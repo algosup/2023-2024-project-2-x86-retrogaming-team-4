@@ -1,4 +1,5 @@
 # Functional Specifications  Team 4
+
 ---
 Last updated on: November, 6 2023
 
@@ -16,14 +17,13 @@ Last updated on: November, 6 2023
 
 ---
 
-
 ## Project Overview
 
 ALGOSUP's school commissioned us to create a Pac-Man game clone in Assembly code. The software's primary objective is to completely fit all the original gameplay systems.
 
 ## Project scope
 
-This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using DOSBox. 
+This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using DOSBox.
 
 ## Stakeholders
 
@@ -40,7 +40,21 @@ This software's primary objective is to create a clone of Pac-Man following all 
 
 ## Risks and assumptions
 
-## Glossary 
+## Solution overview
+
+### System architecture
+
+As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
+Our game will be based on a 16 bits adress bus, limiting adressable RAM to 65,536 bytes.
+
+### User interface
+
+### Game mechanics
+
+As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
+
+## Glossary
+
 | Term | Definition |
 |-----|-----|
 | DOSBox| DOSBox is an emulator program that emulates an IBM PC compatible computer running a DOS operating system. |
