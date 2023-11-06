@@ -10,6 +10,7 @@ Last updated on: November, 6 2023
   - [Project scope](#project-scope)
   - [Stakeholders](#stakeholders)
   - [Risks and assumptions](#risks-and-assumptions)
+  - [Glossary](#glossary)
 
 </details>
 
@@ -22,7 +23,7 @@ ALGOSUP's school commissioned us to create a Pac-Man game clone in Assembly code
 
 ## Project scope
 
-This software's primary objective is to create a clone of Pac-Man followong all the guidelines of the original retro game using DOSBox, an x86 emulator. 
+This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using DOSBox. 
 
 ## Stakeholders
 
@@ -39,3 +40,7 @@ This software's primary objective is to create a clone of Pac-Man followong all 
 
 ## Risks and assumptions
 
+## Glossary 
+| Term | Definition |
+|-----|-----|
+| DOSBox| DOSBox is an emulator program that emulates an IBM PC compatible computer running a DOS operating system. |
