@@ -1,17 +1,20 @@
-# <div align="center">Functional Specifications</div>
-
-## <div align="center">Team 4</div>
-
-<div align="right">Last updated on: November, 6<sup>th</sup>2023</div>
+# Functional Specifications  Team 4
+---
+Last updated on: November, 6 2023
 
 <details>
-    <summary>Table of contents <i>(Click to expand)</i></summary>
-    - [Functional Specifications](#functional-specifications)
-        - [Overview](#project-overview)
-        - [Project Scope](#project-scope)
-        - [Stakeholders](#stakeholders)
-        - [Risks and assumptions](#risks-and-assumptions)
+<summary>Table of Contents</summary>
+
+- [Functional Specifications  Team 4](#functional-specifications--team-4)
+  - [Project Overview](#project-overview)
+  - [Project scope](#project-scope)
+  - [Stakeholders](#stakeholders)
+  - [Risks and assumptions](#risks-and-assumptions)
+
 </details>
+
+---
+
 
 ## Project Overview
 
