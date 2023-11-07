@@ -20,6 +20,7 @@ Last updated on: November, 6 2023
     - [System architecture](#system-architecture)
     - [User interface](#user-interface)
     - [Game mechanics](#game-mechanics)
+      - [Graphisms](#graphisms)
   - [Glossary](#glossary)
 
 </details>
@@ -120,6 +121,17 @@ Our game will be based on a 16 bits adress bus, limiting adressable RAM to 65,53
 ### Game mechanics
 
 As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
+
+- Graphisms: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets and bonus fruits
+- Map creation and gestion: This includes creating a map, managing pellets, fruit cycles and other hazard on the map
+- Gameplay: This includes moving, life system, score system and changes between levels
+- Moving: This includes both pac-man and ghosts deplacements and collision
+- Sound: This includes musics and sound effects
+- Score: This includes score storing and keeping high scores
+
+#### Graphisms
+
+The game will take place on a [maze](docs\pictures\maze.png) of a size of 240 by 320 pixels
 
 ## Glossary
 
