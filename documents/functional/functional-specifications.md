@@ -31,7 +31,6 @@ Last updated on: November, 6 2023
 
 ALGOSUP's school commissioned us to create a Pac-Man game clone in Assembly code. The software's primary objective is to completely fit all the original gameplay systems.
 
-
 ## Stakeholders
 
 | Stakeholder      | Role                     | Description                        | 🔗                                             |
@@ -49,7 +48,6 @@ ALGOSUP's school commissioned us to create a Pac-Man game clone in Assembly code
 
 This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using [^1]DOSBox.
 
-
 Here is a table of milestones and deliverables dates:
 | Date    | Milestone / Deliverable       |
 | ------------------ |------------------------------------------------------------------------------------- |
@@ -60,7 +58,6 @@ Here is a table of milestones and deliverables dates:
 | December 21, 2023, 5pm   | Final product  |
 
 ## Personas and use cases
-
 
 ### 1. Retro Gaming Enthusiast - Alex
 
@@ -82,21 +79,16 @@ Here is a table of milestones and deliverables dates:
   - Designing the game to be accessible and user-friendly for a novice player like Emily, while still maintaining the core essence and challenge of Pac-Man.
   - Balancing the game's difficulty so that it provides a satisfying challenge without becoming frustrating for someone new to the game.
 
-
 ### 3. Nostalgic 90s Gamer - Mike
 
-
 - Goals:
-  - Mike's main goal is to recapture the magic of the 90s arcade experience on his modern machine. He seeks an authentic recreation of Pac-Man. 
+  - Mike's main goal is to recapture the magic of the 90s arcade experience on his modern machine. He seeks an authentic recreation of Pac-Man.
 
 - Challenges:
   - Ensuring that the Pac-Man clone provides a seamless and enjoyable experience on Mike's new machine, taking into account any hardware or software compatibility issues.
   - Striking the right balance between preserving the retro charm of the original game and incorporating modern elements to enhance the overall gaming experience for Mike.
 
-
-
 ### 4. Tandy 1000 Enthusiast - Jason
-
 
 - Goals:
   - Jason's primary goal is to experience Pac-Man on his Tandy 1000, as it's a system he holds dear to his heart.
@@ -106,8 +98,26 @@ Here is a table of milestones and deliverables dates:
   - Ensuring that the Pac-Man clone is compatible with the Tandy 1000's specific hardware configurations and limitations.
   - Fine-tuning the game's performance to run smoothly on the Tandy 1000, taking into account any potential resource constraints.
 
-
 ## Risks and assumptions
+
+### Scope creep
+
+​
+We could try to make the project too big or running out of time, that is why we must planning our work and time to avoid it.
+​
+
+### Technical issues
+
+​
+Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks. These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep your users interested. However, patching behaviour issues might be a challenge as we may encounter errors which have not been previously documented.
+​
+
+### Copyright issues
+
+​
+Even if the project consists in recreating a retro video game which will not be published, copyrights must be taken into account as the risk of a software still being under license is not negligible. As a consequence, we must ensure which assets can be used or not. This includes the game and the level designs, the sprites or the music. We must ensure the license of the original game is allowing us to use these resources.
+In case a resource is not usable, we will have to recreate it from scratch. For the graphic parts, we must choose differents colors and shapes, and for musics, we need at least to edit slightly the melody.
+​
 
 ## Solution overview
 
