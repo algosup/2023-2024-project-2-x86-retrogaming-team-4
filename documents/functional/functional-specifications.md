@@ -22,7 +22,6 @@ Last updated on: November, 8th 2023
     - [Graphics Requirements](#graphics-requirements)
     - [User Experience Requirements](#user-experience-requirements)
     - [Bug-Free Gameplay Requirements](#bug-free-gameplay-requirements)
-    - [Player Feedback and User Satisfaction Requirements](#player-feedback-and-user-satisfaction-requirements)
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
     - [User interface](#user-interface)
@@ -156,10 +155,6 @@ When evaluating a Pac-Man-like game or a game in the maze-chase genre, you can u
 ### Bug-Free Gameplay Requirements
 
 - **Collision Detection:** The game should undergo rigorous testing to ensure it is entirely free from gameplay bugs. Specifically, collisions between "Pac-Man" and enemies must be detected accurately without any hitbox discrepancies.
-
-### Player Feedback and User Satisfaction Requirements
-
-- **Overall Satisfaction:** Above all, the game should be designed to satisfy and engage players. Ensure that players find the game enjoyable, reminiscent of the classic Pac-Man experience, and worthy of replay.
 
 ## Solution overview
 
