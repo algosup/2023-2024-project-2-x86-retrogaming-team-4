@@ -46,7 +46,7 @@ ALGOSUP's school commissioned us to create a Pac-Man game clone in Assembly code
 
 ## Project scope
 
-This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using [^1]DOSBox.
+This software's primary objective is to create a clone of Pac-Man following all the guidelines of the original retro game using DOSBox[^1].
 
 Here is a table of milestones and deliverables dates:
 | Date    | Milestone / Deliverable       |
@@ -92,7 +92,7 @@ Here is a table of milestones and deliverables dates:
 
 - Goals:
   - Jason's primary goal is to experience Pac-Man on his Tandy 1000, as it's a system he holds dear to his heart.
-  - He seeks a version of Pac-Man that is optimized for the [^2]Tandy 1000's hardware and provides an authentic 80s computing experience.
+  - He seeks a version of Pac-Man that is optimized for the Tandy 1000's[^2] hardware and provides an authentic 80s computing experience.
 
 - Challenges:
   - Ensuring that the Pac-Man clone is compatible with the Tandy 1000's specific hardware configurations and limitations.
@@ -123,7 +123,7 @@ In case a resource is not usable, we will have to recreate it from scratch. For 
 
 ### System architecture
 
-As requested by ALGOSUP, we are going to use [^1]DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
+As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
 Our game will be based on a 16 bits adress bus, limiting adressable RAM to 65,536 bytes.
 
 ### User interface
@@ -145,7 +145,6 @@ The game will take place on a [maze](docs\pictures\maze.png) of a size of 240 by
 
 ## Glossary
 
-| Term | Definition |
-|-----|-----|
-| [^1]:| DOSBox is an emulator program that emulates an IBM PC compatible computer running a DOS operating system. |
-| [^2]:| The Tandy 1000 was the first in a line of IBM PC compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.  |
+[^1]: DOSBox is an emulator program that emulates an IBM PC compatible computer running a DOS operating system. 
+
+[^2]: The Tandy 1000 was the first in a line of IBM PC compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.  
