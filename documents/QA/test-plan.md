@@ -22,7 +22,8 @@
       - [Key Points:](#key-points)
   - [7. Test Schedule and Estimation](#7-test-schedule-and-estimation)
     - [Overview:](#overview-6)
-      - [Key Steps:](#key-steps)
+      - [Code Testing Key Steps:](#code-testing-key-steps)
+      - [Documentation Testing Key Steps:](#documentation-testing-key-steps)
   - [8. Test Deliverables](#8-test-deliverables)
     - [Overview:](#overview-7)
       - [Before Testing:](#before-testing)
@@ -52,9 +53,25 @@ This phase involves understanding the product being tested, identifying stakehol
 
 #### Key Questions:
 - Who will use the product?
+  - The product will be used by:
+    - The client (the professor)
+    - The developers (the students)
+    - The testers (the students)
 - What is the primary purpose of this product?
+  - There is 2 main purpose for this product:
+    - The first one is to learn how to code in assembly language.
+    - The second one is to generate entertainment.
 - How does the product work?
+  - The product will be used on a computer using the DOSBox emulator with a keyboard or joystick.
 - What are the software and hardware specifications?
+  - The software specifications are:
+    - DOSBox emulator.
+    - GitHub.
+  - The hardware specifications are:
+    - An emulator with a 16-bit processor.
+    - An emulator with X86 architecture.
+    - An emulator with 65,536 bytes of RAM.
+    - A keyboard or joystick.
 
 #### Actions:
 - Interview clients, designers, and developers.
@@ -109,11 +126,20 @@ Create the software and hardware setup for accurate testing.
 ## 7. Test Schedule and Estimation
 
 ### Overview:
-Break down the project into tasks and allocate time and effort for each.
+To test the code of the wall project we chose to split the work into 4 key steps.
 
-#### Key Steps:
-- Consider employee availability, working days, and project deadlines.
-- Evaluate risks associated with the project.
+#### Code Testing Key Steps:
+1. Create a unit test template for each function and give it to all developers. Each developer will then write their unit tests for their functions.
+2. Write unit tests for each project function; it will help us to find bugs and errors in the code. This part will be done in parallel with the development of the project.
+3. Automate tests with GitHub Actions, this will allow us to run tests automatically after each commit and avoid errors on the main branch. This will also permit to have an integrated overview of failure and coverage of the code directly in GitHub.
+4. Create functional tests and take a screenshot of the game at each step and in case of error. This will allow us to have a visual overview of the game and to see if the game is working as expected.
+
+To test the documentation of the wall project we chose to split the work into 3 key steps.
+
+#### Documentation Testing Key Steps:
+1. Use a template for each documentation part and give it to all developers. Each developer will then write their documentation part.
+2. Organize a meeting with all developers to review the documentation and make sure that it is clear and understandable for everyone.
+3. Review the documentation and make sure that it is clear and understandable for everyone.
 
 ## 8. Test Deliverables 
 ### Overview:
