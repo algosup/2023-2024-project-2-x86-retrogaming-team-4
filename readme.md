@@ -5,6 +5,6 @@ The team is composed of
 - Antoine Prevost, Program manager
 - Malo Archimbaud, Tech lead
 - Maxime Thizeau, Software engineer
-- Benoit de Keyn, Software engineer
+- Benoît de Keyn, Software engineer
 - Maxime Caron, QA
 - Thomas Planchard, QA
