@@ -31,6 +31,7 @@ Last updated on: November, 8th 2023
       - [Graphics](#graphics)
         - [Colors](#colors)
         - [Game window](#game-window)
+        - [Sprites](#sprites)
     - [Gameplay](#gameplay)
       - [Player Controls](#player-controls)
       - [Movement](#movement)
@@ -216,7 +217,27 @@ Data:  R  R  R  G  G  G  B  B
 
 ##### Game window
 
-The game will take place in a [maze](docs\pictures\maze.png) of a size of 240 by 320 pixels
+The game will take place in a maze similar to this one
+![pac-maze](../pictures/Pac-Maze.png)
+
+##### Sprites
+
+Here are the different sprites that will be used to create the game
+
+|Name|Dimensions|Pictures|
+| --- | --- | --- |
+|Pac-Man|16x8|![Pac-Man](../pictures/Pac-Man.png)|
+|Pellets|8x8|![Pellets](../pictures/Pellets.png)|
+|Ghosts|16x8|![Ghosts](../pictures/Ghosts.png)|
+|Scared Ghosts|16x8|![ScaredGhosts](../pictures/ScaredGhosts.png)|
+|Eyes|5x5|![Eyes](../pictures/Eyes.png)|
+|Fruits|8x8|![Fruits](../pictures/Fruits.png)|
+
+Pac-Man will be able to face 4 directions, being up, left, down and right, and open his mouth.
+Ghosts will be able to see in those 4 directions.
+
+At the start of each level, the map will be similar to this
+![FilledMaze](../pictures/FilledPac-Maze.png)
 
 Let's provide more concrete details and examples for the gameplay mechanics:
 
@@ -281,7 +302,8 @@ When the game ends, the player is presented with a game over screen displaying t
 | :----: | :------: | :-------------: |
 | Scope creep   | We might try to make the project too big which could lead to the project running out of time. |  We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation.|
 | Technical issues   | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks.| These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented.|
-|Copyright issues| Even if the project consists in recreating a retro video game which will not be published, copyrights must be taken into account as the risk of a software still being under license is not negligible.| As a consequence, we must ensure which assets can be used or not. This includes the game and the level designs, the sprites or the music. We must ensure the license of the original game is allowing us to use these resources. In case a resource is not usable, we will have to recreate it from scratch. For the graphic parts, we must choose differents colors and shapes, and for musics, we need at least to edit slightly the melody.|
+
+As Pac-Man is still under license, we had to take in consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc., is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
 
 ## Glossary
 
