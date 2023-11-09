@@ -79,7 +79,6 @@ The project aims to develop a faithful recreation of the classic Pac-Man game us
 
 To achieve the emulation of a 90s computer environment, the project will leverage the use of the DOSBox emulator. DOSBox will serve as the platform for executing and testing the Pac-Man clone, ensuring compatibility with the simulated hardware and software of the era.
 
-
 ## Deliverables
 
 Here is a table of milestones and deliverables dates:
@@ -96,7 +95,8 @@ Here is a table of milestones and deliverables dates:
 ### Target Audience
 
 The game is designed to cater to a wide range of players, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time.
-The following personas are based on the target audience we assume to have. 
+The following personas are based on the target audience we assume to have.
+
 ### 1. Retro Gaming Enthusiast - Alex 🕹️
 
 - Goals:
@@ -137,6 +137,7 @@ The following personas are based on the target audience we assume to have.
   - Fine-tuning the game's performance to run smoothly on the Tandy 1000, taking into account any potential resource constraints.
 
 ## Evaluation criteria
+
 To assess the performance and quality of the project, a set of evaluation criteria has been established. These criteria serve as benchmarks against which the project's functionality, design, and overall execution will be measured. The evaluation process aims to ensure that the final product meets the specified objectives. Below are the key areas of focus that will be considered during the evaluation.
 
 ### Gameplay Requirements
@@ -184,7 +185,6 @@ Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,5
 
 As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
 
-
 - **Graphics**: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets, and bonus fruits
 - **Map creation and gestion**: This includes creating a map, managing pellets, fruit cycles, and other hazard on the map
 - **Gameplay**: This includes moving, life system, score system and changes between levels
@@ -229,7 +229,7 @@ Data:  R  R  R  G  G  G  B  B
 ##### Game window
 
 <!-- A redécrire (similar) -->
-The game will take place in a maze similar to the one displayed below. 
+The game will take place in a maze similar to the example displayed below. Of course, the maze shape, 
 
 ![pac-maze](../pictures/Pac-Maze.png)
 
@@ -274,16 +274,21 @@ As a bonus which will be added if there is still time, we plan to add a main men
 Here is the table of the different controls across the various potential features:
 
 ---
+
 - **Startup/Lost game/Main menu**:
   - Up Arrow: Select the upward option.
     - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
   - Down Arrow: Select the downward option.
     - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
   - Enter key/Space bar: Choose this option and enter the sub-menu associated with it.
+
 ---
+
 - **High scores sub-menu**:
   - Enter key/Space bar: Go back to the main menu.
+
 ---
+
 - **Themes sub-menu**:
   - Arrow left: Select the sub-option situated on the left.
     - When on the leftmost option, pressing this key does not warp to the rightmost sub-option of this option or the previous option's rightmost sub-option, instead does nothing.
@@ -295,7 +300,9 @@ Here is the table of the different controls across the various potential feature
     - When on the top option, pressing this key does not warp to the bottom option, instead does nothing.
   - Enter key/ Space bar: Choose and apply the sub-option of an option.
     - When selecting a sub-option of an option, it unselects the previously selected option.
+
 ---
+
 - **2-players game mode**:
   - First player moves:
     - Up Arrow: Move the Pac-Man character without a hair bow upward.
@@ -307,7 +314,9 @@ Here is the table of the different controls across the various potential feature
     - S: Move the Pac-Man character Pac-Man without a hair bow downward.
     - Q: Move the Pac-Man character Pac-Man without a hair bow to the left.
     - D: Move the Pac-Man character Pac-Man without a hair bow to the right.
+
 ---
+
 - **Control ghosts**:
   
 ---
