@@ -16,7 +16,7 @@
   - [Stakeholders](#stakeholders)
   - [Project scope](#project-scope)
     - [Resource: DOSBox Emulator](#resource-dosbox-emulator)
-  - [Deliverables](#deliverables)
+  - [Deliverables \& Milestones](#deliverables--milestones)
   - [Personas and use cases](#personas-and-use-cases)
     - [Target Audience](#target-audience)
     - [1. Retro Gaming Enthusiast - Alex 🕹️](#1-retro-gaming-enthusiast---alex-️)
@@ -79,7 +79,7 @@ The project aims to develop a faithful recreation of the classic Pac-Man game us
 
 To achieve the emulation of a 90s computer environment, the project will leverage the use of the DOSBox emulator. DOSBox will serve as the platform for executing and testing the Pac-Man clone, ensuring compatibility with the simulated hardware and software of the era.
 
-## Deliverables
+## Deliverables & Milestones
 
 Here is a table of milestones and deliverables dates:
 | Date    | Milestone / Deliverable       |
@@ -228,8 +228,7 @@ Data:  R  R  R  G  G  G  B  B
 
 ##### Game window
 
-<!-- A redécrire (similar) -->
-The game will take place in a maze similar to the example displayed below. Of course, the maze shape, 
+The game will take place in a maze similar to the example displayed below. Of course, the maze shape, size or layout might might be changed to this one.
 
 ![pac-maze](../pictures/Pac-Maze.png)
 
@@ -261,13 +260,15 @@ Let's provide more concrete details and examples for the gameplay mechanics:
 
 #### Player Controls
 
+All controls described in the following section are assumed by using an AZERTY layout keyboard:
+
 - The player will control Pac-Man using the keyboard arrow keys:
-  - Up Arrow: Move Pac-Man upward.
-  - Down Arrow: Move Pac-Man downward.
-  - Left Arrow: Move Pac-Man to the left.
-  - Right Arrow: Move Pac-Man to the right.
+  - `Up Arrow`: Move Pac-Man upward.
+  - `Down Arrow`: Move Pac-Man downward.
+  - `Left Arrow`: Move Pac-Man to the left.
+  - `Right Arrow`: Move Pac-Man to the right.
 - The player can also exit the game:
-  - Escape: Quit the game and close the DOSBox emulator
+  - `Escape`: Quit the game and close the DOSBox emulator
 
 As a bonus which will be added if there is still time, we plan to add a main menu which will be displayed when starting the game and losing a game. It would contain the high scores, the different themes of the game, a 2-player game mode, and another mode to control ghosts.
 
@@ -276,49 +277,61 @@ Here is the table of the different controls across the various potential feature
 ---
 
 - **Startup/Lost game/Main menu**:
-  - Up Arrow: Select the upward option.
+  - `Up Arrow`: Select the upward option.
     - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
-  - Down Arrow: Select the downward option.
+  - `Down Arrow`: Select the downward option.
     - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
-  - Enter key/Space bar: Choose this option and enter the sub-menu associated with it.
+  - `Enter key`/`Spacebar`: Choose this option and enter the sub-menu associated with it.
 
 ---
 
 - **High scores sub-menu**:
-  - Enter key/Space bar: Go back to the main menu.
+  - `Enter key`/`Spacebar`: Go back to the main menu.
 
 ---
 
 - **Themes sub-menu**:
-  - Arrow left: Select the sub-option situated on the left.
+  - `Left Arrow`: Select the sub-option situated on the left.
     - When on the leftmost option, pressing this key does not warp to the rightmost sub-option of this option or the previous option's rightmost sub-option, instead does nothing.
-  - Arrow right: Select the sub-option situated on the right.
+  - `Right Arrow`: Select the sub-option situated on the right.
     - When on the rightmost option, pressing this key does not warp to the leftmost sub-option of this option or the previous option's leftmost sub-option, instead does nothing.
-  - Arrow down: Select the first sub-option of the lower option.
+  - `Down Arrow`: Select the first sub-option of the lower option.
     - When on the bottom option, pressing this key does not warp to the top option, instead does nothing.
-  - Arrow up: Select the first sub-option of the upper option.
+  - `Up Arrow`: Select the first sub-option of the upper option.
     - When on the top option, pressing this key does not warp to the bottom option, instead does nothing.
-  - Enter key/ Space bar: Choose and apply the sub-option of an option.
+  - `Enter key`/`Spacebar`: Choose and apply the sub-option of an option.
     - When selecting a sub-option of an option, it unselects the previously selected option.
 
 ---
 
 - **2-players game mode**:
   - First player moves:
-    - Up Arrow: Move the Pac-Man character without a hair bow upward.
-    - Down Arrow: Move the Pac-Man character Pac-Man without a hair bow downward.
-    - Left Arrow: Move the Pac-Man character Pac-Man without a hair bow to the left.
-    - Right Arrow: Move the Pac-Man character Pac-Man without a hair bow to the right.
+    - `Up Arrow`: Move the Pac-Man character without a hair bow upward.
+    - `Down Arrow`: Move the Pac-Man character Pac-Man without a hair bow downward.
+    - `Left Arrow`: Move the Pac-Man character Pac-Man without a hair bow to the left.
+    - `Right Arrow`: Move the Pac-Man character Pac-Man without a hair bow to the right.
   - Second player moves:
-    - Z: Move the Pac-Man character without a hair bow upward.
-    - S: Move the Pac-Man character Pac-Man without a hair bow downward.
-    - Q: Move the Pac-Man character Pac-Man without a hair bow to the left.
-    - D: Move the Pac-Man character Pac-Man without a hair bow to the right.
+    - `Z`: Move the Pac-Man character without a hair bow upward.
+    - `S`: Move the Pac-Man character Pac-Man without a hair bow downward.
+    - `Q`: Move the Pac-Man character Pac-Man without a hair bow to the left.
+    - `D`: Move the Pac-Man character Pac-Man without a hair bow to the right.
 
 ---
 
 - **Control ghosts**:
-  
+  - `&` key: Switch to Blinky's moves control
+    - Pressing the `&` key when Blinky is already the character whose moves are already controled does nothing
+  - `é` key: Switch to Pinky's moves control
+    - Pressing the `é` key when Pinky is already the character whose moves are already controled does nothing
+  - `"` key: Switch to Inky's moves control
+    - Pressing the `"` key when Inky is already the character whose moves are already controled does nothing
+  - `'` key: Switch to Inky's moves control
+    - Pressing the `'` key when Inky is already the character whose moves are already controled does nothing
+  - `Z`: Move the Pac-Man character without a hair bow upward.
+  - `S`: Move the Pac-Man character Pac-Man without a hair bow downward.
+  - `Q`: Move the Pac-Man character Pac-Man without a hair bow to the left.
+  - `D`: Move the Pac-Man character Pac-Man without a hair bow to the right.
+
 ---
 
 #### Movement
