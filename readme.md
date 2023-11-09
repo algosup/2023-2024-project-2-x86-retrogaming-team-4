@@ -3,14 +3,14 @@
 ## Project team
 
 The team is composed of
-- Leo Chartier, Project manager
-- Antoine Prevost, Program manager
-- Malo Archimbaud, Tech lead
-- Maxime Thizeau, Software engineer
-- Benoit de Keyn, Software engineer
-- Maxime Caron, QA
-- Thomas Planchard, QA
+- Léo CHARTIER, Project manager
+- Antoine PREVOST, Program manager
+- Malo ARCHIMBAUD, Tech lead
+- Maxime THIZEAU, Software engineer
+- Benoit DE KEYN, Software engineer
+- Maxime CARON, Quality Assurance
+- Thomas PLANCHARD, Quality Assurance
 
 ## Overview
 
-This project is about recreating a version of pac-man in assembly.
+This project is about recreating a version of Pac-Man in Assembly.
