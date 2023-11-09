@@ -10,6 +10,8 @@ Last updated on: November, 8th 2023
   - [Project Overview](#project-overview)
   - [Stakeholders](#stakeholders)
   - [Project scope](#project-scope)
+    - [Resource: DOSBox Emulator](#resource-dosbox-emulator)
+    - [Target Audience](#target-audience)
   - [Personas and use cases](#personas-and-use-cases)
     - [1. Retro Gaming Enthusiast - Alex 🕹️](#1-retro-gaming-enthusiast---alex-️)
     - [2. Novice Player - Emily 🆕](#2-novice-player---emily-)
@@ -27,6 +29,8 @@ Last updated on: November, 8th 2023
     - [User interface](#user-interface)
     - [Game mechanics](#game-mechanics)
       - [Graphics](#graphics)
+        - [Colors](#colors)
+        - [Game window](#game-window)
     - [Gameplay](#gameplay)
       - [Player Controls](#player-controls)
       - [Movement](#movement)
@@ -62,11 +66,11 @@ ALGOSUP's school commissioned us to create a Pac-Man game clone in assembly x86 
 
 The project aims to develop a faithful recreation of the classic Pac-Man game using Assembly language, within an emulated 90s computer environment. The primary objective is to deliver an experience that captures the essence of the original Pac-Man gameplay while accommodating both regular players and newcomers.
 
-**Resource: DOSBox Emulator**
+### Resource: DOSBox Emulator
 
 To achieve the emulation of a 90s computer environment, the project will leverage the use of the DOSBox emulator. DOSBox will serve as the platform for executing and testing the Pac-Man clone, ensuring compatibility with the simulated hardware and software of the era.
 
-**Target Audience**
+### Target Audience
 
 The game is designed to cater to a wide range of players, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time.
 
@@ -178,6 +182,40 @@ As we need to respect the original gameplay rules, we have to be focused on many
 
 #### Graphics
 
+##### Colors
+
+As Pac-Man is an 8-bit color-like game, we must adopt a similar style. The original Pac-Man game uses 16 colors, which means the colors could be coded on only 4 bits. However, the colors would be inaccurate as some red, green, and blue components are not always multiples of 16, leading us to use 8 bits to code the color space of our Pac-Man clone.
+
+Here is the color palette we are going to use:
+
+|Swatch|Color|24-bit RGB|Uses|
+| --- | --- | --- | --- |
+|![black](https://readme-swatches.vercel.app/000000)|Black|0, 0, 0|Background|
+|![red](https://readme-swatches.vercel.app/fc0000)|Red|252, 0, 0|Blinky, cherry, strawberry, apple, Galaxian ship|
+|![brown](https://readme-swatches.vercel.app/d89055)|Brown|216, 144, 85|Orange top, cherry stream|
+|![pink](https://readme-swatches.vercel.app/fcb4ff)|Pink|252, 180, 255|Pinky, ghost house door|
+|![black](https://readme-swatches.vercel.app/000000)|Black|0, 0, 0|Background|
+|![cyan](https://readme-swatches.vercel.app/00fcff)|Cyan|0, 252, 255|Inky, player text|
+|![blue](https://readme-swatches.vercel.app/48b4ff)|Blue|72, 180, 255|Key top, bell bottom|
+|![orange](https://readme-swatches.vercel.app/fcb455)|Orange|252, 180, 85|Clyde, orange|
+|![black](https://readme-swatches.vercel.app/000000)|Black|0, 0, 0|Background|
+|![yellow](https://readme-swatches.vercel.app/fcfc00)|Yellow|252, 252, 0|Pac-man, ready!, bell, Galaxian ship|
+|![black](https://readme-swatches.vercel.app/000000)|Black|0, 0, 0|Background|
+|![indigo](https://readme-swatches.vercel.app/2424ff)|Indigo|36, 36, 255|Maze walls, flashings ghosts, ghost pupils, Galaxian ship|
+|![green](https://readme-swatches.vercel.app/00fc00)|Green|0, 252, 0|Melon, strawberry top, orange leaf|
+|![teal](https://readme-swatches.vercel.app/48b4aa)|Teal|72, 180, 170|Melon wrinkles and stem|
+|![salmon](https://readme-swatches.vercel.app/fcb4aa)|Salmon|252, 180, 170|Dots, ghost body, ghost face when flashing|
+|![white](https://readme-swatches.vercel.app/fcfcff)|White|252, 252, 255|Flashing ghosts, scores, text, ghost eyes, fruit highlights|
+
+To convert those 24-bit encoded colors into 8-bit colors, our image has to go through a process called color quantization[^3]. The simplest form for this process is to assign 3 bits to red, 3 bits to green, and only 2 bits to blue as the human eye is less sensitive to this color. This creates a 3-3-2 8-bit color image, following the following table structure:
+
+``` txt
+Bit:   7  6  5  4  3  2  1  0
+Data:  R  R  R  G  G  G  B  B
+```
+
+##### Game window
+
 The game will take place in a [maze](docs\pictures\maze.png) of a size of 240 by 320 pixels
 
 Let's provide more concrete details and examples for the gameplay mechanics:
@@ -247,6 +285,8 @@ When the game ends, the player is presented with a game over screen displaying t
 
 ## Glossary
 
-[^1]: DOSBox is an emulator program that emulates an IBM PC compatible computer running a DOS operating system.
+[^1]: DOSBox is an emulator program that emulates an IBM PC-compatible computer running a DOS operating system.
 
-[^2]: The Tandy 1000 was the first in a line of IBM PC compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.  
+[^2]: The Tandy 1000 was the first in a line of IBM PC-compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.  
+
+[^3]: The process of creating a color map for a less color-dense image from a more dense image.
