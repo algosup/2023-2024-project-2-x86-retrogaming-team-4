@@ -1,12 +1,17 @@
-# Functional Specifications  Team 4
+# Functional Specifications | Team 4
 
 ---
-Last updated on: November, 8th 2023
+|                 |                  |
+| --------------- | ---------------- |
+| Document name   | Functional specifications  |
+| Document owner  | Antoine PREVOST  |
+| Creation date   | November 6, 2023 |
+| Lastest version | November 9, 2023 |
 
 <details>
 <summary>Table of Contents</summary>
 
-- [Functional Specifications  Team 4](#functional-specifications--team-4)
+- [Functional Specifications | Team 4](#functional-specifications--team-4)
   - [Project Overview](#project-overview)
   - [Stakeholders](#stakeholders)
   - [Project scope](#project-scope)
@@ -217,6 +222,7 @@ Data:  R  R  R  G  G  G  B  B
 
 ##### Game window
 
+<!-- A redécrire (similar) -->
 The game will take place in a maze similar to this one
 ![pac-maze](../pictures/Pac-Maze.png)
 
@@ -233,7 +239,7 @@ Here are the different sprites that will be used to create the game
 |Eyes|5x5|![Eyes](../pictures/Eyes.png)|
 |Fruits|8x8|![Fruits](../pictures/Fruits.png)|
 
-Pac-Man will be able to face 4 directions, being up, left, down and right, and open his mouth.
+Pac-Man will be able to face 4 directions, up, left, down, and right, and open his mouth.
 Ghosts will be able to see in those 4 directions.
 
 At the start of each level, the map will be similar to this
@@ -252,6 +258,44 @@ Let's provide more concrete details and examples for the gameplay mechanics:
   - Down Arrow: Move Pac-Man downward.
   - Left Arrow: Move Pac-Man to the left.
   - Right Arrow: Move Pac-Man to the right.
+- The player can also exit the game:
+  - Escape: Quit the game and close DOSBox emulator
+
+As a bonus which will be added if there is still time, we plan to add a main menu which will be displayed when starting the game and losing a game. It would contain the high scores, the different themes of the game, a 2-player game mode, and another mode to control ghosts.
+
+Here is the table of the different controls across the various potential features:
+
+- Startup/Lost game/Main menu:
+  - Up Arrow: Select the upward option.
+    - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
+  - Down Arrow: Select the downward option.
+    - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
+  - Enter key/Space bar: Choose this option and enter the sub-menu associated with it.
+- High scores sub-menu:
+  - Enter key/Space bar: Go back to the main menu.
+- Themes sub-menu:
+  - Arrow left: Select the sub-option situated on the left.
+    - When on the leftmost option, pressing this key does not warp to the rightmost sub-option of this option or the previous option's rightmost sub-option, instead does nothing.
+  - Arrow right: Select the sub-option situated on the right.
+    - When on the rightmost option, pressing this key does not warp to the leftmost sub-option of this option or the previous option's leftmost sub-option, instead does nothing.
+  - Arrow down: Select the first sub-option of the lower option.
+    - When on the bottom option, pressing this key does not warp to the top option, instead does nothing.
+  - Arrow up: Select the first sub-option of the upper option.
+    - When on the top option, pressing this key does not warp to the bottom option, instead does nothing.
+  - Enter key/ Space bar: Choose and apply the sub-option of an option.
+    - When selecting a sub-option of an option, it unselects the previously selected option.
+- 2-players game mode:
+  - First player moves:
+    - Up Arrow: Move the Pac-Man character without a hair bow upward.
+    - Down Arrow: Move the Pac-Man character Pac-Man without a hair bow downward.
+    - Left Arrow: Move the Pac-Man character Pac-Man without a hair bow to the left.
+    - Right Arrow: Move the Pac-Man character Pac-Man without a hair bow to the right.
+  - Second player moves:
+    - Z: Move the Pac-Man character without a hair bow upward.
+    - S: Move the Pac-Man character Pac-Man without a hair bow downward.
+    - Q: Move the Pac-Man character Pac-Man without a hair bow to the left.
+    - D: Move the Pac-Man character Pac-Man without a hair bow to the right.
+- Control ghosts:
 
 #### Movement
 
@@ -303,7 +347,7 @@ When the game ends, the player is presented with a game over screen displaying t
 | Scope creep   | We might try to make the project too big which could lead to the project running out of time. |  We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation.|
 | Technical issues   | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks.| These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented.|
 
-As Pac-Man is still under license, we had to take in consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc., is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
+As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc., is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
 
 ## Glossary
 
