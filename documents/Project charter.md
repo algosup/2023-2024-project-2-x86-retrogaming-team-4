@@ -1,10 +1,11 @@
 # Pac-Man recreation - Project charter
 
-|                |                  |
-| -------------- | ---------------- |
-| Document name  | Project charter  |
-| Document owner | Léo CHARTIER     |
-| Issue date     | November 8, 2023 |
+|                 |                  |
+| --------------- | ---------------- |
+| Document name   | Project charter  |
+| Document owner  | Léo CHARTIER     |
+| Creation date   | November 6, 2023 |
+| Lastest version | November 9, 2023 |
 
 ## Table of content
 - [Pac-Man recreation - Project charter](#pac-man-recreation---project-charter)
@@ -12,8 +13,7 @@
   - [Project definition](#project-definition)
   - [Scope](#scope)
   - [Stakeholders](#stakeholders)
-  - [Team members](#team-members)
-  - [Responsabilities](#responsabilities)
+  - [Team members and responsabilities](#team-members-and-responsabilities)
   - [Project plan](#project-plan)
   - [Milestones](#milestones)
   - [Deliverables](#deliverables)
@@ -40,31 +40,21 @@ The recreation should implement the basic mechanics of the game. If not copyrigh
 | ------ | ------------------------ | ------------- |
 | Client | Franck JEANNIN (ALGOSUP) | Final project |
 
-## Team members
+## Team members and responsabilities
 
-| Role                     | Name             | Email                        | Github                                                          |
-| ------------------------ | ---------------- | ---------------------------- | --------------------------------------------------------------- |
-| Project Manager          | Léo CHARTIER     | leo.chartier@algosup.com     | [leo-chartier](https://github.com/leo-chartier)                 |
-| Program Manager          | Antoine PREVOST  | antoine.prevost@algosup.com  | [TechXplorerFR](https://github.com/TechXplorerFR)               |
-| Technical Leader         | Malo ARCHIMBAUD  | malo.archimbaud@algosup.com  | [Malo-Archimbaud](https://github.com/Malo-Archimbaud)           |
-| Junior Software Engineer | Maxime THIZEAU   | maxime.thizeau@algosup.com   | [MaximeTAlgosup](https://github.com/MaximeTAlgosup)             |
-| Junior Software Engineer | Benoît DE KEYN   | benoit.dekeyn@algosup.com    | [benoitdekeyn-algosup](https://github.com/benoitdekeyn-algosup) |
-| Quality Assurance        | Maxime CARON     | maxime.caron@algosup.com     | [MaximeAlgosup](https://github.com/MaximeAlgosup)               |
-| Quality Assurance        | Thomas PLANCHARD | thomas.planchard@algosup.com | [thomas-planchard](https://github.com/thomas-planchard)         |
-
-## Responsabilities
-
-| Role              | Responsabilities                                                                                                         | Performance criteria                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| Project Manager   | Report to stakeholders<br>Management (deadlines, budget, ...)<br>Task repartition                                        | Project delivered on time and budget<br>Good planning                      |
-| Program Manager   | Design<br>Communication with client<br>Functional specifications                                                         | Functional specifications<br>Client satisfaction                           |
-| Technical Leader  | Choose techincal tools<br>Define interactions within the code<br>Review code<br>Technical specifications                 | Techincal specifications                                                   |
-| Software Engineer | Writing code<br>Fixing bugs<br>Document the code                                                                         | (Unit tests)<br>No bugs in the code                                        |
-| Quality Assurance | Verify documents<br>Test the program<br>Confirm we match the client needs<br>Overall quality of the project<br>Test plan | All bugs identified<br>Good team cohesion<br>Deliver a qualitative project |
+| Name             | Role              | Responsabilities                                                                                                         | Performance criteria                                                            |
+| ---------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Léo CHARTIER     | Project Manager   | Report to stakeholders<br>Management (deadlines, budget, ...)<br>Task repartition<br>Risk management                     | Project delivered on time and budget<br>Good planning<br>Smooth running project |
+| Antoine PREVOST  | Program Manager   | Design<br>Communication with client<br>Functional specifications<br>Risk management                                      | Functional specifications                                                       |
+| Malo ARCHIMBAUD  | Technical Leader  | Choose techincal tools<br>Define interactions within the code<br>Review code<br>Technical specifications                 | Techincal specifications                                                        |
+| Maxime THIZEAU   | Software Engineer | Writing code<br>Fixing bugs<br>Document the code                                                                         | (Unit tests)<br>As few bugs in the code as possible                             |
+| Benoît DE KEYN   | Software Engineer |                                                                                                                          |                                                                                 |
+| Maxime CARON     | Quality Assurance | Verify documents<br>Test the program<br>Confirm we match the client needs<br>Overall quality of the project<br>Test plan | All bugs identified<br>Good team cohesion<br>Deliver a qualitative project      |
+| Thomas PLANCHARD | Quality Assurance |                                                                                                                          |                                                                                 |
 
 ## Project plan
 
-A meeting with the client was organized at the beginning of the first day. Further discussions will be made via emails/messages.
+A meeting with the client was organized at the beginning of the first day. Further discussions will be made via emails/Slack messages and reports will be sent to the client member, even put on Github if deemed important.
 
 The project will mainly use the Waterfall method as shown by the deliverables, but will also use SCRUM ideas to improve the quality of development.
 The program will be split into multiple steps which will be incrementally implemented. This will also allow for fast testing iterations, leading to fewer bugs.
@@ -112,11 +102,14 @@ Estimated total human hours: 588h
   - Likelihood: High
   - Impact: High
   - Mitigation: Reschedule tasks of other members
+<!--
+Discussed with the client, this is more of a non-issue
 - Copyright
   - The artworks of Pac-Man are copyrighted, and Pac-Man is also a registered trademark. Recreating the game could lead to heavy lawsuits if actual rights-owners hear of this project.
   - Likelihood: Low to medium
   - Impact: High
-  - Mitigation: Acceptance <!-- to be discussed with the client -->
+  - Mitigation: Acceptance
+-->
 - New requirements
   - The client may change the requirements during the project, forcing us to change the specifications and planning.
   - Likelihood: Medium
