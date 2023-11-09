@@ -1,20 +1,6 @@
 # Pac-Man Project Test Plan
 
 - [Pac-Man Project Test Plan](#pac-man-project-test-plan)
-  - [Testing Environment Initialization Guide](#testing-environment-initialization-guide)
-    - [1. Setting up DOSBox for Development and Testing](#1-setting-up-dosbox-for-development-and-testing)
-      - [Step 1: Download and Install DOSBox](#step-1-download-and-install-dosbox)
-      - [Step 2: Configure DOSBox for Development](#step-2-configure-dosbox-for-development)
-      - [Step 3: Install an Assembler](#step-3-install-an-assembler)
-    - [2. Setting Up GitHub for Bug Reporting](#2-setting-up-github-for-bug-reporting)
-      - [Step 1: Create a Repository](#step-1-create-a-repository)
-      - [Step 2: Enable GitHub Issues](#step-2-enable-github-issues)
-    - [3. Managing Test Cases with Excel](#3-managing-test-cases-with-excel)
-      - [Step 1: Create an Excel Spreadsheet](#step-1-create-an-excel-spreadsheet)
-      - [Step 2: Populate Test Cases](#step-2-populate-test-cases)
-    - [4. Starting Testing](#4-starting-testing)
-    - [5. Reporting Bugs on GitHub](#5-reporting-bugs-on-github)
-    - [6. Managing the Testing Process](#6-managing-the-testing-process)
   - [1. Product Analysis](#1-product-analysis)
     - [Overview:](#overview)
       - [Key Questions:](#key-questions)
@@ -42,70 +28,20 @@
       - [Before Testing:](#before-testing)
       - [During Testing:](#during-testing)
       - [After Testing:](#after-testing)
-
-
-## Testing Environment Initialization Guide
-
-### 1. Setting up DOSBox for Development and Testing
-
-#### Step 1: Download and Install DOSBox
-
-Download and install DOSBox. You can find the latest version on the official [DOSBox website](https://www.dosbox.com/). Follow the installation instructions provided.
-
-#### Step 2: Configure DOSBox for Development
-
-1. Launch DOSBox.
-2. Mount a directory where you'll store your project files using the following command:
-   ```
-   mount C C:\path\to\your\pacmanProject
-   ```
-   Replace `C:\path\to\your\pacmanProject` with the actual path to your project directory.
-
-#### Step 3: Install an Assembler
-
-Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. 
-
-### 2. Setting Up GitHub for Bug Reporting
-
-#### Step 1: Create a Repository
-
-Create a new repository on GitHub to manage your project. This will be used for version control and bug tracking.
-
-#### Step 2: Enable GitHub Issues
-
-In your repository settings, navigate to the "Issues" section and make sure issues are enabled. This will allow you to create and track bug reports.
-
-### 3. Managing Test Cases with Excel
-
-#### Step 1: Create an Excel Spreadsheet
-
-Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
-
-#### Step 2: Populate Test Cases
-
-Based on the test plans provided, fill in the test cases with specific details, including expected outcomes and any additional notes.
-
-### 4. Starting Testing
-
-With the environment set up, you're ready to begin testing. Use the DOSBox environment to execute the assembly code and perform the tests outlined in your Excel spreadsheet.
-
-### 5. Reporting Bugs on GitHub
-
-When you encounter a bug during testing, follow these steps to report it:
-
-1. Go to your project's GitHub repository.
-2. Click on the "Issues" tab.
-3. Click "New Issue" to create a new bug report.
-4. Provide a descriptive title and detailed description of the bug.
-5. Include steps to reproduce the bug, expected behavior, and actual behavior.
-6. Assign labels, milestones, and assignees if applicable.
-7. Submit the issue.
-
-### 6. Managing the Testing Process
-
-Regularly update your Excel spreadsheet with test results, including any bugs encountered. Use the GitHub issues to track and manage bug fixes and progress.
-
-
+  - [Testing Environment Initialization Guide](#testing-environment-initialization-guide)
+    - [1. Setting up DOSBox for Development and Testing](#1-setting-up-dosbox-for-development-and-testing)
+      - [Step 1: Download and Install DOSBox](#step-1-download-and-install-dosbox)
+      - [Step 2: Configure DOSBox for Development](#step-2-configure-dosbox-for-development)
+      - [Step 3: Install an Assembler](#step-3-install-an-assembler)
+    - [2. Setting Up GitHub for Bug Reporting](#2-setting-up-github-for-bug-reporting)
+      - [Step 1: Create a Repository](#step-1-create-a-repository)
+      - [Step 2: Enable GitHub Issues](#step-2-enable-github-issues)
+    - [3. Managing Test Cases with Excel](#3-managing-test-cases-with-excel)
+      - [Step 1: Create an Excel Spreadsheet](#step-1-create-an-excel-spreadsheet)
+      - [Step 2: Populate Test Cases](#step-2-populate-test-cases)
+    - [4. Starting Testing](#4-starting-testing)
+    - [5. Reporting Bugs on GitHub](#5-reporting-bugs-on-github)
+    - [6. Managing the Testing Process](#6-managing-the-testing-process)
 
 
 
@@ -198,3 +134,63 @@ List of documents, tools, and equipment required to support testing activities.
 - Defect Reports
 - Release Notes
 
+## Testing Environment Initialization Guide
+
+### 1. Setting up DOSBox for Development and Testing
+
+#### Step 1: Download and Install DOSBox
+
+Download and install DOSBox. You can find the latest version on the official [DOSBox website](https://www.dosbox.com/). Follow the installation instructions provided.
+
+#### Step 2: Configure DOSBox for Development
+
+1. Launch DOSBox.
+2. Mount a directory where you'll store your project files using the following command:
+   ```
+   mount C C:\path\to\your\pacmanProject
+   ```
+   Replace `C:\path\to\your\pacmanProject` with the actual path to your project directory.
+
+#### Step 3: Install an Assembler
+
+Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. 
+
+### 2. Setting Up GitHub for Bug Reporting
+
+#### Step 1: Create a Repository
+
+Create a new repository on GitHub to manage your project. This will be used for version control and bug tracking.
+
+#### Step 2: Enable GitHub Issues
+
+In your repository settings, navigate to the "Issues" section and make sure issues are enabled. This will allow you to create and track bug reports.
+
+### 3. Managing Test Cases with Excel
+
+#### Step 1: Create an Excel Spreadsheet
+
+Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
+
+#### Step 2: Populate Test Cases
+
+Based on the test plans provided, fill in the test cases with specific details, including expected outcomes and any additional notes.
+
+### 4. Starting Testing
+
+With the environment set up, you're ready to begin testing. Use the DOSBox environment to execute the assembly code and perform the tests outlined in your Excel spreadsheet.
+
+### 5. Reporting Bugs on GitHub
+
+When you encounter a bug during testing, follow these steps to report it:
+
+1. Go to your project's GitHub repository.
+2. Click on the "Issues" tab.
+3. Click "New Issue" to create a new bug report.
+4. Provide a descriptive title and detailed description of the bug.
+5. Include steps to reproduce the bug, expected behavior, and actual behavior.
+6. Assign labels, milestones, and assignees if applicable.
+7. Submit the issue.
+
+### 6. Managing the Testing Process
+
+Regularly update your Excel spreadsheet with test results, including any bugs encountered. Use the GitHub issues to track and manage bug fixes and progress.

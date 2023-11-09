@@ -16,8 +16,9 @@
   - [Stakeholders](#stakeholders)
   - [Project scope](#project-scope)
     - [Resource: DOSBox Emulator](#resource-dosbox-emulator)
-    - [Target Audience](#target-audience)
+  - [Deliverables](#deliverables)
   - [Personas and use cases](#personas-and-use-cases)
+    - [Target Audience](#target-audience)
     - [1. Retro Gaming Enthusiast - Alex 🕹️](#1-retro-gaming-enthusiast---alex-️)
     - [2. Novice Player - Emily 🆕](#2-novice-player---emily-)
     - [3. Nostalgic 90s Gamer - Mike 💾](#3-nostalgic-90s-gamer---mike-)
@@ -32,7 +33,7 @@
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
     - [User interface](#user-interface)
-    - [Game mechanics](#game-mechanics)
+    - [Game mechanics overview](#game-mechanics-overview)
       - [Graphics](#graphics)
         - [Colors](#colors)
         - [Game window](#game-window)
@@ -44,7 +45,9 @@
       - [Game Rules](#game-rules)
       - [Winning and Losing Conditions](#winning-and-losing-conditions)
       - [Game Over Screen](#game-over-screen)
+  - [Timeline](#timeline)
   - [Risks and assumptions](#risks-and-assumptions)
+    - [Copyright and license](#copyright-and-license)
   - [Glossary](#glossary)
 
 </details>
@@ -76,9 +79,8 @@ The project aims to develop a faithful recreation of the classic Pac-Man game us
 
 To achieve the emulation of a 90s computer environment, the project will leverage the use of the DOSBox emulator. DOSBox will serve as the platform for executing and testing the Pac-Man clone, ensuring compatibility with the simulated hardware and software of the era.
 
-### Target Audience
 
-The game is designed to cater to a wide range of players, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time.
+## Deliverables
 
 Here is a table of milestones and deliverables dates:
 | Date    | Milestone / Deliverable       |
@@ -91,6 +93,10 @@ Here is a table of milestones and deliverables dates:
 
 ## Personas and use cases
 
+### Target Audience
+
+The game is designed to cater to a wide range of players, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time.
+The following personas are based on the target audience we assume to have. 
 ### 1. Retro Gaming Enthusiast - Alex 🕹️
 
 - Goals:
@@ -131,8 +137,7 @@ Here is a table of milestones and deliverables dates:
   - Fine-tuning the game's performance to run smoothly on the Tandy 1000, taking into account any potential resource constraints.
 
 ## Evaluation criteria
-
-When evaluating a Pac-Man-like game or a game in the maze-chase genre, you can use several criteria to assess its quality and overall gameplay experience. Here are some evaluation criteria to consider:
+To assess the performance and quality of the project, a set of evaluation criteria has been established. These criteria serve as benchmarks against which the project's functionality, design, and overall execution will be measured. The evaluation process aims to ensure that the final product meets the specified objectives. Below are the key areas of focus that will be considered during the evaluation.
 
 ### Gameplay Requirements
 
@@ -175,16 +180,17 @@ Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,5
 
 ### User interface
 
-### Game mechanics
+### Game mechanics overview
 
 As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
 
-- Graphics: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets, and bonus fruits
-- Map creation and gestion: This includes creating a map, managing pellets, fruit cycles, and other hazard on the map
-- Gameplay: This includes moving, life system, score system and changes between levels
-- Moving: This includes both pac-man and ghosts deplacements and collision
-- Sound: This includes music and sound effects
-- Score: This includes score storing and keeping high scores
+
+- **Graphics**: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets, and bonus fruits
+- **Map creation and gestion**: This includes creating a map, managing pellets, fruit cycles, and other hazard on the map
+- **Gameplay**: This includes moving, life system, score system and changes between levels
+- **Moving**: This includes both pac-man and ghosts deplacements and collision
+- **Sound**: This includes music and sound effects
+- **Score**: This includes score storing and keeping high scores
 
 #### Graphics
 
@@ -223,7 +229,8 @@ Data:  R  R  R  G  G  G  B  B
 ##### Game window
 
 <!-- A redécrire (similar) -->
-The game will take place in a maze similar to this one
+The game will take place in a maze similar to the one displayed below. 
+
 ![pac-maze](../pictures/Pac-Maze.png)
 
 ##### Sprites
@@ -243,6 +250,7 @@ Pac-Man will be able to face 4 directions, up, left, down, and right, and open h
 Ghosts will be able to see in those 4 directions.
 
 At the start of each level, the map will be similar to this
+
 ![FilledMaze](../pictures/FilledPac-Maze.png)
 
 Let's provide more concrete details and examples for the gameplay mechanics:
@@ -259,21 +267,24 @@ Let's provide more concrete details and examples for the gameplay mechanics:
   - Left Arrow: Move Pac-Man to the left.
   - Right Arrow: Move Pac-Man to the right.
 - The player can also exit the game:
-  - Escape: Quit the game and close DOSBox emulator
+  - Escape: Quit the game and close the DOSBox emulator
 
 As a bonus which will be added if there is still time, we plan to add a main menu which will be displayed when starting the game and losing a game. It would contain the high scores, the different themes of the game, a 2-player game mode, and another mode to control ghosts.
 
 Here is the table of the different controls across the various potential features:
 
-- Startup/Lost game/Main menu:
+---
+- **Startup/Lost game/Main menu**:
   - Up Arrow: Select the upward option.
     - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
   - Down Arrow: Select the downward option.
     - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
   - Enter key/Space bar: Choose this option and enter the sub-menu associated with it.
-- High scores sub-menu:
+---
+- **High scores sub-menu**:
   - Enter key/Space bar: Go back to the main menu.
-- Themes sub-menu:
+---
+- **Themes sub-menu**:
   - Arrow left: Select the sub-option situated on the left.
     - When on the leftmost option, pressing this key does not warp to the rightmost sub-option of this option or the previous option's rightmost sub-option, instead does nothing.
   - Arrow right: Select the sub-option situated on the right.
@@ -284,7 +295,8 @@ Here is the table of the different controls across the various potential feature
     - When on the top option, pressing this key does not warp to the bottom option, instead does nothing.
   - Enter key/ Space bar: Choose and apply the sub-option of an option.
     - When selecting a sub-option of an option, it unselects the previously selected option.
-- 2-players game mode:
+---
+- **2-players game mode**:
   - First player moves:
     - Up Arrow: Move the Pac-Man character without a hair bow upward.
     - Down Arrow: Move the Pac-Man character Pac-Man without a hair bow downward.
@@ -295,7 +307,10 @@ Here is the table of the different controls across the various potential feature
     - S: Move the Pac-Man character Pac-Man without a hair bow downward.
     - Q: Move the Pac-Man character Pac-Man without a hair bow to the left.
     - D: Move the Pac-Man character Pac-Man without a hair bow to the right.
-- Control ghosts:
+---
+- **Control ghosts**:
+  
+---
 
 #### Movement
 
@@ -332,7 +347,7 @@ Pac-Man moves through the maze at a rate of one cell per frame. Each frame is re
 #### Winning and Losing Conditions
 
 - **Winning:**
-  - The player wins the game by clearing all levels, demonstrating proficiency in navigating the maze, and outsmarting ghosts.
+  - The player must successfully navigate the maze, consuming all of the small dots (pellets) while strategically using power pellets to temporarily gain the ability to eat ghosts. This process continues through multiple levels, with the ultimate goal of achieving the highest possible score and clearing all the levels.
 - **Losing:**
   - Pac-Man loses a life if it collides with a ghost without the effects of a power pellet. The game ends if all lives are depleted.
 
@@ -340,12 +355,18 @@ Pac-Man moves through the maze at a rate of one cell per frame. Each frame is re
 
 When the game ends, the player is presented with a game over screen displaying their final score, along with options to restart or quit.
 
+## Timeline
+
+<!-- Léo put a timeline of the project here-->
+
 ## Risks and assumptions
 
 | Risk | Impact | Mitigation |
-| :----: | :------: | :-------------: |
+| :----: | :------ | :------------- |
 | Scope creep   | We might try to make the project too big which could lead to the project running out of time. |  We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation.|
-| Technical issues   | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks.| These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented.|
+| Technical issues   | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. <br>This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks.| These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. <br>However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented.|
+
+### Copyright and license
 
 As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc., is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
 
