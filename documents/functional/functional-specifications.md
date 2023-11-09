@@ -26,7 +26,7 @@ Last updated on: November, 8th 2023
     - [System architecture](#system-architecture)
     - [User interface](#user-interface)
     - [Game mechanics](#game-mechanics)
-      - [Graphisms](#graphisms)
+      - [Graphics](#graphics)
     - [Gameplay](#gameplay)
       - [Player Controls](#player-controls)
       - [Movement](#movement)
@@ -60,7 +60,7 @@ ALGOSUP's school commissioned us to create a Pac-Man game clone in assembly x86 
 
 ## Project scope
 
-The project aims to develop a faithful recreation of the classic Pac-Man game using Assembly language, within an emulated 90s computer environment. The primary objective is to deliver an experience which captures the essence of the original Pac-Man gameplay while accommodating both regular players and newcomers.
+The project aims to develop a faithful recreation of the classic Pac-Man game using Assembly language, within an emulated 90s computer environment. The primary objective is to deliver an experience that captures the essence of the original Pac-Man gameplay while accommodating both regular players and newcomers.
 
 **Resource: DOSBox Emulator**
 
@@ -98,7 +98,7 @@ Here is a table of milestones and deliverables dates:
   - Her goal is to have fun while playing and potentially develop an interest in classic arcade games.
 
 - Challenges:
-  - Designing the game to be accessible and user-friendly for a novice player like Emily, while still maintaining the core essence and challenge of Pac-Man.
+  - Designing the game to be accessible and user-friendly for a novice player like Emily, while still maintaining the essence and challenge of Pac-Man.
   - Balancing the game's difficulty so that it provides a satisfying challenge without becoming frustrating for someone new to the game.
 
 ### 3. Nostalgic 90s Gamer - Mike 💾
@@ -134,7 +134,7 @@ When evaluating a Pac-Man-like game or a game in the maze-chase genre, you can u
 
 ### AI and Enemy Behavior Requirements
 
-- **Enemie Intelligence:** Enemies should exhibit intelligent behavior, using pathfinding algorithms to pursue "Pac-Man" logically. Their movements should dynamically respond to "Pac-Man's" position.
+- **Enemies Intelligence:** Enemies should exhibit intelligent behavior, using pathfinding algorithms to pursue "Pac-Man" logically. Their movements should dynamically respond to "Pac-Man's" position.
 
 - **Fairness and Challenge:** Strive to maintain a balanced and challenging gameplay experience. Enemies should be swift and pose a challenge without causing undue frustration for the player.
 
@@ -161,7 +161,7 @@ When evaluating a Pac-Man-like game or a game in the maze-chase genre, you can u
 ### System architecture
 
 As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
-Our game will be based on a 16 bits adress bus, limiting adressable RAM to 65,536 bytes.
+Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,536 bytes.
 
 ### User interface
 
@@ -169,18 +169,18 @@ Our game will be based on a 16 bits adress bus, limiting adressable RAM to 65,53
 
 As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
 
-- Graphisms: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets and bonus fruits
-- Map creation and gestion: This includes creating a map, managing pellets, fruit cycles and other hazard on the map
+- Graphics: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets, and bonus fruits
+- Map creation and gestion: This includes creating a map, managing pellets, fruit cycles, and other hazard on the map
 - Gameplay: This includes moving, life system, score system and changes between levels
 - Moving: This includes both pac-man and ghosts deplacements and collision
-- Sound: This includes musics and sound effects
+- Sound: This includes music and sound effects
 - Score: This includes score storing and keeping high scores
 
-#### Graphisms
+#### Graphics
 
-The game will take place on a [maze](docs\pictures\maze.png) of a size of 240 by 320 pixels
+The game will take place in a [maze](docs\pictures\maze.png) of a size of 240 by 320 pixels
 
-Absolutely, let's provide more concrete details and examples for the gameplay mechanics:
+Let's provide more concrete details and examples for the gameplay mechanics:
 
 ---
 
@@ -229,7 +229,7 @@ Pac-Man moves through the maze at a rate of one cell per frame. Each frame is re
 #### Winning and Losing Conditions
 
 - **Winning:**
-  - The player wins the game by clearing all levels, demonstrating proficiency in navigating the maze and outsmarting ghosts.
+  - The player wins the game by clearing all levels, demonstrating proficiency in navigating the maze, and outsmarting ghosts.
 - **Losing:**
   - Pac-Man loses a life if it collides with a ghost without the effects of a power pellet. The game ends if all lives are depleted.
 
