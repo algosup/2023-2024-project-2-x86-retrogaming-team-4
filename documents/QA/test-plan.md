@@ -2,40 +2,9 @@
 
 - [Pac-Man Project Test Plan](#pac-man-project-test-plan)
   - [1. Product Analysis](#1-product-analysis)
-    - [Overview:](#overview)
-      - [Key Questions:](#key-questions)
-      - [Actions:](#actions)
   - [2. Test Strategy](#2-test-strategy)
-    - [Overview:](#overview-1)
+    - [Overview:](#overview)
       - [Key Components:](#key-components)
-  - [3. Objectives](#3-objectives)
-    - [Overview:](#overview-2)
-      - [Key Objectives:](#key-objectives)
-  - [4. Test Criteria](#4-test-criteria)
-    - [Overview:](#overview-3)
-      - [Key Criteria:](#key-criteria)
-  - [5. Resource Allocation](#5-resource-allocation)
-    - [Overview:](#overview-4)
-      - [Key Considerations:](#key-considerations)
-  - [6. Test Environment](#6-test-environment)
-    - [Overview:](#overview-5)
-      - [Key Points:](#key-points)
-  - [7. Test Schedule and Estimation](#7-test-schedule-and-estimation)
-    - [Overview:](#overview-6)
-    - [Code Testing](#code-testing)
-      - [Key Steps:](#key-steps)
-      - [Steps Time Estimation:](#steps-time-estimation)
-      - [Schedule:](#schedule)
-    - [Documentation Testing](#documentation-testing)
-      - [Key Steps:](#key-steps-1)
-      - [Steps Time Estimation:](#steps-time-estimation-1)
-      - [Schedule:](#schedule-1)
-  - [8. Test Deliverables](#8-test-deliverables)
-    - [Overview:](#overview-7)
-      - [Before Testing:](#before-testing)
-      - [During Testing:](#during-testing)
-      - [After Testing:](#after-testing)
-  - [Testing Environment Initialization Guide](#testing-environment-initialization-guide)
     - [1. Setting up DOSBox for Development and Testing](#1-setting-up-dosbox-for-development-and-testing)
       - [Step 1: Download and Install DOSBox](#step-1-download-and-install-dosbox)
       - [Step 2: Configure DOSBox for Development](#step-2-configure-dosbox-for-development)
@@ -49,40 +18,46 @@
     - [4. Starting Testing](#4-starting-testing)
     - [5. Reporting Bugs on GitHub](#5-reporting-bugs-on-github)
     - [6. Managing the Testing Process](#6-managing-the-testing-process)
+  - [3. Objectives](#3-objectives)
+    - [Overview:](#overview-1)
+      - [Key Objectives:](#key-objectives)
+  - [4. Test Criteria](#4-test-criteria)
+    - [Overview:](#overview-2)
+      - [Key Criteria:](#key-criteria)
+  - [5. Resource Allocation](#5-resource-allocation)
+    - [Overview:](#overview-3)
+      - [Key Considerations:](#key-considerations)
+  - [6. Test Environment](#6-test-environment)
+    - [Overview:](#overview-4)
+      - [Key Points:](#key-points)
+  - [7. Test Schedule and Estimation](#7-test-schedule-and-estimation)
+    - [Overview:](#overview-5)
+    - [Code Testing](#code-testing)
+      - [Key Steps:](#key-steps)
+      - [Steps Time Estimation:](#steps-time-estimation)
+      - [Schedule:](#schedule)
+    - [Documentation Testing](#documentation-testing)
+      - [Key Steps:](#key-steps-1)
+      - [Steps Time Estimation:](#steps-time-estimation-1)
+      - [Schedule:](#schedule-1)
+  - [8. Test Deliverables](#8-test-deliverables)
+    - [Overview:](#overview-6)
+      - [Before Testing:](#before-testing)
+      - [During Testing:](#during-testing)
+      - [After Testing:](#after-testing)
+  - [SMOKE TESTING](#smoke-testing)
 
 
 
 ## 1. Product Analysis
 
-### Overview:
-This phase involves understanding the product being tested, identifying stakeholders, and learning about end-users' expectations.
+This project targets a diverse audience, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time. With a dual purpose, the product aims to serve as an educational tool for learning assembly language coding and as an entertainment game.
 
-#### Key Questions:
-- Who will use the product?
-  - The product will be used by:
-    - The client (the professor)
-    - The developers (the students)
-    - The testers (the students)
-- What is the primary purpose of this product?
-  - There is 2 main purpose for this product:
-    - The first one is to learn how to code in assembly language.
-    - The second one is to generate entertainment.
-- How does the product work?
-  - The product will be used on a computer using the DOSBox emulator with a keyboard or joystick.
-- What are the software and hardware specifications?
-  - The software specifications are:
-    - DOSBox emulator.
-    - GitHub.
-  - The hardware specifications are:
-    - An emulator with a 16-bit processor.
-    - An emulator with X86 architecture.
-    - An emulator with 65,536 bytes of RAM.
-    - A keyboard or joystick.
+We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
+![](../pictures/diagramWalkthrough.svg)
 
-#### Actions:
-- Interview clients, designers, and developers.
-- Review product and project documentation.
-- Perform a product walkthrough.
+The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, 65,536 bytes of RAM.
+
 
 ## 2. Test Strategy
 
@@ -94,6 +69,67 @@ The Test Strategy document outlines project objectives, effort estimation, scope
 - Type of Testing
 - Risks and Issues
 - Test Logistics
+
+
+### 1. Setting up DOSBox for Development and Testing
+
+#### Step 1: Download and Install DOSBox
+
+Download and install DOSBox. You can find the latest version on the official [DOSBox website](https://www.dosbox.com/). Follow the installation instructions provided.
+
+#### Step 2: Configure DOSBox for Development
+
+1. Launch DOSBox.
+2. Mount a directory where you'll store your project files using the following command:
+   ```
+   mount C C:\path\to\your\pacmanProject
+   ```
+   Replace `C:\path\to\your\pacmanProject` with the actual path to your project directory.
+
+#### Step 3: Install an Assembler
+
+Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. 
+
+### 2. Setting Up GitHub for Bug Reporting
+
+#### Step 1: Create a Repository
+
+Create a new repository on GitHub to manage your project. This will be used for version control and bug tracking.
+
+#### Step 2: Enable GitHub Issues
+
+In your repository settings, navigate to the "Issues" section and make sure issues are enabled. This will allow you to create and track bug reports.
+
+### 3. Managing Test Cases with Excel
+
+#### Step 1: Create an Excel Spreadsheet
+
+Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
+
+#### Step 2: Populate Test Cases
+
+Based on the test plans provided, fill in the test cases with specific details, including expected outcomes and any additional notes.
+
+### 4. Starting Testing
+
+With the environment set up, you're ready to begin testing. Use the DOSBox environment to execute the assembly code and perform the tests outlined in your Excel spreadsheet.
+
+### 5. Reporting Bugs on GitHub
+
+When you encounter a bug during testing, follow these steps to report it:
+
+1. Go to your project's GitHub repository.
+2. Click on the "Issues" tab.
+3. Click "New Issue" to create a new bug report.
+4. Provide a descriptive title and detailed description of the bug.
+5. Include steps to reproduce the bug, expected behavior, and actual behavior.
+6. Assign labels, milestones, and assignees if applicable.
+7. Submit the issue.
+
+### 6. Managing the Testing Process
+
+Regularly update your Excel spreadsheet with test results, including any bugs encountered. Use the GitHub issues to track and manage bug fixes and progress.
+
 
 ## 3. Objectives
 
@@ -205,63 +241,7 @@ List of documents, tools, and equipment required to support testing activities.
 - Defect Reports
 - Release Notes
 
-## Testing Environment Initialization Guide
 
-### 1. Setting up DOSBox for Development and Testing
 
-#### Step 1: Download and Install DOSBox
-
-Download and install DOSBox. You can find the latest version on the official [DOSBox website](https://www.dosbox.com/). Follow the installation instructions provided.
-
-#### Step 2: Configure DOSBox for Development
-
-1. Launch DOSBox.
-2. Mount a directory where you'll store your project files using the following command:
-   ```
-   mount C C:\path\to\your\pacmanProject
-   ```
-   Replace `C:\path\to\your\pacmanProject` with the actual path to your project directory.
-
-#### Step 3: Install an Assembler
-
-Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. 
-
-### 2. Setting Up GitHub for Bug Reporting
-
-#### Step 1: Create a Repository
-
-Create a new repository on GitHub to manage your project. This will be used for version control and bug tracking.
-
-#### Step 2: Enable GitHub Issues
-
-In your repository settings, navigate to the "Issues" section and make sure issues are enabled. This will allow you to create and track bug reports.
-
-### 3. Managing Test Cases with Excel
-
-#### Step 1: Create an Excel Spreadsheet
-
-Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
-
-#### Step 2: Populate Test Cases
-
-Based on the test plans provided, fill in the test cases with specific details, including expected outcomes and any additional notes.
-
-### 4. Starting Testing
-
-With the environment set up, you're ready to begin testing. Use the DOSBox environment to execute the assembly code and perform the tests outlined in your Excel spreadsheet.
-
-### 5. Reporting Bugs on GitHub
-
-When you encounter a bug during testing, follow these steps to report it:
-
-1. Go to your project's GitHub repository.
-2. Click on the "Issues" tab.
-3. Click "New Issue" to create a new bug report.
-4. Provide a descriptive title and detailed description of the bug.
-5. Include steps to reproduce the bug, expected behavior, and actual behavior.
-6. Assign labels, milestones, and assignees if applicable.
-7. Submit the issue.
-
-### 6. Managing the Testing Process
-
-Regularly update your Excel spreadsheet with test results, including any bugs encountered. Use the GitHub issues to track and manage bug fixes and progress.
+## SMOKE TESTING
+Doing test wihtout having a real plan just the intention to find bugs 
