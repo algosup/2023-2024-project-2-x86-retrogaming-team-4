@@ -142,7 +142,7 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 ### Gameplay Requirements
 
-- **Movement and Responsiveness:** The character's movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
+- **Movement and Responsiveness:** The sprites' movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
 
 - **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when "Pac-Man" either exhausts all lives or is captured by an enemy.
 
@@ -181,16 +181,18 @@ Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,5
 
 ### User interface
 
+<!-- TO DO -->
+
 ### Game mechanics overview
 
 As we need to respect the original gameplay rules, we have to be focused on many aspects during development:
 
-- **Graphics**: This includes sprites for both pac-man and ghosts, as well as map elements such as walls, pallets, and bonus fruits
-- **Map creation and gestion**: This includes creating a map, managing pellets, fruit cycles, and other hazard on the map
-- **Gameplay**: This includes moving, life system, score system and changes between levels
-- **Moving**: This includes both pac-man and ghosts deplacements and collision
-- **Sound**: This includes music and sound effects
-- **Score**: This includes score storing and keeping high scores
+- **Graphics**: This includes sprites for both Pac-Man and ghosts, as well as map elements such as walls, pallets, and bonus fruits.
+- **Map creation and gestion**: This includes creating a map, managing pellets and fruit cycles, as well as other hazards on the map.
+- **Gameplay**: This includes moving, life system, score system, and changes between levels.
+- **Moving**: This includes both Pac-Man and ghosts' moves and collisions.
+- **Sound**: This includes music and sound effects.
+- **Score**: This includes score storing and keeping high scores.
 
 #### Graphics
 
@@ -228,13 +230,13 @@ Data:  R  R  R  G  G  G  B  B
 
 ##### Game window
 
-The game will take place in a maze similar to the example displayed below. Of course, the maze shape, size or layout might might be changed to this one.
+The game will take place in a maze similar to the example displayed below. Of course, the maze shape, size, or layout might be changed to this one. It will be displayed in the command line window of DOSBox emulator. This window will be displayed in full screen.
 
 ![pac-maze](../pictures/Pac-Maze.png)
 
 ##### Sprites
 
-Here are the different sprites that will be used to create the game
+Here are the different sprites that will be used to create the game:
 
 |Name|Dimensions|Pictures|
 | --- | --- | --- |
@@ -260,7 +262,7 @@ Let's provide more concrete details and examples for the gameplay mechanics:
 
 #### Player Controls
 
-All controls described in the following section are assumed by using an AZERTY layout keyboard:
+All controls described in the following section are assumed to be done using an **AZERTY** layout keyboard:
 
 - The player will control Pac-Man using the keyboard arrow keys:
   - `Up Arrow`: Move Pac-Man upward.
@@ -268,7 +270,7 @@ All controls described in the following section are assumed by using an AZERTY l
   - `Left Arrow`: Move Pac-Man to the left.
   - `Right Arrow`: Move Pac-Man to the right.
 - The player can also exit the game:
-  - `Escape`: Quit the game and close the DOSBox emulator
+  - `Escape`: Quit the game and close the DOSBox emulator.
 
 As a bonus which will be added if there is still time, we plan to add a main menu which will be displayed when starting the game and losing a game. It would contain the high scores, the different themes of the game, a 2-player game mode, and another mode to control ghosts.
 
@@ -304,39 +306,44 @@ Here is the table of the different controls across the various potential feature
 
 ---
 
-- **2-players game mode**:
+- **2 players game mode**:
   - First player moves:
-    - `Up Arrow`: Move the Pac-Man character without a hair bow upward.
-    - `Down Arrow`: Move the Pac-Man character Pac-Man without a hair bow downward.
-    - `Left Arrow`: Move the Pac-Man character Pac-Man without a hair bow to the left.
-    - `Right Arrow`: Move the Pac-Man character Pac-Man without a hair bow to the right.
+    - `Up Arrow`: Move the Pac-Man sprite without a hair bow upward.
+    - `Down Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
+    - `Left Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
+    - `Right Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
   - Second player moves:
-    - `Z`: Move the Pac-Man character without a hair bow upward.
-    - `S`: Move the Pac-Man character Pac-Man without a hair bow downward.
-    - `Q`: Move the Pac-Man character Pac-Man without a hair bow to the left.
-    - `D`: Move the Pac-Man character Pac-Man without a hair bow to the right.
+    - `Z`: Move the Pac-Man sprite without a hair bow upward.
+    - `S`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
+    - `Q`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
+    - `D`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
 
 ---
 
 - **Control ghosts**:
   - `&` key: Switch to Blinky's moves control
-    - Pressing the `&` key when Blinky is already the character whose moves are already controled does nothing
+    - Pressing the `&` key when Blinky is already the sprite whose moves are already controlled does nothing
   - `é` key: Switch to Pinky's moves control
-    - Pressing the `é` key when Pinky is already the character whose moves are already controled does nothing
+    - Pressing the `é` key when Pinky is already the sprite whose moves are already controlled does nothing
   - `"` key: Switch to Inky's moves control
-    - Pressing the `"` key when Inky is already the character whose moves are already controled does nothing
+    - Pressing the `"` key when Inky is already the sprite whose moves are already controlled does nothing
   - `'` key: Switch to Inky's moves control
-    - Pressing the `'` key when Inky is already the character whose moves are already controled does nothing
-  - `Z`: Move the Pac-Man character without a hair bow upward.
-  - `S`: Move the Pac-Man character Pac-Man without a hair bow downward.
-  - `Q`: Move the Pac-Man character Pac-Man without a hair bow to the left.
-  - `D`: Move the Pac-Man character Pac-Man without a hair bow to the right.
+    - Pressing the `'` key when Inky is already the sprite whose moves are already controlled does nothing
+  - `Up Arrow`: Move the controlled ghost sprite upward.
+  - `Down Arrow`: Move the controlled ghost sprite downward.  
+  - `Left Arrow`: Move the controlled ghost sprite to the left.
+  - `Right Arrow`: Move the controlled ghost sprite to the right.
+
+---
+
+- **All optional submenus**:
+  - `Escape`: Quit the game and close the DOSBox emulator.
 
 ---
 
 #### Movement
 
-Pac-Man moves through the maze at a rate of one cell per frame. Each frame is rendered at 60 frames per second, ensuring smooth movement.
+Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at 60 frames per second, ensuring smooth movement.
 
 #### Interactions
 

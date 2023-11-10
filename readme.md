@@ -3,11 +3,12 @@
 ## Project team
 
 The team is composed of
+
 - Léo CHARTIER, Project manager
 - Antoine PREVOST, Program manager
 - Malo ARCHIMBAUD, Tech lead
 - Maxime THIZEAU, Software engineer
-- Benoit DE KEYN, Software engineer
+- Benoît DE KEYN, Software engineer
 - Maxime CARON, Quality Assurance
 - Thomas PLANCHARD, Quality Assurance
 
