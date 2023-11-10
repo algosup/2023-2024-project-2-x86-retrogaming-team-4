@@ -23,17 +23,12 @@
     - [2. Novice Player - Emily 🆕](#2-novice-player---emily-)
     - [3. Nostalgic 90s Gamer - Mike 💾](#3-nostalgic-90s-gamer---mike-)
     - [4. Tandy 1000 Enthusiast - Jason 📟](#4-tandy-1000-enthusiast---jason-)
-  - [Evaluation criteria](#evaluation-criteria)
-    - [Gameplay Requirements](#gameplay-requirements)
-    - [AI and Enemy Behavior Requirements](#ai-and-enemy-behavior-requirements)
-    - [Controls and Responsiveness Requirements](#controls-and-responsiveness-requirements)
-    - [Graphics Requirements](#graphics-requirements)
-    - [User Experience Requirements](#user-experience-requirements)
-    - [Bug-Free Gameplay Requirements](#bug-free-gameplay-requirements)
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
+    - [Game launcher](#game-launcher)
     - [User interface](#user-interface)
     - [Game mechanics overview](#game-mechanics-overview)
+      - [Winning and Losing Conditions](#winning-and-losing-conditions)
       - [Graphics](#graphics)
         - [Colors](#colors)
         - [Game window](#game-window)
@@ -43,9 +38,15 @@
       - [Movement](#movement)
       - [Interactions](#interactions)
       - [Game Rules](#game-rules)
-      - [Winning and Losing Conditions](#winning-and-losing-conditions)
       - [Game Over Screen](#game-over-screen)
   - [Timeline](#timeline)
+  - [Evaluation criteria](#evaluation-criteria)
+    - [Gameplay Requirements](#gameplay-requirements)
+    - [AI and Enemy Behavior Requirements](#ai-and-enemy-behavior-requirements)
+    - [Controls and Responsiveness Requirements](#controls-and-responsiveness-requirements)
+    - [Graphics Requirements](#graphics-requirements)
+    - [User Experience Requirements](#user-experience-requirements)
+    - [Bug-Free Gameplay Requirements](#bug-free-gameplay-requirements)
   - [Risks and assumptions](#risks-and-assumptions)
     - [Copyright and license](#copyright-and-license)
   - [Glossary](#glossary)
@@ -136,48 +137,16 @@ The following personas are based on the target audience we assume to have.
   - Ensuring that the Pac-Man clone is compatible with the Tandy 1000's specific hardware configurations and limitations.
   - Fine-tuning the game's performance to run smoothly on the Tandy 1000, taking into account any potential resource constraints.
 
-## Evaluation criteria
-
-To assess the performance and quality of the project, a set of evaluation criteria has been established. These criteria serve as benchmarks against which the project's functionality, design, and overall execution will be measured. The evaluation process aims to ensure that the final product meets the specified objectives. Below are the key areas of focus that will be considered during the evaluation.
-
-### Gameplay Requirements
-
-- **Movement and Responsiveness:** The sprites' movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
-
-- **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when "Pac-Man" either exhausts all lives or is captured by an enemy.
-
-- **Level Progression:** The game must feature progressively challenging levels. Initial levels should present uncomplicated mazes with fewer enemies, while later levels should introduce more intricate mazes and faster enemies.
-
-### AI and Enemy Behavior Requirements
-
-- **Enemies Intelligence:** Enemies should exhibit intelligent behavior, using pathfinding algorithms to pursue "Pac-Man" logically. Their movements should dynamically respond to "Pac-Man's" position.
-
-- **Fairness and Challenge:** Strive to maintain a balanced and challenging gameplay experience. Enemies should be swift and pose a challenge without causing undue frustration for the player.
-
-### Controls and Responsiveness Requirements
-
-- **Control Response Time:** The game should acknowledge player inputs with minimal delay. Specifically, key presses must be recognized within 50 milliseconds of being executed.
-
-### Graphics Requirements
-
-- **Visual Quality:** Visual elements, including character sprites, animations, and maze designs, should be visually appealing and run smoothly. There should be no graphical glitches during gameplay.
-
-### User Experience Requirements
-
-- **Menu and Transitions:** Menu transitions and animations must provide a seamless user experience. Transitions between menus and screens should not exceed 200 milliseconds to ensure a fluid feel.
-
-- **Replay Value:** Encourage replayability through features such as high-score tracking and the inclusion of hidden bonuses within mazes, motivating players to revisit levels.
-
-### Bug-Free Gameplay Requirements
-
-- **Collision Detection:** The game should undergo rigorous testing to ensure it is entirely free from gameplay bugs. Specifically, collisions between "Pac-Man" and enemies must be detected accurately without any hitbox discrepancies.
-
 ## Solution overview
 
 ### System architecture
 
 As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
 Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,536 bytes.
+
+### Game launcher
+
+As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we are going to create a .exe and a .dmg executable to launch our Pac-Man clone if we have left-over time before the project deadline. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
 
 ### User interface
 
@@ -193,6 +162,13 @@ As we need to respect the original gameplay rules, we have to be focused on many
 - **Moving**: This includes both Pac-Man and ghosts' moves and collisions.
 - **Sound**: This includes music and sound effects.
 - **Score**: This includes score storing and keeping high scores.
+
+#### Winning and Losing Conditions
+
+- **Winning:**
+  - The player must successfully navigate the maze, consuming all of the small dots (pellets) while strategically using power pellets to temporarily gain the ability to eat ghosts. This process continues through multiple levels, with the ultimate goal of achieving the highest possible score and clearing all the levels.
+- **Losing:**
+  - Pac-Man loses a life if it collides with a ghost without the effects of a power pellet. The game ends if all lives are depleted.
 
 #### Graphics
 
@@ -230,7 +206,7 @@ Data:  R  R  R  G  G  G  B  B
 
 ##### Game window
 
-The game will take place in a maze similar to the example displayed below. Of course, the maze shape, size, or layout might be changed to this one. It will be displayed in the command line window of DOSBox emulator. This window will be displayed in full screen.
+The game will take place in a maze similar to the example displayed below. Of course, the maze's shape, size, or layout might be changed compared to this one. It will be displayed in the command line window of the DOSBox emulator. This window will be displayed in full screen.
 
 ![pac-maze](../pictures/Pac-Maze.png)
 
@@ -373,13 +349,6 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
   - **Extra Lives:**
     - Pac-Man starts with three lives. An extra life is awarded upon reaching 10,000 points.
 
-#### Winning and Losing Conditions
-
-- **Winning:**
-  - The player must successfully navigate the maze, consuming all of the small dots (pellets) while strategically using power pellets to temporarily gain the ability to eat ghosts. This process continues through multiple levels, with the ultimate goal of achieving the highest possible score and clearing all the levels.
-- **Losing:**
-  - Pac-Man loses a life if it collides with a ghost without the effects of a power pellet. The game ends if all lives are depleted.
-
 #### Game Over Screen
 
 When the game ends, the player is presented with a game over screen displaying their final score, along with options to restart or quit.
@@ -387,6 +356,42 @@ When the game ends, the player is presented with a game over screen displaying t
 ## Timeline
 
 <!-- Léo put a timeline of the project here-->
+
+## Evaluation criteria
+
+To assess the performance and quality of the project, a set of evaluation criteria has been established. These criteria serve as benchmarks against which the project's functionality, design, and overall execution will be measured. The evaluation process aims to ensure that the final product meets the specified objectives. Below are the key areas of focus that will be considered during the evaluation.
+
+### Gameplay Requirements
+
+- **Movement and Responsiveness:** The sprites' movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
+
+- **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when Pac-Man either exhausts all lives or is captured by an enemy.
+
+- **Level Progression:** The game must feature progressively challenging levels. Initial levels should present uncomplicated mazes with fewer enemies, while later levels should introduce more intricate mazes and faster enemies.
+
+### AI and Enemy Behavior Requirements
+
+- **Enemies Intelligence:** Enemies should exhibit intelligent behavior, using pathfinding algorithms to pursue Pac-Man logically. Their movements should dynamically respond to Pac-Man's position.
+
+- **Fairness and Challenge:** Strive to maintain a balanced and challenging gameplay experience. Enemies should be swift and pose a challenge without causing undue frustration for the player.
+
+### Controls and Responsiveness Requirements
+
+- **Control Response Time:** The game should acknowledge player inputs with minimal delay. Specifically, key presses must be recognized within 50 milliseconds of being executed.
+
+### Graphics Requirements
+
+- **Visual Quality:** Visual elements, including character sprites, animations, and maze designs, should be visually appealing and run smoothly. There should be no graphical glitches during gameplay.
+
+### User Experience Requirements
+
+- **Menu and Transitions:** Menu transitions and animations must provide a seamless user experience. Transitions between menus and screens should not exceed 200 milliseconds to ensure a fluid feel.
+
+- **Replay Value:** Encourage replayability through features such as high-score tracking and the inclusion of hidden bonuses within mazes, motivating players to revisit levels.
+
+### Bug-Free Gameplay Requirements
+
+- **Collision Detection:** The game should undergo rigorous testing to ensure it is entirely free from gameplay bugs. Specifically, collisions between Pac-Man and enemies must be detected accurately without any hitbox discrepancies.
 
 ## Risks and assumptions
 
