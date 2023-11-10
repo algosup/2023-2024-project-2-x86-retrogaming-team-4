@@ -1,10 +1,17 @@
-This project is about recreating a version of pac-man in assembly.
+# <div align="center">2023-2024 Project-2 x86-retrogaming Team-4</div>
+
+## Project team
 
 The team is composed of
-- Leo Chartier, Project manager
-- Antoine Prevost, Program manager
-- Malo Archimbaud, Tech lead
-- Maxime Thizeau, Software engineer
-- Benoit de Keyn, Software engineer
-- Maxime Caron, QA
-- Thomas Planchard, QA
+
+- Léo CHARTIER, Project manager
+- Antoine PREVOST, Program manager
+- Malo ARCHIMBAUD, Tech lead
+- Maxime THIZEAU, Software engineer
+- Benoît DE KEYN, Software engineer
+- Maxime CARON, Quality Assurance
+- Thomas PLANCHARD, Quality Assurance
+
+## Overview
+
+This project is about recreating a version of Pac-Man in Assembly.
