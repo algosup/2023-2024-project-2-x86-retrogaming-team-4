@@ -250,9 +250,18 @@ Let's provide more concrete details and examples for the gameplay mechanics:
 
 To give the player a more immersive experience, we want to add a sound ambiance to our game. Here is the table that recaps the different sounds that will be implemented and the use cases they are related to.
 
-|Sound|Name of the sound|Use case|
+|Sound|Name of the sound|Trggering event|
 |---|---|---|
-| ![](../sounds/pacman_beginning.mov) |Beginning|Sound played at the beginning of the gale before the player starts controlling Pac-Man|
+|<audio controls> <source src="../sounds/startup.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
+|<audio controls> <source src="../sounds/waka_waka.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
+|<audio controls> <source src="../sounds/power_up.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
+|<audio controls> <source src="../sounds/eating_fruit.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
+|<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
+|<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
+|<audio controls> <source src="../sounds/ghost_siren2.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
+|<audio controls> <source src="../sounds/pacman_gets_high_score.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
+|<audio controls> <source src="../sounds/ghost_back_to_base.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
+|<audio controls> <source src="../sounds/pacman_dying.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Dying|Sound played by Pac-Man when it dies|
 
 ---
 
@@ -288,7 +297,7 @@ All controls described in the following section are assumed to be done using an 
 
 #### Movement
 
-Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at 60 frames per second, ensuring smooth movement.
+Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind 60 frames per second is the targeted framerate.
 
 #### Interactions
 
