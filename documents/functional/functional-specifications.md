@@ -252,9 +252,9 @@ To give the player a more immersive experience, we want to add a sound ambiance 
 
 |Sound|Name of the sound|Trggering event|
 |---|---|---|
-|<audio controls> <source src="../sounds/startup.wav" type="audio/wav"></audio>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
-|<audio controls> <source src="https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/blob/documents/documents/sounds/waka_waka.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
-|<audio controls> <source src="https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/blob/documents/documents/sounds/power_up.wav" type="audio/wav"> </audio>|Power up|Sound played after Pac-Man eats a Power pellet|
+|<audio controls> <source src="../sounds/startup.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
+|<audio controls> <source src="../sounds/waka_waka.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
+|<audio controls> <source src="../sounds/power_up.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
 |<audio controls> <source src="../sounds/eating_fruit.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
 |<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
 |<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
