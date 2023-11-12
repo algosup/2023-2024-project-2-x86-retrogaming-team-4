@@ -33,6 +33,7 @@
         - [Colors](#colors)
         - [Game window](#game-window)
         - [Sprites](#sprites)
+      - [Sound system](#sound-system)
     - [Gameplay](#gameplay)
       - [Player Controls](#player-controls)
       - [Movement](#movement)
@@ -244,6 +245,14 @@ At the start of each level, the map will be similar to this
 ![FilledMaze](../pictures/FilledPac-Maze.png)
 
 Let's provide more concrete details and examples for the gameplay mechanics:
+
+#### Sound system
+
+To give the player a more immersive experience, we want to add a sound ambiance to our game. Here is the table that recaps the different sounds that will be implemented and the use cases they are related to.
+
+|Sound|Name of the sound|Use case|
+|---|---|---|
+| ![](../sounds/pacman_beginning.mov) |Beginning|Sound played at the beginning of the gale before the player starts controlling Pac-Man|
 
 ---
 
