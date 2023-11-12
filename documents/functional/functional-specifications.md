@@ -6,7 +6,7 @@
 | Document name   | Functional specifications  |
 | Document owner  | Antoine PREVOST  |
 | Creation date   | November 6, 2023 |
-| Lastest version | November 9, 2023 |
+| Lastest version | November 12, 2023 |
 
 <details>
 <summary>Table of Contents</summary>
@@ -39,6 +39,7 @@
       - [Interactions](#interactions)
       - [Game Rules](#game-rules)
       - [Game Over Screen](#game-over-screen)
+  - [Example applications](#example-applications)
   - [Timeline](#timeline)
   - [Evaluation criteria](#evaluation-criteria)
     - [Gameplay Requirements](#gameplay-requirements)
@@ -49,6 +50,21 @@
     - [Bug-Free Gameplay Requirements](#bug-free-gameplay-requirements)
   - [Risks and assumptions](#risks-and-assumptions)
     - [Copyright and license](#copyright-and-license)
+  - [Bonus/additional features](#bonusadditional-features)
+    - [Additional game modes](#additional-game-modes)
+      - [2 players game mode](#2-players-game-mode)
+        - [Specificities](#specificities)
+        - [Objectives](#objectives)
+        - [Key-binds](#key-binds)
+      - [Ghost control game mode](#ghost-control-game-mode)
+        - [Specificities](#specificities-1)
+        - [Objectives](#objectives-1)
+        - [Key-binds](#key-binds-1)
+    - [Additional menus](#additional-menus)
+      - [Main menu](#main-menu)
+      - [High-score menu](#high-score-menu)
+    - [Additional Fruits \& Bonuses](#additional-fruits--bonuses)
+    - [Game Launcher](#game-launcher-1)
   - [Glossary](#glossary)
 
 </details>
@@ -130,8 +146,8 @@ The following personas are based on the target audience we assume to have.
 ### 4. Tandy 1000 Enthusiast - Jason 📟
 
 - Goals:
-  - Jason's primary goal is to experience Pac-Man on his Tandy 1000, as it's a system he holds dear to his heart.
-  - He seeks a version of Pac-Man that is optimized for the Tandy 1000's[^2] hardware and provides an authentic 80s computing experience.
+  - Jason's primary goal is to experience Pac-Man on his Tandy 1000[^2], as it's a system he holds dear to his heart.
+  - He seeks a version of Pac-Man that is optimized for the Tandy 1000's hardware and provides an authentic 80s computing experience.
 
 - Challenges:
   - Ensuring that the Pac-Man clone is compatible with the Tandy 1000's specific hardware configurations and limitations.
@@ -150,7 +166,11 @@ As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced
 
 ### User interface
 
-<!-- TO DO -->
+As we plan to have an easy-to-use and intuitive interface, we want it to be as simple as possible, only showing the score, the maze, and the elements present in it.
+
+The interface will look as follows (the maze layout is subject to edits):
+
+![Pac-Man interface](../pictures//FilledPac-Maze.png)
 
 ### Game mechanics overview
 
@@ -166,7 +186,7 @@ As we need to respect the original gameplay rules, we have to be focused on many
 #### Winning and Losing Conditions
 
 - **Winning:**
-  - The player must successfully navigate the maze, consuming all of the small dots (pellets) while strategically using power pellets to temporarily gain the ability to eat ghosts. This process continues through multiple levels, with the ultimate goal of achieving the highest possible score and clearing all the levels.
+  - The player must successfully navigate the maze, consuming all of the small dots (pellets) while strategically using power pellets (which are bigger dots) to temporarily gain the ability to eat ghosts. This process continues through multiple levels, with the ultimate goal of achieving the highest possible score and clearing all the levels.
 - **Losing:**
   - Pac-Man loses a life if it collides with a ghost without the effects of a power pellet. The game ends if all lives are depleted.
 
@@ -197,18 +217,11 @@ Here is the color palette we are going to use:
 |![salmon](https://readme-swatches.vercel.app/fcb4aa)|Salmon|252, 180, 170|Dots, ghost body, ghost face when flashing|
 |![white](https://readme-swatches.vercel.app/fcfcff)|White|252, 252, 255|Flashing ghosts, scores, text, ghost eyes, fruit highlights|
 
-To convert those 24-bit encoded colors into 8-bit colors, our image has to go through a process called color quantization[^3]. The simplest form for this process is to assign 3 bits to red, 3 bits to green, and only 2 bits to blue as the human eye is less sensitive to this color. This creates a 3-3-2 8-bit color image, following the following table structure:
-
-``` txt
-Bit:   7  6  5  4  3  2  1  0
-Data:  R  R  R  G  G  G  B  B
-```
-
 ##### Game window
 
 The game will take place in a maze similar to the example displayed below. Of course, the maze's shape, size, or layout might be changed compared to this one. It will be displayed in the command line window of the DOSBox emulator. This window will be displayed in full screen.
 
-![pac-maze](../pictures/Pac-Maze.png)
+![Pac-maze](../pictures/Pac-Maze.png)
 
 ##### Sprites
 
@@ -221,7 +234,7 @@ Here are the different sprites that will be used to create the game:
 |Ghosts|16x8|![Ghosts](../pictures/Ghosts.png)|
 |Scared Ghosts|16x8|![ScaredGhosts](../pictures/ScaredGhosts.png)|
 |Eyes|5x5|![Eyes](../pictures/Eyes.png)|
-|Fruits|8x8|![Fruits](../pictures/Fruits.png)|
+|Cherry|8x8|![Cherry](../pictures/Cherry.png)|
 
 Pac-Man will be able to face 4 directions, up, left, down, and right, and open his mouth.
 Ghosts will be able to see in those 4 directions.
@@ -248,24 +261,6 @@ All controls described in the following section are assumed to be done using an 
 - The player can also exit the game:
   - `Escape`: Quit the game and close the DOSBox emulator.
 
-As a bonus which will be added if there is still time, we plan to add a main menu which will be displayed when starting the game and losing a game. It would contain the high scores, the different themes of the game, a 2-player game mode, and another mode to control ghosts.
-
-Here is the table of the different controls across the various potential features:
-
----
-
-- **Startup/Lost game/Main menu**:
-  - `Up Arrow`: Select the upward option.
-    - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
-  - `Down Arrow`: Select the downward option.
-    - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
-  - `Enter key`/`Spacebar`: Choose this option and enter the sub-menu associated with it.
-
----
-
-- **High scores sub-menu**:
-  - `Enter key`/`Spacebar`: Go back to the main menu.
-
 ---
 
 - **Themes sub-menu**:
@@ -282,41 +277,6 @@ Here is the table of the different controls across the various potential feature
 
 ---
 
-- **2 players game mode**:
-  - First player moves:
-    - `Up Arrow`: Move the Pac-Man sprite without a hair bow upward.
-    - `Down Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
-    - `Left Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
-    - `Right Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
-  - Second player moves:
-    - `Z`: Move the Pac-Man sprite without a hair bow upward.
-    - `S`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
-    - `Q`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
-    - `D`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
-
----
-
-- **Control ghosts**:
-  - `&` key: Switch to Blinky's moves control
-    - Pressing the `&` key when Blinky is already the sprite whose moves are already controlled does nothing
-  - `é` key: Switch to Pinky's moves control
-    - Pressing the `é` key when Pinky is already the sprite whose moves are already controlled does nothing
-  - `"` key: Switch to Inky's moves control
-    - Pressing the `"` key when Inky is already the sprite whose moves are already controlled does nothing
-  - `'` key: Switch to Inky's moves control
-    - Pressing the `'` key when Inky is already the sprite whose moves are already controlled does nothing
-  - `Up Arrow`: Move the controlled ghost sprite upward.
-  - `Down Arrow`: Move the controlled ghost sprite downward.  
-  - `Left Arrow`: Move the controlled ghost sprite to the left.
-  - `Right Arrow`: Move the controlled ghost sprite to the right.
-
----
-
-- **All optional submenus**:
-  - `Escape`: Quit the game and close the DOSBox emulator.
-
----
-
 #### Movement
 
 Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at 60 frames per second, ensuring smooth movement.
@@ -324,7 +284,7 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
 #### Interactions
 
 - **Eating Dots:**
-  - Small dots (pellets) are strategically placed throughout the maze. When Pac-Man comes into contact with a dot, it is immediately consumed, and the player's score increases by 10 points.
+  - Small dots (pellets) are strategically nearly completely placed throughout the maze. When Pac-Man comes into contact with a dot, it is immediately consumed, and the player's score increases by 10 points.
 - **Power Pellets:**
   - There are four power pellets located at the corners of the maze. When Pac-Man consumes a power pellet, it gains the ability to eat ghosts for a limited duration of 10 seconds.
 - **Ghosts:**
@@ -334,8 +294,8 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
     - Inky: Combines elements of Blinky and Pinky's behavior.
     - Clyde: Switches between random movement and targeting Pac-Man.
   - If Pac-Man collides with a ghost while not under the effects of a power pellet, Pac-Man loses a life.
-- **Fruit (Optional):**
-  - At certain intervals, a fruit bonus may appear in the maze. When Pac-Man collects the fruit, additional points are awarded.
+- **Cherry:**
+  - After 70 dots are eaten, a bonus cherry appears in the maze and stays active and displayed on the screen. When Pac-Man collects the fruit, 100 additional points are awarded and incremented to the player's score. After 170 dots are eaten, another cherry will appear unless the first one is still here.
 
 #### Game Rules
 
@@ -343,9 +303,9 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
   - Small dots: 10 points each.
     - Power Pellets: 50 points each.
     - Eating a ghost (while under the effects of a power pellet): 200, 400, 800, 1600 points (depending on consecutive ghost eats).
-    - Fruit (if implemented): Varies based on the type of fruit.
+    - Cherry: 100 points each.
   - **Level Progression:**
-    - Each level starts with a new maze layout. The difficulty increases as players progress through levels, with faster ghosts and more complex mazes.
+    - Each level starts with the same maze layout. The difficulty increases as players progress through levels, with faster ghosts and more complex mazes.
   - **Extra Lives:**
     - Pac-Man starts with three lives. An extra life is awarded upon reaching 10,000 points.
 
@@ -353,9 +313,21 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
 
 When the game ends, the player is presented with a game over screen displaying their final score, along with options to restart or quit.
 
+## Example applications
+
+We plan our software will be used for entertainment purposes, whether the user is nostalgic about the time this game was just released or just wants to discover the retro-games environment.
+
+Here is an activity diagram showing the potential usage of our software and the timeline the user could go through :
+
+![Use case Activity](../pictures/Activity_diagram_use_case.svg)
+
 ## Timeline
 
-<!-- Léo put a timeline of the project here-->
+**Week 1 & 2** *(5 half days)*: Planning & Research
+**Week 3** & 4** *(6 half days)*: Main display & mechanics
+**Week 5** *(3 half days)*: Complex display & mechanics
+**Week 6** *(4 half days)*: Polishing (sounds, animations, ...)
+**Week 7** *(7 half days)*: Reserve time & pitch preparation
 
 ## Evaluation criteria
 
@@ -367,13 +339,15 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 - **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when Pac-Man either exhausts all lives or is captured by an enemy.
 
-- **Level Progression:** The game must feature progressively challenging levels. Initial levels should present uncomplicated mazes with fewer enemies, while later levels should introduce more intricate mazes and faster enemies.
+- **Level Progression:** The game must feature progressively challenging levels. Initial levels should include less quick and intelligent enemies, while later levels should introduce more intelligent and faster enemies.
 
 ### AI and Enemy Behavior Requirements
 
 - **Enemies Intelligence:** Enemies should exhibit intelligent behavior, using pathfinding algorithms to pursue Pac-Man logically. Their movements should dynamically respond to Pac-Man's position.
 
 - **Fairness and Challenge:** Strive to maintain a balanced and challenging gameplay experience. Enemies should be swift and pose a challenge without causing undue frustration for the player.
+
+- **Ghosts being eaten:** When a ghost is being eaten by Pac-Man in power mode, it is warped back to its spawn point which is situated in a cage in the center of the maze.
 
 ### Controls and Responsiveness Requirements
 
@@ -402,12 +376,120 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 ### Copyright and license
 
-As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc., is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
+As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, he told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc.[^3], is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
+
+## Bonus/additional features
+
+As a bonus which will be added if we don't face any issues during the development and testing phases, we plan to add some additional features to give players more varied experiences in terms of gameplay.
+This section will stay quite concise and won't explain in detail how each of the game modes and menus will work, so an additional document describing these additional gameplay elements will be included in a future specification.
+
+### Additional game modes
+
+#### 2 players game mode
+
+This game mode can be played by two players at the same time. Both players control their own Pac-Man sprite on the same keyboard. The objective of this game mode is strictly the same as the original Pac-Man game. The second character is wearing a hair bow and is called "Miss Pac-Man".
+
+##### Specificities
+
+- Each Pac-Man has independent movements and is controlled separately from the other.
+- Loot tables stay the same compared to the one specified in the [Game Rules](#game-rules)
+- If Pac-man and Miss Pac-Man collide during the game, each of them loses a life and is brought back to their spawn point, but the emplacement of the ghosts and the already-eaten dots are not reset.
+
+##### Objectives
+
+The objective of this game mode is similar to the one-player original Pac-Man game mode, you have to progress across different levels, going as far as you can, by eating all the dots and trying to avoid being eaten by the ghosts, except when the phantoms are flashing in blue, which is the moment when you can eat them to gain more points.
+
+##### Key-binds
+
+- First player moves:
+  - `Up Arrow`: Move the Pac-Man sprite without a hair bow upward.
+  - `Down Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
+  - `Left Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
+  - `Right Arrow`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
+- Second player moves:
+  - `Z`: Move the Pac-Man sprite without a hair bow upward.
+  - `S`: Move the Pac-Man sprite Pac-Man without a hair bow downward.
+  - `Q`: Move the Pac-Man sprite Pac-Man without a hair bow to the left.
+  - `D`: Move the Pac-Man sprite Pac-Man without a hair bow to the right.
+- `Escape`: Quit the game and close the DOSBox emulator.
+
+#### Ghost control game mode
+
+This game mode can be only played by one player. In this game mode, instead of controlling Pac-Man, you are controlling the ghosts which are normally chasing him. You only control one at a time but can switch between them.
+
+##### Specificities
+
+- Each ghost is controlled independently from the others.
+- You can switch from one ghost to the other with attributed key-binds.
+- Each ghost has independent lives but a maximum of 3 per level.
+- While a ghost is not selected, the artificial intelligence normally guiding him retakes its control.
+
+##### Objectives
+
+The main objective of this game mode is to stop Pac-Man as early as possible in the levels. It is mainly challenging as you have to completely think of how you can stop him as quickly as possible instead of how to go as far as possible in the game.
+
+##### Key-binds
+
+- `&` key: Switch to Blinky's moves control
+  - Pressing the `&` key when Blinky is already the sprite whose moves are already controlled does nothing
+- `é` key: Switch to Pinky's moves control
+  - Pressing the `é` key when Pinky is already the sprite whose moves are already controlled does nothing
+- `"` key: Switch to Inky's moves control
+  - Pressing the `"` key when Inky is already the sprite whose moves are already controlled does nothing
+- `'` key: Switch to Inky's moves control
+  - Pressing the `'` key when Inky is already the sprite whose moves are already controlled does nothing
+- `Up Arrow`: Move the controlled ghost sprite upward.
+- `Down Arrow`: Move the controlled ghost sprite downward.  
+- `Left Arrow`: Move the controlled ghost sprite to the left.
+- `Right Arrow`: Move the controlled ghost sprite to the right.
+- `Escape`: Quit the game and close the DOSBox emulator.
+
+### Additional menus
+
+#### Main menu
+
+This menu will allow the player to navigate between the different available game modes and menus of the final Pac-Man game which will be available. This menu will be composed of the different options being aligned vertically in the center of the screen.
+
+The controls in this menu will be the following:
+
+- `Up Arrow`: Select the upward option.
+  - When on the top option, pressing this key does not warp to the bottom one, instead does nothing.
+- `Down Arrow`: Select the downward option.
+  - When on the bottom option, pressing this key does not warp to the bottom, instead does nothing.
+- `Enter key`/`Spacebar`: Choose this option and enter the sub-menu associated with it.
+- `Escape`: Quit the game and close the DOSBox emulator.
+
+#### High-score menu
+
+This menu will be read-only and will consist in reading the highest score which has been done by playing our game in each of the game modes. At the bottom of the menu, there will be a button to escape this menu and go back to the main menu.
+
+The controls in this menu will be the following:
+
+- `Enter key`/`Spacebar`: Go back to the main menu.
+- `Escape`: Quit the game and close the DOSBox emulator.
+
+### Additional Fruits & Bonuses
+
+As the cherry is the most iconic fruit of the Pac-Man game, we decided to implement it directly, however, we plan to add the other fruits present in it. Each of them will be displayed as an 8x8 sprite in the maze and will be randomly spawning with a decreasing spawn rate the more the fruit gives points. They are subjected to the same spawn conditions as the one described in the [interactions section](#interactions) Here is the table of the bonus points provided by the bonus fruits and the spawn rate associated with it:
+
+|Image|Fruit name|Given points|
+| --- | --- | --- |
+|![Strawberry](../pictures/PM_Strawberry.webp)| Strawberry | 300 |
+|![Orange](../pictures/PM_Orange.webp)| Orange | 500 |
+|![Apple](../pictures/PM_Apple.webp)| Apple | 700 |
+|![Melon](../pictures/PM_Melon.webp)| Melon | 1000 |
+|![Galaxian starship](../pictures/PM_Galaxian.webp)| Galaxian starship | 2000 |
+|![Bell](../pictures/PM_Bell.webp)| Bell | 3000 |
+|![Key](../pictures/PM_Key.webp)| Key | 5000 |
+
+### Game Launcher
+
+We also plan to create a game launcher for Mac and Windows that will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases.
 
 ## Glossary
 
 [^1]: DOSBox is an emulator program that emulates an IBM PC-compatible computer running a DOS operating system.
 
-[^2]: The Tandy 1000 was the first in a line of IBM PC-compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.  
+[^2]: The Tandy 1000 was the first in a line of IBM PC-compatible home computer systems produced by the Tandy. The Tandy 1000 is powered by an x86 processor operating on a 16-bit architecture. This means that it utilizes the Intel 8088, which is a 16-bit microprocessor compatible with the x86 instruction set.
 
-[^3]: The process of creating a color map for a less color-dense image from a more dense image.
+[^3]: Bandai Namco Entertainment Inc. is a Japanese multinational video game publisher that owns Pac-Man's property.
