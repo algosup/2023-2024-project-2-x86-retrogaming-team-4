@@ -164,7 +164,7 @@ Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,5
 ### Launch procedure
 
 The user will have to download the full repository containing the files and follow the installation steps which will be described in the README. The user will launch the compiled program contained in the repository files, which is executed on the same platform, thanks to the DOSBox emulator.
-We don't plan to create the launcher at the moment, so the user will have to type the different commands to launch the game contained in the README file in DOSBox command line.
+We don't plan to create the launcher at the moment, so the user will have to type the different commands to launch the game contained in the README file in the DOSBox command line.
 
 ### User interface
 
@@ -263,6 +263,8 @@ To give the player a more immersive experience, we want to add a sound ambiance 
 |<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_gets_high_score.html">High Score Sound</a>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game.|
 |<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_back_to_base.html">Ghost soul back to base Sound</a>|Ghost soul back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint.|
 |<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_dying.html">Dying sound Link</a>|Dying|Sound played by Pac-Man when it dies.|
+
+The list of all the sounds and their players can also be found on [this link](https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/).
 
 ---
 
