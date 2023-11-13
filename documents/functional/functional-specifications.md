@@ -25,6 +25,7 @@
     - [4. Tandy 1000 Enthusiast - Jason 📟](#4-tandy-1000-enthusiast---jason-)
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
+    - [Launch procedure](#launch-procedure)
     - [User interface](#user-interface)
     - [Game mechanics overview](#game-mechanics-overview)
       - [Winning and Losing Conditions](#winning-and-losing-conditions)
@@ -160,6 +161,11 @@ The following personas are based on the target audience we assume to have.
 As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs. This software is cross-platform and does not require any DOS distribution or an x86 architecture CPU, so it can be run both on MacOS and Windows.
 Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,536 bytes.
 
+### Launch procedure
+
+The user will have to download the full repository containing the files and follow the installation steps which will be described in the README. The user will launch the compiled program contained in the repository files, which is executed on the same platform, thanks to the DOSBox emulator.
+We don't plan to create the launcher at the moment, so the user will have to type the different commands to launch the game contained in the README file in DOSBox command line.
+
 ### User interface
 
 As we plan to have an easy-to-use and intuitive interface, we want it to be as simple as possible, only showing the score, the maze, and the elements present in it.
@@ -247,16 +253,16 @@ To give the player a more immersive experience, we want to add a sound ambiance 
 
 |Sound playback link|Name of the sound|Trggering event|
 |---|---|---|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/startup.html">Startup Sound</a>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/waka_waka.html">Waka Waka Sound</a>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/power_up.html">Power Up Sound</a>|Power up|Sound played after Pac-Man eats a Power pellet|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/eating_fruit.html">Eating Fruit Sound</a>|Eating fruit|Sound played when Pac-Man eats a cherry|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_eats_ghost.html">Eating Ghost Sound</a>|Eating ghost|Sound played when Pac-Man eats a ghost|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren1.html">Ghost Siren 1 Sound</a>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren2.html">Ghost Siren 2 Sound</a>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_gets_high_score.html">High Score Sound</a>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_back_to_base.html">Ghost soul back to base Sound</a>|Ghost soul back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
-|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_dying.html">Dying sound Link</a>|Dying|Sound played by Pac-Man when it dies|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/startup.html">Startup Sound</a>|Startup|Sound played at the game launch before the player starts controlling Pac-Man.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/waka_waka.html">Waka Waka Sound</a>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/power_up.html">Power Up Sound</a>|Power up|Sound played after Pac-Man eats a Power pellet.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/eating_fruit.html">Eating Fruit Sound</a>|Eating fruit|Sound played when Pac-Man eats a cherry.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_eats_ghost.html">Eating Ghost Sound</a>|Eating ghost|Sound played when Pac-Man eats a ghost.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren1.html">Ghost Siren 1 Sound</a>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode).|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren2.html">Ghost Siren 2 Sound</a>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode).|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_gets_high_score.html">High Score Sound</a>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_back_to_base.html">Ghost soul back to base Sound</a>|Ghost soul back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_dying.html">Dying sound Link</a>|Dying|Sound played by Pac-Man when it dies.|
 
 ---
 
@@ -332,7 +338,7 @@ We plan our software will be used for entertainment purposes, whether the user i
 
 Here is an activity diagram showing the potential usage of our software and the timeline the user could go through :
 
-![Use case Activity](../pictures/diagramWalkthrough.png)
+![Use case Activity](../pictures/DiagramWalkthrough.png)
 
 ## Timeline
 
@@ -363,7 +369,7 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 ### Gameplay Requirements
 
-- **Movement and Responsiveness:** The sprites' movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
+- **Movement and Responsiveness:** The sprites' movement speed must be at least 24 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
 
 - **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when Pac-Man either exhausts all lives or is captured by an enemy.
 
