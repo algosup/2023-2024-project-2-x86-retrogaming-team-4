@@ -6,7 +6,7 @@
 | Document name   | Functional specifications  |
 | Document owner  | Antoine PREVOST  |
 | Creation date   | November 6, 2023 |
-| Lastest version | November 12, 2023 |
+| Lastest version | November 13, 2023 |
 
 <details>
 <summary>Table of Contents</summary>
@@ -25,7 +25,7 @@
     - [4. Tandy 1000 Enthusiast - Jason 📟](#4-tandy-1000-enthusiast---jason-)
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
-    - [Game launcher](#game-launcher)
+    - [Launch procedure](#launch-procedure)
     - [User interface](#user-interface)
     - [Game mechanics overview](#game-mechanics-overview)
       - [Winning and Losing Conditions](#winning-and-losing-conditions)
@@ -65,7 +65,7 @@
       - [Main menu](#main-menu)
       - [High-score menu](#high-score-menu)
     - [Additional Fruits \& Bonuses](#additional-fruits--bonuses)
-    - [Game Launcher](#game-launcher-1)
+    - [Game launcher](#game-launcher)
   - [Glossary](#glossary)
 
 </details>
@@ -158,12 +158,13 @@ The following personas are based on the target audience we assume to have.
 
 ### System architecture
 
-As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
+As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs. This software is cross-platform and does not require any DOS distribution or an x86 architecture CPU, so it can be run both on MacOS and Windows.
 Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,536 bytes.
 
-### Game launcher
+### Launch procedure
 
-As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we are going to create a .exe and a .dmg executable to launch our Pac-Man clone if we have left-over time before the project deadline. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
+The user will have to download the full repository containing the files and follow the installation steps which will be described in the README. The user will launch the compiled program contained in the repository files, which is executed on the same platform, thanks to the DOSBox emulator.
+We don't plan to create the launcher at the moment, so the user will have to type the different commands to launch the game contained in the README file in DOSBox command line.
 
 ### User interface
 
@@ -250,18 +251,18 @@ Let's provide more concrete details and examples for the gameplay mechanics:
 
 To give the player a more immersive experience, we want to add a sound ambiance to our game. Here is the table that recaps the different sounds that will be implemented and the use cases they are related to.
 
-|Sound|Name of the sound|Trggering event|
+|Sound playback link|Name of the sound|Trggering event|
 |---|---|---|
-|<audio controls> <source src="../sounds/startup.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
-|<audio controls> <source src="../sounds/waka_waka.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
-|<audio controls> <source src="../sounds/power_up.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
-|<audio controls> <source src="../sounds/eating_fruit.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
-|<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
-|<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
-|<audio controls> <source src="../sounds/ghost_siren2.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
-|<audio controls> <source src="../sounds/pacman_gets_high_score.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
-|<audio controls> <source src="../sounds/ghost_back_to_base.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
-|<audio controls> <source src="../sounds/pacman_dying.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Dying|Sound played by Pac-Man when it dies|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/startup.html">Startup Sound</a>|Startup|Sound played at the game launch before the player starts controlling Pac-Man.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/waka_waka.html">Waka Waka Sound</a>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/power_up.html">Power Up Sound</a>|Power up|Sound played after Pac-Man eats a Power pellet.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/eating_fruit.html">Eating Fruit Sound</a>|Eating fruit|Sound played when Pac-Man eats a cherry.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_eats_ghost.html">Eating Ghost Sound</a>|Eating ghost|Sound played when Pac-Man eats a ghost.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren1.html">Ghost Siren 1 Sound</a>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode).|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren2.html">Ghost Siren 2 Sound</a>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode).|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_gets_high_score.html">High Score Sound</a>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_back_to_base.html">Ghost soul back to base Sound</a>|Ghost soul back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint.|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_dying.html">Dying sound Link</a>|Dying|Sound played by Pac-Man when it dies.|
 
 ---
 
@@ -297,7 +298,7 @@ All controls described in the following section are assumed to be done using an 
 
 #### Movement
 
-Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind 60 frames per second is the targeted framerate.
+Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second is the targeted framerate.
 
 #### Interactions
 
@@ -337,15 +338,30 @@ We plan our software will be used for entertainment purposes, whether the user i
 
 Here is an activity diagram showing the potential usage of our software and the timeline the user could go through :
 
-![Use case Activity](../pictures/Activity_diagram_use_case.svg)
+![Use case Activity](../pictures/DiagramWalkthrough.png)
 
 ## Timeline
 
-**Week 1 & 2** *(5 half days)*: Planning & Research
-**Week 3** & 4** *(6 half days)*: Main display & mechanics
-**Week 5** *(3 half days)*: Complex display & mechanics
-**Week 6** *(4 half days)*: Polishing (sounds, animations, ...)
-**Week 7** *(7 half days)*: Reserve time & pitch preparation
+- Planning & Research
+  - Learning about the project and preparing for it
+  - Week 1 & 2
+  - 5 half days
+- Main display & Mechanics
+  - Displaying the player, maze, and movement maze collision and eating pellets
+  - Week 3 & 4
+  - 6 half days
+- Complex display & Mechanics
+  - Working ghosts, fruits, score, and live system
+  - Week 5
+  - 3 half days
+- Polishing
+  - Adding sounds, animations, level system, ...
+  - Week 6
+  - 4 half days
+- Reserve time & pitch preparation
+  - Time reserved in case of problems and preparing a presentation to the client
+  - Week 7
+  - 7 half days
 
 ## Evaluation criteria
 
@@ -353,7 +369,7 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 ### Gameplay Requirements
 
-- **Movement and Responsiveness:** The sprites' movement speed must be precisely 60 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
+- **Movement and Responsiveness:** The sprites' movement speed must be at least 24 pixels per second. Player inputs for movement must result in immediate and responsive character actions.
 
 - **Winning and Losing Conditions:** Winning the game should be achieved by consuming all the dots within a level. Losing conditions must be triggered when Pac-Man either exhausts all lives or is captured by an enemy.
 
@@ -500,9 +516,9 @@ As the cherry is the most iconic fruit of the Pac-Man game, we decided to implem
 |![Bell](../pictures/PM_Bell.webp)| Bell | 3000 |
 |![Key](../pictures/PM_Key.webp)| Key | 5000 |
 
-### Game Launcher
+### Game launcher
 
-We also plan to create a game launcher for Mac and Windows that will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases.
+As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we plan to create a .exe and a .dmg executable to launch our Pac-Man clone if we don't face any development issues before the project deadline. It will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
 
 ## Glossary
 

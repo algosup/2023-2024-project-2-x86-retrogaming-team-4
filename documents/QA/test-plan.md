@@ -54,7 +54,7 @@
 This project targets a diverse audience, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time. With a dual purpose, the product aims to serve as an educational tool for learning assembly language coding and as an entertainment game.
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
-![](../pictures/diagramWalkthrough.svg)
+![](../pictures/diagramWalkthrough.png)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, 65,536 bytes of RAM.
 
