@@ -6,7 +6,7 @@
 | Document name   | Functional specifications  |
 | Document owner  | Antoine PREVOST  |
 | Creation date   | November 6, 2023 |
-| Lastest version | November 12, 2023 |
+| Lastest version | November 13, 2023 |
 
 <details>
 <summary>Table of Contents</summary>
@@ -245,18 +245,18 @@ Let's provide more concrete details and examples for the gameplay mechanics:
 
 To give the player a more immersive experience, we want to add a sound ambiance to our game. Here is the table that recaps the different sounds that will be implemented and the use cases they are related to.
 
-|Sound|Name of the sound|Trggering event|
+|Sound playback link|Name of the sound|Trggering event|
 |---|---|---|
-|[![Startup](../pictures/Play_Button.png)](../sounds/startup.wav)|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
-|<video controls src="../sounds/waka_waka.mp4">|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
-|<audio controls> <source src="../sounds/power_up.wav" type="audio"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
-|<audio controls> <source src="../sounds/eating_fruit.wav" type="audio"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
-|<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
-|<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
-|<audio controls> <source src="../sounds/ghost_siren2.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
-|<audio controls> <source src="../sounds/pacman_gets_high_score.wav" type="audio"> Your browser does not support the audio element.</audio>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
-|<audio controls> <source src="../sounds/ghost_back_to_base.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
-|<audio controls> <source src="../sounds/pacman_dying.wav" type="audio"> Your browser does not support the audio element.</audio>|Dying|Sound played by Pac-Man when it dies|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/startup.html">Startup Sound</a>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/waka_waka.html">Waka Waka Sound</a>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/power_up.html">Power Up Sound</a>|Power up|Sound played after Pac-Man eats a Power pellet|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/eating_fruit.html">Eating Fruit Sound</a>|Eating fruit|Sound played when Pac-Man eats a cherry|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_eats_ghost.html">Eating Ghost Sound</a>|Eating ghost|Sound played when Pac-Man eats a ghost|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren1.html">Ghost Siren 1 Sound</a>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_siren2.html">Ghost Siren 2 Sound</a>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_gets_high_score.html">High Score Sound</a>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/ghost_back_to_base.html">Ghost soul back to base Sound</a>|Ghost soul back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
+|<a target="_blank" href="https://benoitdk.ynh.fr/web/algosup/sounds_of_pacman/pacman_dying.html">Dying sound Link</a>|Dying|Sound played by Pac-Man when it dies|
 
 ---
 
@@ -292,7 +292,7 @@ All controls described in the following section are assumed to be done using an 
 
 #### Movement
 
-Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second are the targeted framerate.
+Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second is the targeted framerate.
 
 #### Interactions
 
@@ -336,11 +336,26 @@ Here is an activity diagram showing the potential usage of our software and the 
 
 ## Timeline
 
-**Week 1 & 2** *(5 half days)*: Planning & Research
-**Week 3** & 4** *(6 half days)*: Main display & mechanics
-**Week 5** *(3 half days)*: Complex display & mechanics
-**Week 6** *(4 half days)*: Polishing (sounds, animations, ...)
-**Week 7** *(7 half days)*: Reserve time & pitch preparation
+- Planning & Research
+  - Learning about the project and preparing for it
+  - Week 1 & 2
+  - 5 half days
+- Main display & Mechanics
+  - Displaying the player, maze, and movement maze collision and eating pellets
+  - Week 3 & 4
+  - 6 half days
+- Complex display & Mechanics
+  - Working ghosts, fruits, score, and live system
+  - Week 5
+  - 3 half days
+- Polishing
+  - Adding sounds, animations, level system, ...
+  - Week 6
+  - 4 half days
+- Reserve time & pitch preparation
+  - Time reserved in case of problems and preparing a presentation to the client
+  - Week 7
+  - 7 half days
 
 ## Evaluation criteria
 
