@@ -54,6 +54,7 @@
 This project targets a diverse audience, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time. With a dual purpose, the product aims to serve as an educational tool for learning assembly language coding and as an entertainment game.
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
+
 ![](../pictures/diagramWalkthrough.svg)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, 65,536 bytes of RAM.
@@ -192,11 +193,11 @@ To test the code of the wall project we chose to split the work into 4 key steps
 
 #### Schedule:
 | Step | Start Date | End Date |
-| --- | --- | --- |
-| Create a unit test template | 2023-11-13 | 2023-11-13 |
-| Write unit tests | 2023-11-13 | 2023-12-22 |
-| Automate tests with GitHub Actions | 2023-11-27 | 2023-12-03 |
-| Create functional tests | \ | \ |
+| ---- | ---------- | -------- |
+| Create a unit test template | 2023/11/13 | 2023/11/13 |
+| Write unit tests | 2023/11/13 | 2023/12/22 |
+| Automate tests with GitHub Actions | 2023/11/27 | 2023/12/03 |
+| Start test session | / | / |
 
 
 ### Documentation Testing
@@ -214,13 +215,23 @@ To test the documentation of the wall project we chose to split the work into 3 
 | Create and give template for documentation | 1-2 days | |
 | Organize a meeting with all developers | 1 hour | Meeting are planned every week. |
 | Review the documentation | 1-2 days | Review are planned every week. |
+| Unit tests | 1-2 days | Unit test will be done in parallel with the development of the project. |
+| Test session | 1 hour | Test session will be done 1-3 times every week. |
+| GitHub Actions | 1 week | |
+| Coverage script | 1 week | |
+| Unit test formater script | 1 week | |
 
 #### Schedule:
 | Step | Start Date | End Date |
-| --- | --- | --- |
-| Create and give template for documentation | 2023-11-13 | 2023-11-13 |
-| Organize a meeting with all developers | 2023-11-13 | 2023-12-22 |
-| Review the documentation | 2023-11-20 | 2023-12-22 |
+| ---- | ---------- | -------- |
+| Create and give template for documentation | 2023/11/13 | 2023/11/13 |
+| Organize a meeting with all developers | 2023/11/13 | 2023/12/22 |
+| Review the documentation | 2023/11/20 | 2023/12/22 |
+| Unit tests | 2023/11/13 | 2023/12/22 |
+| Test session | 2023/11/20 | 2023/12/22 |
+| GitHub Actions | 2023/11/27 | 2023/12/03 |
+| Coverage script | 2023/12/04 | 2023/12/10 |
+| Unit test formater script | 2023/12/04 | 2023/12/10 |
 
 ## 8. Test Deliverables 
 ### Overview:
