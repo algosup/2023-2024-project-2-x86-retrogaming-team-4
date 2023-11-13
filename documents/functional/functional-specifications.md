@@ -25,7 +25,6 @@
     - [4. Tandy 1000 Enthusiast - Jason 📟](#4-tandy-1000-enthusiast---jason-)
   - [Solution overview](#solution-overview)
     - [System architecture](#system-architecture)
-    - [Game launcher](#game-launcher)
     - [User interface](#user-interface)
     - [Game mechanics overview](#game-mechanics-overview)
       - [Winning and Losing Conditions](#winning-and-losing-conditions)
@@ -65,7 +64,7 @@
       - [Main menu](#main-menu)
       - [High-score menu](#high-score-menu)
     - [Additional Fruits \& Bonuses](#additional-fruits--bonuses)
-    - [Game Launcher](#game-launcher-1)
+    - [Game launcher](#game-launcher)
   - [Glossary](#glossary)
 
 </details>
@@ -158,12 +157,8 @@ The following personas are based on the target audience we assume to have.
 
 ### System architecture
 
-As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs which is cross-platform and does not require any DOS distribution or an x86 architecture CPU.
+As requested by ALGOSUP, we are going to use DOSBox, an emulator for Intel 80386 family CPUs. This software is cross-platform and does not require any DOS distribution or an x86 architecture CPU, so it can be run both on MacOS and Windows.
 Our game will be based on a 16-bit address bus, limiting addressable RAM to 65,536 bytes.
-
-### Game launcher
-
-As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we are going to create a .exe and a .dmg executable to launch our Pac-Man clone if we have left-over time before the project deadline. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
 
 ### User interface
 
@@ -252,16 +247,16 @@ To give the player a more immersive experience, we want to add a sound ambiance 
 
 |Sound|Name of the sound|Trggering event|
 |---|---|---|
-|<audio controls> <source src="../sounds/startup.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
-|<audio controls> <source src="../sounds/waka_waka.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
-|<audio controls> <source src="../sounds/power_up.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
-|<audio controls> <source src="../sounds/eating_fruit.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
-|<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
-|<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
-|<audio controls> <source src="../sounds/ghost_siren2.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
-|<audio controls> <source src="../sounds/pacman_gets_high_score.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
-|<audio controls> <source src="../sounds/ghost_back_to_base.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Ghost back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
-|<audio controls> <source src="../sounds/pacman_dying.wav" type="audio/wav"> Your browser does not support the audio element.</audio>|Dying|Sound played by Pac-Man when it dies|
+|[![Startup](../pictures/Play_Button.png)](../sounds/startup.wav)|Startup|Sound played at the game launch before the player starts controlling Pac-Man|
+|<video controls src="../sounds/waka_waka.mp4">|Waka waka|Sound is played when Pac-Man eats the pellets, whatever their size is|
+|<audio controls> <source src="../sounds/power_up.wav" type="audio"> Your browser does not support the audio element.</audio>|Power up|Sound played after Pac-Man eats a Power pellet|
+|<audio controls> <source src="../sounds/eating_fruit.wav" type="audio"> Your browser does not support the audio element.</audio>|Eating fruit|Sound played when Pac-Man eats a cherry|
+|<audio controls> <source src="../sounds/pacman_eats_ghost.wav" type="audio"> Your browser does not support the audio element.</audio>|Eating ghost|Sound played when Pac-Man eats a ghost|
+|<audio controls> <source src="../sounds/ghost_siren1.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost Siren 1|Sound played by the ghost when they are dangerous to Pac-Man (when Pac-Man is not in power mode)|
+|<audio controls> <source src="../sounds/ghost_siren2.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost Siren 2|Sound played by the ghost when they are not dangerous to Pac-Man (when Pac-Man is in power mode)|
+|<audio controls> <source src="../sounds/pacman_gets_high_score.wav" type="audio"> Your browser does not support the audio element.</audio>|High Score|Sound triggered when Pac-Man reaches the previous high-score of the game|
+|<audio controls> <source src="../sounds/ghost_back_to_base.wav" type="audio"> Your browser does not support the audio element.</audio>|Ghost back to base|Sound played by the ghost when they are killed and their sould is coming back to their spawnpoint|
+|<audio controls> <source src="../sounds/pacman_dying.wav" type="audio"> Your browser does not support the audio element.</audio>|Dying|Sound played by Pac-Man when it dies|
 
 ---
 
@@ -297,7 +292,7 @@ All controls described in the following section are assumed to be done using an 
 
 #### Movement
 
-Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind 60 frames per second is the targeted framerate.
+Pac-Man moves through the maze at the rate of one cell per frame. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second are the targeted framerate.
 
 #### Interactions
 
@@ -337,7 +332,7 @@ We plan our software will be used for entertainment purposes, whether the user i
 
 Here is an activity diagram showing the potential usage of our software and the timeline the user could go through :
 
-![Use case Activity](../pictures/Activity_diagram_use_case.svg)
+![Use case Activity](../pictures/diagramWalkthrough.png)
 
 ## Timeline
 
@@ -500,9 +495,9 @@ As the cherry is the most iconic fruit of the Pac-Man game, we decided to implem
 |![Bell](../pictures/PM_Bell.webp)| Bell | 3000 |
 |![Key](../pictures/PM_Key.webp)| Key | 5000 |
 
-### Game Launcher
+### Game launcher
 
-We also plan to create a game launcher for Mac and Windows that will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases.
+As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we plan to create a .exe and a .dmg executable to launch our Pac-Man clone if we don't face any development issues before the project deadline. It will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
 
 ## Glossary
 
