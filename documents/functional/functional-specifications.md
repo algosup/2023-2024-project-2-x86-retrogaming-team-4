@@ -315,6 +315,27 @@ Pac-Man moves through the maze at the rate of one cell per frame. Each frame is 
     - Inky: Combines elements of Blinky and Pinky's behavior.
     - Clyde: Switches between random movement and targeting Pac-Man.
   - If Pac-Man collides with a ghost while not under the effects of a power pellet, Pac-Man loses a life.
+  - If a power has been eaten by Pac-Man, ghosts are frightened during the time Pac-Man is in power mode and subsquently, the time where the ghosts are vulnerable. This time decreases the futher you are in the levels:
+  
+  |Level | Time while ghosts are frightened (seconds)|
+  |--- | ---|
+  |1 | 6|
+  |2 | 5|
+  |3 | 4|
+  |4 | 3|
+  |5 | 2|
+  |6 | 5|
+  |7 and 8 | 2|
+  |9 | 1|
+  |10 | 5|
+  |11 | 2|
+  |12 and 13 | 1|
+  |14 | 3|
+  |15 and 16 | 1 |
+  |17 | 0|
+  |18 | 1|
+  |19 and more | 0|
+
 - **Cherry:**
   - After 70 dots are eaten, a bonus cherry appears in the maze and stays active and displayed on the screen. When Pac-Man collects the fruit, 100 additional points are awarded and incremented to the player's score. After 170 dots are eaten, another cherry will appear unless the first one is still here.
 
