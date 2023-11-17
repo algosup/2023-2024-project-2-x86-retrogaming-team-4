@@ -1,3 +1,10 @@
+org 100h
+
+%include "constants.asm"
+%include "sprites.asm"
+
+section .text
+
 start:
     ; Set video mode to 320x200 256 colors graphic mode
     mov ax, 0013h

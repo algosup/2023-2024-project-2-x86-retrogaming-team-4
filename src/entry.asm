@@ -1,4 +1,6 @@
 org 100h
 
 section .text
-jump start
+jmp start
+
+%include "main.asm"
