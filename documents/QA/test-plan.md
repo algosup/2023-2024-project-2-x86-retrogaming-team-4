@@ -76,19 +76,21 @@ The software specifications encompass the DOSBox emulator, while the hardware re
 ## Strategy
 ### Test 
 ### Scope of Testing
-<!-- The testing scope for the project encompasses a thorough examination of the game. This includes rigorous testing of the DOSBox emulator, ensuring compatibility with various hardware configurations, and evaluating the functionality of the assembly x86 code. Testing will focus on both core gameplay elements and peripheral features to guarantee a reliable end product. However, it's important to note that certain aspects, such as low-level technical details like the font of the text, the colors used for each item and the speed of the sprite will be excluded from testing as they are beyond the scope of the test.
+The testing scope for the project is comprehensive, covering a meticulous examination of the game. This entails rigorous testing of the DOSBox emulator to ensure compatibility with diverse hardware configurations and a thorough evaluation of the assembly x86 code. The testing focus extends to both core gameplay elements and peripheral features, ensuring the delivery of a reliable end product.
 
-- code
-  - no big bug
-  - main game mechanics
-  - acceptable visual
-- documents
-  - Spelling
-  - Typo
-- exclude
-  - font
-  - colors of sprite
-  - sprite speed -->
+**In-scope for Testing:**
+- Code
+  - Absence of significant bugs
+  - Main game mechanics functionality
+  - Acceptable visual quality
+- Documents
+  - Spelling accuracy
+  - Typographical errors
+
+**Out of Scope for Testing:**
+- Font details
+- Colors of sprites
+- Sprite speed
 
 ### Type of Testing
 
