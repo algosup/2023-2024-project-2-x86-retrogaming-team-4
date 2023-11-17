@@ -1,17 +1,17 @@
 # Weekly Report - Week 1
 
 This first week was focused on the initialization of the project and the planning of it. We also started doing research for the code and the different questions we had. There were also a few interactions with the client to ensure the quality of our work.  
-One thing to point out is the fact we had additional time provided due to one of our teacher being absent.
+One thing to point out is the fact we had additional time provided due to one of our teachers being absent.
 
 ## Accomplishments:
 1. Kick-off
-    - The client presented us with the project and what he is expecting of us.
+    - The client presented us with the project and what he expects from us.
 2. Specifications
     - We currently have most of the functional specifications ready and started thinking about the technical ones.
 3. Planning
     - The different tasks required for this project have mostly been defined. The timeline has been defined but not written down yet.
 4. Research
-    - The software team has researched Assembly, NASM and DOSBox, the language and tools we are required to use. They successfully managed to run a "Hello World" and draw a square on the screen.
+    - The software team has researched Assembly, NASM, and DOSBox, the language and tools we are required to use. They successfully managed to run a "Hello World" and draw a square on the screen.
 5. Test strategy
     - A good project cannot go smoothly without testing. Our QA team defined a strategy for testing with the different tools and tasks they will do.
 
