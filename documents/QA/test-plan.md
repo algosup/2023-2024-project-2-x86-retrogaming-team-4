@@ -10,30 +10,29 @@
     - [Scope of Testing](#scope-of-testing)
     - [Unit Tests](#unit-tests)
     - [Game-testing sessions](#game-testing-sessions)
-    - [Monitoring tools](#monitoring-tools)
-      - [3. Managing Test Cases with Excel](#3-managing-test-cases-with-excel)
-        - [Step 1: Create an Excel Spreadsheet](#step-1-create-an-excel-spreadsheet)
-        - [Step 2: Populate Test Cases](#step-2-populate-test-cases)
-      - [GitHub Tests Automation](#github-tests-automation)
-        - [Unit Test Exploitation Script](#unit-test-exploitation-script)
-      - [GitHub issues](#github-issues)
+      - [Overview](#overview-1)
+      - [Smoke Testing](#smoke-testing)
+      - [Group Game-Testing](#group-game-testing)
+    - [Monitoring and tools](#monitoring-and-tools)
+      - [GitHub](#github)
+      - [Google Spreadsheet](#google-spreadsheet)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
       - [Template](#template)
   - [Objectives](#objectives)
-    - [Overview:](#overview-1)
+    - [Overview:](#overview-2)
       - [Key Objectives:](#key-objectives)
   - [Test Criteria](#test-criteria)
-    - [Overview:](#overview-2)
+    - [Overview:](#overview-3)
       - [Key Criteria:](#key-criteria)
   - [Allocated Resources](#allocated-resources)
-    - [Overview:](#overview-3)
+    - [Overview:](#overview-4)
       - [Key Considerations:](#key-considerations)
     - [Time](#time)
     - [People](#people)
   - [Test Environment](#test-environment)
     - [X86](#x86)
-      - [Overview](#overview-4)
+      - [Overview](#overview-5)
       - [Code Example](#code-example)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
@@ -63,7 +62,7 @@ We will illustrate the operational flow of the software and provide a visual rep
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, and 65,536 bytes of RAM.
 
 ## Strategy
-Our testing strategy employs a multifaceted approach to ensure the robustness and reliability of the project. **Unit Tests** form the bedrock, scrutinizing individual components for functionality. **Game-testing sessions** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **monitoring tools**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
+Our testing strategy employs a multifaceted approach to ensure the robustness and reliability of the project. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
 
 ### Scope of Testing
 Testing will focus on both core gameplay elements and peripheral features to guarantee a reliable end product. However, it's important to note that certain aspects, such as low-level technical details will be excluded from testing as they are beyond the scope of the test.
@@ -110,15 +109,14 @@ The main objectives of these tests are:
 | Ghost speed increase | Ghost speed increase when user change level | Medium |
 
 ### Game-testing sessions
-
-**Overview**
+---
+#### Overview
 
 
 Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing). To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
 
 ---
-
-**Smoke Testing**
+#### Smoke Testing
 
 Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
 
@@ -137,13 +135,13 @@ The smoke testing scope will focus on the fundamental aspects of the game. This 
 During each smoke testing session, the following steps will be executed:
 
 1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
-2. **Test Execution:** Execute a set of [predefined test cases](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing)) covering the critical functionalities.
-3. **Results Archiving:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing)) for future reference.
+2. **Test Execution:** Execute a set of [predefined test cases](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) covering the critical functionalities.
+3. **Results Archiving:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) for future reference.
 4. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
 
 ---
 
-**Group Game-Testing**
+#### Group Game-Testing
 
 To gain a better overview of the project, a collaboration with the [3rd](Collaboration-QA.md) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
 
@@ -167,26 +165,49 @@ Each session will follow the following steps:
 
 For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
 
+
+### Monitoring and tools
+
 ---
+#### GitHub
 
-### Monitoring tools
+**Overview**  
 
-#### 3. Managing Test Cases with Excel
+For this project, GitHub is imposed to store our code, GitHub is a web-based version control and collaboration platform for software developers. It provides a centralized repository for storing and managing source code, facilitating collaboration between developers.
 
+But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are: **[GitHub Actions](#github-actions)** and **[GitHub Issues](#github-issues)**.
 
-##### Step 1: Create an Excel Spreadsheet
+**GitHub Actions**
 
-Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
+GitHub Actions is a CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. This will also permit to have an integrated overview of the failure of the code directly in GitHub.
 
-##### Step 2: Populate Test Cases
+**GitHub Actions Scope:**  
 
-Based on the test plans provided, fill in the test cases with specific details, including expected outcomes and any additional notes.
+The GitHub Actions will be activated on pull requests on the dev or main branch and their scope is to:
+1. **Build game:** Build the game and ensure there is no compilation error.
+2. **Run unit tests:** Run unit tests to ensure that the main functions of the game are working properly.
+3. **Ensure that the code on the references branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
 
-#### GitHub Tests Automation
+**Workflow:**  
 
-##### Unit Test Exploitation Script
+The workflow defines the different steps to be executed by GitHub Actions. The workflow is defined in the file [pacman.yml](../.github/workflows/pacman.yml) and is executed on each pull request on the main or dev branch.
 
-#### GitHub issues
+The workflow we will use to improve project quality is defined in the following diagrams:
+
+![](../pictures/GitWorkflow.png)
+
+**Configuration:**
+
+Actions such as compilation and execution of unit tests are performed on a computer or server. These actions are enabled and synchronized with GitHub thanks to a runner provided by GitHub. To install the runner, there is GitHub [documentation](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners) explaining the various steps involved. Once the runner has been installed and activated on a computer, it can be selected to execute the various workflow actions.
+
+As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff:
+- Thomas Planchard
+- Maxime Caron
+
+Next, the various actions and workflow steps are defined in the [pacman.yml](/pacman.yml) file, which is saved at the root of the repository.
+
+---
+**GitHub Issues**
 
 When you encounter a bug during testing, follow these steps to report it:
 
@@ -197,6 +218,11 @@ When you encounter a bug during testing, follow these steps to report it:
 5. Include steps to reproduce the bug, expected behavior, and actual behavior.
 6. Assign labels, milestones, and assignees if applicable.
 7. Submit the issue.
+
+#### Google Spreadsheet
+
+Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
+
 
 ### Documentation
 
