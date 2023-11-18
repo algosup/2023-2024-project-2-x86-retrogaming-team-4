@@ -9,15 +9,12 @@
   - [Strategy](#strategy)
     - [Test](#test)
     - [Scope of Testing](#scope-of-testing)
-    - [Type of Testing](#type-of-testing)
-    - [1. Smoke Testing Strategy](#1-smoke-testing-strategy)
-      - [Objective](#objective)
-      - [Scope](#scope)
       - [Execution](#execution)
       - [Benefits](#benefits)
       - [Automation Consideration](#automation-consideration)
-    - [2. Unit Tests](#2-unit-tests)
-      - [Manual Tests](#manual-tests)
+    - [Unit Tests](#unit-tests)
+      - [Game session Tests](#game-session-tests)
+      - [Scope](#scope)
     - [Monitoring tools](#monitoring-tools)
       - [3. Managing Test Cases with Excel](#3-managing-test-cases-with-excel)
         - [Step 1: Create an Excel Spreadsheet](#step-1-create-an-excel-spreadsheet)
@@ -92,29 +89,6 @@ The testing scope for the project is comprehensive, covering a meticulous examin
 - Colors of sprites
 - Sprite speed
 
-### Type of Testing
-
-The testing process will employ different testing types to identify and rectify specific types of bugs. This includes the following:
-1. **Smoke Testing:** This testing phase is designed to identify critical issues early in the development process.
-2. **User Interface Testing:** Assessing the visual quality and smooth operation of visual elements, including character sprites, animations, and maze designs.
-3. **Performance Testing:** Evaluating the responsiveness of player controls and the overall speed of the game, ensuring it meets the specified movement speed criteria.
-4. **Functional Testing:** Ensuring that all gameplay features, including player controls, movement, interactions, and game rules, operate as intended.
-
-
-### 1. Smoke Testing Strategy 
-
-#### Objective
-The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
-
-#### Scope
-The smoke testing scope will focus on the fundamental aspects of the game. This includes:
-
-1. **Game Launch:** Confirm that the game launches successfully without any critical errors or crashes.
-2. **Player Controls:** Verify that basic player controls (up, down, left, right) respond as intended.
-3. **Character Movement:** Ensure that Pac-Man moves through the maze at the specified speed without glitches or abnormalities.
-4. **Collision Detection:** Validate that collision detection is functioning correctly, especially between Pac-Man and ghosts.
-5. **Basic Interactions:** Confirm basic interactions, such as eating dots and encountering ghosts, occur without errors.
-
 
 #### Execution
 The smoke testing process will be executed systematically after each build or significant code change. It involves the following steps:
@@ -136,7 +110,7 @@ While smoke testing is typically manual, consideration should be given to automa
 By implementing a robust smoke testing strategy, the Pac-Man project can maintain a stable and reliable codebase throughout its development lifecycle.
 
 
-### 2. Unit Tests
+### Unit Tests
 
 Unit testing is an important part of the process. These tests are developed in X86 assembler and executed on DOSBox, to have an environment as close as possible to that of the final game.
 
@@ -162,7 +136,26 @@ The main objectives of these tests are:
 | Lives cap | Player can't have more than 5 lives | Medium |
 | Ghost speed increase | Ghost speed increase when user change level | Medium |
 
-#### Manual Tests
+#### Game session Tests
+
+**Overview:**
+
+---
+Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. The chosen testing solution was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in a document (here) and the tester has to follow them but also find new tests to do. To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
+
+**Smoke Testing Strategy:**
+
+---
+The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
+
+#### Scope
+The smoke testing scope will focus on the fundamental aspects of the game. This includes:
+
+1. **Game Launch:** Confirm that the game launches successfully without any critical errors or crashes.
+2. **Player Controls:** Verify that basic player controls (up, down, left, right) respond as intended.
+3. **Character Movement:** Ensure that Pac-Man moves through the maze at the specified speed without glitches or abnormalities.
+4. **Collision Detection:** Validate that collision detection is functioning correctly, especially between Pac-Man and ghosts.
+5. **Basic Interactions:** Confirm basic interactions, such as eating dots and encountering ghosts, occur without errors.
 
 Manual testing is carried out by people playing the game during defined sessions. These tests last at least 1 hour every week, until the end of the project.
 
