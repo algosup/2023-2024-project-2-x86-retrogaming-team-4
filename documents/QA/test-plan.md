@@ -13,8 +13,7 @@
       - [Benefits](#benefits)
       - [Automation Consideration](#automation-consideration)
     - [Unit Tests](#unit-tests)
-      - [Game session Tests](#game-session-tests)
-      - [Scope](#scope)
+    - [Game-testing sessions](#game-testing-sessions)
     - [Monitoring tools](#monitoring-tools)
       - [3. Managing Test Cases with Excel](#3-managing-test-cases-with-excel)
         - [Step 1: Create an Excel Spreadsheet](#step-1-create-an-excel-spreadsheet)
@@ -136,19 +135,20 @@ The main objectives of these tests are:
 | Lives cap | Player can't have more than 5 lives | Medium |
 | Ghost speed increase | Ghost speed increase when user change level | Medium |
 
-#### Game session Tests
+### Game-testing sessions
 
-**Overview:**
-
----
-Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. The chosen testing solution was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in a document (here) and the tester has to follow them but also find new tests to do. To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
-
-**Smoke Testing Strategy:**
+**Overview**
 
 ---
-The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
+Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. The chosen testing solution was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](todo) and the tester has to follow them but also find new tests to do. To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
 
-#### Scope
+**Smoke Testing**
+
+---
+Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
+
+**Smoke Testing Scope:**
+
 The smoke testing scope will focus on the fundamental aspects of the game. This includes:
 
 1. **Game Launch:** Confirm that the game launches successfully without any critical errors or crashes.
@@ -157,17 +157,43 @@ The smoke testing scope will focus on the fundamental aspects of the game. This 
 4. **Collision Detection:** Validate that collision detection is functioning correctly, especially between Pac-Man and ghosts.
 5. **Basic Interactions:** Confirm basic interactions, such as eating dots and encountering ghosts, occur without errors.
 
-Manual testing is carried out by people playing the game during defined sessions. These tests last at least 1 hour every week, until the end of the project.
+**Sequence of Smoke Testing:**
 
-Each test session is filmed and saved, enabling us to see the exact cause of any error and to reproduce the bug conditions as closely as possible afterward.
+During each smoke testing session, the following steps will be executed:
 
-In order not to forget any tests during verification sessions, a list is given to the tester. This test list is created and completed by all project members to ensure that it is as complete as possible.
+1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
+2. **Test Execution:** Execute a set of [predefined test cases](todo) covering the critical functionalities.
+3. **Results Archiving:** Archive the test results [here](todo) for future reference.
+4. **Results Analysis:** Analyze the test results to identify any critical issues or deviations from expected behavior.
+5. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
 
-The main objectives of these tests are to
-- Check that the essential game mechanics are working properly.
-- Check all other game functions as far as possible.
-- To serve as a non-regression test between game updates.
 
+**Group Game-Testing**
+
+---
+
+In order to gain a better overview of the project, a collaboration with the [3rd](todo) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+
+**Group Game-Testing Scope:**
+
+Group sessions are designed primarily to:
+1. **Verify that the game is working as expected:** Check that all the game's basic and additional game mechanics are working properly.
+2. **Sharing tests:** Share tests between the 2 teams to have a better overview of the game and to find more bugs and errors.
+3. **Identify bugs and errors:** Find bugs and errors in the game to improve it.
+4. **Identify improvements and missing features:** Find improvements and missing features in the game to bring it closer to the original.
+5. **Identify spelling and grammar errors:** Find spelling and grammar errors in the game and report them.
+
+**Sequence of a Group Game-Testing:**
+A group testing session will take place once a week during one of the hours allocated to the project.
+Each session will follow the following steps:
+1. **Game quick overview:** A quick overview of the game is done to see the progress of the project.
+2. **Testing points:** The testing points are defined and shared between the 2 teams, testing points will be adapted to each project's progression.
+3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](todo).
+4. **Test results:** The test results are shared between the 2 teams and the bugs and errors are reported on this [file](todo).
+
+For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterwards.
+
+It's important to note that each test session will take place in a caring and respectful atmosphere, without prejudice or judgment.
 
 ### Monitoring tools
 
