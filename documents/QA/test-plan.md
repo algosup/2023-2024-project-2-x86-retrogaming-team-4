@@ -7,11 +7,7 @@
   - [Product Analysis](#product-analysis)
     - [Overview](#overview)
   - [Strategy](#strategy)
-    - [Test](#test)
     - [Scope of Testing](#scope-of-testing)
-      - [Execution](#execution)
-      - [Benefits](#benefits)
-      - [Automation Consideration](#automation-consideration)
     - [Unit Tests](#unit-tests)
     - [Game-testing sessions](#game-testing-sessions)
     - [Monitoring tools](#monitoring-tools)
@@ -40,9 +36,6 @@
       - [Overview](#overview-4)
       - [Code Example](#code-example)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
-    - [Overview:](#overview-5)
-    - [Code Testing](#code-testing)
-      - [Key Steps:](#key-steps)
       - [Tasks Time Estimation:](#tasks-time-estimation)
       - [Schedule:](#schedule)
   - [Deliverables and Schedule](#deliverables-and-schedule)
@@ -70,13 +63,14 @@ We will illustrate the operational flow of the software and provide a visual rep
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, and 65,536 bytes of RAM.
 
 ## Strategy
-### Test 
+Our testing strategy employs a multifaceted approach to ensure the robustness and reliability of the project. **Unit Tests** form the bedrock, scrutinizing individual components for functionality. **Game-testing sessions** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **monitoring tools**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
+
 ### Scope of Testing
-The testing scope for the project is comprehensive, covering a meticulous examination of the game. This entails rigorous testing of the DOSBox emulator to ensure compatibility with diverse hardware configurations and a thorough evaluation of the assembly x86 code. The testing focus extends to both core gameplay elements and peripheral features, ensuring the delivery of a reliable end product.
+Testing will focus on both core gameplay elements and peripheral features to guarantee a reliable end product. However, it's important to note that certain aspects, such as low-level technical details will be excluded from testing as they are beyond the scope of the test.
 
 **In-scope for Testing:**
 - Code
-  - Absence of significant bugs
+  - Absence of significant bugs     
   - Main game mechanics functionality
   - Acceptable visual quality
 - Documents
@@ -89,29 +83,9 @@ The testing scope for the project is comprehensive, covering a meticulous examin
 - Sprite speed
 
 
-#### Execution
-The smoke testing process will be executed systematically after each build or significant code change. It involves the following steps:
-
-1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
-2. **Test Execution:** Execute a set of predefined test cases covering the critical functionalities.
-3. **Results Analysis:** Analyze the test results to identify any critical issues or deviations from expected behavior.
-4. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
-5. **Decision Making:** Based on the results, decide whether the build is stable enough for further testing or if it requires immediate attention and fixing.
-
-#### Benefits
-1. **Early Issue Identification:** Smoke testing allows for the early identification of critical issues, preventing the propagation of major defects into subsequent development phases.
-2. **Rapid Feedback:** The quick turnaround of smoke testing provides rapid feedback to the development team, enabling timely resolution of critical issues.
-3. **Stability Assessment:** It helps assess the stability of each build, allowing for a more controlled and reliable development process.
-
-#### Automation Consideration
-While smoke testing is typically manual, consideration should be given to automating repetitive and critical smoke test cases to enhance efficiency and ensure consistent execution after each build. Automated smoke tests can be integrated into the continuous integration/continuous deployment (CI/CD) pipeline for faster feedback.
-
-By implementing a robust smoke testing strategy, the Pac-Man project can maintain a stable and reliable codebase throughout its development lifecycle.
-
-
 ### Unit Tests
 
-Unit testing is an important part of the process. These tests are developed in X86 assembler and executed on DOSBox, to have an environment as close as possible to that of the final game.
+Unit testing is an important part of the process. These tests are developed in X86 assembler and executed on DOSBox, to have an environment as close as possible to the final game.
 
 These tests are developed throughout the project in parallel with game development, corresponding to an exploratory testing approach.
 
@@ -139,12 +113,13 @@ The main objectives of these tests are:
 
 **Overview**
 
+
+Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing). To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
+
 ---
-Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. The chosen testing solution was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](todo) and the tester has to follow them but also find new tests to do. To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
 
 **Smoke Testing**
 
----
 Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
 
 **Smoke Testing Scope:**
@@ -162,17 +137,15 @@ The smoke testing scope will focus on the fundamental aspects of the game. This 
 During each smoke testing session, the following steps will be executed:
 
 1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
-2. **Test Execution:** Execute a set of [predefined test cases](todo) covering the critical functionalities.
-3. **Results Archiving:** Archive the test results [here](todo) for future reference.
-4. **Results Analysis:** Analyze the test results to identify any critical issues or deviations from expected behavior.
-5. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
-
-
-**Group Game-Testing**
+2. **Test Execution:** Execute a set of [predefined test cases](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing)) covering the critical functionalities.
+3. **Results Archiving:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing)) for future reference.
+4. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
 
 ---
 
-In order to gain a better overview of the project, a collaboration with the [3rd](todo) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+**Group Game-Testing**
+
+To gain a better overview of the project, a collaboration with the [3rd](Collaboration-QA.md) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
 
 **Group Game-Testing Scope:**
 
@@ -183,7 +156,8 @@ Group sessions are designed primarily to:
 4. **Identify improvements and missing features:** Find improvements and missing features in the game to bring it closer to the original.
 5. **Identify spelling and grammar errors:** Find spelling and grammar errors in the game and report them.
 
-**Sequence of a Group Game-Testing:**
+**A Sequence of a Group Game-Testing:**
+
 A group testing session will take place once a week during one of the hours allocated to the project.
 Each session will follow the following steps:
 1. **Game quick overview:** A quick overview of the game is done to see the progress of the project.
@@ -191,9 +165,9 @@ Each session will follow the following steps:
 3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](todo).
 4. **Test results:** The test results are shared between the 2 teams and the bugs and errors are reported on this [file](todo).
 
-For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterwards.
+For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
 
-It's important to note that each test session will take place in a caring and respectful atmosphere, without prejudice or judgment.
+---
 
 ### Monitoring tools
 
@@ -280,7 +254,7 @@ snippet of unit test code
 
 
 ## Test Schedule and Estimation
-
+<!-- 
 ### Overview:
 
 Testing tasks are divided into two parts: code testing and documentation testing. We chose to split the work into two parts because it would allow us to work in parallel and to have a better overview of the project.
@@ -294,7 +268,7 @@ To test the code of the wall project we chose to split the work into 4 key steps
 1. Create a unit test template and give it to all developers. Each developer will then write their unit tests for their functions.
 2. Write unit tests for each project function; it will help us to find bugs and errors in the code. This part will be done in parallel with the development of the project.
 3. Automate tests with GitHub Actions, this will allow us to run tests automatically after each commit and avoid errors on the main branch. This will also permit to have an integrated overview of failure and coverage of the code directly in GitHub.
-4. Organize regular test sessions to hand-test the game. Each test session will be filmed to better visualize problem cases and identify errors more quickly. This will allow us to have a visual overview of the game and to see if the game is working as expected.
+4. Organize regular test sessions to hand-test the game. Each test session will be filmed to better visualize problem cases and identify errors more quickly. This will allow us to have a visual overview of the game and to see if the game is working as expected. -->
 
 #### Tasks Time Estimation:
 | Task | Time | Comment |
@@ -305,7 +279,6 @@ To test the code of the wall project we chose to split the work into 4 key steps
 | Unit tests | 1-2 days | Unit test will be done in parallel with the development of the project. |
 | Test session | 1 hour | Test session will be done every week. |
 | GitHub Actions | 1 week | |
-| Coverage script | 1 week | |
 | Unit test formater script | 1 week | |
 
 #### Schedule:
@@ -317,7 +290,6 @@ To test the code of the wall project we chose to split the work into 4 key steps
 | Review the documentation | November 20, 2023 | December 22, 2023 |
 | Test session | November 20, 2023 | December 22, 2023 |
 | GitHub Actions | November 27, 2023 | December 3, 2023 |
-| Coverage script | December 4, 2023 | December 12, 2023 |
 | Unit test formater script | December 4, 2023 | December 12, 2023 |
 
 ## Deliverables and Schedule
