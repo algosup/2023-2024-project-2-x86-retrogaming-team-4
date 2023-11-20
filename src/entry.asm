@@ -1,6 +1,6 @@
 org 100h
 
-section .text
-jmp start
+%include "constants.asm"
 
 %include "main.asm"
+%include "sprites.asm"
