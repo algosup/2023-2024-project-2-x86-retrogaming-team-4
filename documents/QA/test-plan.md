@@ -18,21 +18,17 @@
       - [Bug Data Report Spreadsheet](#bug-data-report-spreadsheet)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
-      - [Template](#template)
-  - [Objectives](#objectives)
-    - [Overview:](#overview-2)
-      - [Key Objectives:](#key-objectives)
   - [Test Criteria](#test-criteria)
-    - [Overview:](#overview-3)
-      - [Key Criteria:](#key-criteria)
+    - [Suspension Criteria:](#suspension-criteria)
+    - [Exit Criteria:](#exit-criteria)
   - [Allocated Resources](#allocated-resources)
-    - [Overview:](#overview-4)
+    - [Overview:](#overview-2)
       - [Key Considerations:](#key-considerations)
     - [Time](#time)
     - [People](#people)
   - [Test Environment](#test-environment)
     - [X86](#x86)
-      - [Overview](#overview-5)
+      - [Overview](#overview-3)
       - [Code Example](#code-example)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
@@ -174,7 +170,7 @@ For the sake of simplicity, during test sessions, the game will be launched on t
 
 For this project, GitHub is imposed to store our code, GitHub is a web-based version control and collaboration platform for software developers. It provides a centralized repository for storing and managing source code, facilitating collaboration between developers.
 
-But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are **GitHub Actions**](#github-actions)** and **[GitHub Issues](#github-issues)**.
+But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are [**GitHub Actions**](#github-actions) and [**GitHub Issues**](#github-issues).
 
 ---
 **GitHub Actions**
@@ -217,25 +213,40 @@ We define:
 - **Deadlines:** Specific deadlines for project stages to ensure timely delivery.
 - **Documentation:** Request for documentation on a specific function or group of functions in the code.
 - **Task allocation:** Assignment and tracking of specific responsibilities.
- 
-By leveraging GitHub Issues, our project benefits from a structured and efficient approach to project management, bolstering communication and fostering an organized and collaborative development environment.
 
 **GitHub Issues Scope:**
 
-The use of GitHub Issues encompasses a broad range of functionalities aimed at enhancing collaboration, communication, and project management within a software development environment. Here are key aspects of its scope:
+We are implementing a  strategy for managing GitHub issues to enhance collaboration and efficiency within the development team. Here are the key components of our strategy:
 
-1. **Bug Tracking:** GitHub Issues provides a systematic approach to identifying, documenting, and managing software bugs. Team members can report bugs, discuss potential solutions, and track the resolution process.
+1. **Detailed Issue Descriptions:**
+   - Issues should have clear and detailed descriptions to provide context and understanding.
+   - Include steps to reproduce bugs or details about the feature request.
+   - Specify the expected and actual behavior.
 
-2. **Error Management:** Beyond bugs, GitHub Issues can be utilized to track and resolve general errors. This includes addressing issues related to document, and logic errors.
+2. **Labeling System:**
+   - Utilize labels to categorize issues, such as "bug," or "enhancement".
+   - Labels aid in quickly identifying the nature of the issue and prioritizing tasks.
 
-3. **Task Management:** GitHub Issues serves as a comprehensive task management tool, allowing teams to create, assign, and track tasks. It provides visibility into individual responsibilities, ensuring a clear understanding of who is working on what.
+3. **Assignees and Responsibility:**
+   - Assign issues to the appropriate team member or individuals responsible for addressing the problem.
+   - Assignees take ownership of the task, improving accountability.
 
-4. **Project Planning:** The platform supports project planning by enabling the creation and tracking of milestones and deadlines. Teams can set targets, monitor progress, and adjust timelines as needed.
 
-5. **Documentation:** GitHub Issues acts as a documentation hub, capturing discussions, decisions, and context around code changes. This documentation is valuable for onboarding new team members, maintaining a historical record, and ensuring knowledge continuity.
+4. **Use of Templates:**
+   - We have introduced issue templates to standardize the information provided for different types of issues.
+   - The "Bug Issue" template, streamlines the bug reporting process with predefined sections.
+   - Here is a picture of the "Bug Issue" template: ![](../pictures/githubIssue.png)
+     - The template includes sections for steps to reproduce, expected and actual behavior, environment details, and more.
+     - Using this template ensures that crucial information is consistently captured for debugging and resolution.
 
-In essence, GitHub Issues provides a versatile and collaborative framework for managing the entire game development lifecycle, from identifying and resolving issues to planning and releasing software updates.
+5. **Regular Issue Triage:**
+   - Regularly review and triage open issues.
+   - Prioritize tasks based on their urgency, impact on users, and alignment with project goals.
 
+By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub. This approach contributes to clearer communication, better task management, and an overall improvement in the development workflow.
+
+
+---
 
 #### Bug Data Report Spreadsheet
 
@@ -279,23 +290,70 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
 
 #### GitHub Wiki
 
-#### Template
+To enhance transparency, collaboration, and knowledge sharing within our development process, we are adopting a centralized documentation approach using [GitHub Wiki](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/wiki). This platform will serve as a comprehensive repository for all documentation related to our codebase. Here are the key points regarding this initiative:
 
-## Objectives
-### Overview:
-Define the goals and expected results of test execution.
+1. **GitHub Wiki as a Knowledge Hub:**
+   - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure and functions.
 
-#### Key Objectives:
-- Test all software features (functionality, GUI, performance standards).
-- Set benchmark results for each aspect of the software.
+2. **Structured and Accessible Information:**
+   - Documentation will be organized in a structured manner, making it easy to navigate and locate specific details.
+   - Each significant aspect of the project, such as functions, modules, and workflows, will have dedicated pages for in-depth information.
+
+3. **Developer-Friendly Templates:**
+   - To facilitate developers in documenting their code effectively, we will provide a [template](Function-documentation-template.md) that guides them on the essential information to include.
+   - This template will streamline the documentation process, ensuring consistency and completeness.
+
+4. **Improved Onboarding and Collaboration:**
+   - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth.
+   - Developers can collaborate more efficiently when documentation is readily available, reducing the need for constant inquiries.
+
+5. **Versioned Documentation:**
+   - GitHub Wiki supports versioning, allowing us to maintain historical documentation for different releases.
+   - Developers can refer to documentation relevant to a specific version, ensuring accuracy in understanding the codebase at any point in time.
+
+6. **Open Collaboration:**
+   - The GitHub Wiki encourages open collaboration, enabling team members to contribute and edit documentation collaboratively.
+   - This ensures that documentation stays up-to-date with the evolving nature of the project.
+
 
 ## Test Criteria
-### Overview:
-Establish standards or rules governing all activities in the testing project.
 
-#### Key Criteria:
-- Suspension Criteria
-- Exit Criteria
+Setting up strict test criteria is crucial to guarantee the game's 
+quality before it's released. These criteria act as standards that need 
+to be met before the game is distributed. By following clear rules for 
+suspension and exit, the testing process aims to find and fix issues 
+early on, improving the overall quality and dependability of the
+product.
+
+### Suspension Criteria:
+Suspension criteria are established to define conditions under which 
+testing activities may be temporarily halted. This ensures that issues are addressed promptly, maintaining the integrity of the testing 
+process. The following suspension criteria are identified:
+
+1. **Critical Bug Threshold:**
+   - If a predetermined threshold of critical bugs is reached during testing (e.g., 10% of total test cases), testing will be suspended.
+   - Critical bugs are those with a "High" impact on the core functionality of the software.
+
+2. **Resource Unavailability:**
+   - If essential testing resources, such as testing environments, tools, or personnel, become unavailable for an extended period, testing may be suspended.
+   - This criterion ensures that testing can resume only when necessary resources are accessible.
+
+### Exit Criteria:
+Before the game can be considered ready for distribution, certain benchmarks must be met. For instance, at least 80% of all test cases should pass successfully, ensuring a high level of functionality and reliability. This criteria ensures that the game meets the required quality standards before reaching the distribution phase.
+
+1. **Test Case Coverage:**
+   - A minimum test case coverage of 80% for all identified features and functionalities must be achieved before considering the test phase complete.
+   - This ensures that almost all aspects of the software have been tested.
+
+2. **Bug Resolution Rate:**
+   - At least 80% of reported bugs must be addressed and resolved before exiting the testing phase.
+   - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability.
+
+3. **Documentation Completeness:**
+   - Comprehensive documentation, including test plans, test cases, and test results, must be finalized and reviewed for completeness.
+   - All necessary documentation should be available for reference and future analysis.
+
+
 
 ## Allocated Resources
 ### Overview:
@@ -329,47 +387,58 @@ Install an x86 assembler in DOSBox to write and compile assembly code. The techn
 
 
 ## Test Schedule and Estimation
-<!-- 
-### Overview:
+
+<!-- ### Overview:
 
 Testing tasks are divided into two parts: code testing and documentation testing. We chose to split the work into two parts because it would allow us to work in parallel and to have a better overview of the project.
 
-### Code Testing 
+### Code Testing  -->
 
-To test the code of the wall project we chose to split the work into 4 key steps.
-
-#### Key Steps:
-
-1. Create a unit test template and give it to all developers. Each developer will then write their unit tests for their functions.
-2. Write unit tests for each project function; it will help us to find bugs and errors in the code. This part will be done in parallel with the development of the project.
-3. Automate tests with GitHub Actions, this will allow us to run tests automatically after each commit and avoid errors on the main branch. This will also permit to have an integrated overview of failure and coverage of the code directly in GitHub.
-4. Organize regular test sessions to hand-test the game. Each test session will be filmed to better visualize problem cases and identify errors more quickly. This will allow us to have a visual overview of the game and to see if the game is working as expected. -->
 
 #### Tasks Time Estimation:
-| Task | Time | Comment |
-| --- | --- | --- |
-| Create and give template for documentation | 1-2 days | |
-| Organize a meeting with all developers | 1 hour | Meeting are planned every week. |
-| Review the documentation | 1-2 days | Review are planned every week. |
-| Unit tests | 1-2 days | Unit test will be done in parallel with the development of the project. |
-| Test session | 1 hour | Test session will be done every week. |
-| GitHub Actions | 1 week | |
-| Unit test formater script | 1 week | |
+| Task                                          | Start Date          | End Date            | Duration               |
+| ----------------------------------------------| ------------------- | ------------------- | ---------------------- |
+| Create and give template for documentation      | November 13, 2023   | November 13, 2023   | 1 day                  |
+| First meeting with Dev team                     | November 13, 2023   | November 13, 2023   | 1 day                  |
+| Unit tests                                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
+| Review the documentation                       | November 6, 2023    | December 20, 2023   | 6 weeks                |
+| First Test session with team 3 QA              | November 27, 2023   | November 27, 2023   | 1 day                  |
+| GitHub Actions                                 | November 27, 2023   | December 20, 2023   | 3 weeks                |
+| Unit test formatter script                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
+| Second Test session with team 3 QA             | December 4, 2023    | December 4, 2023    | 1 day                  |
+| Second meeting with Dev team                   | December 4, 2023    | December 4, 2023    | 1 day                  |
+| Third meeting Test session with team 3 QA     | December 11, 2023   | December 11, 2023   | 1 day                  |
+| Third meeting with Dev team                    | December 11, 2023   | December 11, 2023   | 1 day                  |
+| Fourth meeting Test session with team 3 QA     | December 18, 2023   | December 18, 2023   | 1 day                  |
+| Fourth meeting with Dev team                   | December 18, 2023   | December 18, 2023   | 1 day                  |
+
+**Note:**
+- The duration is calculated based on working days.
+- Weekends are not included in the duration.
+- For tasks spanning multiple weeks, the duration reflects continuous work, considering full-time efforts.
 
 #### Schedule:
 | Task | Start Date | End Date |
 | ---- | ---------- | -------- |
 | Create and give template for documentation | November 13, 2023 | November 13, 2023 |
-| Organize a meeting with all developers | November 13, 2023 | December 22, 2023 |
-| Unit tests | November 13, 2023 | December 22, 2023 |
-| Review the documentation | November 20, 2023 | December 22, 2023 |
-| Test session | November 20, 2023 | December 22, 2023 |
-| GitHub Actions | November 27, 2023 | December 3, 2023 |
-| Unit test formater script | December 4, 2023 | December 12, 2023 |
+| First meeting with Dev team | November 13, 2023 | November 13, 2023 |
+| Unit tests | November 27, 2023 | December 20, 2023 |
+| Review the documentation | November 6, 2023 | December 20, 2023 |
+| First Test session with team 3 QA | November 27, 2023 | November 27, 2023 |
+| GitHub Actions | November 27, 2023 | December 20, 2023 |
+| Unit test formater script | November 27, 2023 | December 20, 2023 |
+| Second Test session with team 3 QA  | December 4, 2023 | December 4, 2023 |
+| Second meeting with Dev team | December 4, 2023 | December 4, 2023 |
+| Third meeting Test session with team 3 QA  | December 11, 2023 | December 11, 2023 |
+| Third meeting with Dev team | December 11, 2023 | December 11, 2023 |
+| Fourth meeting Test session with team 3 QA | December 18, 2023 | December 18, 2023 |
+| Fourth meeting with Dev team | December 18, 2023 | December 18, 2023 |
+
 
 ## Deliverables and Schedule
 ### Deliverables and Estimation
 ### Schedule
+| Test Plan deliverable | November 6, 2023 | December 12, 2023 |
 
 #### Before Testing:
 - Test Plan
