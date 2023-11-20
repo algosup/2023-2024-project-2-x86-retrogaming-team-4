@@ -72,6 +72,14 @@ int 10h
 
 GameLoop:
 
+mov ah, 00h
+int 1ah ; BIOS clock read
+cmp dx, [old_time] ; Wait for change
+je GameLoop ; Loop
+mov [old_time], dx
+
+call clearScreen
+
 mov al, 0FFh
 ;call printMaze
 mov di, [xPos]
@@ -82,13 +90,7 @@ mov bx, [xPos]
 add bx, [xVelocity]
 mov word [xPos], bx
 
-mov ah, 00h
-int 1ah ; BIOS clock read
-cmp dx, [old_time] ; Wait for change
-je GameLoop ; Loop
-mov [old_time], dx
 
-call clearScreen
 
 cmp word [xPos], 320-8 
 je ChangeVelocity
