@@ -5,5 +5,3 @@ set "NASM=%ROOT_DIR%\nasm\nasm"
 set "BIN_DIR=%ROOT_DIR%\bin"
 
 "%NASM%" _test_sprites.asm -f bin -o "%BIN_DIR%\sprites.com"
-
-pause
