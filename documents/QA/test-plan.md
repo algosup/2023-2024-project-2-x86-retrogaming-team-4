@@ -15,7 +15,7 @@
       - [Group Game-Testing](#group-game-testing)
     - [Monitoring and tools](#monitoring-and-tools)
       - [GitHub](#github)
-      - [Google Spreadsheet](#google-spreadsheet)
+      - [Bug Data Report Spreadsheet](#bug-data-report-spreadsheet)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
       - [Template](#template)
@@ -161,7 +161,7 @@ Each session will follow the following steps:
 1. **Game quick overview:** A quick overview of the game is done to see the progress of the project.
 2. **Testing points:** The testing points are defined and shared between the 2 teams, testing points will be adapted to each project's progression.
 3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](todo).
-4. **Test results:** The test results are shared between the 2 teams and the bugs and errors are reported on this [file](todo).
+4. **Test results:** The test results are shared between the 2 teams and the bugs and errors are reported on the [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing).
 
 For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
 
@@ -175,7 +175,7 @@ For the sake of simplicity, during test sessions, the game will be launched on t
 
 For this project, GitHub is imposed to store our code, GitHub is a web-based version control and collaboration platform for software developers. It provides a centralized repository for storing and managing source code, facilitating collaboration between developers.
 
-But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are: **[GitHub Actions](#github-actions)** and **[GitHub Issues](#github-issues)**.
+But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are **GitHub Actions**](#github-actions)** and **[GitHub Issues](#github-issues)**.
 
 **GitHub Actions**
 
@@ -183,7 +183,7 @@ GitHub Actions is a CI/CD tool that allows us to run tests automatically after v
 
 **GitHub Actions Scope:**  
 
-The GitHub Actions will be activated on pull requests on the dev or main branch and their scope is to:
+The GitHub Actions will be activated on pull requests on the dev and the main branch and their scope is to:
 1. **Build game:** Build the game and ensure there is no compilation error.
 2. **Run unit tests:** Run unit tests to ensure that the main functions of the game are working properly.
 3. **Ensure that the code on the references branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
@@ -219,9 +219,42 @@ When you encounter a bug during testing, follow these steps to report it:
 6. Assign labels, milestones, and assignees if applicable.
 7. Submit the issue.
 
-#### Google Spreadsheet
+#### Bug Data Report Spreadsheet
 
-Create a new Excel spreadsheet to document your test cases. Organize it with columns for test ID, test description, steps to reproduce, expected result, actual result, and status.
+**Overview:**
+
+The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a comprehensive tool for documenting and tracking test cases, their results, and overall testing progress. It adopts a standardized pattern for each test case, ensuring clarity and consistency in reporting.
+
+**Spreadsheet Structure:**
+
+1. **Test Case Pattern:**
+   - **ID:** Unique identifier for each test case.
+   - **Function:** The function or feature being tested.
+   - **Priority:** The priority level of the test case (e.g., High, Medium, Low).
+   - **Description:** A concise description of the test case.
+   - **Inputs:** Input values or conditions applied during testing.
+   - **Expected Result:** The expected outcome or behavior.
+
+
+2. **Testing Sessions:**
+   - For each test case, there is a dedicated section to record results obtained during testing sessions.
+   - Testers can input whether the test passed, failed, is in progress, or not implemented during a specific testing session.
+   - The date of the testing session is also recorded.
+   
+
+3. **Graphics:**
+   - **Test Percentage Representation:**
+     - A pie chart representing the percentage distribution of test cases based on their status (Passed, Failed, In Progress, Not Implemented).
+     - Provides a visual snapshot of the overall testing status.
+
+   - **Test Execution Progress:**
+     - A line chart depicting the progress of test execution over time.
+     - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
+
+**Benefits:**
+- **Standardization:** The standardized pattern ensures consistency and clarity in documenting test cases.
+- **Real-Time Tracking:** Testing sessions allow for immediate recording of test results and tracking of ongoing efforts.
+- **Visual Representation:** Graphics provide a quick and visual overview of testing status and progress.
 
 
 ### Documentation
@@ -263,9 +296,7 @@ Plan human resources, equipment, and infrastructure needed for testing.
 
 **Install NASM**
 
-Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. 
-
-snippet of unit test code 
+Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. a snippet of unit test code 
 #### Overview
 #### Code Example
 
