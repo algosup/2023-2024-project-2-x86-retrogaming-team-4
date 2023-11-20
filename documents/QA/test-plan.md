@@ -15,7 +15,6 @@
       - [Group Game-Testing](#group-game-testing)
     - [Monitoring and tools](#monitoring-and-tools)
       - [GitHub](#github)
-  - [Scope of Using Git Issues](#scope-of-using-git-issues)
       - [Bug Data Report Spreadsheet](#bug-data-report-spreadsheet)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
@@ -221,9 +220,7 @@ We define:
  
 By leveraging GitHub Issues, our project benefits from a structured and efficient approach to project management, bolstering communication and fostering an organized and collaborative development environment.
 
-**Scope of usage:**
-
-## Scope of Using Git Issues
+**GitHub Issues Scope:**
 
 The use of GitHub Issues encompasses a broad range of functionalities aimed at enhancing collaboration, communication, and project management within a software development environment. Here are key aspects of its scope:
 
