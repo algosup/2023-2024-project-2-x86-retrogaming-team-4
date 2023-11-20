@@ -15,6 +15,7 @@
       - [Group Game-Testing](#group-game-testing)
     - [Monitoring and tools](#monitoring-and-tools)
       - [GitHub](#github)
+  - [Scope of Using Git Issues](#scope-of-using-git-issues)
       - [Bug Data Report Spreadsheet](#bug-data-report-spreadsheet)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
@@ -136,11 +137,10 @@ During each smoke testing session, the following steps will be executed:
 
 1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
 2. **Test Execution:** Execute a set of [predefined test cases](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) covering the critical functionalities.
-3. **Results Archiving:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) for future reference.
+3. **Archiving results:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) for future reference.
 4. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
 
 ---
-
 #### Group Game-Testing
 
 To gain a better overview of the project, a collaboration with the [3rd](Collaboration-QA.md) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
@@ -177,14 +177,15 @@ For this project, GitHub is imposed to store our code, GitHub is a web-based ver
 
 But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are **GitHub Actions**](#github-actions)** and **[GitHub Issues](#github-issues)**.
 
+---
 **GitHub Actions**
 
 GitHub Actions is a CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. This will also permit to have an integrated overview of the failure of the code directly in GitHub.
 
 **GitHub Actions Scope:**  
 
-The GitHub Actions will be activated on pull requests on the dev and the main branch and their scope is to:
-1. **Build game:** Build the game and ensure there is no compilation error.
+The GitHub Actions will be activated on pull requests on the dev and main branch and their scope is to:
+1. **Build game:** Build the game and ensure there is no assembling error.
 2. **Run unit tests:** Run unit tests to ensure that the main functions of the game are working properly.
 3. **Ensure that the code on the references branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
 
@@ -198,7 +199,7 @@ The workflow we will use to improve project quality is defined in the following 
 
 **Configuration:**
 
-Actions such as compilation and execution of unit tests are performed on a computer or server. These actions are enabled and synchronized with GitHub thanks to a runner provided by GitHub. To install the runner, there is GitHub [documentation](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners) explaining the various steps involved. Once the runner has been installed and activated on a computer, it can be selected to execute the various workflow actions.
+Actions such as assembling and execution of unit tests are performed on a computer or server. These actions are enabled and synchronized with GitHub thanks to a runner provided by GitHub. To install the runner, there is GitHub [documentation](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners) explaining the various steps involved. Once the runner has been installed and activated on a computer, it can be selected to execute the various workflow actions.
 
 As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff:
 - Thomas Planchard
@@ -209,15 +210,35 @@ Next, the various actions and workflow steps are defined in the [pacman.yml](/pa
 ---
 **GitHub Issues**
 
-When you encounter a bug during testing, follow these steps to report it:
+To manage bugs, errors, deadlines, documentation, and task allocation, this project uses GitHub Issues. GitHub Issues serves as a comprehensive and centralized platform for tracking and addressing various aspects of our project development lifecycle. 
 
-1. Go to your project's GitHub repository.
-2. Click on the "Issues" tab.
-3. Click "New Issue" to create a new bug report.
-4. Provide a descriptive title and detailed description of the bug.
-5. Include steps to reproduce the bug, expected behavior, and actual behavior.
-6. Assign labels, milestones, and assignees if applicable.
-7. Submit the issue.
+We define:
+- **Bugs:** Unexpected problems such as screen flashing or code errors.
+- **Errors:** Includes all errors that do not originate in the code.
+- **Deadlines:** Specific deadlines for project stages to ensure timely delivery.
+- **Documentation:** Request for documentation on a specific function or group of functions in the code.
+- **Task allocation:** Assignment and tracking of specific responsibilities.
+ 
+By leveraging GitHub Issues, our project benefits from a structured and efficient approach to project management, bolstering communication and fostering an organized and collaborative development environment.
+
+**Scope of usage:**
+
+## Scope of Using Git Issues
+
+The use of GitHub Issues encompasses a broad range of functionalities aimed at enhancing collaboration, communication, and project management within a software development environment. Here are key aspects of its scope:
+
+1. **Bug Tracking:** GitHub Issues provides a systematic approach to identifying, documenting, and managing software bugs. Team members can report bugs, discuss potential solutions, and track the resolution process.
+
+2. **Error Management:** Beyond bugs, GitHub Issues can be utilized to track and resolve general errors. This includes addressing issues related to document, and logic errors.
+
+3. **Task Management:** GitHub Issues serves as a comprehensive task management tool, allowing teams to create, assign, and track tasks. It provides visibility into individual responsibilities, ensuring a clear understanding of who is working on what.
+
+4. **Project Planning:** The platform supports project planning by enabling the creation and tracking of milestones and deadlines. Teams can set targets, monitor progress, and adjust timelines as needed.
+
+5. **Documentation:** GitHub Issues acts as a documentation hub, capturing discussions, decisions, and context around code changes. This documentation is valuable for onboarding new team members, maintaining a historical record, and ensuring knowledge continuity.
+
+In essence, GitHub Issues provides a versatile and collaborative framework for managing the entire game development lifecycle, from identifying and resolving issues to planning and releasing software updates.
+
 
 #### Bug Data Report Spreadsheet
 
