@@ -92,6 +92,7 @@ draw_sprite:
 
     ; Set the pixel
     mov di, dx
+    
     mov [es:di], al
 
     ; If we need to go to the next line

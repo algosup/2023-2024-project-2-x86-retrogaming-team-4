@@ -20,6 +20,7 @@ start:
     ; Set video mode to 320x200 256 colors graphic mode
     mov ax, 0013h
     int 10h
+    
 
     
 
@@ -40,34 +41,30 @@ start:
 
 
 
-
+    
     mov al, 0x18 ; color to fill the screen (white = 0x0F, black = 0x00)
     call clearScreen
 
     gameloop:
-
+    push 0xA000
+    pop es
 ; backup the screen before display ghost
     mov si, [xPos] ; give the position to begin to save the screen
     call saveScreen ; store the state of the screen before display the ghost
 
 ; display the selected ghost
-    mov ax, [xPos]
-    mov bx, 160
+    
+    mov ax, 80
+    mov bx, [xPos]
     call calculate_screen_position
     push dx
-    mov ax, BLINKY_1
+    mov ax, PACMAN_FULL
     call calculate_spritesheet_position
     call draw_sprite
     pop dx
     
 
 ;waiting...
-    call waiting
-    call waiting
-    call waiting
-    call waiting
-    call waiting
-    call waiting
     call waiting
     
 
@@ -81,6 +78,15 @@ start:
     jmp gameloop
 
 
+
+mov ax, 0C01h ; 
+int 21h
+
+;dos box default video mode
+mov ax, 03h 
+int 21h
+
+int 20h ;quit
 
 
 
@@ -141,6 +147,8 @@ saveScreen:
     ; as es was containing ds, and ds was changed , we need to revert es and ds as in the begginning
     push es 
     pop ds
+    push 0xA000
+    pop es
     
 ret ; go back in the game loop
 
