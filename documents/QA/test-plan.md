@@ -22,14 +22,6 @@
     - [Suspension Criteria:](#suspension-criteria)
     - [Exit Criteria:](#exit-criteria)
   - [Allocated Resources](#allocated-resources)
-    - [Overview:](#overview-2)
-      - [Key Considerations:](#key-considerations)
-    - [Time](#time)
-    - [People](#people)
-  - [Test Environment](#test-environment)
-    - [X86](#x86)
-      - [Overview](#overview-3)
-      - [Code Example](#code-example)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
       - [Schedule:](#schedule)
@@ -114,7 +106,10 @@ Due to the difficulty of creating a test bot for an assembler game running on an
 ---
 #### Smoke Testing
 
-Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of potential show-stopping problems.
+Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke 
+testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing 
+phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of
+potential show-stopping problems.
 
 **Smoke Testing Scope:**
 
@@ -208,7 +203,7 @@ Next, the various actions and workflow steps are defined in the [pacman.yml](/pa
 To manage bugs, errors, deadlines, documentation, and task allocation, this project uses GitHub Issues. GitHub Issues serves as a comprehensive and centralized platform for tracking and addressing various aspects of our project development lifecycle. 
 
 We define:
-- **Bugs:** Unexpected problems such as screen flashing or code errors.
+- **Bugs:** Unexpected problems or code errors.
 - **Errors:** Includes all errors that do not originate in the code.
 - **Deadlines:** Specific deadlines for project stages to ensure timely delivery.
 - **Documentation:** Request for documentation on a specific function or group of functions in the code.
@@ -216,7 +211,7 @@ We define:
 
 **GitHub Issues Scope:**
 
-We are implementing a  strategy for managing GitHub issues to enhance collaboration and efficiency within the development team. Here are the key components of our strategy:
+We are implementing a strategy for managing GitHub issues to enhance collaboration and efficiency within the development team. Here are the key components of our strategy:
 
 1. **Detailed Issue Descriptions:**
    - Issues should have clear and detailed descriptions to provide context and understanding.
@@ -224,13 +219,12 @@ We are implementing a  strategy for managing GitHub issues to enhance collaborat
    - Specify the expected and actual behavior.
 
 2. **Labeling System:**
-   - Utilize labels to categorize issues, such as "bug," or "enhancement".
+   - Utilize labels to categorize issues, such as "bug," or "enhancement". Here is the [list](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/issues/labels) of labels. 
    - Labels aid in quickly identifying the nature of the issue and prioritizing tasks.
 
 3. **Assignees and Responsibility:**
    - Assign issues to the appropriate team member or individuals responsible for addressing the problem.
    - Assignees take ownership of the task, improving accountability.
-
 
 4. **Use of Templates:**
    - We have introduced issue templates to standardize the information provided for different types of issues.
@@ -241,10 +235,9 @@ We are implementing a  strategy for managing GitHub issues to enhance collaborat
 
 5. **Regular Issue Triage:**
    - Regularly review and triage open issues.
-   - Prioritize tasks based on their urgency, impact on users, and alignment with project goals.
+   - Prioritize tasks based on their urgency(Critical, High, Medium, Low).
 
-By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub. This approach contributes to clearer communication, better task management, and an overall improvement in the development workflow.
-
+By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub. This will help us to better manage our project development lifecycle and deliver a high-quality product.
 
 ---
 
@@ -252,23 +245,25 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 **Overview:**
 
-The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a comprehensive tool for documenting and tracking test cases, their results, and overall testing progress. It adopts a standardized pattern for each test case, ensuring clarity and consistency in reporting.
+The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a comprehensive tool for documenting and tracking test cases, their results, and overall testing progress. It adopts a standardized pattern for each test case.
 
 **Spreadsheet Structure:**
 
 1. **Test Case Pattern:**
    - **ID:** Unique identifier for each test case.
    - **Function:** The function or feature being tested.
-   - **Priority:** The priority level of the test case (e.g., High, Medium, Low).
+   - **Priority:** The priority level of the test case (High 🟥, Medium 🟧, Low 🟨).
    - **Description:** A concise description of the test case.
    - **Inputs:** Input values or conditions applied during testing.
    - **Expected Result:** The expected outcome or behavior.
+   - **Status:** The current status of the test case (Passed, Failed, In Progress, Not Implemented).
+![test case pattern](../pictures/testCasePattern.png)
 
-
-2. **Testing Sessions:**
+1. **Testing Sessions:**
    - For each test case, there is a dedicated section to record results obtained during testing sessions.
    - Testers can input whether the test passed, failed, is in progress, or not implemented during a specific testing session.
    - The date of the testing session is also recorded.
+![testing session](../pictures/testSessionpattern.png)
    
 
 3. **Graphics:**
@@ -279,11 +274,6 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
    - **Test Execution Progress:**
      - A line chart depicting the progress of test execution over time.
      - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
-
-**Benefits:**
-- **Standardization:** The standardized pattern ensures consistency and clarity in documenting test cases.
-- **Real-Time Tracking:** Testing sessions allow for immediate recording of test results and tracking of ongoing efforts.
-- **Visual Representation:** Graphics provide a quick and visual overview of testing status and progress.
 
 
 ### Documentation
@@ -300,8 +290,8 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
    - Each significant aspect of the project, such as functions, modules, and workflows, will have dedicated pages for in-depth information.
 
 3. **Developer-Friendly Templates:**
-   - To facilitate developers in documenting their code effectively, we will provide a [template](Function-documentation-template.md) that guides them on the essential information to include.
-   - This template will streamline the documentation process, ensuring consistency and completeness.
+   - To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include.
+   - The template will be available on the project GitHub in the folder QA inside the folder documents, the file name is "[Function-documentation-template](Function-documentation-template.md)". Developers can use it as a reference when documenting their code.
 
 4. **Improved Onboarding and Collaboration:**
    - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth.
@@ -319,19 +309,14 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 ## Test Criteria
 
 Setting up strict test criteria is crucial to guarantee the game's 
-quality before it's released. These criteria act as standards that need 
-to be met before the game is distributed. By following clear rules for 
-suspension and exit, the testing process aims to find and fix issues 
-early on, improving the overall quality and dependability of the
-product.
+quality before it's released. These criteria act as standards that need to be met before the game is distributed. By following clear rules for suspension and exit, the testing process aims to find and fix issues early on.
 
 ### Suspension Criteria:
 Suspension criteria are established to define conditions under which 
-testing activities may be temporarily halted. This ensures that issues are addressed promptly, maintaining the integrity of the testing 
-process. The following suspension criteria are identified:
+testing activities may be temporarily halted. The following suspension criteria are identified:
 
 1. **Critical Bug Threshold:**
-   - If a predetermined threshold of critical bugs is reached during testing (e.g., 10% of total test cases), testing will be suspended.
+   - If a predetermined threshold of critical bugs is reached during testing (10% of total test cases), testing will be suspended.
    - Critical bugs are those with a "High" impact on the core functionality of the software.
 
 2. **Resource Unavailability:**
@@ -339,14 +324,14 @@ process. The following suspension criteria are identified:
    - This criterion ensures that testing can resume only when necessary resources are accessible.
 
 ### Exit Criteria:
-Before the game can be considered ready for distribution, certain benchmarks must be met. For instance, at least 80% of all test cases should pass successfully, ensuring a high level of functionality and reliability. This criteria ensures that the game meets the required quality standards before reaching the distribution phase.
+Before the game can be considered ready for distribution, certain benchmarks must be met. For instance, at least 80% of all test cases should pass successfully. This criteria ensures that the game meets the required quality standards before reaching the distribution phase.
 
 1. **Test Case Coverage:**
    - A minimum test case coverage of 80% for all identified features and functionalities must be achieved before considering the test phase complete.
    - This ensures that almost all aspects of the software have been tested.
 
 2. **Bug Resolution Rate:**
-   - At least 80% of reported bugs must be addressed and resolved before exiting the testing phase.
+   - At least 90% of reported bugs must be addressed and resolved before exiting the testing phase.
    - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability.
 
 3. **Documentation Completeness:**
@@ -356,34 +341,58 @@ Before the game can be considered ready for distribution, certain benchmarks mus
 
 
 ## Allocated Resources
-### Overview:
-Plan human resources, equipment, and infrastructure needed for testing.
 
-#### Key Considerations:
-- Determine required resources (testers, equipment).
-- Calculate schedule and effort estimation.
+<!-- - **Human Resources Allocation:**
+  - **Code Review and Collaboration:**
+    - Allocate at least 1 hour per week from each developer for code review sessions, ensuring a thorough examination of the codebase.
+    - Conduct bi-weekly collaborative sessions between developers and QA for knowledge sharing and addressing questions.
 
-### Time
+  - **Wiki Contribution:**
+    - Dedicate 2 hours per week for each developer to populate the wiki with relevant content.
+    - Schedule a joint session between the QA team and developers to discuss and clarify any wiki-related queries.
 
-### People
 
-## Test Environment
-### X86
+- **Equipment and Tools Allocation:**
+  - **GitHub Collaboration:**
+    - Ensure that both developers and QA team members have access to GitHub for code collaboration.
+    - Allocate 1 hour per week for addressing any GitHub-related issues or questions.
 
-**Install NASM**
+  - **Spreadsheet Usage:**
+    - Integrate the spreadsheet into the QA team's workflow, dedicating 1 hour per week to updating and maintaining bug data reports.
+    - Schedule a brief training session to familiarize team members with the spreadsheet structure.
 
-Install an x86 assembler in DOSBox to write and compile assembly code. The technical team chose to pick NASM (Netwide Assembler) as the reference. a snippet of unit test code 
-#### Overview
-#### Code Example
+- **Infrastructure Allocation:**
+  - **DOSBox Implementation:**
+    - Allocate 1 hour for setting up and configuring DOSBox on each team member's system.
+    - Establish clear guidelines for DOSBox usage in the development and testing environments.
 
-**Configure DOSBox for testing**
+  - **Wiki Organization:**
+    - Devote 2 hours to create an organized structure for the wiki, defining sections and categories for easy navigation.
+    - Conduct a walkthrough session to ensure everyone understands the wiki's architecture.
 
-1. Launch DOSBox.
-2. Mount a directory where you'll store your project files using the following command:
-   ```
-   mount C C:\path\to\your\pacmanProject
-   ```
-   Replace `C:\path\to\your\pacmanProject` with the actual path to your project directory.
+- **Training and Development Allocation:**
+  - **Git Proficiency:**
+    - Plan a 2-week training program, consisting of 4 sessions of 1 hour each, covering Git basics and best practices.
+    - Provide additional resources and exercises to reinforce learning.
+
+  - **Documentation Guidelines:**
+    - Allocate 1 hour for presenting documentation templates and guidelines to both teams, ensuring uniformity in documentation practices.
+
+- **Timeline Allocation:**
+  - **Code Review and Collaboration Sessions:**
+    - Conduct bi-weekly code review sessions over 8 weeks, with each session lasting 1 hour.
+
+  - **Wiki Population and QA Sessions:**
+    - Schedule 4 weeks for populating the wiki, with each developer dedicating 2 hours per week.
+    - Conduct 8 QA sessions, each lasting 3.5 hours, distributed over 16 weeks.
+
+  - **Git Training:**
+    - Implement a 4-week Git training program, with 2 hours per week, totaling 8 hours.
+
+  - **Spreadsheet Usage and Training:**
+    - Incorporate spreadsheet usage into regular QA activities, allocating 1 hour per week.
+    - Conduct a training session in the first week for 1 hour. -->
+
 
 
 ## Test Schedule and Estimation
