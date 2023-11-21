@@ -25,6 +25,13 @@
       - [Game update](#game-update)
       - [Rendering](#rendering)
       - [Sound](#sound)
+  - [File Architecture](#file-architecture)
+    - [Constant](#constant)
+    - [Sprites](#sprites)
+    - [Collider](#collider)
+    - [GameStateUpdate](#gamestateupdate)
+    - [Keyboard](#keyboard)
+    - [Sound](#sound-1)
   - [Test Plan](#test-plan)
   - [Release Plan](#release-plan)
   - [Further Considerations](#further-considerations)
@@ -61,7 +68,7 @@ When the ghost are frightened, they turn dark blue, and keep the same kind of an
 When a ghost is eaten, only its eyes remains, which head back to the ghost house. Once arrived, the ghost eaten goes back in his original.
 Pac-Man has a death animation composed of 10 frames which last 1 second.
 
-The maze layout is this one.
+The maze layout is as follow
 
 ![maze](../pictures/Pac-Maze.png)
 
@@ -94,6 +101,8 @@ The duration is 6 seconds in the first level, and change as the levels go along.
 
 The ghosts start blinking 2 seconds before the ned of the fright time to indicate to the player that the game will soon be reversed to its normal state. If the fright time is 2 seconds or less, the ghosts blink from the start of the fright time.
 
+Each time a ghost is eaten, the screen should freeze for 2 seonds and display the amount of points scored where the ghost has been eaten.
+
 ### Score management
 
 Each small pellet eaten is worth 10 points. Each big one is worth 50 points.
@@ -115,9 +124,11 @@ A player can get a life each 10000 points reached.
 Each ghost has a different comportment patern.
 
 - Blinky, the red one, is the most agressive one. He is always chasing Pac-Man, wherever it goes. He starts outside of the ghost house, being the first one able to move freely in the maze. He always try to reach the exact tile Pac-Man is on.
-- Pinky, the pink ghost, has a more strategic approach. Instead of targeting the position of Pac-Man, it targets the direction of Pac-Man, moving in parallel compared to the player. it is the second one to go out of the ghost home. He aims for 4 tiles ahead of Pac-Man, leading him to always try to trap him rather than chase him like blinky.
-- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, he goes back into random mode. He is the third one, to go out of ghost home.
+- Pinky, the pink ghost, has a more strategic approach. Instead of targeting the position of Pac-Man, it targets the direction of Pac-Man, moving in parallel compared to the player. it is the second one to go out of the ghost house. He aims for 4 tiles ahead of Pac-Man, leading him to always try to trap him rather than chase him like blinky.
+- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, he goes back into random mode. He is the third one, to go out of ghost house.
 - Inky, the blue one, has the most complex patern. He is moving in relation to the position of both Pac-Man and Blinky. He always try to trap Pac-Man between him and Blinky. The farther Blinky is from Pac-Man, the more random he will move.
+
+During fright time, all the ghosts try to run away from Pac-Man. They recover their normal behaviour when they are not frightened anymore.
 
 ### Collision Handling
 
@@ -142,15 +153,15 @@ If the player close the game, the current high score will be deleted and will no
 
 ### Game initialization
 
-The first thing that has to be done is to set up the graphic mode. In our case, the graphic mode used will be a VGA mode, with a screen resolution of 640 by 480 pixels and 16 colors available, video mode 12h.
-For the audio, we will use the melody and notes of the original music, already generated in the code.
+The first thing that has to be done is to set up the graphic mode. In our case, the graphic mode used will be a VGA mode, with a screen resolution of 640 by 480 pixels and 16 colours available, video mode 12h.
 The high score will be set back to 0. The player starts with 3 lives and 0 points at level 1.
-The placement of the pellets, Pac-Man and the ghosts as well are their starting directions are as follow.
+The placement of pellets, Pac-Man and ghosts as well are their starting directions are as follow.
 
 ![filled maze](../pictures/FilledPac-Maze.png)
 
 There are 240 small pellet, as well as 4 big ones.
 The player has to wait for the intro music to stop in order for him to be able to move.
+The screen with the maze will be put in memory, allowing it to have to display it once, preventing further calculations
 
 ### Game loop
 
@@ -162,11 +173,15 @@ At each game loop, the first step is to check if the player did an input, and ch
 
 #### Collision Check
 
-The goal of this step is to check if any element of the game collide between them. This will be done by the [collision handler](#collision-handling).
+The goal of this step is to check if any element of the game collide between them. This will be done thanks to the logic described in the [collision handler](#collision-handling).
 
 #### Game update
 
-This is where we check if anything needs an update. First, we need to update the score. Then we need to check if the [fruit apparition condition](#score-management) is met. We also need to check if we go, stay or leave fright time. Next, we need to check if we have to go to the next level, stay, or lose a life and continue. Lastly, we need to check if the [Game Over conditions](#game-over) are met.
+This is where we check if anything needs an update. First, we need to update the score. Then we need to check if the [fruit apparition condition](#score-management) is met.
+We need to update the current direction of the ghosts to match their comportment. A ghost can do a full U-turn on itself. Remember that when frightened, ghosts try to run away from Pac-Man. They go back to their normal behaviour after that.
+We also need to check if we go, stay in or leave fright time.
+Next, we need to check if we have to go to the next level, stay, or lose a life. If a life is lost, Pac-Man and the ghosts are set back at their initial position, but the pellets eaten remain eaten until the end of level.
+Lastly, we need to check if the [Game Over conditions](#game-over) are met, and do accordingly.
 
 #### Rendering
 
@@ -176,6 +191,35 @@ After updating their position in the code, we have to display the actual new pos
 
 Here, we need to check if any sound effect needs to be played depending on the situation, and output them.
 Else, the background music should be looping.
+
+## File Architecture
+
+There should be several files. Several files allow to have a better organization of the code and a better readability in the game loop.
+
+### Constant
+
+This file will contains every constant defined to help for the development
+
+### Sprites
+
+This file will contain all the diferent functions used to draw sprites, but also to calculate their new positions.
+
+### Collider
+
+This file will contain the [collision handler](#collision-handling) and check that the movements done by Pac-Man and ghosts are possible.
+
+### GameStateUpdate
+
+This file will contain every function necessary to update the game status. This include ghost target, score, fruits, fright time, losing a life, game over and finishing a level.
+
+### Keyboard
+
+This file will be used to handle key inputed by the player.
+
+### Sound
+
+This file will manage all the sound system.
+
 ## Test Plan
 
 For the test plan, please refer to [this document](../QA/test-plan.md).
@@ -210,7 +254,7 @@ In a second time, the user would be able to download the latest release files an
 |   Scope creep    | We might try to make the project too big which could lead to the project running out of time.| We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation. |
 | Technical issues | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. <br>This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks. | These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. <br>However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented. |
 |Delays| Our project could be delayed because of some code-related bugs or issues, obliging us to spend more time than planned on a feature. | We will spend extra hours on the project as a consequence of potential delays|
-|Colours| As of today, the palette colour used in the video mode chosen does not have the original colors.|We can either use different colours or modify the palette to have the needed colours|
+|Colours| As of today, the palette colour used in the video mode chosen does not have the original colours.|We can either use different colours or modify the palette to have the needed colours|
 
 ---
 
