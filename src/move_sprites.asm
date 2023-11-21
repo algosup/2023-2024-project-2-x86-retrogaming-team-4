@@ -1,7 +1,8 @@
 section .data
     xPos dw 160
     yPos dw 80
-    xVelocity dw 16
+    xVelocity dw 1
+    PACMANDir dw PACMAN_RIGHT_2
 
 section .text
 clearScreen:
@@ -85,21 +86,23 @@ clearGhost:
 ret ; go back in the game loop
 changePos:
 ;switch the direction if the ghost reached a side of the screen
-    cmp word [xPos], SCREEN_WIDTH - SPRITE_SIZE 
-    jb .noflip
-    neg word [xVelocity]
-    .noflip:
-;inc/decremente the position
-    mov bx, [xPos]
-    add bx, [xVelocity]
-    mov [xPos], bx
-ret
+    cmp byte [oldKeyPressed] ,113
+    je MoveLeft
+
+    cmp byte [oldKeyPressed] ,100
+    je MoveRight
+
+    cmp byte [oldKeyPressed] ,122
+    je MoveUp
+
+    cmp byte [oldKeyPressed] ,115
+    je MoveDown
 
 DrawSprite:
     mov ax, [yPos]
     mov bx, [xPos]
     call calculate_screen_position
-    mov ax, PACMAN_RIGHT_2
+    mov ax, [PACMANDir]
     call calculate_spritesheet_position
     call draw_sprite
     ret
@@ -107,15 +110,31 @@ DrawSprite:
 MoveRight:
     mov bx, [xVelocity]
     add [xPos], bx
+    mov word [PACMANDir], PACMAN_RIGHT_2
     ;call clearScreen
     call DrawSprite
     ret
 
 MoveLeft:
+    mov bx, [xVelocity]
+    sub [xPos], bx
+    mov word [PACMANDir], PACMAN_LEFT_2
+    ;call clearScreen
+    call DrawSprite
     ret
 
 MoveUp:
+    mov bx, [xVelocity]
+    sub [yPos], bx
+    mov word [PACMANDir], PACMAN_UP_2
+    ;call clearScreen
+    call DrawSprite
     ret
 
 MoveDown:
+    mov bx, [xVelocity]
+    add [yPos], bx
+    mov word [PACMANDir], PACMAN_DOWN_2
+    ;call clearScreen
+    call DrawSprite
     ret
