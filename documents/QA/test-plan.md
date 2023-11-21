@@ -22,6 +22,9 @@
     - [Suspension Criteria:](#suspension-criteria)
     - [Exit Criteria:](#exit-criteria)
   - [Allocated Resources](#allocated-resources)
+    - [Time](#time)
+    - [People](#people)
+    - [Testing Environment Requirements](#testing-environment-requirements)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
       - [Schedule:](#schedule)
@@ -342,57 +345,48 @@ Before the game can be considered ready for distribution, certain benchmarks mus
 
 ## Allocated Resources
 
-<!-- - **Human Resources Allocation:**
-  - **Code Review and Collaboration:**
-    - Allocate at least 1 hour per week from each developer for code review sessions, ensuring a thorough examination of the codebase.
-    - Conduct bi-weekly collaborative sessions between developers and QA for knowledge sharing and addressing questions.
-
-  - **Wiki Contribution:**
-    - Dedicate 2 hours per week for each developer to populate the wiki with relevant content.
-    - Schedule a joint session between the QA team and developers to discuss and clarify any wiki-related queries.
 
 
-- **Equipment and Tools Allocation:**
-  - **GitHub Collaboration:**
-    - Ensure that both developers and QA team members have access to GitHub for code collaboration.
-    - Allocate 1 hour per week for addressing any GitHub-related issues or questions.
 
-  - **Spreadsheet Usage:**
-    - Integrate the spreadsheet into the QA team's workflow, dedicating 1 hour per week to updating and maintaining bug data reports.
-    - Schedule a brief training session to familiarize team members with the spreadsheet structure.
 
-- **Infrastructure Allocation:**
-  - **DOSBox Implementation:**
-    - Allocate 1 hour for setting up and configuring DOSBox on each team member's system.
-    - Establish clear guidelines for DOSBox usage in the development and testing environments.
+### Time
 
-  - **Wiki Organization:**
-    - Devote 2 hours to create an organized structure for the wiki, defining sections and categories for easy navigation.
-    - Conduct a walkthrough session to ensure everyone understands the wiki's architecture.
+| Task                                           | Estimated Time (hours) |
+| ---------------------------------------------- | ----------------------- |
+| Create and give template for documentation      | 4                       | 
+| First meeting with Dev team                     | 1                       | 
+| Unit tests                                      | 30                     |
+| Smoke testing                                     | 70                     | 
+| Review the documentation                        | 8                       |
+| First Test session with team 3 QA               | 3.5                     | 
+| GitHub Actions                                  | 16                      | 
+| Unit test formatter script                      | 16                      | 
+| Second Test session with team 3 QA              | 3.5                     | 
+| Second meeting with Dev team                    | 1                       | 
+| Third meeting Test session with team 3 QA       | 3.5                     |
+| Third meeting with Dev team                     | 1                       | 
+| Fourth meeting Test session with team 3 QA      | 3.5                     | 
+| Fourth meeting with Dev team                    | 1                       |
+| Total                                          | 162 hours               |
 
-- **Training and Development Allocation:**
-  - **Git Proficiency:**
-    - Plan a 2-week training program, consisting of 4 sessions of 1 hour each, covering Git basics and best practices.
-    - Provide additional resources and exercises to reinforce learning.
+This table outlines the estimated time for each task from the test plan. The total time allocated for testing is 162 hours.
 
-  - **Documentation Guidelines:**
-    - Allocate 1 hour for presenting documentation templates and guidelines to both teams, ensuring uniformity in documentation practices.
+### People
 
-- **Timeline Allocation:**
-  - **Code Review and Collaboration Sessions:**
-    - Conduct bi-weekly code review sessions over 8 weeks, with each session lasting 1 hour.
 
-  - **Wiki Population and QA Sessions:**
-    - Schedule 4 weeks for populating the wiki, with each developer dedicating 2 hours per week.
-    - Conduct 8 QA sessions, each lasting 3.5 hours, distributed over 16 weeks.
+### Testing Environment Requirements
 
-  - **Git Training:**
-    - Implement a 4-week Git training program, with 2 hours per week, totaling 8 hours.
 
-  - **Spreadsheet Usage and Training:**
-    - Incorporate spreadsheet usage into regular QA activities, allocating 1 hour per week.
-    - Conduct a training session in the first week for 1 hour. -->
 
+1. **DOSBox Emulator:**
+   - Version: [Specify version]
+  
+2. **Code Editor:**
+     - Visual Studio Code: Version 1.61.2 or later
+
+3. **Desktop Platforms:**
+     - Windows: 10 or later
+     - macOS: Version 10.14 or later
 
 
 ## Test Schedule and Estimation
