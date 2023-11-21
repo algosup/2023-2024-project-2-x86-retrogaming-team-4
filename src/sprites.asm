@@ -1,27 +1,5 @@
 <<<<<<< Updated upstream
 
-draw_spritesheet:
-    mov cx, 0
-    .loop:
-    push cx
-    ; Set y coord
-    mov ax, cx
-    and ax, 0xf0
-    ; Set x coord
-    mov bx, cx
-    and bx, 0xf
-    shl bx, 4
-    call calculate_screen_position
-    ; Set sprite
-    mov ax, cx
-    call calculate_spritesheet_position
-    call draw_sprite
-    ; Repeat
-    pop cx
-    inc cx
-    cmp cx, 64
-    jb .loop
-    ret
 
 
 
