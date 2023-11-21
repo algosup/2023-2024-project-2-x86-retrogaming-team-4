@@ -9,7 +9,7 @@
   - [Introduction](#introduction)
     - [Overview](#overview)
     - [Assumptions](#assumptions)
-  - [Game mechanics](#game-mechanics)
+  - [Technical solution](#technical-solution)
     - [Graphism](#graphism)
     - [Fright time](#fright-time)
     - [Score management](#score-management)
@@ -21,6 +21,7 @@
     - [Game initialization](#game-initialization)
     - [Game loop](#game-loop)
       - [Input check](#input-check)
+      - [Collision Check](#collision-check)
       - [Game update](#game-update)
       - [Rendering](#rendering)
       - [Sound](#sound)
@@ -47,13 +48,13 @@ We assumed that copyright was not an issue. This is a student project for non-co
 
 ---
 
-## Game mechanics
+## Technical solution
 
 ### Graphism
 
 The different sprites will be drawn according to this spritesheet.
 ![spritesheet](../pictures/spritesheet.png)
-As shown above, each ghosts has two separate sprite. We can create animations by changing which sprite is displayed every 0.25 second. Pac-Man has also 2 different sprites, being the ones with the mouse half opened and fully opened. We can create the same animation by alterning each 0.25 second.
+As shown above, each ghosts has two separate sprite. We can create animations by alterning which sprite is displayed every 0.25 second. Pac-Man has also 2 different sprites, being the ones with the mouse half opened and fully opened. We can create the same animation by alterning each 0.25 second.
 We can rotate these 2 sprites to make sure that Pac-Man can face all 4 directions.
 As the ghosts are looking in the direction they are moving in, the adequate eye sprite will be drawn on top of the ghosts at their position.
 When the ghost are frightened, they turn dark blue, and keep the same kind of animation than before. They start blinking in white 2 seconds before the end of the fright time.
@@ -61,7 +62,9 @@ When a ghost is eaten, only its eyes remains, which head back to the ghost house
 Pac-Man has a death animation composed of 10 frames which last 1 second.
 
 The maze layout is this one.
+
 ![maze](../pictures/Pac-Maze.png)
+
 The rectangle in the middle of the maze is called the ghost house. This is where 3 out of the 4 ghosts start, and where they come back when they have been eaten.
 The fruits appear on the row just below the ghost house, in the middle of the row.
 
@@ -89,7 +92,7 @@ The duration is 6 seconds in the first level, and change as the levels go along.
 | 18           |1|
 | 19 and after | 0|
 
-The ghosts start blinking 2 seconds before the ned of the fright time to indicate to the player that the game will soon be reversed to its normal state. If the fright time is 2 seconds or less, the ghosts already start blinking.
+The ghosts start blinking 2 seconds before the ned of the fright time to indicate to the player that the game will soon be reversed to its normal state. If the fright time is 2 seconds or less, the ghosts blink from the start of the fright time.
 
 ### Score management
 
@@ -143,33 +146,36 @@ The first thing that has to be done is to set up the graphic mode. In our case, 
 For the audio, we will use the melody and notes of the original music, already generated in the code.
 The high score will be set back to 0. The player starts with 3 lives and 0 points at level 1.
 The placement of the pellets, Pac-Man and the ghosts as well are their starting directions are as follow.
+
 ![filled maze](../pictures/FilledPac-Maze.png)
+
 There are 240 small pellet, as well as 4 big ones.
 The player has to wait for the intro music to stop in order for him to be able to move.
 
 ### Game loop
 
-A game loop is executed at each frame.
+A game loop is executed at each frame. The game should be running at 24 FPS (frames per second)
 
 #### Input check
 
 At each game loop, the first step is to check if the player did an input, and check what the input is. Only 5 input are recognized by the game, all 4 direction arrows and escape. The direction arrows are used to move in the maze, only if possible. It is possible to move in a direction only if there are no walls. Escape is used to quit the game at any time. When the game is closed, all progression is lost.
 
+#### Collision Check
+
+The goal of this step is to check if any element of the game collide between them. This will be done by the [collision handler](#collision-handling).
+
 #### Game update
 
-Position of both Pac-Man and the ghosts are updated first. Ghosts' positions is updated thanks to their [behavioural AI](#ghost-ai). Pac-Man continues to move in the same direction if nothing was input, or in the inputed direction if possible. Pac-Man can do 180°, while the ghosts cannot.
-Points, level and lives will be updated if the conditions to update them are complete.
-Win and lose conditions are also checked at this step.
+This is where we check if anything needs an update. First, we need to update the score. Then we need to check if the [fruit apparition condition](#score-management) is met. We also need to check if we go, stay or leave fright time. Next, we need to check if we have to go to the next level, stay, or lose a life and continue. Lastly, we need to check if the [Game Over conditions](#game-over) are met.
 
 #### Rendering
 
-After updating their position in the code, we have to display their actual new position in the maze. It includes fruits if the conditions are met, pellets, ghosts and Pac-Man.
+After updating their position in the code, we have to display the actual new position of ghosts and Pac-Man in the maze. We also need to change the score, display the fruit if needed or any animation depending on the conditions.
 
 #### Sound
 
 Here, we need to check if any sound effect needs to be played depending on the situation, and output them.
-Else, the background music should be looping, or continue where it was stopped for a sound effect.
-
+Else, the background music should be looping.
 ## Test Plan
 
 For the test plan, please refer to [this document](../QA/test-plan.md).
@@ -204,6 +210,7 @@ In a second time, the user would be able to download the latest release files an
 |   Scope creep    | We might try to make the project too big which could lead to the project running out of time.| We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation. |
 | Technical issues | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. <br>This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks. | These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. <br>However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented. |
 |Delays| Our project could be delayed because of some code-related bugs or issues, obliging us to spend more time than planned on a feature. | We will spend extra hours on the project as a consequence of potential delays|
+|Colours| As of today, the palette colour used in the video mode chosen does not have the original colors.|We can either use different colours or modify the palette to have the needed colours|
 
 ---
 
