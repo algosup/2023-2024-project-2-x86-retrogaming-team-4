@@ -1,15 +1,9 @@
 
-<<<<<<< Updated upstream
-
-;%ifndef "entry.asm"
-;%endif "entry.asm"
-
 
 section .bss
 
 buffScreen resb SPRITE_SIZE*SPRITE_SIZE ; where is stored the backuped screen
-=======
->>>>>>> Stashed changes
+
 
 section .data
 

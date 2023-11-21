@@ -2,10 +2,10 @@ org 100h
 
 %include "constants.asm"
 
-<<<<<<< Updated upstream
+
 %include "main.asm"
 %include "sprites.asm"
-=======
+
 %include "constants.asm"
 %include "main.asm"
 %include "sprites.asm"
@@ -15,4 +15,3 @@ org 100h
 %include "move_sprites.asm"
 %include "scoring.asm"
 
->>>>>>> Stashed changes
