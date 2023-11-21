@@ -1,3 +1,9 @@
+section .data
+    xPos dw 160
+    yPos dw 80
+    xVelocity dw 16
+
+section .text
 clearScreen:
     
     ;stosb copy byte per byte the content of al to es:di, di increasing.
@@ -88,3 +94,28 @@ changePos:
     add bx, [xVelocity]
     mov [xPos], bx
 ret
+
+DrawSprite:
+    mov ax, [yPos]
+    mov bx, [xPos]
+    call calculate_screen_position
+    mov ax, PACMAN_RIGHT_2
+    call calculate_spritesheet_position
+    call draw_sprite
+    ret
+
+MoveRight:
+    mov bx, [xVelocity]
+    add [xPos], bx
+    ;call clearScreen
+    call DrawSprite
+    ret
+
+MoveLeft:
+    ret
+
+MoveUp:
+    ret
+
+MoveDown:
+    ret

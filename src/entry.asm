@@ -3,11 +3,11 @@ org 100h
 section .text
 jmp start
 
-%include "Constants.asm"
-%include "Sprites.asm"
-%include "Main.asm"
-%include "Initialization.asm"
-%include "Keyboard.asm"
-%include "Collider.asm"
-%include "MoveSprites.asm"
-%include "Scoring.asm"
+%include "constants.asm"
+%include "sprites.asm"
+%include "main.asm"
+%include "initialization.asm"
+%include "keyboard.asm"
+%include "collider.asm"
+%include "move_sprites.asm"
+%include "scoring.asm"

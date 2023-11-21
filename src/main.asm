@@ -2,8 +2,6 @@ section .bss
     buffScreen resb SPRITE_SIZE*SPRITE_SIZE ; where is stored the backuped screen
 
 section .data
-    xPos dw 0 
-    xVelocity dw 1
     base: equ 0xf9fe
     old_time: equ base+0x06
 
@@ -11,13 +9,8 @@ section .text
 start:
     
     call SetVideoMode
-    call SetScreen
-    
-    mov si, [xPos] ; give the position to begin to save the screen
-    call saveScreen ; store the state of the screen before display the ghost
-; display the selected ghost
-    lea si, BLINKY_1 ; selecting the sprite
-    call displayGhost
+    ;call SetScreen
+    call DrawSprite
     pusha
 
 gameloop:
@@ -31,17 +24,21 @@ gameloop:
     
     popa
 
+    call readKeyboard
 ;restore the backuped screen above the ghost
-    call clearGhost
+    call clearScreen
 ;move the ghost
-    call changePos
+    ;call changePos
 
 ; backup the screen before display ghost
-    mov si, [xPos] ; give the position to begin to save the screen
-    call saveScreen ; store the state of the screen before display the ghost
-; display the selected ghost
-    lea si, BLINKY_1 ; selecting the sprite
-    call displayGhost
+    mov ax, 80
+    mov bx, 160
+    call calculate_screen_position
+    push dx
+    mov ax, PACMAN_RIGHT_2
+    call calculate_spritesheet_position
+    call draw_sprite
+    pop dx
     pusha
 ;return to the beggining of the gameloop
     jmp gameloop
