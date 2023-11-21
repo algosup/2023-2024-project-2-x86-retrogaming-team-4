@@ -1,29 +1,41 @@
 # Functional Specifications | Team 4
 
 ---
-|                 |                           |
-| --------------- | ------------------------- |
-| Document name   | Functional specifications |
-| Document owner  | Antoine PREVOST           |
-| Creation date   | November 6, 2023          |
-| Lastest version | November 13, 2023         |
 
 <details>
 <summary>Table of Contents</summary>
 
 - [Functional Specifications | Team 4](#functional-specifications--team-4)
-  - [Project Overview](#project-overview)
-  - [Stakeholders](#stakeholders)
-  - [Project scope](#project-scope)
+  - [I. Project Overview](#i-project-overview)
+  - [II. Stakeholders](#ii-stakeholders)
+  - [III. Project scope](#iii-project-scope)
     - [Resource: DOSBox Emulator](#resource-dosbox-emulator)
-  - [Deliverables \& Milestones](#deliverables--milestones)
-  - [Personas and use cases](#personas-and-use-cases)
+  - [IV. Deliverables \& Milestones](#iv-deliverables--milestones)
+  - [V. Personas and use cases](#v-personas-and-use-cases)
     - [Target Audience](#target-audience)
     - [1. Retro Gaming Enthusiast - Alex 🕹️](#1-retro-gaming-enthusiast---alex-️)
     - [2. Novice Player - Emily 🆕](#2-novice-player---emily-)
     - [3. Nostalgic 90s Gamer - Mike 💾](#3-nostalgic-90s-gamer---mike-)
     - [4. Tandy 1000 Enthusiast - Jason 📟](#4-tandy-1000-enthusiast---jason-)
-  - [Solution overview](#solution-overview)
+  - [VI. Non-functional requirements](#vi-non-functional-requirements)
+    - [Project expenses](#project-expenses)
+      - [Time spent](#time-spent)
+    - [Operational expenses](#operational-expenses)
+      - [Performance](#performance)
+        - [Response time](#response-time)
+        - [Framerate](#framerate)
+      - [Reliability](#reliability)
+        - [Bug presence](#bug-presence)
+        - [Crash presence](#crash-presence)
+      - [Security](#security)
+        - [Network](#network)
+      - [Operability](#operability)
+        - [Supported platforms](#supported-platforms)
+      - [Recovery](#recovery)
+        - [Game crash handling](#game-crash-handling)
+        - [High score](#high-score)
+      - [Maintainability](#maintainability)
+  - [VII. Solution overview](#vii-solution-overview)
     - [System architecture](#system-architecture)
     - [Launch procedure](#launch-procedure)
     - [User interface](#user-interface)
@@ -40,18 +52,18 @@
       - [Interactions](#interactions)
       - [Game Rules](#game-rules)
       - [Game Over Screen](#game-over-screen)
-  - [Usage example](#usage-example)
-  - [Timeline](#timeline)
-  - [Evaluation criteria](#evaluation-criteria)
+  - [VIII. Usage example](#viii-usage-example)
+  - [IX. Timeline](#ix-timeline)
+  - [X. Evaluation criteria](#x-evaluation-criteria)
     - [Gameplay Requirements](#gameplay-requirements)
     - [AI and Enemy Behavior Requirements](#ai-and-enemy-behavior-requirements)
     - [Controls and Responsiveness Requirements](#controls-and-responsiveness-requirements)
     - [Graphics Requirements](#graphics-requirements)
     - [User Experience Requirements](#user-experience-requirements)
     - [Bug-Free Gameplay Requirements](#bug-free-gameplay-requirements)
-  - [Risks and assumptions](#risks-and-assumptions)
+  - [XI. Risks and assumptions](#xi-risks-and-assumptions)
     - [Copyright and license](#copyright-and-license)
-  - [Bonus/additional features](#bonusadditional-features)
+  - [XII. Bonus/additional features](#xii-bonusadditional-features)
     - [Additional game modes](#additional-game-modes)
       - [2 players game mode](#2-players-game-mode)
         - [Specificities](#specificities)
@@ -66,30 +78,30 @@
       - [High-score menu](#high-score-menu)
     - [Additional Fruits \& Bonuses](#additional-fruits--bonuses)
     - [Game launcher](#game-launcher)
-  - [Glossary](#glossary)
+  - [XIII. Glossary](#xiii-glossary)
 
 </details>
 
 ---
 
-## Project Overview
+## I. Project Overview
 
 ALGOSUP's school commissioned us to create a Pac-Man game clone in assembly x86 using DOSBox[^1]. The software's primary objective is to completely fit all the original gameplay systems.
 
-## Stakeholders
+## II. Stakeholders
 
-| Stakeholder      | Role                     | Description                        | 🔗                                                 |
+| Stakeholder      | Role & Tasks                    | Description                        | 🔗                                                 |
 | ---------------- | ------------------------ | ---------------------------------- | ------------------------------------------------- |
-| ALGOSUP          | Client                   | Client of this project.            | [Website](https://algosup.com/)                   |
-| Léo CHARTIER     | Project Manager          | In charge of project management.   | [Github](https://github.com/leo-chartier)         |
-| Antoine PREVOST  | Program Manager          | In charge of program management.   | [Github](https://www.github.com/TechXplorerFR)    |
-| Malo ARCHIMBAUD  | Tech Lead                | In charge of technical aspects.    | [Github](https://github.com/Malo-Archimbaud)      |
-| Benoît DE KEYN   | Junior Software Engineer | In charge of software development. | [Github](https://github.com/benoitdekeyn-algosup) |
-| Maxime THIZEAU   | Junior Software Engineer | In charge of software development. | [Github](https://github.com/MaximeTAlgosup)       |
-| Maxime CARON     | Quality Assurance        | In charge of project quality.      | [Github](https://github.com/MaximeAlgosup)        |
-| Thomas PLANCHARD | Quality Assurance        | In charge of project quality.      | [Github](https://github.com/thomas-planchard)     |
+| ALGOSUP (represented by Franck JEANNIN)         | Client                   | Client of the project            | [Website](https://algosup.com/)                   |
+| Léo CHARTIER     | Project Manager          | - Project management documents<br>- Team cohesion and organisation   | [Github](https://github.com/leo-chartier)         |
+| Antoine PREVOST  | Program Manager          | - Concept creation<br>- Design decisions<br>- Functional specifications document   | [Github](https://www.github.com/TechXplorerFR)    |
+| Malo ARCHIMBAUD  | Tech Lead                | - Technical decisions<br>- Technical specifications document<br>- Give guidelines to the developers during development    | [Github](https://github.com/Malo-Archimbaud)      |
+| Benoît DE KEYN   | Junior Software Engineer | - Software development<br>- Coding unit tests | [Github](https://github.com/benoitdekeyn-algosup) |
+| Maxime THIZEAU   | Junior Software Engineer | - Software development<br>- Coding unit tests | [Github](https://github.com/MaximeTAlgosup)       |
+| Maxime CARON     | Quality Assurance        | - Writing tests plans<br>- Test all the functionalities<br>- Documents issues<br>- Issue solving verification    | [Github](https://github.com/MaximeAlgosup)        |
+| Thomas PLANCHARD | Quality Assurance        | - Writing tests plans<br>- Test all the functionalities<br>- Documents issues<br>- Issue solving verification      | [Github](https://github.com/thomas-planchard)     |
 
-## Project scope
+## III. Project scope
 
 The project aims to develop a faithful recreation of the classic Pac-Man game using Assembly language, within an emulated 90s computer environment. The primary objective is to deliver an experience that captures the essence of the original Pac-Man gameplay while accommodating both regular players and newcomers.
 
@@ -97,9 +109,9 @@ The project aims to develop a faithful recreation of the classic Pac-Man game us
 
 To achieve the emulation of a 90s computer environment, the project will leverage the use of the DOSBox emulator. DOSBox will serve as the platform for executing and testing the Pac-Man clone, ensuring compatibility with the simulated hardware and software of the era.
 
-## Deliverables & Milestones
+## IV. Deliverables & Milestones
 
-Here is a table of milestones and deliverables dates:
+Here is a table of the different milestones and the deliverables dates associated:
 | Date                      | Milestone / Deliverable  |
 | ------------------------- | ------------------------ |
 | November 13, 2023, 1.30pm | Functional specification |
@@ -108,7 +120,7 @@ Here is a table of milestones and deliverables dates:
 | December 11, 2023, 5pm    | Working prototype        |
 | December 21, 2023, 5pm    | Final product            |
 
-## Personas and use cases
+## V. Personas and use cases
 
 ### Target Audience
 
@@ -154,7 +166,63 @@ The following personas are based on the target audience we assume to have.
   - Ensuring that the Pac-Man clone is compatible with the Tandy 1000's specific hardware configurations and limitations.
   - Fine-tuning the game's performance to run smoothly on the Tandy 1000, taking into account any potential resource constraints.
 
-## Solution overview
+## VI. Non-functional requirements
+
+### Project expenses
+
+#### Time spent
+
+- We estimated the realization of such a project will require 400 manhours to complete.
+
+### Operational expenses
+
+#### Performance
+
+##### Response time
+
+- The response time between a key is pressed by a user and the action taken into account by the program should be under or equal to 100 milliseconds.
+
+##### Framerate
+
+- At least 24 frame per second, but to guarantee a smoother user-experience, our game shoudl refresh at a 60 hertz framerate.
+
+#### Reliability
+
+##### Bug presence
+
+- The game should not contain bugs which are impacting the user-experience.
+
+##### Crash presence
+
+- The game should not crash as any crash cancels the current game and inherently destroys the user experience.
+
+#### Security
+
+##### Network
+
+- The game will not be using the network and the program will be contained in DOSBox emulator.
+
+#### Operability
+
+##### Supported platforms
+
+- The game should run on any platform compatible with DOSBox emulator.
+
+#### Recovery
+
+##### Game crash handling
+
+- The game should restart from the beginning in case of a crash.
+
+##### High score
+
+- Stored in an external .txt file which reloads in case of a crash.
+
+#### Maintainability
+
+- The code can be maintained with the provided documents in the Github repository.
+
+## VII. Solution overview
 
 ### System architecture
 
@@ -353,7 +421,7 @@ Pac-Man moves through the maze at the rate of one pixel per frame. Each frame is
 
 When the game ends, the player is presented with a game over screen displaying their final score, along with options to restart or quit.
 
-## Usage example
+## VIII. Usage example
 
 We expect our software to be used for entertainment purposes, whether the user is nostalgic about the time this game was just released or just wants to discover the retro-games environment.
 
@@ -361,7 +429,7 @@ Here is an activity diagram showing the potential usage of our software and the 
 
 ![Use case Activity](../pictures/DiagramWalkthrough.png)
 
-## Timeline
+## IX. Timeline
 
 - Planning & Research
   - Learning about the project and preparing for it
@@ -386,7 +454,7 @@ Here is an activity diagram showing the potential usage of our software and the 
 
 The complete timeline and tasks can be found in the [Management section](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/tree/main/documents/management).
 
-## Evaluation criteria
+## X. Evaluation criteria
 
 To assess the performance and quality of the project, a set of evaluation criteria has been established. These criteria serve as benchmarks against which the project's functionality, design, and overall execution will be measured. The evaluation process aims to ensure that the final product meets the specified objectives. Below are the key areas of focus that will be considered during the evaluation.
 
@@ -424,7 +492,7 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 - **Collision Detection:** The game should undergo rigorous testing to ensure it is entirely free from gameplay bugs. Specifically, collisions between Pac-Man and enemies must be detected accurately without any hitbox discrepancies.
 
-## Risks and assumptions
+## XI. Risks and assumptions
 
 |       Risk       | Impact                                                                                                                                                                                                                                                                                                                                                                                   | Mitigation                                                                                                                                                                                                                                                                                                                |
 | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -433,9 +501,14 @@ To assess the performance and quality of the project, a set of evaluation criter
 
 ### Copyright and license
 
-As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, they told us this should not be an issue for several reasons. The first one is that as being an educational purpose project which will not be sold, it is allowed to use the sprites of the original game. Also, the owner of the copyright, Bandai Namco Entertainment Inc.[^3], is very unlikely to find this project, and if they sue us, it would be bad publicity and could discredit their image.
+As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, they told us this should not be an issue for several reasons, but advised us to reach out directly to Bandai Namco Entertainment Inc.[^3]. We sent an email to them, and received an answer, saying there could not give an explicit approval for us to use their product in our project. The only piece of advide they could give us was to make sure everything we ere doing was falling in the relevant legal framework. As a consequence, we decided to take the following measures:
 
-## Bonus/additional features
+- Include in the first line of the README a reference to the non-commercial usage of the software, as it was only made with educational and entertainment purpose.
+- Include a Creative Commons BY-NC license which restrcits to non-commercial and personal usages only. This license limits the usage of the software, as well as clearing our names from violating a copyright.
+- Explicitly say we are not the authors of the original Pac-Man game and we only pay a tribute to the original Pac-Man in the README.
+- With these actions, we can leave the GitHub repository publicly accessible to anyone.
+
+## XII. Bonus/additional features
 
 As a bonus which will be added if we don't face any issues during the development and testing phases, we plan to add some additional features to give players more varied experiences in terms of gameplay.  
 This section will stay quite concise and won't explain in detail how each of the game modes and menus will work, so an additional document describing these additional gameplay elements will be included in a future specification.
@@ -546,7 +619,7 @@ Here is the table of the bonus points provided by the bonus fruits and the spawn
 
 As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we plan to create a .exe and a .dmg executable to launch our Pac-Man clone if we don't face any development issues before the project deadline. It will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
 
-## Glossary
+## XIII. Glossary
 
 [^1]: DOSBox is an emulator program that emulates an IBM PC-compatible computer running a DOS operating system.
 
