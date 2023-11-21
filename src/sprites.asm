@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 draw_spritesheet:
     mov cx, 0
@@ -26,6 +27,8 @@ draw_spritesheet:
 
 
 
+=======
+>>>>>>> Stashed changes
 calculate_screen_position:
     ; Set first position on screen
     ; Parameters: y coord in ax, x coord in bx
