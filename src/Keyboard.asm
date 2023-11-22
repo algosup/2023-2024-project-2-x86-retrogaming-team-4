@@ -11,7 +11,7 @@ readKeyboard:
     int 16h
     cmp al, 0
     je NoKey
-    
+    xor ax, ax
     int 16h
     ; Overwrite the first char in 'charDump' with received char:
     mov [keyPressed] ,al

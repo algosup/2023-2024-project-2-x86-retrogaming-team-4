@@ -37,7 +37,7 @@ gameloop:
     jmp gameloop
 
     ; Exit
-    jmp exit
+    ;jmp exit
 
 
 
