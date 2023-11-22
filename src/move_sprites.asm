@@ -1,79 +1,41 @@
-;!!!PARAMETERS!!!;
-;input the position of the ghost which will be displayed, into 'si'
-saveScreen:
-    ;movsb mov byte per byte the content of ds:si to es:di, increasing both si and di each time
-    ;so we set the adress of the segments and the offsets
-    ;set the destinatin 'es:di'. Here , the begginning of the screen backup in [bufferScreen]
-    push ds ; ds is the data segment where is [bufferScreen]
-    pop es ; put it as the destination segment of movsb
-    lea di, [buffScreen] ; load the effective adress (L.E.A.) of the backup in the destination offset
-    ;set the source 'ds:si' to A000:xpos  (it's needed to have si defined before the call)
-    push 0xA000 ; video memory adress = 0xA000
-    pop ds ; define it as the adress of the source segment
-    ;'si' had been set up before
-    
-    ;mov, byte per byte the content into buffscreen
-    mov dx, SPRITE_SIZE ; set the counter for 8 lines per sprite
-    .eachLine:
-    mov cx, SPRITE_SIZE ; set the counter for 8 pixel per line
-    rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
-    dec dx ; decrementatin de dx, when it reach 0, the flag is 0 too cause of the dec propreties
-    jnz .eachLine ; while the flag != 0, it continues
-    
-    ; as es was containing ds, and ds was changed , we need to revert es and ds as in the begginning
-    push es 
-    pop ds
-    
-ret ; go back in the game loop
-displayGhost:
-    ;movsb mov byte per byte the content of ds:si to es:di, increasing both si and di each time
-    ;so we set the adress of the segments and the offsets
-    ;set the destinatin 'es:di'. Here , the screen at the xPos position
-    mov di, [xPos] ; the offset destination is xPos
-    ;the destination 'es' is already at its right value : the data segment 0x489D
-    ;select the source 'ds:si' of the movsb function
-    push 0xA000 ; video memory adress = 0xA000
-    pop es ; define it as the adress of the destination segment
-    ;'si' had been set up before
-    
-    ;mov, byte per byte the content of the ghost in the video memory 
-    mov dx, SPRITE_SIZE ; set the counter for 8 lines per sprite
-    
-    .eachLine:
-    mov cx, SPRITE_SIZE ; set the counter for 8 pixel per line
-    rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
-    add di, SCREEN_WIDTH - SPRITE_SIZE ; increment the position register to the next line 
-    dec dx ; decrementatin de dx, when it reach 0, the flag is 0 too cause of the dec propreties
-    jnz .eachLine ; while the flag != 0, it continues
-ret ; go back in the game loop
-clearGhost:
-    
-    ;movsb mov byte per byte the content of ds:si to es:di, increasing both si and di each time
-    ;so we set the adress of the segments and the offsets
-    ;set the source 'ds:si' of the movsb function
-    push 0xA000 ; video memory adress = 0xA000
-    pop es ; define it as the adress of the destination segment
-    mov di, [xPos] ; define the offset destination as the same xPos, where was displayed the ghost
-    ;set the source 'ds:si' as the backup of the screen
-    ;ds is already set as 0x489D where is the backup at [buffScreen]
-    lea si, [buffScreen]; load the effective adress (L.E.A.) of the backup in the destination offset
-    ;mov, byte per byte the content of the ghost in the video memory 
-    mov dx, SPRITE_SIZE ; set the counter for 8 lines per sprite
-    .eachLine:
-    mov cx, SPRITE_SIZE ; set the counter for 8 pixel per line
-    rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
-    add di, SCREEN_WIDTH - SPRITE_SIZE ; increment the position register to the next line 
-    dec dx ; decrementatin de dx, when it reach 0, the flag is 0 too cause of the dec propreties
-    jnz .eachLine ; while the flag != 0, it continues
-ret ; go back in the game loop
+
+section .data
+
+x_PacManVelocity dw 0 ; PacMan's translation vector on x axis (px/screen update) (if it=-3, pac man will go down  3 pixel, 24 times per second)
+y_PacManVelocity dw 0 ; PacMan's translation vector on y axis (px/screen update) (if it=+2, pac man will go right 2 pixel, 24 times per second)
+
+x_BlinkyVelocity dw 0 ; Blinky's translation vector on x axis (px/screen update) (if it=-3, Blinky will go down  3 pixel, 24 times per second)
+y_BlinkyVelocity dw 0 ; Blinky's translation vector on y axis (px/screen update) (if it=+2, Blinky will go right 2 pixel, 24 times per second)
+
+x_PinkyVelocity dw 0 ; Pinky's translation vector on x axis (px/screen update) (if it=-3, Pinky will go down  3 pixel, 24 times per second)
+y_PinkyVelocity dw 0 ; Pinky's translation vector on y axis (px/screen update) (if it=+2, Pinky will go right 2 pixel, 24 times per second)
+
+x_ClydeVelocity dw 0 ; Clyde's translation vector on x axis (px/screen update) (if it=-3, Clyde will go down  3 pixel, 24 times per second)
+y_ClydeVelocity dw 0 ; Clyde's translation vector on y axis (px/screen update) (if it=+2, Clyde will go right 2 pixel, 24 times per second)
+
+x_InkyVelocity dw 0 ; Inky's translation vector on x axis (px/screen update) (if it=-3, Inky will go down  3 pixel, 24 times per second)
+y_InkyVelocity dw 0 ; Inky's translation vector on y axis (px/screen update) (if it=+2, Inky will go right 2 pixel, 24 times per second)
+
+section .text
+
+
 changePos:
 ;switch the direction if the ghost reached a side of the screen
-    cmp word [xPos], SCREEN_WIDTH - SPRITE_SIZE 
+    cmp word [x_PacManPosition], SCREEN_WIDTH - SPRITE_SIZE 
     jb .noflip
-    neg word [xVelocity]
+    neg word [x_PacManVelocity]
     .noflip:
 ;inc/decremente the position
-    mov bx, [xPos]
-    add bx, [xVelocity]
-    mov [xPos], bx
+    mov bx, [x_PacManPosition]
+    add bx, [x_PacManVelocity]
+    mov [x_PacManPosition], bx
+ret
+
+Move_PacMan:
+
+    call ClearPacMan
+    mov bx, 1
+    mov [x_PacManVelocity], bx
+    call changePos
+    call Display_PacMan
 ret
