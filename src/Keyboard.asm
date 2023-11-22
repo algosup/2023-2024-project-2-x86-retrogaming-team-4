@@ -5,68 +5,46 @@ section .data
 
 section .text
 readKeyboard:
-    ; Read next key in buffer:
-    xor ax, ax
+    ; Don't do anything if no key was pressed
     mov ah, 01h
     int 16h
-    cmp al, 0
-    je NoKey
-    xor ax, ax
+    jz .skipBufferRead
+
+    ; Read last key in buffer:
+    .keepReadingBuffer:
+    int3
+    mov ah, 00h
     int 16h
+    mov bx, ax
+    mov ah, 01h
+    int 16h
+    jnz .keepReadingBuffer
+
     ; Overwrite the first char in 'charDump' with received char:
-    mov [keyPressed] ,al
+    mov ax, [keyPressed]
+    mov [oldKeyPressed], ax
+    mov [keyPressed], bh
 
-    cmp byte [keyPressed] ,113
-    je ChangeKeyL
+    .skipBufferRead:
 
-    cmp byte [keyPressed] ,100
-    je ChangeKeyR
+    ; Exit if ESCAPE
+    cmp byte [keyPressed], EXIT_KEY_SCANCODE
+    je exit
 
-    cmp byte [keyPressed] ,122
-    je ChangeKeyU
+    ; Left
+    cmp byte [keyPressed], LEFT_KEY_SCANCODE
+    je MoveLeft
 
-    cmp byte [keyPressed] ,115
-    je ChangeKeyD
+    ; Right
+    cmp byte [keyPressed], RIGHT_KEY_SCANCODE
+    je MoveRight
 
-    ; Compare the red char with ESCAPE (ASCII #27)
-    cmp byte [keyPressed] ,27
-    je exit        ; Loop while not "escape".
+    ; Up
+    cmp byte [keyPressed], UP_KEY_SCANCODE
+    je MoveUp
 
-    xor ax, ax
-NoKey:
+    ; Down
+    cmp byte [keyPressed], DOWN_KEY_SCANCODE
+    je MoveDown
+
     ret
-
-ChangeKeyL:
-    pusha
-    mov bx, [keyPressed]
-    mov [oldKeyPressed], bx
-    popa
-    jmp MoveLeft
-
-ChangeKeyR:
-    pusha
-    mov bx, [keyPressed]
-    mov [oldKeyPressed], bx
-    popa
-    jmp MoveRight
-
-ChangeKeyU:
-    pusha
-    mov bx, [keyPressed]
-    mov [oldKeyPressed], bx
-    popa
-    jmp MoveUp
-
-ChangeKeyD:
-    pusha
-    mov bx, [keyPressed]
-    mov [oldKeyPressed], bx
-    popa
-    jmp MoveDown
-
-exit:
-    ; Wait for key and terminate the program
-    mov al,01h ; Clear buffer
-    mov ah,0ch ; Read key
-    int 21h ; Execute
-    int 20h ; Exit

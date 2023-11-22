@@ -2,6 +2,12 @@
 %define SCREEN_HEIGHT 200
 %define SPRITE_SIZE 16
 
+%define UP_KEY_SCANCODE 48h
+%define DOWN_KEY_SCANCODE 50h
+%define LEFT_KEY_SCANCODE 4bh
+%define RIGHT_KEY_SCANCODE 4dh
+%define EXIT_KEY_SCANCODE 01h
+
 %define BLINKY_1 0
 %define BLINKY_2 1
 %define PINKY_1 2

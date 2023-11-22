@@ -45,7 +45,6 @@ draw_sprite:
     mov di, spritesheet
     add di, bx
     add di, cx
-    int3 ; ################################ DEBUG ################################
     mov al, [ds:di]
 
     ; Check if the color is in the high or low nibble
