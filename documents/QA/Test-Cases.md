@@ -1,0 +1,341 @@
+# Test Cases
+
+## OverviewThis document defines all the tests we will run on the application to ensure that it is working as expected.
+The following tests will be done by playing the game and checking that the expected result is obtained.
+
+## Priority
+
+The priority of the test is defined by the following colors:
+| Color | Priority |
+| --- | --- |
+| 🟨 | Low |
+| 🟧 | Medium |
+| 🟥 | High |
+
+## 1. Start the game
+
+| ID | 1 |
+| --- | --- |
+| Name | Start the game |
+| Test Description | Verify that the game is starting well |
+| Requirement(s) | The game is not started |
+| Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox |
+| Expected Result | The game start |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 2. Stop the game
+
+| ID | 2 |
+| --- | --- |
+| Name | Stop the game |
+| Test Description | Verify that the game is stopping well |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox, 3. Press "esc" |
+| Expected Result | The game stop |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 3. Move left
+
+| ID | 3 |
+| --- | --- |
+| Name | Move Pac-Man to the left with keyboard arrow |
+| Test Description | Verify that Pac-Man can go left when user pressing the left arrow of the keyboard and there is no wall in this direction |
+| Requirement(s) | The game is started |
+| Step(s) |1. Start the game, 2. Press on the left arrow of the keyboard |
+| Expected Result | Pac-Man move to the left in the game |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 4. Move right
+
+| ID | 4 |
+| --- | --- |
+| Name | Move Pac-Man to the right with keyboard arrow |
+| Test Description | Verify that Pac-Man can go righ when usery pressing the right arrow of the keyboard and there is no wall in this direction |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Press on the right arrow of the keyboard |
+| Expected Result | Pac-Man move to the right in the game |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 5. Move up
+
+| ID | 5 |
+| --- | --- |
+| Name | Move Pac-Man up with keyboard arrow |
+| Test Description | Verify that Pac-Man can go up b when userressing the up arrow of the keyboard and there is no wall in this direction |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Press on the up arrow of the keyboard |
+| Expected Result | Pac-Man move to the up in the game |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 6. Move down
+
+| ID | 6 |
+| --- | --- |
+| Name | Move Pac-Man down with keyboard arrow |
+| Test Description | Verify that Pac-Man can go down when user pressing the down arrow of the keyboard and there is no wall in this direction |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Press on the down arrow of the keyboard |
+| Expected Result | Pac-Man move to the down in the game |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 7. Pac-Mac Collision: Wall
+
+| ID | 7 |
+| --- | --- |
+| Name | Pac-Mac Collision : Wall |
+| Test Description | Verify that Pac-Man is stopped by a wall and can't pass through it |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Move in the direction of a wall |
+| Expected Result | Pac-Man should be stopped and not pass through it |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 8. Pac-Mac Collision: Ghost Without Power Pellet
+
+| ID | 8 |
+| --- | --- |
+| Name | Pac-Mac Collision: Ghost Without Power Pellet |
+| Test Description | Verify that Pac-Man is killed by a ghost when he doesn't eat power pellet and collide it |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Move in the direction of a ghost |
+| Expected Result | Pac-Man should be killed by the ghost |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 9. Pac-Mac Collision: Ghost With a Power Pellet
+
+| ID | 9 |
+| --- | --- |
+| Name | Pac-Mac Collision: Ghost With a Power Pellet |
+| Test Description | Verify that Pac-Man kill a ghost when he eat power pellet and collide it |
+| Requirement(s) | The game is started, Pac-Man eat power pellet |
+| Step(s) | 1. Start the game, 2. Eat power pellet 3. Move in the direction of a ghost |
+| Expected Result | Pac-Man should kill the ghost |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 10. Pac-Mac Collision: Ghost eyes only
+
+| ID | 10 |
+| --- | --- |
+| Name | Pac-Mac Collision : Ghost eyes |
+| Test Description | Verify that Pac-Man not collide ghost's eyes when he cross only them |
+| Requirement(s) | The game is started, Pac-Man eat power pellet |
+| Step(s) | 1. Start the game, 2. Eat power pellet, 3. Kill a ghost, 4. Cross ghost eyes when they back to the ghost house |
+| Expected Result | Pac-Man should cross them without any interaction |
+| Priority | 🟥 |
+| Estimed Time | 1 minute |
+
+## 11. Pac-Mac Eat Pellet
+
+| ID | 11 |
+| --- | --- |
+| Name | Pac-Mac Eat Pellet |
+| Test Description | Verify the interaction and effects of Pac-Man consuming regular pellets |
+| Requirement(s) | The game is started, Pac-Man eat pellets |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat pellets |
+| Expected Result | Pac-Man should consume the pellets, and the score should increase accordingly |
+| Priority | 🟨 |
+| Estimated Time | 2 minutes |
+
+## 12. Pac-Mac Eat Power pellet
+
+| ID | 12 |
+| --- | --- |
+| Name | Pac-Mac Eat Power pellet |
+| Test Description | Verify that Pac-Man can eat power pellet and that the ghosts become vulnerable and blue |
+| Requirement(s) | The game is started, Pac-Man eat power pellets |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellets |
+| Expected Result | The ghosts should become blue and vulnerable to Pac-Man |\
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 13. Pac-Mac Eat Bonus Fruits/Items
+
+| ID | 13 |
+| --- | --- |
+| Name | Pac-Mac Eat Bonus Fruits/Items |
+| Test Description | Verify that Pac-Man can eat bonus fruits/items and that the score increase |
+| Requirement(s) | The game is started, Pac-Man eat bonus fruits/items |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat bonus fruits/items |
+| Expected Result | The score should increase |
+| Priority | 🟨 |
+| Estimated Time | 2 minutes |
+
+## 14. Ghost Collision: Ghost
+
+| ID | 14 |
+| --- | --- |
+| Name | Ghost Collision: Ghost |
+| Test Description | Verify that ghosts can cross with each other without collision or visual bugs |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe ghost behavior |
+| Expected Result | Ghosts should be able to cross each other without collision or visual bugs |
+| Priority | 🟥 |
+| Estimated Time | 4 minutes |
+
+
+## 15. Ghost Collision: Wall
+
+| ID | 15 |
+| --- | --- |
+| Name | Ghost Collision: Wall |
+| Test Description | Verify that ghosts don't collide with walls and that they can't pass through it |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe ghost behavior |
+| Expected Result | Ghosts should be able to move without collision with walls |
+| Priority | 🟥 |
+| Estimated Time | 4 minutes |
+
+## 16. Ghosts Death
+
+| ID | 16 |
+| --- | --- |
+| Name | Ghosts Death |
+| Test Description | Verify that ghosts can die and that they return to the ghost house |
+| Requirement(s) | The game is started, player kill a ghost|
+| Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
+| Expected Result | Ghosts sprite should change to eyes and they should return to the ghost house |
+| Priority | 🟥 |
+| Estimated Time | 2 minutes |
+
+## 17. Ghosts Respawn
+
+| ID | 17 |
+| --- | --- |
+| Name | Ghosts Respawn |
+| Test Description | Verify that ghosts can respawn after a certain time |
+| Requirement(s) | The game is started, player kill a ghost|
+| Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
+| Expected Result | Ghosts should respawn after a certain time |
+| Priority | 🟥 |
+| Estimated Time | 2 minutes |
+
+## 18. Blinky (Red Ghost) Behavior: Chase Mode
+
+| ID | 18 |
+| --- | --- |
+| Name | Blinky (Red Ghost) Behavior: Chase Mode |
+| Test Description | Verify Blinky (red ghost) behavior when he is in chase mode |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe Blinky behavior |
+| Expected Result | Blinky should follow Pac-Man |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 19. Pinky (Pink Ghost) Behavior: Chase Mode
+
+| ID | 19 |
+| --- | --- |
+| Name | Pinky (Pink Ghost) Behavior: Chase Mode |
+| Test Description | Verify Pinky (pink ghost) behavior when he is in chase mode |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe Pinky behavior |
+| Expected Result | Pinky should try to go 2 Pac-Dots in front of Pac-Man |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 20. Inky (Blue Ghost) Behavior: Chase Mode
+
+| ID | 20 |
+| --- | --- |
+| Name | Inky (Blue Ghost) Behavior: Chase Mode |
+| Test Description | Verify Inky (blue ghost) behavior when he is in chase mode |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe Inky behavior |
+| Expected Result | Inky should select the two Pac-Dots positioned in front of Pac-Man in its current direction of travel. Imagine a vector from Blinky's position to this Pac-Dot, then double the length of the vector. The dots on which this extended vector ends will be the current target |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+
+## 21. Clyde (Orange Ghost) Behavior: Chase Mode
+
+| ID | 21 |
+| --- | --- |
+| Name | Clyde (Orange Ghost) Behavior: Chase Mode |
+| Test Description | Verify Clyde (orange ghost) behavior when he is in chase mode |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe Clyde behavior |
+| Expected Result | Clyde should follow Pac-Man directly and try to head for his scatter corner when within 8 dots of Pac-Man |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 22. Blinky (Red Ghost) Behavior: Scatter Mode
+
+| ID | 22 |
+| --- | --- |
+| Name | Blinky (Red Ghost) Behavior: Scatter Mode |
+| Test Description | Verify Blinky (red ghost) behavior when he is in scatter mode |
+| Requirement(s) | The game is started, eat power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Blinky behavior |
+| Expected Result | Blinky should go to the top right corner |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 23. Pinky (Pink Ghost) Behavior: Scatter Mode
+
+| ID | 23 |
+| --- | --- |
+| Name | Pinky (Pink Ghost) Behavior: Scatter Mode |
+| Test Description | Verify Pinky (pink ghost) behavior when he is in scatter mode |
+| Requirement(s) | The game is started, eat power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Pinky behavior |
+| Expected Result | Pinky should go to the top left corner |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 24. Inky (Blue Ghost) Behavior: Scatter Mode
+
+| ID | 24 |
+| --- | --- |
+| Name | Inky (Blue Ghost) Behavior: Scatter Mode |
+| Test Description | Verify Inky (blue ghost) behavior when he is in scatter mode |
+| Requirement(s) | The game is started, eat power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Inky behavior |
+| Expected Result | Inky should go to the bottom right corner |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 25. Clyde (Orange Ghost) Behavior: Scatter Mode
+
+| ID | 25 |
+| --- | --- |
+| Name | Clyde (Orange Ghost) Behavior: Scatter Mode |
+| Test Description | Verify Clyde (orange ghost) behavior when he is in scatter mode |
+| Requirement(s) | The game is started, eat power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Clyde behavior |
+| Expected Result | Clyde should go to the bottom left corner |
+| Priority | 🟧 |
+| Estimated Time | 2 minutes |
+
+## 26. Game Over Handling
+
+| ID | 26 |
+| --- | --- |
+| Name | Game Over Handling |
+| Test Description | Confirm appropriate handling of game over conditions |
+| Requirement(s) | The player is playing to the game |
+| Step(s) | 1. Start the game, 2. Play game, 3. Lose all Pac-Man's lives |
+| Expected Result | The game should display a "Game Over" screen with the option to restart or exit |
+| Priority | 🟨 |
+| Estimated Time | 2 minutes |
+
+
+
+## 27. Ghost Behavior: Return to Normal State
+
+| ID | 16.1 |
+| --- | --- |
+| Name | Ghost Behavior: Return to Normal State |
+| Test Description | Confirm that all ghosts return to their normal, active state after the vulnerable period |
+| Requirement(s) | Pac-Man eat power pellets, and all ghosts are present in the game |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost behavior after the vulnerable period expires |
+| Expected Result | Blinky, Pinky, Inky, and Clyde should cease defensive behavior and resume their typical pursuit of Pac-Man |
+| Priority | 🟨 |
+| Estimated Time | 3 minutes |
