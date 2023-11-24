@@ -260,7 +260,7 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
    - **Inputs:** Input values or conditions applied during testing.
    - **Expected Result:** The expected outcome or behavior.
    - **Status:** The current status of the test case (Passed, Failed, In Progress, Not Implemented).
-![test case pattern](../pictures/testCasePattern.png)
+![test case pattern](../pictures/testCasepattern.png)
 
 1. **Testing Sessions:**
    - For each test case, there is a dedicated section to record results obtained during testing sessions.
