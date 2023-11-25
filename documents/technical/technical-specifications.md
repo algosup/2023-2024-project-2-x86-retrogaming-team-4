@@ -10,7 +10,7 @@
     - [Overview](#overview)
     - [Assumptions](#assumptions)
   - [Technical solution](#technical-solution)
-    - [Graphism](#graphism)
+    - [Graphics](#graphics)
     - [Fright time](#fright-time)
     - [Score management](#score-management)
     - [Ghost AI](#ghost-ai)
@@ -24,14 +24,14 @@
       - [Collision Check](#collision-check)
       - [Game update](#game-update)
       - [Rendering](#rendering)
-      - [Sound](#sound)
+      - [Sound effects](#sound-effects)
   - [File Architecture](#file-architecture)
     - [Constant](#constant)
     - [Sprites](#sprites)
     - [Collider](#collider)
     - [GameStateUpdate](#gamestateupdate)
     - [Keyboard](#keyboard)
-    - [Sound](#sound-1)
+    - [Sound](#sound)
   - [Test Plan](#test-plan)
   - [Release Plan](#release-plan)
   - [Further Considerations](#further-considerations)
@@ -57,11 +57,11 @@ We assumed that copyright was not an issue. This is a student project for non-co
 
 ## Technical solution
 
-### Graphism
+### Graphics
 
 The different sprites will be drawn according to this spritesheet.
 ![spritesheet](../pictures/spritesheet.png)
-As shown above, each ghosts has two separate sprite. We can create animations by alterning which sprite is displayed every 0.25 second. Pac-Man has also 2 different sprites, being the ones with the mouse half opened and fully opened. We can create the same animation by alterning each 0.25 second.
+As shown above, each ghosts has two separate sprite. We can create animations by alternating which sprite is displayed every 0.25 second. Pac-Man also has 2 different sprites, being the ones with the mouth half opened and fully opened. We can create the same animation by alternating each 0.25 second.
 We can rotate these 2 sprites to make sure that Pac-Man can face all 4 directions.
 As the ghosts are looking in the direction they are moving in, the adequate eye sprite will be drawn on top of the ghosts at their position.
 When the ghost are frightened, they turn dark blue, and keep the same kind of animation than before. They start blinking in white 2 seconds before the end of the fright time.
@@ -99,7 +99,7 @@ The duration is 6 seconds in the first level, and change as the levels go along.
 | 18           |1|
 | 19 and after | 0|
 
-The ghosts start blinking 2 seconds before the ned of the fright time to indicate to the player that the game will soon be reversed to its normal state. If the fright time is 2 seconds or less, the ghosts blink from the start of the fright time.
+The ghosts start blinking 2 seconds before the end of the fright time to indicate to the player that the game will soon be reversed to its normal state. If the fright time is 2 seconds or less, the ghosts blink from the start of the fright time.
 
 Each time a ghost is eaten, the screen should freeze for 2 seonds and display the amount of points scored where the ghost has been eaten.
 
@@ -121,14 +121,14 @@ A player can get a life each 10000 points reached.
 
 ### Ghost AI
 
-Each ghost has a different comportment patern.
+Each ghost has a different behaviour pattern.
 
 - Blinky, the red one, is the most agressive one. He is always chasing Pac-Man, wherever it goes. He starts outside of the ghost house, being the first one able to move freely in the maze. He always try to reach the exact tile Pac-Man is on.
 - Pinky, the pink ghost, has a more strategic approach. Instead of targeting the position of Pac-Man, it targets the direction of Pac-Man, moving in parallel compared to the player. it is the second one to go out of the ghost house. He aims for 4 tiles ahead of Pac-Man, leading him to always try to trap him rather than chase him like blinky.
-- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, he goes back into random mode. He is the third one, to go out of ghost house.
-- Inky, the blue one, has the most complex patern. He is moving in relation to the position of both Pac-Man and Blinky. He always try to trap Pac-Man between him and Blinky. The farther Blinky is from Pac-Man, the more random he will move.
+- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, it goes back into random mode. He is the third one, to go out of ghost house.
+- Inky, the blue one, has the most complex patern. He is moving in relation to the position of both Pac-Man and Blinky. He always try to trap Pac-Man between him and Blinky's position. The farther Blinky is from Pac-Man, the more random he will move.
 
-During fright time, all the ghosts try to run away from Pac-Man. They recover their normal behaviour when they are not frightened anymore.
+During fright time, all the ghosts try to run away from Pac-Man. They recover their normal behaviour when they are no longer frightened.
 
 ### Collision Handling
 
@@ -146,7 +146,7 @@ There are no "real" winning conditions in the original Pac-Man. When you collect
 
 ### Game Over
 
-A Game Over occurs when the player loses all his lives. Then, the Game Over animation of Pac-Man displays and the score is set as high score if ot is higher than the previous one. The player just have to press a key to start a new game.
+A Game Over occurs when the player loses all his lives. Then, the Game Over animation of Pac-Man displays and the score is set as high score if it is higher than the previous one. The player just have to press a key to start a new game.
 If the player close the game, the current high score will be deleted and will not be saved for when the player launch the program.
 
 ## Game run
@@ -169,7 +169,7 @@ A game loop is executed at each frame. The game should be running at 24 FPS (fra
 
 #### Input check
 
-At each game loop, the first step is to check if the player did an input, and check what the input is. Only 5 input are recognized by the game, all 4 direction arrows and escape. The direction arrows are used to move in the maze, only if possible. It is possible to move in a direction only if there are no walls. Escape is used to quit the game at any time. When the game is closed, all progression is lost.
+At each game loop, the first step is to check if the player did an input, and check what the input is. Only 5 input are recognized by the game, all 4 direction arrows and escape. The direction arrows are used to move in the maze, only if possible. It is possible to move in a direction only if there are no walls. Escape is used to quit the game at any time. When the game is closed, all progress is lost.
 
 #### Collision Check
 
@@ -187,7 +187,7 @@ Lastly, we need to check if the [Game Over conditions](#game-over) are met, and 
 
 After updating their position in the code, we have to display the actual new position of ghosts and Pac-Man in the maze. We also need to change the score, display the fruit if needed or any animation depending on the conditions.
 
-#### Sound
+#### Sound effects
 
 Here, we need to check if any sound effect needs to be played depending on the situation, and output them.
 Else, the background music should be looping.
@@ -202,7 +202,7 @@ This file will contains every constant defined to help for the development
 
 ### Sprites
 
-This file will contain all the diferent functions used to draw sprites, but also to calculate their new positions.
+This file will contain all the different functions used to draw sprites, but also to calculate their new positions.
 
 ### Collider
 
@@ -214,7 +214,7 @@ This file will contain every function necessary to update the game status. This 
 
 ### Keyboard
 
-This file will be used to handle key inputed by the player.
+This file will be used to handle key input by the player.
 
 ### Sound
 
@@ -228,7 +228,7 @@ For the test plan, please refer to [this document](../QA/test-plan.md).
 
 At first, the game will only be available as a .com[^2] file in the [repository](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4). In order to run this file, a DOS environment is required, such as DOSBox.
 
-In a second time, the user would be able to download the latest release files and follow the installation steps which will be described in the README. The user will launch the compiled program, which is executed on the same platform, thanks to the DOSBox emulator.
+In a second time, the user would be able to download the latest release files and follow the installation steps which will be described in the README. The user will launch the compiled program's, which is executed on the same environment, thanks to the DOSBox emulator.
 
 ---
 
@@ -237,7 +237,7 @@ In a second time, the user would be able to download the latest release files an
 ### Third-party services and platform considerations
 
 - Our code base will be hosted on [GitHub](https://github.com) on [this repository](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/). In case of an outage of the website or its closure, the source code and compiled files of the releases will not be accessible and downloadable for the end-user.
-- DOSBox is an external platform downloadable via [DOSBox's official website](https://www.dosbox.com/). In case of an outage of the website or its closure, the executable file allowing the program to run on different platforms the assembly files will not be :
+- DOSBox is an external platform downloadable via [DOSBox official website](https://www.dosbox.com/). In case of an outage of the website or its closure, the executable file allowing the program to run on different platforms the assembly files will not be :
   - Use an alternative such as [DOSBox-X](https://dosbox-x.com/) or [DOSBox SVN Daum](http://ykhwong.x-y.net/). However, these pieces of software may require some code adaptations.
   - Download it from other sources. As DOSBox is open-source, its source code can be downloaded from [SourceForge](https://sourceforge.net/projects/dosbox/).
 - NASM (Netwide Assembler) is the assembly language compiler we are using to turn our assembly files into machine code files. It is available for download from the [NASM project official website](https://nasm.us/). If this site is unavailable or the project is terminated, the executable should be downloaded from another source:
@@ -251,10 +251,10 @@ In a second time, the user would be able to download the latest release files an
 
 | Risk |Impact | Mitigation |
 |---| --- | --- |
-|   Scope creep    | We might try to make the project too big which could lead to the project running out of time.| We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realisation. |
+|   Scope creep    | We might try to make the project too big which could lead to the project running out of time.| We must plan our work by doing a breakdown of the different tasks in sub-tasks and estimate a specific time which will be dedicated to this sub-task realization. |
 | Technical issues | Assembly, which is the language used during this project, is part of a niche for development as only a few software developers are still using this low-level language. <br>This explains why only a few people is our team already know how to code in depth with it. For this reason, many bugs or crashes could happen during the project realisation, mainly caused by memory leaks. | These unexpected behaviour must be found and patched as reliability and user friendliness are the key-points of a non-necessary software such as a video-game to keep users interested. <br>However, patching behaviour issues might be challenging as we may encounter errors which have not been previously documented. |
-|Delays| Our project could be delayed because of some code-related bugs or issues, obliging us to spend more time than planned on a feature. | We will spend extra hours on the project as a consequence of potential delays|
-|Colours| As of today, the palette colour used in the video mode chosen does not have the original colours.|We can either use different colours or modify the palette to have the needed colours|
+|Delays| Our project could be delayed because of some code-related bugs or issues, obliging us to spend more time than planned on a feature. | We will spend addtional time on the project as a consequence of potential delays|
+|Colors| As of today, the palette colors used in the video mode chosen does not have the original colours.|We can either use different colors or modify the palette to have the required colors|
 
 ---
 
