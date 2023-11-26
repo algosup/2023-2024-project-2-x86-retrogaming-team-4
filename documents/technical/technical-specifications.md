@@ -25,6 +25,9 @@
       - [Game update](#game-update)
       - [Rendering](#rendering)
       - [Sound effects](#sound-effects)
+  - [Algorithm](#algorithm)
+    - [Set the colors if the palette](#set-the-colors-if-the-palette)
+    - [Game loop code](#game-loop-code)
   - [File Architecture](#file-architecture)
     - [Constant](#constant)
     - [Sprites](#sprites)
@@ -191,6 +194,87 @@ After updating their position in the code, we have to display the actual new pos
 
 Here, we need to check if any sound effect needs to be played depending on the situation, and output them.
 Else, the background music should be looping.
+
+## Algorithm
+
+### Set the colors if the palette
+
+The video mode used can display only 16 different colors. However, it is possible to change the colors used.
+The most efficient way is to create a macro function. We just have to indicate how many paramets your function needs, and then call the macro. An exemple of use is featured below.
+
+```assembly
+
+%macro setpalete 4 
+        mov bx, %1
+        mov dh, %2
+        mov ch, %3
+        mov cl, %4
+        mov ax, 1010h
+        int 10h
+%endmacro
+
+    Start:
+        mov ax, 0A000h
+        mov es, ax
+
+        ;set video mode to 640x480 16 color 
+        mov ax, 12h 
+        int 10h
+
+        setpalete 14h,0ffh,0ffh,0ffh
+
+```
+
+This the the relation between the index of the palette and the register attached to it.
+
+```
+0  1  2  3  4  5  6 7  8  9  A  B  C  D  E  F     palette register
+0  1  2  3  4  5 14 7 38 39 3A 3B 3C 3D 3E 3F     color register
+```
+
+The code featured is setting the palette register 6 with the color ffffff, which is white.
+
+### Game loop code
+
+This is a draft of what the main file would look like. This is the file where everything will be put together
+
+```assembly
+; IT'S ONLY A DRAFT
+; ALL NAMES AND FILE NAMES ARE NOT FINAL
+
+section .text
+
+; INITIALISATION FUNCTION
+
+; set up environment: video mode, etc
+; set up memory: allocate memory segment to run the game
+
+; GRAPHICAL STUFF
+
+; load the maze in memory
+; all other functions should be in another file named sprites
+
+; GAME LOOP
+
+; check if input and process it
+; should call func in the file name keyboard
+
+; update positions
+; should call func in file sprites
+
+; chekc collision
+; should call func in file collider
+
+; update game state (score, fright time, refer to the tech specs)
+; should call func in file score
+; lot of stuff implied here check tech specs section game update
+
+; update rendering
+; should call func in file sprites
+
+; update sound 
+; FUTURE STUFF, DO NOT CARE FOR NOW
+```
 
 ## File Architecture
 
