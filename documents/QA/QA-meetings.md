@@ -29,7 +29,7 @@ The team is expected to implement the optimized code commenting practices discus
 
 ### Content:
 
-- The Dev team currently follows the practice of using a single branch, "dev," for coding, which may not be optimal. We recommend adopting a strategy of using different branches for various code components and merging them into the "dev" branch after thorough code review. 
+- The Dev team currently follows the practice of using a single branch, "dev," for coding, which may not be optimal. We recommend adopting a strategy of using different branches for various code components and merging them into the "dev" branch after a thorough code review. 
   
 - It has been observed that the Dev team is building upon the code of Gary Iglesias rather than focusing on the project itself and initiating coding with best practices. 
   
@@ -50,9 +50,9 @@ The team is expected to implement the optimized code commenting practices discus
 
 - **GitHub Proficiency:** Initiatives launched to enhance the Dev team's proficiency in GitHub, aiming for improved collaboration and utilization of Git functionalities.
 
-- **Wiki Population:** Dev team will actively populating the wiki with templates provided by the QA team..
+- **Wiki Population:** The dev team will actively populate the wiki with templates provided by the QA team.
 
-- **Test Case Formulation:** QA team initiated the development of  test cases for the project.
+- **Test Case Formulation:** The QA team initiated the development of test cases for the project.
 
 - **Architecture Consistency:** Ongoing discussions to align the architecture between the wiki and the codebase.
 
