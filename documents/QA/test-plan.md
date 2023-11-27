@@ -44,16 +44,18 @@
 
 ### Overview
 
+The project aims to develop a faithful recreation of the classic Pac-Man game using Assembly language, within an emulated 90s computer environment. The primary objective is to deliver an experience that captures the essence of the original Pac-Man gameplay.
+
 This project targets a diverse audience, from those well-acquainted with the original Pac-Man to individuals who may be discovering the game for the first time. With a dual purpose, the product aims to serve as an educational tool for learning assembly language coding and as an entertainment game.
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
 
 ![](../pictures/diagramWalkthrough.png)
 
-The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor, X86 architecture, and 65,536 bytes of RAM.
+The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor and an X86 architecture.
 
 ## Strategy
-Our testing strategy employs a multifaceted approach to ensure the robustness and reliability of the project. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
+Our testing strategy employs a multifaceted approach. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
 
 ### Scope of Testing
 Testing will focus on both core gameplay elements and peripheral features to guarantee a reliable end product. However, it's important to note that certain aspects, such as low-level technical details will be excluded from testing as they are beyond the scope of the test.
@@ -82,7 +84,7 @@ These tests are developed throughout the project in parallel with game developme
 The main objectives of these tests are:
 - Check that the game's essential functions are working properly.
 - Check all other game functions as far as possible.
-- Serve as non-regression tests between each game update.`
+- Serve as non-regression tests between each game update.
 
 
 | Function | Expected Result | Severity |
@@ -104,7 +106,9 @@ The main objectives of these tests are:
 #### Overview
 
 
-Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing). To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
+Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](./Test-Cases.md). 
+
+To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
 
 ---
 #### Smoke Testing
@@ -129,14 +133,14 @@ The smoke testing scope will focus on the fundamental aspects of the game. This 
 During each smoke testing session, the following steps will be executed:
 
 1. **Build Deployment:** Deploy the latest build of the project in the testing environment.
-2. **Test Execution:** Execute a set of [predefined test cases](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) covering the critical functionalities.
+2. **Test Execution:** Execute a set of [predefined test cases](./Test-Cases.md) covering the critical functionalities.
 3. **Archiving results:** Archive the test results [here](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) for future reference.
-4. **Issue Reporting:** If critical issues are identified, report them promptly to the development team for resolution.
+4. **Issue Reporting:** If critical issues are identified, report them to the development team.
 
 ---
 #### Group Game-Testing
 
-To gain a better overview of the project, a collaboration with the [3rd](Collaboration-QA.md) team's quality assurance team was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+To gain a better overview of the project, a collaboration with the [3rd team's quality assurance team](Collaboration-QA.md) was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
 
 **Group Game-Testing Scope:**
 
@@ -145,7 +149,7 @@ Group sessions are designed primarily to:
 2. **Sharing tests:** Share tests between the 2 teams to have a better overview of the game and to find more bugs and errors.
 3. **Identify bugs and errors:** Find bugs and errors in the game to improve it.
 4. **Identify improvements and missing features:** Find improvements and missing features in the game to bring it closer to the original.
-5. **Identify spelling and grammar errors:** Find spelling and grammar errors in the game and report them.
+
 
 **A Sequence of a Group Game-Testing:**
 
@@ -153,7 +157,7 @@ A group testing session will take place once a week during one of the hours allo
 Each session will follow the following steps:
 1. **Game quick overview:** A quick overview of the game is done to see the progress of the project.
 2. **Testing points:** The testing points are defined and shared between the 2 teams, testing points will be adapted to each project's progression.
-3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](todo).
+3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](./Test-Cases.md).
 4. **Test results:** The test results are shared between the 2 teams and the bugs and errors are reported on the [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing).
 
 For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
@@ -203,18 +207,22 @@ Next, the various actions and workflow steps are defined in the [pacman.yml](/pa
 ---
 **GitHub Issues**
 
-To manage bugs, errors, deadlines, documentation, and task allocation, this project uses GitHub Issues. GitHub Issues serves as a comprehensive and centralized platform for tracking and addressing various aspects of our project development lifecycle. 
+GitHub Issues is a tool that allows us to create and manage issues and 
+assign them to team members. This tool is integrated into GitHub and 
+allows us to have a better overview of the project and to have a better 
+organization.
 
 We define:
 - **Bugs:** Unexpected problems or code errors.
 - **Errors:** Includes all errors that do not originate in the code.
-- **Deadlines:** Specific deadlines for project stages to ensure timely delivery.
+- **Deadlines:** Specific deadlines for project stages to ensure timely 
+  delivery.
 - **Documentation:** Request for documentation on a specific function or group of functions in the code.
 - **Task allocation:** Assignment and tracking of specific responsibilities.
 
-**GitHub Issues Scope:**
+**GitHub Issues Strategy:**
 
-We are implementing a strategy for managing GitHub issues to enhance collaboration and efficiency within the development team. Here are the key components of our strategy:
+We are implementing a strategy for managing GitHub issues. Here are the key components of our strategy:
 
 1. **Detailed Issue Descriptions:**
    - Issues should have clear and detailed descriptions to provide context and understanding.
@@ -240,7 +248,7 @@ We are implementing a strategy for managing GitHub issues to enhance collaborati
    - Regularly review and triage open issues.
    - Prioritize tasks based on their urgency(Critical, High, Medium, Low).
 
-By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub. This will help us to better manage our project development lifecycle and deliver a high-quality product.
+By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub.
 
 ---
 
@@ -248,7 +256,7 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 **Overview:**
 
-The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a comprehensive tool for documenting and tracking test cases, their results, and overall testing progress. It adopts a standardized pattern for each test case.
+The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a tool for documenting and tracking test cases, their results, and overall testing progress. The spreadsheet is divided into three sections: Test Case Pattern, Testing Sessions, and Graphics.
 
 **Spreadsheet Structure:**
 
@@ -273,10 +281,13 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
    - **Test Percentage Representation:**
      - A pie chart representing the percentage distribution of test cases based on their status (Passed, Failed, In Progress, Not Implemented).
      - Provides a visual snapshot of the overall testing status.
+  ![Graphics test percentage](../pictures/TestCase-Calculator-Summary.png)
+
 
    - **Test Execution Progress:**
      - A line chart depicting the progress of test execution over time.
      - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
+   ![Graphics test execution](../pictures/Test-Execution-Progress.png)
 
 
 ### Documentation
@@ -289,8 +300,8 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
    - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure and functions.
 
 2. **Structured and Accessible Information:**
-   - Documentation will be organized in a structured manner, making it easy to navigate and locate specific details.
-   - Each significant aspect of the project, such as functions, modules, and workflows, will have dedicated pages for in-depth information.
+   - Documentation will be organized in a structured manner, with a table of contents for easy navigation.
+   - Each complex function will have dedicated pages for in-depth information.
 
 3. **Developer-Friendly Templates:**
    - To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include.
@@ -302,17 +313,18 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
 
 5. **Versioned Documentation:**
    - GitHub Wiki supports versioning, allowing us to maintain historical documentation for different releases.
-   - Developers can refer to documentation relevant to a specific version, ensuring accuracy in understanding the codebase at any point in time.
+   - Developers can refer to documentation relevant to a specific version.
 
-6. **Open Collaboration:**
-   - The GitHub Wiki encourages open collaboration, enabling team members to contribute and edit documentation collaboratively.
-   - This ensures that documentation stays up-to-date with the evolving nature of the project.
 
 
 ## Test Criteria
 
-Setting up strict test criteria is crucial to guarantee the game's 
-quality before it's released. These criteria act as standards that need to be met before the game is distributed. By following clear rules for suspension and exit, the testing process aims to find and fix issues early on.
+Setting up strict test criteria is crucial to guarantee the 
+game's 
+quality before it's released. These criteria act as standards 
+that need to be met before the game is distributed. By 
+following clear rules for suspension and exit, the testing 
+process aims to find and fix issues early on.
 
 ### Suspension Criteria:
 Suspension criteria are established to define conditions under which 
@@ -324,7 +336,7 @@ testing activities may be temporarily halted. The following suspension criteria 
 
 2. **Resource Unavailability:**
    - If essential testing resources, such as testing environments, tools, or personnel, become unavailable for an extended period, testing may be suspended.
-   - This criterion ensures that testing can resume only when necessary resources are accessible.
+   - This criteria ensures that testing can resume only when necessary resources are accessible.
 
 ### Exit Criteria:
 Before the game can be considered ready for distribution, certain benchmarks must be met. For instance, at least 80% of all test cases should pass successfully. This criteria ensures that the game meets the required quality standards before reaching the distribution phase.
@@ -334,12 +346,13 @@ Before the game can be considered ready for distribution, certain benchmarks mus
    - This ensures that almost all aspects of the software have been tested.
 
 2. **Bug Resolution Rate:**
-   - At least 90% of reported bugs must be addressed and resolved before exiting the testing phase.
-   - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability.
+   - At least 90% of reported bugs must be addressed and 
+     resolved before exiting the testing phase.
+   - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability
+  
 
-3. **Documentation Completeness:**
-   - Comprehensive documentation, including test plans, test cases, and test results, must be finalized and reviewed for completeness.
-   - All necessary documentation should be available for reference and future analysis.
+1. **Documentation Completeness:**
+   - Comprehensive documentation, including test plans, test cases, test results, functional specifications and technical specifications, must be finalized and reviewed for completeness.
 
 
 
