@@ -1,6 +1,7 @@
 # Test Cases
 
-## OverviewThis document defines all the tests we will run on the application to ensure that it is working as expected.
+## Overview
+This document defines all the tests we will run on the application to ensure that it is working as expected.
 The following tests will be done by playing the game and checking that the expected result is obtained.
 
 ## Priority
@@ -130,7 +131,7 @@ The priority of the test is defined by the following colors:
 | Test Description | Verify the interaction and effects of Pac-Man consuming regular pellets |
 | Requirement(s) | The game is started, Pac-Man eat pellets |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat pellets |
-| Expected Result | Pac-Man should consume the pellets, and the score should increase accordingly |
+| Expected Result | Pac-Man should consume the pellets, and the score should increase of 10 points |
 | Priority | 🟨 |
 
 ## 12. Pac-Mac Eat Power pellet
@@ -141,17 +142,18 @@ The priority of the test is defined by the following colors:
 | Test Description | Verify that Pac-Man can eat power pellet and that the ghosts become vulnerable and blue |
 | Requirement(s) | The game is started, Pac-Man eat power pellets |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellets |
-| Expected Result | The ghosts should become blue and vulnerable to Pac-Man |
+| Expected Result | The ghosts should become blue and vulnerable to Pac-Man and the score should increase of 50 points|
 | Priority | 🟧 |
 
-## 13. Pac-Mac Eat Bonus Fruits/Items
+
+## 13. Pac-Mac Eat Cherry
 
 | ID | 13 |
 | --- | --- |
 | Name | Pac-Mac Eat Bonus Fruits/Items |
 | Test Description | Verify that Pac-Man can eat bonus fruits/items and that the score increase |
-| Requirement(s) | The game is started, Pac-Man eat bonus fruits/items |
-| Step(s) | 1. Start the game, 2. Play game, 3. Eat bonus fruits/items |
+| Requirement(s) | The game is started, Pac-Man eat Cherry |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat Cherry |
 | Expected Result | The score should increase |
 | Priority | 🟨 |
 
@@ -194,10 +196,10 @@ The priority of the test is defined by the following colors:
 | ID | 17 |
 | --- | --- |
 | Name | Ghosts Respawn |
-| Test Description | Verify that ghosts can respawn after a certain time |
+| Test Description | Verify that ghosts can respawn after the eyes reach the ghost house |
 | Requirement(s) | The game is started, player kill a ghost|
 | Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
-| Expected Result | Ghosts should respawn after a certain time |
+| Expected Result | Ghosts should respawn after the eyes reach the ghost house |
 | Priority | 🟥 |
 
 ## 18. Blinky (Red Ghost) Behavior: Chase Mode
@@ -311,4 +313,40 @@ The priority of the test is defined by the following colors:
 | Requirement(s) | Pac-Man eat power pellets, and all ghosts are present in the game |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost behavior after the vulnerable period expires |
 | Expected Result | Blinky, Pinky, Inky, and Clyde should cease defensive behavior and resume their typical pursuit of Pac-Man |
+| Priority | 🟧 |
+
+
+## 28. Test Winning Conditions
+
+| ID | 28 |
+| --- | --- |
+| Name | Test Winning Conditions |
+| Test Description | Confirm that the game ends when all Pac-Dots are eaten |
+| Requirement(s) | The player consume all dots within a level |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat all Pac-Dots |
+| Expected Result | The game should run a "sound effect" and run the next level |
+| Priority | 🟧 |
+
+## 29. Test Power Pellet Duration
+
+| ID | 29 |
+| --- | --- |
+| Name | Test Power Pellet Duration |
+| Test Description | Confirm that the power pellet duration is 6 seconds |
+| Requirement(s) | The player eat a power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe power pellet duration |
+| Expected Result | The power pellet should last 6 seconds |
 | Priority | 🟨 |
+
+
+## 30. Test Ghost Vulnerability Period
+
+| ID | 30 |
+| --- | --- |
+| Name | Test Ghost Vulnerability Period |
+| Test Description | Confirm that the ghost vulnerability period is 6 seconds |
+| Requirement(s) | The player eat a power pellet |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost vulnerability period |
+| Expected Result | The ghost vulnerability period should last 6 seconds |
+| Priority | 🟧 |
+
