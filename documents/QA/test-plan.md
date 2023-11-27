@@ -6,6 +6,7 @@
 - [Pac-Man Project Test Plan](#pac-man-project-test-plan)
   - [Product Analysis](#product-analysis)
     - [Overview](#overview)
+  - [Glossary](#glossary)
   - [Strategy](#strategy)
     - [Scope of Testing](#scope-of-testing)
     - [Unit Tests](#unit-tests)
@@ -28,7 +29,6 @@
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
       - [Schedule:](#schedule)
-  - [Glossary](#glossary)
 
 </details>
 
@@ -47,6 +47,26 @@ We will illustrate the operational flow of the software and provide a visual rep
 ![](../pictures/diagramWalkthrough.png)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor and an X86 architecture.
+
+
+## Glossary
+
+| Term | Definition | Source |
+| ---- | ---------- | ------ |
+| Assembly language | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
+| DOSBox | An emulator program that emulates an IBM PC compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
+| Exploratory testing | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
+| GitHub | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
+| GitHub Actions | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
+| GitHub Issues | A tool that allows us to create and manage issues and assign them to team members. | [GitHub](https://docs.github.com/en/issues) |
+| macOS | A series of proprietary graphical operating systems developed and marketed by Apple Inc. | [Wikipedia](https://en.wikipedia.org/wiki/MacOS) |
+| QuickTime Player | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
+| Smoke testing | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
+| Snipping tool | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
+| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
+| Windows | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
+| X86 | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
+
 
 ## Strategy
 Our testing strategy employs a multifaceted approach. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
@@ -438,20 +458,3 @@ For this project, the people involved are the 2 quality assurances of team 4 but
 | Fourth meeting Test session with team 3 QA | December 19, 2023 | December 19, 2023 |
 | Fourth meeting with Dev team | December 18, 2023 | December 18, 2023 |
 
-## Glossary
-
-| Term | Definition | Source |
-| ---- | ---------- | ------ |
-| Assembly language | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
-| DOSBox | An emulator program that emulates an IBM PC compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
-| Exploratory testing | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
-| GitHub | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
-| GitHub Actions | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
-| GitHub Issues | A tool that allows us to create and manage issues and assign them to team members. | [GitHub](https://docs.github.com/en/issues) |
-| macOS | A series of proprietary graphical operating systems developed and marketed by Apple Inc. | [Wikipedia](https://en.wikipedia.org/wiki/MacOS) |
-| QuickTime Player | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
-| Smoke testing | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
-| Snipping tool | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
-| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
-| Windows | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
-| X86 | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
