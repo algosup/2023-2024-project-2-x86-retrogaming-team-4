@@ -207,7 +207,7 @@ Else, the background music should be looping.
 
 ### Set the colors of the palette
 
-The video mode used can display only 16 different colors. However, it is possible to change the colors used.
+We are using the video mode 12h. This video mode can only display 16 different colors. However, it is possible to change the colors used.
 The most efficient way is to create a macro function. We just have to indicate how many paramets your function needs, and then call the macro. An exemple of use is featured below.
 
 ```assembly
@@ -291,6 +291,8 @@ call rendering; update rendering
 call sound; update sound
 jmp gameloop
 ```
+
+At each game loop, we have to wait in order to have 24 frame per seconds.
 
 ## File Architecture
 
