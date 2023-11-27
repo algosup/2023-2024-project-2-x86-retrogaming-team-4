@@ -9,26 +9,40 @@
   - [Glossary](#glossary)
   - [Strategy](#strategy)
     - [Scope of Testing](#scope-of-testing)
+      - [In-scope for Testing](#in-scope-for-testing)
+      - [Out-of-scope for Testing](#out-of-scope-for-testing)
     - [Unit Tests](#unit-tests)
     - [Game-testing sessions](#game-testing-sessions)
       - [Overview](#overview-1)
       - [Smoke Testing](#smoke-testing)
+        - [Smoke Testing Scope](#smoke-testing-scope)
+        - [Sequence of Smoke Testing](#sequence-of-smoke-testing)
       - [Group Game-Testing](#group-game-testing)
+        - [Group Game-Testing](#group-game-testing-1)
+        - [A Sequence of a Group Game-Testing](#a-sequence-of-a-group-game-testing)
     - [Monitoring and tools](#monitoring-and-tools)
       - [GitHub](#github)
+        - [Overview](#overview-2)
+        - [GitHub Actions](#github-actions)
+          - [GitHub Actions Scope](#github-actions-scope)
+          - [Workflow](#workflow)
+          - [Configuration](#configuration)
+      - [GitHub Issues](#github-issues)
+      - [Tests Report](#tests-report)
       - [Bug Data Report Spreadsheet](#bug-data-report-spreadsheet)
+        - [Spreadsheet Structure](#spreadsheet-structure)
     - [Documentation](#documentation)
       - [GitHub Wiki](#github-wiki)
   - [Test Criteria](#test-criteria)
-    - [Suspension Criteria:](#suspension-criteria)
-    - [Exit Criteria:](#exit-criteria)
+    - [Suspension Criteria](#suspension-criteria)
+    - [Exit Criteria](#exit-criteria)
   - [Allocated Resources](#allocated-resources)
     - [Time](#time)
     - [People](#people)
     - [Testing Environment Requirements](#testing-environment-requirements)
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
-      - [Tasks Time Estimation:](#tasks-time-estimation)
-      - [Schedule:](#schedule)
+    - [Tasks Time Estimation](#tasks-time-estimation)
+      - [Schedule](#schedule)
 
 </details>
 
@@ -44,17 +58,16 @@ This project targets a diverse audience, from those well-acquainted with the ori
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
 
-![](../pictures/diagramWalkthrough.png)
+![Diagram](../pictures/diagramWalkthrough.png)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor and an X86 architecture.
-
 
 ## Glossary
 
 | Term | Definition | Source |
 | ---- | ---------- | ------ |
 | Assembly language | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
-| DOSBox | An emulator program that emulates an IBM PC compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
+| DOSBox | An emulator program that emulates an IBM PC-compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
 | Exploratory testing | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
 | GitHub | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
 | GitHub Actions | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
@@ -63,31 +76,33 @@ The software specifications encompass the DOSBox emulator, while the hardware re
 | QuickTime Player | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
 | Smoke testing | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
 | Snipping tool | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
-| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
+| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux, and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
 | Windows | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
 | X86 | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
 
-
 ## Strategy
-Our testing strategy employs a multifaceted approach. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution. 
+
+Our testing strategy employs a multifaceted approach. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution.
 
 ### Scope of Testing
+
 Testing will focus on both core gameplay elements and peripheral features to guarantee a reliable end product. However, it's important to note that certain aspects, such as low-level technical details will be excluded from testing as they are beyond the scope of the test.
 
-**In-scope for Testing:**
+#### In-scope for Testing
+
 - Code
-  - Absence of significant bugs     
+  - Absence of significant bugs
   - Main game mechanics functionality
   - Acceptable visual quality
 - Documents
   - Spelling accuracy
   - Typographical errors
 
-**Out of Scope for Testing:**
+#### Out-of-scope for Testing
+
 - Font details
 - Colors of sprites
 - Sprite speed
-
 
 ### Unit Tests
 
@@ -96,43 +111,45 @@ Unit testing is an important part of the process. These tests are developed in X
 These tests are developed throughout the project in parallel with game development, corresponding to an exploratory testing approach.
 
 The main objectives of these tests are:
+
 - Check that the game's essential functions are working properly.
 - Check all other game functions as far as possible.
 - Serve as non-regression tests between each game update.
-
 
 | Function | Expected Result | Severity |
 | --- | --- | --- |
 | Score when eating a dot | Score is incremented by 10 | Medium |
 | Score when eating a big dot | Score is incremented by 50 | Medium |
 | Score when eating a ghost | Score is incremented by 200 | Medium |
-| Score when eating a cherry | Score is incremented by 100 | Medium | 
-| Clyde behavior | Clyde is supposed to be near to pacMan and at less of 8 cases he becomes random | Medium |
-| Wall collision (Pac-Man) | Pac-Man is supposed to be stopped by every e wall | High |
+| Score when eating a cherry | Score is incremented by 100 | Medium |
+| Clyde behavior | Clyde is supposed to be near PacMan and within 8 squares he becomes random. | Medium |
+| Wall collision (Pac-Man) | Pac-Man is supposed to be stopped by every e-wall | High |
 | Wall collision (Ghost) | Ghosts are supposed to be stopped by every wall | High |
-| Ghosts collision (Ghost) | Ghosts are supposed to be stopped by every other ghosts | High |
-| Increase lives | Add new life to the player when user get 10.000 points | Medium |
+| Ghosts collision (Ghost) | Ghosts are supposed to be stopped by every other ghost | High |
+| Increase lives | Add new life to the player when the user gets 10.000 points | Medium |
 | Lives cap | Player can't have more than 5 lives | Medium |
 | Ghost speed increase | Ghost speed increase when user change level | Medium |
 
 ### Game-testing sessions
+
 ---
+
 #### Overview
 
-
-Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](./Test-Cases.md). 
+Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](./Test-Cases.md).
 
 To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
 
 ---
+
 #### Smoke Testing
 
-Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke 
-testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing 
+Game testing sessions will take place after each project release. These sessions will serve as smoke tests. The primary goal of smoke
+testing is to quickly assess whether the essential functionalities of the project are working as expected after each build. This testing
 phase is designed to identify critical issues early in the development process, allowing for rapid feedback and swift resolution of
 potential show-stopping problems.
 
-**Smoke Testing Scope:**
+##### Smoke Testing Scope
 
 The smoke testing scope will focus on the fundamental aspects of the game. This includes:
 
@@ -142,7 +159,7 @@ The smoke testing scope will focus on the fundamental aspects of the game. This 
 4. **Collision Detection:** Validate that collision detection is functioning correctly, especially between Pac-Man and ghosts.
 5. **Basic Interactions:** Confirm basic interactions, such as eating dots and encountering ghosts, occur without errors.
 
-**Sequence of Smoke Testing:**
+##### Sequence of Smoke Testing
 
 During each smoke testing session, the following steps will be executed:
 
@@ -152,23 +169,25 @@ During each smoke testing session, the following steps will be executed:
 4. **Issue Reporting:** If critical issues are identified, report them to the development team.
 
 ---
+
 #### Group Game-Testing
 
-To gain a better overview of the project, a collaboration with the [3rd team's quality assurance team](Collaboration-QA.md) was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods. 
+To gain a better overview of the project, a collaboration with the [3rd team's quality assurance team](Collaboration-QA.md) was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods.
 
-**Group Game-Testing Scope:**
+##### Group Game-Testing
 
 Group sessions are designed primarily to:
+
 1. **Verify that the game is working as expected:** Check that all the game's basic and additional game mechanics are working properly.
 2. **Sharing tests:** Share tests between the 2 teams to have a better overview of the game and to find more bugs and errors.
 3. **Identify bugs and errors:** Find bugs and errors in the game to improve it.
 4. **Identify improvements and missing features:** Find improvements and missing features in the game to bring it closer to the original.
 
-
-**A Sequence of a Group Game-Testing:**
+##### A Sequence of a Group Game-Testing
 
 A group testing session will take place once a week during one of the hours allocated to the project.
 Each session will follow the following steps:
+
 1. **Game quick overview:** A quick overview of the game is done to see the progress of the project.
 2. **Testing points:** The testing points are defined and shared between the 2 teams, testing points will be adapted to each project's progression.
 3. **Testing session:** The test session is carried out by the 2 teams on the 2 games, and the tests are carried out according to this [list](./Test-Cases.md).
@@ -176,60 +195,65 @@ Each session will follow the following steps:
 
 For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
 
-
 ### Monitoring and tools
 
 ---
+
 #### GitHub
 
-**Overview**  
+##### Overview
 
 For this project, GitHub is imposed to store our code, GitHub is a web-based version control and collaboration platform for software developers. It provides a centralized repository for storing and managing source code, facilitating collaboration between developers.
 
 But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are [**GitHub Actions**](#github-actions) and [**GitHub Issues**](#github-issues).
 
 ---
-**GitHub Actions**
+
+##### GitHub Actions
 
 GitHub Actions is a CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. This will also permit to have an integrated overview of the failure of the code directly in GitHub.
 
-**GitHub Actions Scope:**  
+###### GitHub Actions Scope
 
 The GitHub Actions will be activated on pull requests on the dev and main branch and their scope is to:
+
 1. **Build game:** Build the game and ensure there is no assembling error.
 2. **Run unit tests:** Run unit tests to ensure that the main functions of the game are working properly.
 3. **Ensure that the code on the references branches is working** Ensure that the code on the main and dev branches is working properly and avoid creating new branches from code that doesn't work.
 
-**Workflow:**  
+###### Workflow
 
 The workflow defines the different steps to be executed by GitHub Actions. The workflow is defined in the file [pacman.yml](../.github/workflows/pacman.yml) and is executed on each pull request on the main or dev branch.
 
 The workflow we will use to improve project quality is defined in the following diagrams:
 
-![](../pictures/GitWorkflow.png)
+![GitWorkflow](../pictures/GitWorkflow.png)
 
-**Configuration:**
+###### Configuration
 
 Actions such as assembling and execution of unit tests are performed on a computer or server. These actions are enabled and synchronized with GitHub thanks to a runner provided by GitHub. To install the runner, there is GitHub [documentation](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners) explaining the various steps involved. Once the runner has been installed and activated on a computer, it can be selected to execute the various workflow actions.
 
 As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff:
+
 - Thomas Planchard
 - Maxime Caron
 
 Next, the various actions and workflow steps are defined in the [pacman.yml](/pacman.yml) file, which is saved at the root of the repository.
 
 ---
-**GitHub Issues**
 
-GitHub Issues is a tool that allows us to create and manage issues and 
-assign them to team members. This tool is integrated into GitHub and 
-allows us to have a better overview of the project and to have a better 
+#### GitHub Issues
+
+GitHub Issues is a tool that allows us to create and manage issues and
+assign them to team members. This tool is integrated into GitHub and
+allows us to have a better overview of the project and to have a better
 organization.
 
 We define:
+
 - **Bugs:** Unexpected problems or code errors.
 - **Errors:** Includes all errors that do not originate in the code.
-- **Deadlines:** Specific deadlines for project stages to ensure timely 
+- **Deadlines:** Specific deadlines for project stages to ensure timely
   delivery.
 - **Documentation:** Request for documentation on a specific function or group of functions in the code.
 - **Task allocation:** Assignment and tracking of specific responsibilities.
@@ -244,7 +268,7 @@ We are implementing a strategy for managing GitHub issues. Here are the key comp
    - Specify the expected and actual behavior.
 
 2. **Labeling System:**
-   - Utilize labels to categorize issues, such as "bug," or "enhancement". Here is the [list](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/issues/labels) of labels. 
+   - Utilize labels to categorize issues, such as "bug," or "enhancement". Here is the [list](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/issues/labels) of labels.
    - Labels aid in quickly identifying the nature of the issue and prioritizing tasks.
 
 3. **Assignees and Responsibility:**
@@ -254,16 +278,24 @@ We are implementing a strategy for managing GitHub issues. Here are the key comp
 4. **Use of Templates:**
    - We have introduced issue templates to standardize the information provided for different types of issues.
    - The "Bug Issue" template, streamlines the bug reporting process with predefined sections.
-   - Here is a picture of the "Bug Issue" template: 
-  ![](../pictures/githubIssue.png)
+   - Here is a picture of the "Bug Issue" template:
+  ![GitHub Issue](../pictures/githubIssue.png)
      - The template includes sections for steps to reproduce, expected and actual behavior, environment details, and more.
      - Using this template ensures that crucial information is consistently captured for debugging and resolution.
 
-1. **Regular Issue Triage:**
+5. **Regular Issue Triage:**
    - Regularly review and triage open issues.
    - Prioritize tasks based on their urgency (Critical, High, Medium, Low).
 
 By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub.
+
+---
+
+#### Tests Report
+
+**Overview:**
+
+The folder [Tests Report](./Tests%20Report/) will contain all the test reports of the project. Each test report will be named with the date of the test session and the name of the tester as follows: `YYYY-MM-DD-TesterName.md`.
 
 ---
 
@@ -273,7 +305,8 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a tool for documenting and tracking test cases, their results, and overall testing progress. The spreadsheet is divided into three sections: Test Case Pattern, Testing Sessions, and Graphics.
 
-**Spreadsheet Structure:**
+
+##### Spreadsheet Structure
 
 1. **Test Case Pattern:**
    - **ID:** Unique identifier for each test case.
@@ -292,7 +325,6 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
    - The date of the testing session is also recorded.
   
 ![testing session](../pictures/testSessionpattern.png)
-   
 
 1. **Graphics:**
    - **Test Percentage Representation:**
@@ -301,13 +333,13 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
   
   ![Graphics test percentage](../pictures/TestCase-Calculator-Summary.png)
 
-
-   - **Test Execution Progress:**
-     - A line chart depicting the progress of test execution over time.
-     - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
+- **Test Execution Progress:**
+  - A line chart depicting the progress of test execution over time.
+  - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
   
    ![Graphics test execution](../pictures/Test-Execution-Progress.png)
 
+---
 
 ### Documentation
 
@@ -334,19 +366,13 @@ To enhance transparency, collaboration, and knowledge sharing within our develop
    - GitHub Wiki supports versioning, allowing us to maintain historical documentation for different releases.
    - Developers can refer to documentation relevant to a specific version.
 
-
-
 ## Test Criteria
 
-Setting up strict test criteria is crucial to guarantee the 
-game's 
-quality before it's released. These criteria act as standards 
-that need to be met before the game is distributed. By 
-following clear rules for suspension and exit, the testing 
-process aims to find and fix issues early on.
+Setting up strict test criteria is crucial to guarantee the game's quality before it's released. These criteria act as standards that need to be met before the game is distributed. By following clear rules for suspension and exit, the testing process aims to find and fix issues early on.
 
-### Suspension Criteria:
-Suspension criteria are established to define conditions under which 
+### Suspension Criteria
+
+Suspension criteria are established to define conditions under which
 testing activities may be temporarily halted. The following suspension criteria are identified:
 
 1. **Critical Bug Threshold:**
@@ -357,7 +383,8 @@ testing activities may be temporarily halted. The following suspension criteria 
    - If essential testing resources, such as testing environments, tools, or personnel, become unavailable for an extended period, testing may be suspended.
    - This criteria ensures that testing can resume only when necessary resources are accessible.
 
-### Exit Criteria:
+### Exit Criteria
+
 Before the game can be considered ready for distribution, certain benchmarks must be met. For instance, at least 80% of all test cases should pass successfully. This criteria ensures that the game meets the required quality standards before reaching the distribution phase.
 
 1. **Test Case Coverage:**
@@ -365,15 +392,11 @@ Before the game can be considered ready for distribution, certain benchmarks mus
    - This ensures that almost all aspects of the software have been tested.
 
 2. **Bug Resolution Rate:**
-   - At least 90% of reported bugs must be addressed and 
-     resolved before exiting the testing phase.
+   - At least 90% of reported bugs must be addressed and resolved before exiting the testing phase.
    - This criteria emphasizes the importance of resolving identified issues to enhance the software's reliability
   
-
-1. **Documentation Completeness:**
-   - Comprehensive documentation, including test plans, test cases, test results, functional specifications and technical specifications, must be finalized and reviewed for completeness.
-
-
+3. **Documentation Completeness:**
+   - Comprehensive documentation, including test plans, test cases, test results, functional specifications, and technical specifications, must be finalized and reviewed for completeness.
 
 ## Allocated Resources
 
@@ -381,19 +404,19 @@ Before the game can be considered ready for distribution, certain benchmarks mus
 
 | Task                                           | Estimated Time (hours)  |
 | ---------------------------------------------- | ----------------------- |
-| Create and give template for documentation     | 4                       | 
-| First meeting with Dev team                    | 1                       | 
+| Create and give template for documentation     | 4                       |
+| First meeting with Dev team                    | 1                       |
 | Unit tests                                     | 30                      |
-| Smoke testing                                  | 70                      | 
+| Smoke testing                                  | 70                      |
 | Review the documentation                       | 8                       |
-| First Test session with team 3 QA              | 3.5                     | 
-| GitHub Actions                                 | 16                      | 
-| Unit test formatter script                     | 16                      | 
-| Second Test session with team 3 QA             | 3.5                     | 
-| Second meeting with Dev team                   | 1                       | 
+| First Test session with team 3 QA              | 3.5                     |
+| GitHub Actions                                 | 16                      |
+| Unit test formatting script                    | 16                      |
+| Second Test session with team 3 QA             | 3.5                     |
+| Second meeting with Dev team                   | 1                       |
 | Third meeting Test session with team 3 QA      | 3.5                     |
-| Third meeting with Dev team                    | 1                       | 
-| Fourth meeting Test session with team 3 QA     | 3.5                     | 
+| Third meeting with Dev team                    | 1                       |
+| Fourth meeting Test session with team 3 QA     | 3.5                     |
 | Fourth meeting with Dev team                   | 1                       |
 | Total                                          | 162 hours               |
 
@@ -402,7 +425,6 @@ This table outlines the estimated time for each task from the test plan. The tot
 ### People
 
 For this project, the people involved are the 2 quality assurances of team 4 but also the 2 quality assurances of team 3 during the team test sessions.
-
 
 ### Testing Environment Requirements
 
@@ -416,10 +438,10 @@ For this project, the people involved are the 2 quality assurances of team 4 but
      - Windows: 10 or later
      - macOS: Version 10.14 or later
 
-
 ## Test Schedule and Estimation
 
-#### Tasks Time Estimation:
+### Tasks Time Estimation
+
 | Task                                           | Start Date          | End Date            | Duration             |
 | ---------------------------------------------- | ------------------- | ------------------- | -------------------- |
 | Create and give template for documentation     | November 13, 2023   | November 13, 2023   | 1 day                |
@@ -437,11 +459,13 @@ For this project, the people involved are the 2 quality assurances of team 4 but
 | Fourth meeting with Dev team                   | December 18, 2023   | December 18, 2023   | 1 day                |
 
 **Note:**
-- The duration is calculated based on working days.
+
+- Duration are calculated on working days.
 - Weekends are not included in the duration.
 - For tasks spanning multiple weeks, the duration reflects continuous work, considering full-time efforts.
 
-#### Schedule:
+#### Schedule
+
 | Task | Start Date | End Date |
 | ---- | ---------- | -------- |
 | Create and give template for documentation | November 13, 2023 | November 13, 2023 |
@@ -457,4 +481,3 @@ For this project, the people involved are the 2 quality assurances of team 4 but
 | Third meeting with Dev team | December 11, 2023 | December 11, 2023 |
 | Fourth meeting Test session with team 3 QA | December 19, 2023 | December 19, 2023 |
 | Fourth meeting with Dev team | December 18, 2023 | December 18, 2023 |
-

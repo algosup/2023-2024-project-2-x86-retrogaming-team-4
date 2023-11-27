@@ -1,6 +1,7 @@
 # Test Cases
 
 ## Overview
+
 This document defines all the tests we will run on the application to ensure that it is working as expected.
 The following tests will be done by playing the game and checking that the expected result is obtained.
 
@@ -31,7 +32,7 @@ The priority of the test is defined by the following colors:
 | Name | Stop the game |
 | Test Description | Verify that the game is stopping well |
 | Requirement(s) | The game is started |
-| Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox, 3. Press "esc" |
+| Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox, 3. Press "ESC" |
 | Expected Result | The game stop |
 | Priority | 🟥 |
 
@@ -40,10 +41,10 @@ The priority of the test is defined by the following colors:
 | ID | 3 |
 | --- | --- |
 | Name | Move Pac-Man to the left with keyboard arrow |
-| Test Description | Verify that Pac-Man can go left when user pressing the left arrow of the keyboard and there is no wall in this direction |
+| Test Description | Verify that Pac-Man can go left when the user presses the left arrow of the keyboard and there is no wall in this direction |
 | Requirement(s) | The game is started |
 | Step(s) |1. Start the game, 2. Press on the left arrow of the keyboard |
-| Expected Result | Pac-Man move to the left in the game |
+| Expected Result | Pac-Man moves to the left in the game |
 | Priority | 🟥 |
 
 ## 4. Move right
@@ -54,7 +55,7 @@ The priority of the test is defined by the following colors:
 | Test Description | Verify that Pac-Man can go right when usery pressing the right arrow of the keyboard and there is no wall in this direction |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Press on the right arrow of the keyboard |
-| Expected Result | Pac-Man move to the right in the game |
+| Expected Result | Pac-Man moves to the right in the game |
 | Priority | 🟥 |
 
 ## 5. Move up
@@ -62,7 +63,7 @@ The priority of the test is defined by the following colors:
 | ID | 5 |
 | --- | --- |
 | Name | Move Pac-Man up with keyboard arrow |
-| Test Description | Verify that Pac-Man can go up b when userressing the up arrow of the keyboard and there is no wall in this direction |
+| Test Description | Verify that Pac-Man can go up b when the user presses the up arrow of the keyboard and there is no wall in this direction |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Press on the up arrow of the keyboard |
 | Expected Result | Pac-Man move to the up in the game |
@@ -73,17 +74,17 @@ The priority of the test is defined by the following colors:
 | ID | 6 |
 | --- | --- |
 | Name | Move Pac-Man down with keyboard arrow |
-| Test Description | Verify that Pac-Man can go down when user pressing the down arrow of the keyboard and there is no wall in this direction |
+| Test Description | Verify that Pac-Man can go down when the user presses the down arrow of the keyboard and there is no wall in this direction |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Press on the down arrow of the keyboard |
-| Expected Result | Pac-Man move to the down in the game |
+| Expected Result | Pac-Man moves to the down in the game |
 | Priority | 🟥 |
 
 ## 7. Pac-Mac Collision: Wall
 
 | ID | 7 |
 | --- | --- |
-| Name | Pac-Mac Collision : Wall |
+| Name | Pac-Mac Collision: Wall |
 | Test Description | Verify that Pac-Man is stopped by a wall and can't pass through it |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Move in the direction of a wall |
@@ -95,7 +96,7 @@ The priority of the test is defined by the following colors:
 | ID | 8 |
 | --- | --- |
 | Name | Pac-Mac Collision: Ghost Without Power Pellet |
-| Test Description | Verify that Pac-Man is killed by a ghost when he doesn't eat power pellet and collide it |
+| Test Description | Verify that Pac-Man is killed by a ghost when he doesn't eat the power pellet and collide with it |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Move in the direction of a ghost |
 | Expected Result | Pac-Man should be killed by the ghost |
@@ -106,8 +107,8 @@ The priority of the test is defined by the following colors:
 | ID | 9 |
 | --- | --- |
 | Name | Pac-Mac Collision: Ghost With a Power Pellet |
-| Test Description | Verify that Pac-Man kill a ghost when he eat power pellet and collide it |
-| Requirement(s) | The game is started, Pac-Man eat power pellet |
+| Test Description | Verify that Pac-Man kills a ghost when he eats a power pellet and collides with it |
+| Requirement(s) | The game is started, Pac-Man eats power pellet |
 | Step(s) | 1. Start the game, 2. Eat power pellet 3. Move in the direction of a ghost |
 | Expected Result | Pac-Man should kill the ghost |
 | Priority | 🟥 |
@@ -116,9 +117,9 @@ The priority of the test is defined by the following colors:
 
 | ID | 10 |
 | --- | --- |
-| Name | Pac-Mac Collision : Ghost eyes |
-| Test Description | Verify that Pac-Man not collide ghost's eyes when he cross only them |
-| Requirement(s) | The game is started, Pac-Man eat power pellet |
+| Name | Pac-Mac Collision: Ghost eyes |
+| Test Description | Verify that Pac-Man does not collide with ghost's eyes when he crosses only them |
+| Requirement(s) | The game is started, Pac-Man eats power pellet |
 | Step(s) | 1. Start the game, 2. Eat power pellet, 3. Kill a ghost, 4. Cross ghost eyes when they back to the ghost house |
 | Expected Result | Pac-Man should cross them without any interaction |
 | Priority | 🟥 |
@@ -129,9 +130,9 @@ The priority of the test is defined by the following colors:
 | --- | --- |
 | Name | Pac-Mac Eat Pellet |
 | Test Description | Verify the interaction and effects of Pac-Man consuming regular pellets |
-| Requirement(s) | The game is started, Pac-Man eat pellets |
+| Requirement(s) | The game is started, Pac-Man eats pellets |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat pellets |
-| Expected Result | Pac-Man should consume the pellets, and the score should increase of 10 points |
+| Expected Result | Pac-Man should consume the pellets, and the score should increase by 10 points |
 | Priority | 🟨 |
 
 ## 12. Pac-Mac Eat Power pellet
@@ -139,20 +140,19 @@ The priority of the test is defined by the following colors:
 | ID | 12 |
 | --- | --- |
 | Name | Pac-Mac Eat Power pellet |
-| Test Description | Verify that Pac-Man can eat power pellet and that the ghosts become vulnerable and blue |
-| Requirement(s) | The game is started, Pac-Man eat power pellets |
+| Test Description | Verify that Pac-Man can eat power pellets and that the ghosts become vulnerable and blue |
+| Requirement(s) | The game is started, Pac-Man eats power pellets |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellets |
-| Expected Result | The ghosts should become blue and vulnerable to Pac-Man and the score should increase of 50 points|
+| Expected Result | The ghosts should become blue and vulnerable to Pac-Man and the score should increase by 50 points|
 | Priority | 🟧 |
-
 
 ## 13. Pac-Mac Eat Cherry
 
 | ID | 13 |
 | --- | --- |
 | Name | Pac-Mac Eat Bonus Fruits/Items |
-| Test Description | Verify that Pac-Man can eat bonus fruits/items and that the score increase |
-| Requirement(s) | The game is started, Pac-Man eat Cherry |
+| Test Description | Verify that Pac-Man can eat bonus fruits/items and that the score increases |
+| Requirement(s) | The game is started, Pac-Man eats Cherry |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat Cherry |
 | Expected Result | The score should increase |
 | Priority | 🟨 |
@@ -167,7 +167,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe ghost behavior |
 | Expected Result | Ghosts should be able to cross each other without collision or visual bugs |
 | Priority | 🟥 |
-
 
 ## 15. Ghost Collision: Wall
 
@@ -186,9 +185,9 @@ The priority of the test is defined by the following colors:
 | --- | --- |
 | Name | Ghosts Death |
 | Test Description | Verify that ghosts can die and that they return to the ghost house |
-| Requirement(s) | The game is started, player kill a ghost|
+| Requirement(s) | The game is started, player kills a ghost|
 | Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
-| Expected Result | Ghosts sprite should change to eyes and they should return to the ghost house |
+| Expected Result | Ghost sprite should change to eyes and they should return to the ghost house |
 | Priority | 🟥 |
 
 ## 17. Ghosts Respawn
@@ -197,7 +196,7 @@ The priority of the test is defined by the following colors:
 | --- | --- |
 | Name | Ghosts Respawn |
 | Test Description | Verify that ghosts can respawn after the eyes reach the ghost house |
-| Requirement(s) | The game is started, player kill a ghost|
+| Requirement(s) | The game is started, player kills a ghost|
 | Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
 | Expected Result | Ghosts should respawn after the eyes reach the ghost house |
 | Priority | 🟥 |
@@ -207,7 +206,7 @@ The priority of the test is defined by the following colors:
 | ID | 18 |
 | --- | --- |
 | Name | Blinky (Red Ghost) Behavior: Chase Mode |
-| Test Description | Verify Blinky (red ghost) behavior when he is in chase mode |
+| Test Description | Verify Blinky's (red ghost) behavior when he is in chase mode |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe Blinky behavior |
 | Expected Result | Blinky should follow Pac-Man |
@@ -235,15 +234,14 @@ The priority of the test is defined by the following colors:
 | Expected Result | Inky should select the two Pac-Dots positioned in front of Pac-Man in its current direction of travel. Imagine a vector from Blinky's position to this Pac-Dot, then double the length of the vector. The dots on which this extended vector ends will be the current target |
 | Priority | 🟧 |
 
-
 ## 21. Clyde (Orange Ghost) Behavior: Chase Mode
 
 | ID | 21 |
 | --- | --- |
 | Name | Clyde (Orange Ghost) Behavior: Chase Mode |
-| Test Description | Verify Clyde (orange ghost) behavior when he is in chase mode |
+| Test Description | Verify Clyde's (orange ghost) behavior when he is in chase mode |
 | Requirement(s) | The game is started |
-| Step(s) | 1. Start the game, 2. Play game, 3. Observe Clyde behavior |
+| Step(s) | 1. Start the game, 2. Play game, 3. Observe Clyde's behavior |
 | Expected Result | Clyde should follow Pac-Man directly and try to head for his scatter corner when within 8 dots of Pac-Man |
 | Priority | 🟧 |
 
@@ -252,7 +250,7 @@ The priority of the test is defined by the following colors:
 | ID | 22 |
 | --- | --- |
 | Name | Blinky (Red Ghost) Behavior: Scatter Mode |
-| Test Description | Verify Blinky (red ghost) behavior when he is in scatter mode |
+| Test Description | Verify Blinky's (red ghost) behavior when he is in scatter mode |
 | Requirement(s) | The game is started, eat power pellet |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Blinky behavior |
 | Expected Result | Blinky should go to the top right corner |
@@ -285,9 +283,9 @@ The priority of the test is defined by the following colors:
 | ID | 25 |
 | --- | --- |
 | Name | Clyde (Orange Ghost) Behavior: Scatter Mode |
-| Test Description | Verify Clyde (orange ghost) behavior when he is in scatter mode |
+| Test Description | Verify Clyde's (orange ghost) behavior when he is in scatter mode |
 | Requirement(s) | The game is started, eat power pellet |
-| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Clyde behavior |
+| Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Clyde's behavior |
 | Expected Result | Clyde should go to the bottom left corner |
 | Priority | 🟧 |
 
@@ -302,19 +300,16 @@ The priority of the test is defined by the following colors:
 | Expected Result | The game should display a "Game Over" screen with the option to restart or exit |
 | Priority | 🟨 |
 
-
-
 ## 27. Ghost Behavior: Return to Normal State
 
 | ID | 27 |
 | --- | --- |
 | Name | Ghost Behavior: Return to Normal State |
 | Test Description | Confirm that all ghosts return to their normal, active state after the vulnerable period |
-| Requirement(s) | Pac-Man eat power pellets, and all ghosts are present in the game |
+| Requirement(s) | Pac-Man eats power pellets, and all ghosts are present in the game |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost behavior after the vulnerable period expires |
 | Expected Result | Blinky, Pinky, Inky, and Clyde should cease defensive behavior and resume their typical pursuit of Pac-Man |
 | Priority | 🟧 |
-
 
 ## 28. Test Winning Conditions
 
@@ -322,7 +317,7 @@ The priority of the test is defined by the following colors:
 | --- | --- |
 | Name | Test Winning Conditions |
 | Test Description | Confirm that the game ends when all Pac-Dots are eaten |
-| Requirement(s) | The player consume all dots within a level |
+| Requirement(s) | The player consumes all dots within a level |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat all Pac-Dots |
 | Expected Result | The game should run a "sound effect" and run the next level |
 | Priority | 🟧 |
@@ -338,7 +333,6 @@ The priority of the test is defined by the following colors:
 | Expected Result | The power pellet should last 6 seconds |
 | Priority | 🟨 |
 
-
 ## 30. Test Ghost Vulnerability Period
 
 | ID | 30 |
@@ -349,4 +343,3 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost vulnerability period |
 | Expected Result | The ghost vulnerability period should last 6 seconds |
 | Priority | 🟧 |
-
