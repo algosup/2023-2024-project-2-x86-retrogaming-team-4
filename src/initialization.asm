@@ -48,7 +48,7 @@ section .text
 
    ClearScreen:
    ;clear the screen by filling it with a unique color (stored in al)
-      mov al, 0x85 ; color to fill the screen (white = 0x0F, black = 0x00)
+      mov al, 0x90 ; color to fill the screen (white = 0x0F, black = 0x00)
       call FillScreen
    ret
 
@@ -73,7 +73,7 @@ section .text
       ;HEART OF THE FUNCTION : 'movsb' writes byte per byte the content from 'ds:si' to 'es:di', increasing both si and di each time it is executed
 
       ;set source 'ds:si'
-      push 0x489D ; adress of the data segment
+      push cs ; adress of the data segment
       pop ds
       lea si, [background_buffer] ; load the effective adress (L.E.A.) of the dynamic background buffer
 

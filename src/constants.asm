@@ -1,5 +1,5 @@
 %define SCREEN_WIDTH 320
-%define SCREEN_HEIGHT 200
+%define SCREEN_HEIGHT 177
 %define SPRITE_SIZE 16
 
 %define BLINKY_1 0
