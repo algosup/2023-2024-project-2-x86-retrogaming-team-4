@@ -28,12 +28,6 @@
   - [Test Schedule and Estimation](#test-schedule-and-estimation)
       - [Tasks Time Estimation:](#tasks-time-estimation)
       - [Schedule:](#schedule)
-  - [Deliverables and Schedule](#deliverables-and-schedule)
-    - [Deliverables and Estimation](#deliverables-and-estimation)
-    - [Schedule](#schedule-1)
-      - [Before Testing:](#before-testing)
-      - [During Testing:](#during-testing)
-      - [After Testing:](#after-testing)
   - [Glossary](#glossary)
 
 </details>
@@ -240,13 +234,14 @@ We are implementing a strategy for managing GitHub issues. Here are the key comp
 4. **Use of Templates:**
    - We have introduced issue templates to standardize the information provided for different types of issues.
    - The "Bug Issue" template, streamlines the bug reporting process with predefined sections.
-   - Here is a picture of the "Bug Issue" template: ![](../pictures/githubIssue.png)
+   - Here is a picture of the "Bug Issue" template: 
+  ![](../pictures/githubIssue.png)
      - The template includes sections for steps to reproduce, expected and actual behavior, environment details, and more.
      - Using this template ensures that crucial information is consistently captured for debugging and resolution.
 
-5. **Regular Issue Triage:**
+1. **Regular Issue Triage:**
    - Regularly review and triage open issues.
-   - Prioritize tasks based on their urgency(Critical, High, Medium, Low).
+   - Prioritize tasks based on their urgency (Critical, High, Medium, Low).
 
 By implementing these strategies, we aim to foster a more organized and efficient issue-tracking process on GitHub.
 
@@ -262,31 +257,35 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
 
 1. **Test Case Pattern:**
    - **ID:** Unique identifier for each test case.
-   - **Function:** The function or feature being tested.
+   - **Name:** The function or feature being tested.
    - **Priority:** The priority level of the test case (High 🟥, Medium 🟧, Low 🟨).
-   - **Description:** A concise description of the test case.
-   - **Inputs:** Input values or conditions applied during testing.
+   - **Test Description:** A concise description of the test case.
+   - **Steps:** Input values or conditions applied during testing.
    - **Expected Result:** The expected outcome or behavior.
    - **Status:** The current status of the test case (Passed, Failed, In Progress, Not Implemented).
+  
 ![test case pattern](../pictures/testCasepattern.png)
 
 1. **Testing Sessions:**
    - For each test case, there is a dedicated section to record results obtained during testing sessions.
    - Testers can input whether the test passed, failed, is in progress, or not implemented during a specific testing session.
    - The date of the testing session is also recorded.
+  
 ![testing session](../pictures/testSessionpattern.png)
    
 
-3. **Graphics:**
+1. **Graphics:**
    - **Test Percentage Representation:**
      - A pie chart representing the percentage distribution of test cases based on their status (Passed, Failed, In Progress, Not Implemented).
      - Provides a visual snapshot of the overall testing status.
+  
   ![Graphics test percentage](../pictures/TestCase-Calculator-Summary.png)
 
 
    - **Test Execution Progress:**
      - A line chart depicting the progress of test execution over time.
      - Enables monitoring of testing efforts and helps identify trends in the resolution of test cases.
+  
    ![Graphics test execution](../pictures/Test-Execution-Progress.png)
 
 
@@ -358,38 +357,34 @@ Before the game can be considered ready for distribution, certain benchmarks mus
 
 ## Allocated Resources
 
-
-
-
-
 ### Time
 
-| Task                                           | Estimated Time (hours) |
+| Task                                           | Estimated Time (hours)  |
 | ---------------------------------------------- | ----------------------- |
-| Create and give template for documentation      | 4                       | 
-| First meeting with Dev team                     | 1                       | 
-| Unit tests                                      | 30                     |
-| Smoke testing                                     | 70                     | 
-| Review the documentation                        | 8                       |
-| First Test session with team 3 QA               | 3.5                     | 
-| GitHub Actions                                  | 16                      | 
-| Unit test formatter script                      | 16                      | 
-| Second Test session with team 3 QA              | 3.5                     | 
-| Second meeting with Dev team                    | 1                       | 
-| Third meeting Test session with team 3 QA       | 3.5                     |
-| Third meeting with Dev team                     | 1                       | 
-| Fourth meeting Test session with team 3 QA      | 3.5                     | 
-| Fourth meeting with Dev team                    | 1                       |
+| Create and give template for documentation     | 4                       | 
+| First meeting with Dev team                    | 1                       | 
+| Unit tests                                     | 30                      |
+| Smoke testing                                  | 70                      | 
+| Review the documentation                       | 8                       |
+| First Test session with team 3 QA              | 3.5                     | 
+| GitHub Actions                                 | 16                      | 
+| Unit test formatter script                     | 16                      | 
+| Second Test session with team 3 QA             | 3.5                     | 
+| Second meeting with Dev team                   | 1                       | 
+| Third meeting Test session with team 3 QA      | 3.5                     |
+| Third meeting with Dev team                    | 1                       | 
+| Fourth meeting Test session with team 3 QA     | 3.5                     | 
+| Fourth meeting with Dev team                   | 1                       |
 | Total                                          | 162 hours               |
 
 This table outlines the estimated time for each task from the test plan. The total time allocated for testing is 162 hours.
 
 ### People
 
+For this project, the people involved are the 2 quality assurances of team 4 but also the 2 quality assurances of team 3 during the team test sessions.
+
 
 ### Testing Environment Requirements
-
-
 
 1. **DOSBox Emulator:**
    - Version: [0.74-3](https://www.dosbox.com/download.php?main=1)
@@ -404,29 +399,22 @@ This table outlines the estimated time for each task from the test plan. The tot
 
 ## Test Schedule and Estimation
 
-<!-- ### Overview:
-
-Testing tasks are divided into two parts: code testing and documentation testing. We chose to split the work into two parts because it would allow us to work in parallel and to have a better overview of the project.
-
-### Code Testing  -->
-
-
 #### Tasks Time Estimation:
-| Task                                          | Start Date          | End Date            | Duration               |
-| ----------------------------------------------| ------------------- | ------------------- | ---------------------- |
-| Create and give template for documentation      | November 13, 2023   | November 13, 2023   | 1 day                  |
-| First meeting with Dev team                     | November 13, 2023   | November 13, 2023   | 1 day                  |
-| Unit tests                                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
-| Review the documentation                       | November 6, 2023    | December 20, 2023   | 6 weeks                |
-| First Test session with team 3 QA              | November 30, 2023   | November 30, 2023   | 1 day                  |
-| GitHub Actions                                 | November 27, 2023   | December 20, 2023   | 3 weeks                |
-| Unit test formatter script                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
-| Second Test session with team 3 QA             | December 8, 2023    | December 8, 2023    | 1 day                  |
-| Second meeting with Dev team                   | December 4, 2023    | December 4, 2023    | 1 day                  |
-| Third meeting Test session with team 3 QA     | December 11, 2023   | December 11, 2023   | 1 day                  |
-| Third meeting with Dev team                    | December 11, 2023   | December 15, 2023   | 1 day                  |
-| Fourth meeting Test session with team 3 QA     | December 18, 2023   | December 19, 2023   | 1 day                  |
-| Fourth meeting with Dev team                   | December 18, 2023   | December 18, 2023   | 1 day                  |
+| Task                                           | Start Date          | End Date            | Duration             |
+| ---------------------------------------------- | ------------------- | ------------------- | -------------------- |
+| Create and give template for documentation     | November 13, 2023   | November 13, 2023   | 1 day                |
+| First meeting with Dev team                    | November 13, 2023   | November 13, 2023   | 1 day                |
+| Unit tests                                     | November 27, 2023   | December 20, 2023   | 3 weeks              |
+| Review the documentation                       | November 6, 2023    | December 20, 2023   | 6 weeks              |
+| First Test session with team 3 QA              | November 30, 2023   | November 30, 2023   | 1 day                |
+| GitHub Actions                                 | November 27, 2023   | December 20, 2023   | 3 weeks              |
+| Unit test formatter script                     | November 27, 2023   | December 20, 2023   | 3 weeks              |
+| Second Test session with team 3 QA             | December 8, 2023    | December 8, 2023    | 1 day                |
+| Second meeting with Dev team                   | December 4, 2023    | December 4, 2023    | 1 day                |
+| Third meeting Test session with team 3 QA      | December 11, 2023   | December 11, 2023   | 1 day                |
+| Third meeting with Dev team                    | December 11, 2023   | December 15, 2023   | 1 day                |
+| Fourth meeting Test session with team 3 QA     | December 18, 2023   | December 19, 2023   | 1 day                |
+| Fourth meeting with Dev team                   | December 18, 2023   | December 18, 2023   | 1 day                |
 
 **Note:**
 - The duration is calculated based on working days.
@@ -450,26 +438,20 @@ Testing tasks are divided into two parts: code testing and documentation testing
 | Fourth meeting Test session with team 3 QA | December 19, 2023 | December 19, 2023 |
 | Fourth meeting with Dev team | December 18, 2023 | December 18, 2023 |
 
-
-## Deliverables and Schedule
-### Deliverables and Estimation
-### Schedule
-| Test Plan deliverable | November 6, 2023 | December 12, 2023 |
-
-#### Before Testing:
-- Test Plan
-- Test Design
-
-#### During Testing:
-- Test Scripts
-- Simulators or Emulators (in early stages)
-- Test Data
-- Error and execution logs
-
-#### After Testing:
-- Test Results
-- Defect Reports
-- Release Notes
-
 ## Glossary
 
+| Term | Definition | Source |
+| ---- | ---------- | ------ |
+| Assembly language | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
+| DOSBox | An emulator program that emulates an IBM PC compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
+| Exploratory testing | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
+| GitHub | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
+| GitHub Actions | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
+| GitHub Issues | A tool that allows us to create and manage issues and assign them to team members. | [GitHub](https://docs.github.com/en/issues) |
+| macOS | A series of proprietary graphical operating systems developed and marketed by Apple Inc. | [Wikipedia](https://en.wikipedia.org/wiki/MacOS) |
+| QuickTime Player | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
+| Smoke testing | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
+| Snipping tool | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
+| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
+| Windows | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
+| X86 | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
