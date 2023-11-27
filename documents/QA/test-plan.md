@@ -392,7 +392,7 @@ This table outlines the estimated time for each task from the test plan. The tot
 
 
 1. **DOSBox Emulator:**
-   - Version: [Specify version]
+   - Version: [0.74-3](https://www.dosbox.com/download.php?main=1)
   
 2. **Code Editor:**
      - Visual Studio Code: Version 1.61.2 or later
@@ -418,14 +418,14 @@ Testing tasks are divided into two parts: code testing and documentation testing
 | First meeting with Dev team                     | November 13, 2023   | November 13, 2023   | 1 day                  |
 | Unit tests                                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
 | Review the documentation                       | November 6, 2023    | December 20, 2023   | 6 weeks                |
-| First Test session with team 3 QA              | November 27, 2023   | November 27, 2023   | 1 day                  |
+| First Test session with team 3 QA              | November 30, 2023   | November 30, 2023   | 1 day                  |
 | GitHub Actions                                 | November 27, 2023   | December 20, 2023   | 3 weeks                |
 | Unit test formatter script                     | November 27, 2023   | December 20, 2023   | 3 weeks                |
-| Second Test session with team 3 QA             | December 4, 2023    | December 4, 2023    | 1 day                  |
+| Second Test session with team 3 QA             | December 8, 2023    | December 8, 2023    | 1 day                  |
 | Second meeting with Dev team                   | December 4, 2023    | December 4, 2023    | 1 day                  |
 | Third meeting Test session with team 3 QA     | December 11, 2023   | December 11, 2023   | 1 day                  |
-| Third meeting with Dev team                    | December 11, 2023   | December 11, 2023   | 1 day                  |
-| Fourth meeting Test session with team 3 QA     | December 18, 2023   | December 18, 2023   | 1 day                  |
+| Third meeting with Dev team                    | December 11, 2023   | December 15, 2023   | 1 day                  |
+| Fourth meeting Test session with team 3 QA     | December 18, 2023   | December 19, 2023   | 1 day                  |
 | Fourth meeting with Dev team                   | December 18, 2023   | December 18, 2023   | 1 day                  |
 
 **Note:**
@@ -440,14 +440,14 @@ Testing tasks are divided into two parts: code testing and documentation testing
 | First meeting with Dev team | November 13, 2023 | November 13, 2023 |
 | Unit tests | November 27, 2023 | December 20, 2023 |
 | Review the documentation | November 6, 2023 | December 20, 2023 |
-| First Test session with team 3 QA | November 27, 2023 | November 27, 2023 |
+| First Test session with team 3 QA | November 30, 2023 | November 30, 2023 |
 | GitHub Actions | November 27, 2023 | December 20, 2023 |
 | Unit test formater script | November 27, 2023 | December 20, 2023 |
-| Second Test session with team 3 QA  | December 4, 2023 | December 4, 2023 |
+| Second Test session with team 3 QA  | December 8, 2023 | December 8, 2023 |
 | Second meeting with Dev team | December 4, 2023 | December 4, 2023 |
-| Third meeting Test session with team 3 QA  | December 11, 2023 | December 11, 2023 |
+| Third meeting Test session with team 3 QA  | December 15, 2023 | December 15, 2023 |
 | Third meeting with Dev team | December 11, 2023 | December 11, 2023 |
-| Fourth meeting Test session with team 3 QA | December 18, 2023 | December 18, 2023 |
+| Fourth meeting Test session with team 3 QA | December 19, 2023 | December 19, 2023 |
 | Fourth meeting with Dev team | December 18, 2023 | December 18, 2023 |
 
 
