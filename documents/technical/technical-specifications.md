@@ -26,13 +26,14 @@
       - [Rendering](#rendering)
       - [Sound effects](#sound-effects)
   - [Algorithm](#algorithm)
-    - [Set the colors if the palette](#set-the-colors-if-the-palette)
+    - [Set the colors of the palette](#set-the-colors-of-the-palette)
+    - [Sound generation](#sound-generation)
     - [Game loop code](#game-loop-code)
   - [File Architecture](#file-architecture)
     - [Constant](#constant)
     - [Sprites](#sprites)
     - [Collider](#collider)
-    - [GameStateUpdate](#gamestateupdate)
+    - [GameState](#gamestate)
     - [Keyboard](#keyboard)
     - [Sound](#sound)
   - [Test Plan](#test-plan)
@@ -63,7 +64,9 @@ We assumed that copyright was not an issue. This is a student project for non-co
 ### Graphics
 
 The different sprites will be drawn according to this spritesheet.
+
 ![spritesheet](../pictures/spritesheet.png)
+
 As shown above, each ghosts has two separate sprite. We can create animations by alternating which sprite is displayed every 0.25 second. Pac-Man also has 2 different sprites, being the ones with the mouth half opened and fully opened. We can create the same animation by alternating each 0.25 second.
 We can rotate these 2 sprites to make sure that Pac-Man can face all 4 directions.
 As the ghosts are looking in the direction they are moving in, the adequate eye sprite will be drawn on top of the ghosts at their position.
@@ -75,6 +78,7 @@ The maze layout is as follow
 
 ![maze](../pictures/Pac-Maze.png)
 
+The maze is 224 width by 248 height.
 The rectangle in the middle of the maze is called the ghost house. This is where 3 out of the 4 ghosts start, and where they come back when they have been eaten.
 The fruits appear on the row just below the ghost house, in the middle of the row.
 
@@ -124,13 +128,16 @@ A player can get a life each 10000 points reached.
 
 ### Ghost AI
 
+All the ghosts have a scatter mode. In this mode, they stay in the corner they are assigned to, as described in [the functional specification](/documents/functional/functional-specifications.md)
+
 Each ghost has a different behaviour pattern.
 
 - Blinky, the red one, is the most agressive one. He is always chasing Pac-Man, wherever it goes. He starts outside of the ghost house, being the first one able to move freely in the maze. He always try to reach the exact tile Pac-Man is on.
 - Pinky, the pink ghost, has a more strategic approach. Instead of targeting the position of Pac-Man, it targets the direction of Pac-Man, moving in parallel compared to the player. it is the second one to go out of the ghost house. He aims for 4 tiles ahead of Pac-Man, leading him to always try to trap him rather than chase him like blinky.
-- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, it goes back into random mode. He is the third one, to go out of ghost house.
+- Clyde, the orange one, has a more random movement. It's not actually always random. When Pac-Man is more than 8 tiles away, he directly target Pac-Man, like Blinky does. However, when he is closer to Pac-Man like Blinky, it goes back into scatter mode. He is the third one, to go out of ghost house.
 - Inky, the blue one, has the most complex patern. He is moving in relation to the position of both Pac-Man and Blinky. He always try to trap Pac-Man between him and Blinky's position. The farther Blinky is from Pac-Man, the more random he will move.
 
+A ghost should always be in movement.
 During fright time, all the ghosts try to run away from Pac-Man. They recover their normal behaviour when they are no longer frightened.
 
 ### Collision Handling
@@ -189,6 +196,7 @@ Lastly, we need to check if the [Game Over conditions](#game-over) are met, and 
 #### Rendering
 
 After updating their position in the code, we have to display the actual new position of ghosts and Pac-Man in the maze. We also need to change the score, display the fruit if needed or any animation depending on the conditions.
+The sprites will be displayed lines by lines.
 
 #### Sound effects
 
@@ -197,14 +205,14 @@ Else, the background music should be looping.
 
 ## Algorithm
 
-### Set the colors if the palette
+### Set the colors of the palette
 
 The video mode used can display only 16 different colors. However, it is possible to change the colors used.
 The most efficient way is to create a macro function. We just have to indicate how many paramets your function needs, and then call the macro. An exemple of use is featured below.
 
 ```assembly
 
-%macro setpalete 4 
+%macro setpalette 4 
         mov bx, %1
         mov dh, %2
         mov ch, %3
@@ -221,18 +229,37 @@ The most efficient way is to create a macro function. We just have to indicate h
         mov ax, 12h 
         int 10h
 
-        setpalete 14h,0ffh,0ffh,0ffh
+        setpalette 14h,0ffh,0ffh,0ffh
 
 ```
 
 This the the relation between the index of the palette and the register attached to it.
 
-```
+```text
 0  1  2  3  4  5  6 7  8  9  A  B  C  D  E  F     palette register
 0  1  2  3  4  5 14 7 38 39 3A 3B 3C 3D 3E 3F     color register
 ```
 
-The code featured is setting the palette register 6 with the color ffffff, which is white.
+The code featured above is setting the palette register 6 with the color ffffff, which is white.
+
+### Sound generation
+
+To generate some sound, we can use the code below
+
+```assembly
+    mov     al, 182
+    out     43h, al
+
+    mov     ax, 2153        ; countdown value is stored in ax. It is calculated by dividing 1193180 by the desired frequency with the number being the frequency at which the main system oscillator runs
+    out     42h, al         
+    mov     al, ah          
+    out     42h, al               
+
+    in      al, 61h         
+                            ; to connect the speaker to timer 2
+    or      al, 00000011b  
+    out     61h, al         ; Send the new value
+```
 
 ### Game loop code
 
@@ -245,44 +272,46 @@ This is a draft of what the main file would look like. This is the file where ev
 section .text
 
 ; INITIALISATION FUNCTION
-
-; set up environment: video mode, etc
-; set up memory: allocate memory segment to run the game
-
-; GRAPHICAL STUFF
-
-; load the maze in memory
-; all other functions should be in another file named sprites
+start:
+call initialisation ; This include variables, sprites, map processing
+jmp gameloop
 
 ; GAME LOOP
+gameloop:
+call input; check if input and process it
 
-; check if input and process it
-; should call func in the file name keyboard
+call updatepositions; update positions
 
-; update positions
-; should call func in file sprites
+call collisions; chekc collision
 
-; chekc collision
-; should call func in file collider
+call updategamestate; update game state (score, fright time, refer to the tech specs)
 
-; update game state (score, fright time, refer to the tech specs)
-; should call func in file score
-; lot of stuff implied here check tech specs section game update
+call rendering; update rendering
 
-; update rendering
-; should call func in file sprites
-
-; update sound 
-; FUTURE STUFF, DO NOT CARE FOR NOW
+call sound; update sound
+jmp gameloop
 ```
 
 ## File Architecture
 
 There should be several files. Several files allow to have a better organization of the code and a better readability in the game loop.
 
+```text
+/project-root
+│
+├── src
+│   ├── main.asm
+│   ├── constant.asm
+│   ├── sprites.asm
+│   ├── collider.asm
+│   ├── gamestate.asm
+│   ├── keyboard.asm
+│   └── sound.asm
+```
+
 ### Constant
 
-This file will contains every constant defined to help for the development
+This file will contains every constant defined to help for the development.
 
 ### Sprites
 
@@ -291,8 +320,9 @@ This file will contain all the different functions used to draw sprites, but als
 ### Collider
 
 This file will contain the [collision handler](#collision-handling) and check that the movements done by Pac-Man and ghosts are possible.
+To handle collisions, we will check if the sprites overlap. This means that if the position of a sprite on any axis is the same, then the check will be done and follow any scenarions given above. The collision check is done before the rendering, to ensure that any impossible locations are displayed.
 
-### GameStateUpdate
+### GameState
 
 This file will contain every function necessary to update the game status. This include ghost target, score, fruits, fright time, losing a life, game over and finishing a level.
 
