@@ -22,7 +22,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox |
 | Expected Result | The game start |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 2. Stop the game
 
@@ -34,7 +33,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox, 3. Press "esc" |
 | Expected Result | The game stop |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 3. Move left
 
@@ -46,19 +44,17 @@ The priority of the test is defined by the following colors:
 | Step(s) |1. Start the game, 2. Press on the left arrow of the keyboard |
 | Expected Result | Pac-Man move to the left in the game |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 4. Move right
 
 | ID | 4 |
 | --- | --- |
 | Name | Move Pac-Man to the right with keyboard arrow |
-| Test Description | Verify that Pac-Man can go righ when usery pressing the right arrow of the keyboard and there is no wall in this direction |
+| Test Description | Verify that Pac-Man can go right when usery pressing the right arrow of the keyboard and there is no wall in this direction |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Start the game, 2. Press on the right arrow of the keyboard |
 | Expected Result | Pac-Man move to the right in the game |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 5. Move up
 
@@ -70,7 +66,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Press on the up arrow of the keyboard |
 | Expected Result | Pac-Man move to the up in the game |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 6. Move down
 
@@ -82,7 +77,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Press on the down arrow of the keyboard |
 | Expected Result | Pac-Man move to the down in the game |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 7. Pac-Mac Collision: Wall
 
@@ -94,7 +88,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Move in the direction of a wall |
 | Expected Result | Pac-Man should be stopped and not pass through it |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 8. Pac-Mac Collision: Ghost Without Power Pellet
 
@@ -106,7 +99,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Move in the direction of a ghost |
 | Expected Result | Pac-Man should be killed by the ghost |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 9. Pac-Mac Collision: Ghost With a Power Pellet
 
@@ -118,7 +110,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Eat power pellet 3. Move in the direction of a ghost |
 | Expected Result | Pac-Man should kill the ghost |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 10. Pac-Mac Collision: Ghost eyes only
 
@@ -130,7 +121,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Eat power pellet, 3. Kill a ghost, 4. Cross ghost eyes when they back to the ghost house |
 | Expected Result | Pac-Man should cross them without any interaction |
 | Priority | 🟥 |
-| Estimed Time | 1 minute |
 
 ## 11. Pac-Mac Eat Pellet
 
@@ -142,7 +132,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat pellets |
 | Expected Result | Pac-Man should consume the pellets, and the score should increase accordingly |
 | Priority | 🟨 |
-| Estimated Time | 2 minutes |
 
 ## 12. Pac-Mac Eat Power pellet
 
@@ -152,9 +141,8 @@ The priority of the test is defined by the following colors:
 | Test Description | Verify that Pac-Man can eat power pellet and that the ghosts become vulnerable and blue |
 | Requirement(s) | The game is started, Pac-Man eat power pellets |
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellets |
-| Expected Result | The ghosts should become blue and vulnerable to Pac-Man |\
+| Expected Result | The ghosts should become blue and vulnerable to Pac-Man |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 13. Pac-Mac Eat Bonus Fruits/Items
 
@@ -166,7 +154,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat bonus fruits/items |
 | Expected Result | The score should increase |
 | Priority | 🟨 |
-| Estimated Time | 2 minutes |
 
 ## 14. Ghost Collision: Ghost
 
@@ -178,7 +165,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe ghost behavior |
 | Expected Result | Ghosts should be able to cross each other without collision or visual bugs |
 | Priority | 🟥 |
-| Estimated Time | 4 minutes |
 
 
 ## 15. Ghost Collision: Wall
@@ -191,7 +177,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe ghost behavior |
 | Expected Result | Ghosts should be able to move without collision with walls |
 | Priority | 🟥 |
-| Estimated Time | 4 minutes |
 
 ## 16. Ghosts Death
 
@@ -203,7 +188,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
 | Expected Result | Ghosts sprite should change to eyes and they should return to the ghost house |
 | Priority | 🟥 |
-| Estimated Time | 2 minutes |
 
 ## 17. Ghosts Respawn
 
@@ -215,7 +199,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Kill a ghost, 4. Observe ghost behavior |
 | Expected Result | Ghosts should respawn after a certain time |
 | Priority | 🟥 |
-| Estimated Time | 2 minutes |
 
 ## 18. Blinky (Red Ghost) Behavior: Chase Mode
 
@@ -227,7 +210,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe Blinky behavior |
 | Expected Result | Blinky should follow Pac-Man |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 19. Pinky (Pink Ghost) Behavior: Chase Mode
 
@@ -239,7 +221,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe Pinky behavior |
 | Expected Result | Pinky should try to go 2 Pac-Dots in front of Pac-Man |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 20. Inky (Blue Ghost) Behavior: Chase Mode
 
@@ -251,7 +232,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe Inky behavior |
 | Expected Result | Inky should select the two Pac-Dots positioned in front of Pac-Man in its current direction of travel. Imagine a vector from Blinky's position to this Pac-Dot, then double the length of the vector. The dots on which this extended vector ends will be the current target |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 
 ## 21. Clyde (Orange Ghost) Behavior: Chase Mode
@@ -264,7 +244,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Observe Clyde behavior |
 | Expected Result | Clyde should follow Pac-Man directly and try to head for his scatter corner when within 8 dots of Pac-Man |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 22. Blinky (Red Ghost) Behavior: Scatter Mode
 
@@ -276,7 +255,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Blinky behavior |
 | Expected Result | Blinky should go to the top right corner |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 23. Pinky (Pink Ghost) Behavior: Scatter Mode
 
@@ -288,7 +266,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Pinky behavior |
 | Expected Result | Pinky should go to the top left corner |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 24. Inky (Blue Ghost) Behavior: Scatter Mode
 
@@ -300,7 +277,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Inky behavior |
 | Expected Result | Inky should go to the bottom right corner |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 25. Clyde (Orange Ghost) Behavior: Scatter Mode
 
@@ -312,7 +288,6 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe Clyde behavior |
 | Expected Result | Clyde should go to the bottom left corner |
 | Priority | 🟧 |
-| Estimated Time | 2 minutes |
 
 ## 26. Game Over Handling
 
@@ -324,13 +299,12 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Lose all Pac-Man's lives |
 | Expected Result | The game should display a "Game Over" screen with the option to restart or exit |
 | Priority | 🟨 |
-| Estimated Time | 2 minutes |
 
 
 
 ## 27. Ghost Behavior: Return to Normal State
 
-| ID | 16.1 |
+| ID | 27 |
 | --- | --- |
 | Name | Ghost Behavior: Return to Normal State |
 | Test Description | Confirm that all ghosts return to their normal, active state after the vulnerable period |
@@ -338,4 +312,3 @@ The priority of the test is defined by the following colors:
 | Step(s) | 1. Start the game, 2. Play game, 3. Eat power pellet, 4. Observe ghost behavior after the vulnerable period expires |
 | Expected Result | Blinky, Pinky, Inky, and Clyde should cease defensive behavior and resume their typical pursuit of Pac-Man |
 | Priority | 🟨 |
-| Estimated Time | 3 minutes |
