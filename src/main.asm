@@ -1,17 +1,24 @@
 section .text
 
     start:
-
+    
         call SetVideoMode
         call ClearScreen
-        call BuildBackgroundBuffer ; !!!!!THE ERROR IS IN THIS FUNCTION!!!!!!
+        
+        
+        call BuildBackgroundBuffer 
+        
         call DisplayMaze
-        ;call FirstDisplayGhosts
-        call FirstDisplayPacMan
-
         jmp exit
+        
+        call FirstDisplayPacMan
+        
+        
+        
+        ;call FirstDisplayGhosts
 
-        pusha ; for the clock, maybe not usefull
+        
+
 
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
@@ -29,3 +36,13 @@ section .text
 ;-----------------------------------------------------------------------------------------
 
 exit:
+;reset the keyboard buffer and then wait for a keypress :
+mov ax, 0C01h ; 
+int 21h
+
+;dos box default video mode
+mov ax, 03h 
+int 21h
+
+
+int 20h ;quit

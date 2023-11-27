@@ -10,6 +10,7 @@ section .data
 section .text
 
    GetClockAndCompare:
+      pusha
 
       mov ax, 0
       int 1ah ; BIOS clock read
@@ -47,19 +48,19 @@ section .text
 
    ClearScreen:
    ;clear the screen by filling it with a unique color (stored in al)
-      mov al, 0x09 ; color to fill the screen (white = 0x0F, black = 0x00)
+      mov al, 0x85 ; color to fill the screen (white = 0x0F, black = 0x00)
       call FillScreen
    ret
 
    BuildBackgroundBuffer: 
       ;source of stosb 'al'
-      mov al, 0x78 ; color of the background (simulate the maze) (to be change)
+      mov al, 0x36 ; color of the background (simulate the maze) (to be change)
       
       ;destination of stosb 'es:di'
-      ;push ds ; adress of the data segment (even if 'es' probably already contains '0x489D')
-      ;pop es 
+      push ds ; adress of the data segment (even if 'es' probably already contains '0x489D')
+      pop es 
       lea di, [background_buffer] ; load the effective adress (L.E.A.) of the backup in the destination offset 'di'
-       
+      
       mov cx, SCREEN_WIDTH*SCREEN_HEIGHT ; set the counter for rep
       rep stosb ; to copy al into each byte of the target adress es:di byte per byte
       
@@ -83,7 +84,7 @@ section .text
        
       mov cx, SCREEN_WIDTH*SCREEN_HEIGHT ; set the counter for rep
       rep movsb ; 'movsb' writes byte per byte the content from 'ds:si' to 'es:di', increasing both si and di each time it is executed
-      
+
    ret
 
    FirstDisplayPacMan:
