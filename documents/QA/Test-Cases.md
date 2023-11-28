@@ -350,3 +350,16 @@ The priority of the test is defined by the following colors:
 | Expected Result | The ghost vulnerability period should last 6 seconds |
 | Priority | 🟧 |
 
+
+## 31. Pac-Man Spawn Location 
+
+| ID | 31 |
+| --- | --- |
+| Name | Pac-Man Spawn Location |
+| Test Description | Confirm that Pac-Man spawns in the correct location at the start of the game |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Run DOSBox, 2. Run PacMan file on DOSBox, 3. Observe Pac-Man spawn location |
+| Expected Result | Pac-Man should spawn below the ghost home |
+| Priority | 🟨 |
+
+
