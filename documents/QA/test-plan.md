@@ -44,7 +44,7 @@ This project targets a diverse audience, from those well-acquainted with the ori
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
 
-![](../pictures/diagramWalkthrough.png)
+![](../pictures/DiagramWalkthrough.png)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor and an X86 architecture.
 
