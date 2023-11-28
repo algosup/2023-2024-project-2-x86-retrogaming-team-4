@@ -19,23 +19,39 @@ y_InkyVelocity dw 0 ; Inky's translation vector on y axis (px/screen update) (if
 section .text
 
 
-changePos:
+changePinkyPosition:
 ;switch the direction if the ghost reached a side of the screen
-    cmp word [x_PacManPosition], SCREEN_WIDTH - SPRITE_SIZE 
-    jb .noflip
-    neg word [x_PacManVelocity]
-    .noflip:
+    cmp word [x_PinkyPosition], SCREEN_WIDTH - SPRITE_SIZE 
+    jb .noXflip
+    neg word [x_PinkyVelocity]
+    mov word [frameOf_Pinky_eyes], EYES_LEFT
+    cmp word [x_PinkyVelocity], 1
+    jne .noEyesRight
+    mov word [frameOf_Pinky_eyes], EYES_RIGHT
+    .noEyesRight:
+    .noXflip:
+
+    cmp word [y_PinkyPosition], SCREEN_HEIGHT - SPRITE_SIZE 
+    jb .noYflip
+    neg word [y_PinkyVelocity]
+    mov word [frameOf_Pinky_eyes], EYES_UP
+    cmp word [y_PinkyVelocity], 1
+    jne .noEyesDown
+    mov word [frameOf_Pinky_eyes], EYES_DOWN
+    .noEyesDown:
+    .noYflip:
 ;inc/decremente the position
-    mov bx, [x_PacManPosition]
-    add bx, [x_PacManVelocity]
-    mov [x_PacManPosition], bx
-ret
+    mov bx, [x_PinkyPosition]
+    add bx, [x_PinkyVelocity]
+    mov [x_PinkyPosition], bx
 
-Move_PacMan:
+    mov ax, [y_PinkyPosition]
+    add ax, [y_PinkyVelocity]
+    mov [y_PinkyPosition], ax
 
-    call ClearPacMan
-    mov bx, 1
-    mov [x_PacManVelocity], bx
-    call changePos
-    call Display_PacMan
+
+    
+    
+
+
 ret

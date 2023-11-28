@@ -2,33 +2,33 @@
 section .text
 
     start:
-    
         call SetVideoMode
-        call ClearScreen
+        call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
         
-        
-        call BuildBackgroundBuffer 
-        
+        ;call ClearScreen
+        call BuildBackgroundBuffer
+        call MazeToBGbuffer
         call DisplayMaze
-        jmp exit
-        
-        call FirstDisplayPacMan
-        
-        
-        
-        ;call FirstDisplayGhosts
+        ;call FirstDisplayPacMan
+        call FirstDisplayGhosts
 
         
+        
+        
+        
+
+
 
 
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:
 ;-------------------------------------------------
-
-    call GetClockAndCompare
-
-    call Move_PacMan
+    
+    call ClearPinky
+    call changePinkyPosition
+    call Display_Pinky
+    call UpdateScreen
 
 
 ;-------------------------------------------------
@@ -36,14 +36,3 @@ section .text
     jmp gameloop
 ;-----------------------------------------------------------------------------------------
 
-exit:
-;reset the keyboard buffer and then wait for a keypress :
-mov ax, 0C01h ; 
-int 21h
-
-;dos box default video mode
-mov ax, 03h 
-int 21h
-
-
-int 20h ;quit
