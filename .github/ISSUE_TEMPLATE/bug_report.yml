@@ -33,7 +33,7 @@ body:
       description: "What are some details about your software?"
       value: |
         Platform: Windows/Mac
-        Mono version: X.X.X
+        DOSBox Version
   - type: textarea
     id: inputs
     attributes:
