@@ -1,0 +1,41 @@
+name: Typo Report
+description: "File a typo report in the documentation"
+title: "Typo Report [2023/XX/XX]"
+labels: ["documentation", "invalid"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Please describe the documentation typo in detail."
+      placeholder: "Short and explicit description of the typo..."
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      options:
+        - 1 - Critical
+        - 2 - High
+        - 3 - Medium
+        - 4 - Low
+        - 5 - None
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "The version of the documentation or repository."
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Correction"
+      description: "What is the expected correction for the typo?"
+  - type: textarea
+    id: other
+    attributes:
+      label: "Other Details"
+      description: "Provide any additional information or context about the typo."
+  - type: markdown
+    attributes:
+      value: "Attach screenshots or relevant snippets if available to help identify the typo."
