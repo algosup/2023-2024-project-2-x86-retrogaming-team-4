@@ -75,3 +75,15 @@ draw_sprite:
     cmp cl, 0xff
     jne .draw_loop
     ret
+
+DrawMaze:
+    mov ax, 0xA000
+    mov es, ax
+    mov dx, 8
+    .eachLine:
+        mov cx, 8
+        rep movsb
+        add di, 320-8
+        dec dx
+        jnz .eachLine
+        ret

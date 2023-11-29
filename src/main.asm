@@ -11,6 +11,71 @@ start:
     call SetVideoMode
     ;call SetScreen
     call DrawSprite
+
+    ; mov si, OTL
+    ; mov di, 0
+    ; call DrawMaze
+
+    ; mov si, OTR
+    ; mov di, 8
+    ; call DrawMaze
+
+    ; mov si, OBL
+    ; mov di, 320*8
+    ; call DrawMaze
+
+    ; mov si, OBR
+    ; mov di, 320*8+8
+    ; call DrawMaze
+
+    ; mov si, ITL
+    ; mov di, 16
+    ; call DrawMaze
+
+    ; mov si, ITR
+    ; mov di, 24
+    ; call DrawMaze
+
+    ; mov si, IBL
+    ; mov di, 320*8+16
+    ; call DrawMaze
+
+    ; mov si, IBR
+    ; mov di, 320*8+24
+    ; call DrawMaze
+
+    ; mov si, LG
+    ; mov di, 320*16
+    ; call DrawMaze
+
+    ; mov si, LD
+    ; mov di, 320*16+8
+    ; call DrawMaze
+
+    ; mov si, LU
+    ; mov di, 320*24
+    ; call DrawMaze
+
+    ; mov si, LB
+    ; mov di, 320*24+8
+    ; call DrawMaze
+
+    ; mov si, Dot
+    ; mov di, 320*16+16
+    ; call DrawMaze
+
+    ; mov si, PD
+    ; mov di, 320*16+24
+    ; call DrawMaze
+
+    ; mov si, E
+    ; mov di, 320*24+16
+    ; call DrawMaze
+
+    ; mov si, Inter
+    ; mov di, 320*24+24
+    ; call DrawMaze    
+
     pusha
 
 gameloop:
