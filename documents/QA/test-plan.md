@@ -12,19 +12,24 @@
       - [In-scope for Testing](#in-scope-for-testing)
       - [Out-of-scope for Testing](#out-of-scope-for-testing)
     - [Unit Tests](#unit-tests)
+    - [Tests Structure](#tests-structure)
+    - [Tests List](#tests-list)
+      - [Scoring Mechanisms](#scoring-mechanisms)
+      - [Game Dynamics](#game-dynamics)
     - [Game-testing sessions](#game-testing-sessions)
       - [Overview](#overview-1)
       - [Smoke Testing](#smoke-testing)
         - [Smoke Testing Scope](#smoke-testing-scope)
         - [Sequence of Smoke Testing](#sequence-of-smoke-testing)
-      - [Group Game-Testing](#group-game-testing)
-        - [Group Game-Testing](#group-game-testing-1)
-        - [A Sequence of a Group Game-Testing](#a-sequence-of-a-group-game-testing)
+      - [Collaborative Game-Testing Sessions](#collaborative-game-testing-sessions)
+        - [Session Scope](#session-scope)
+        - [A Sequence of a Session](#a-sequence-of-a-session)
     - [Monitoring and tools](#monitoring-and-tools)
       - [GitHub](#github)
-        - [Overview](#overview-2)
+        - [GitHub Overview](#github-overview)
         - [GitHub Actions](#github-actions)
           - [GitHub Actions Scope](#github-actions-scope)
+          - [GitHub Actions Scope](#github-actions-scope-1)
           - [Workflow](#workflow)
           - [Configuration](#configuration)
       - [GitHub Issues](#github-issues)
@@ -58,27 +63,32 @@ This project targets a diverse audience, from those well-acquainted with the ori
 
 We will illustrate the operational flow of the software and provide a visual representation through a diagram. For further details, refer to the [functional specifications](../functional/functional-specifications.md) document.
 
-![](../pictures/DiagramWalkthrough.png)
+![Diagram](../pictures/diagramWalkthrough.png)
 
 The software specifications encompass the DOSBox emulator, while the hardware requirements include an emulator with a 16-bit processor and an X86 architecture.
 
 ## Glossary
 
+
 | Term | Definition | Source |
 | ---- | ---------- | ------ |
-| Assembly language | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
-| DOSBox | An emulator program that emulates an IBM PC-compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
-| Exploratory testing | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
-| GitHub | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
-| GitHub Actions | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
-| GitHub Issues | A tool that allows us to create and manage issues and assign them to team members. | [GitHub](https://docs.github.com/en/issues) |
-| macOS | A series of proprietary graphical operating systems developed and marketed by Apple Inc. | [Wikipedia](https://en.wikipedia.org/wiki/MacOS) |
-| QuickTime Player | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
-| Smoke testing | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
-| Snipping tool | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
-| Visual Studio Code | A free source-code editor made by Microsoft for Windows, Linux, and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
-| Windows | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
-| X86 | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
+| **Assembly language** | A low-level programming language for a computer, or other programmable device, in which there is a very strong (generally one-to-one) correspondence between the language and the architecture's machine code instructions. | [Wikipedia](https://en.wikipedia.org/wiki/Assembly_language) |
+| **DOS (Disk Operating System)** | An early operating system that provides the essential functions for managing files and running applications on IBM PC-compatible systems. | [Wikipedia](https://en.wikipedia.org/wiki/DOS) |
+| **DOSBox** | An emulator program that emulates an IBM PC-compatible computer running a DOS operating system. | [Wikipedia](https://en.wikipedia.org/wiki/DOSBox) |
+| **Exploratory testing** | A software testing approach that allows testers to apply their knowledge and expertise to design and execute tests. | [Wikipedia](https://en.wikipedia.org/wiki/Exploratory_testing) |
+| **GitHub** | A web-based version control and collaboration platform for software developers. | [Wikipedia](https://en.wikipedia.org/wiki/GitHub) |
+| **GitHub Actions** | A CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. | [GitHub](https://docs.github.com/en/actions) |
+| **GitHub Issues** | A tool that allows us to create and manage issues and assign them to team members. | [GitHub](https://docs.github.com/en/issues) |
+| **macOS** | A series of proprietary graphical operating systems developed and marketed by Apple Inc. | [Wikipedia](https://en.wikipedia.org/wiki/MacOS) |
+| **QuickTime Player** | A media player created by Apple that allows users to play back audio and video in digital format. | [Wikipedia](https://en.wikipedia.org/wiki/QuickTime_Player) |
+| **Smoke testing** | A preliminary test that focuses on the major functionality of the software, without bothering with finer details. | [Wikipedia](https://en.wikipedia.org/wiki/Smoke_testing_(software)) |
+| **Snipping Tool** | A screenshot utility included in Windows Vista and later. | [Wikipedia](https://en.wikipedia.org/wiki/Snipping_Tool) |
+| **Visual Studio Code** | A free source-code editor made by Microsoft for Windows, Linux, and macOS. | [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code) |
+| **Windows** | A group of several proprietary graphical operating system families, all of which are developed and marketed by Microsoft. | [Wikipedia](https://en.wikipedia.org/wiki/Microsoft_Windows) |
+| **X86** | A family of instruction set architectures initially developed by Intel based on the Intel 8086 microprocessor and its 8088 variant. | [Wikipedia](https://en.wikipedia.org/wiki/X86) |
+
+
+---
 
 ## Strategy
 
@@ -104,43 +114,73 @@ Testing will focus on both core gameplay elements and peripheral features to gua
 - Colors of sprites
 - Sprite speed
 
+---
+
 ### Unit Tests
 
 Unit testing is an important part of the process. These tests are developed in X86 assembler and executed on DOSBox, to have an environment as close as possible to the final game.
 
 These tests are developed throughout the project in parallel with game development, corresponding to an exploratory testing approach.
 
-The main objectives of these tests are:
+These unit tests serve three crucial objectives:
 
-- Check that the game's essential functions are working properly.
-- Check all other game functions as far as possible.
-- Serve as non-regression tests between each game update.
+1. **Code Functionality:** Verify that each function performs as expected under various scenarios. For instance, we ensure that scoring mechanisms function correctly when Pac-Man interacts with different elements.
+
+2. **Code Quality:** Assess the clarity and quality of the code to promote maintainability and ease of collaboration among developers.
+
+3. **Code Coverage:** Guarantee comprehensive testing to prevent future changes from unintentionally altering the original behavior of the code.
+
+
+### Tests Structure
+
+Each test comprises the following components:
+
+1. **Function:** Identifies the function under examination.
+2. **Test Description:** Describes the purpose of the test, the specific conditions being evaluated, and the expected outcome.
+3. **Severity:** Indicates the criticality of the test, categorized as **High**, **Medium**, or **Low**.
+
+### Tests List
+
+#### Scoring Mechanisms
+
+| Function | Test Description | Severity |
+| --- | --- | --- |
+| Score when eating a dot | Increment score by 10 | Medium |
+| Score when eating a big dot | Increment score by 50 | Medium |
+| Score when eating a ghost | Increment score by 200 | Medium |
+| Score when eating a cherry | Increment score by 100 | Medium |
+
+
+#### Game Dynamics
 
 | Function | Expected Result | Severity |
 | --- | --- | --- |
-| Score when eating a dot | Score is incremented by 10 | Medium |
-| Score when eating a big dot | Score is incremented by 50 | Medium |
-| Score when eating a ghost | Score is incremented by 200 | Medium |
-| Score when eating a cherry | Score is incremented by 100 | Medium |
 | Clyde behavior | Clyde is supposed to be near PacMan and within 8 squares he becomes random. | Medium |
-| Wall collision (Pac-Man) | Pac-Man is supposed to be stopped by every e-wall | High |
-| Wall collision (Ghost) | Ghosts are supposed to be stopped by every wall | High |
-| Ghosts collision (Ghost) | Ghosts are supposed to be stopped by every other ghost | High |
+| Wall collision (Pac-Man) | Ensure Pac-Man halts at every environmental wall | High |
+| Wall collision (Ghost) | Ensure ghosts halt at every environmental wall | High |
+| Ghosts collision (Ghost) | Ensure ghosts halt at every other ghost | High |
 | Increase lives | Add new life to the player when the user gets 10.000 points | Medium |
 | Lives cap | Player can't have more than 5 lives | Medium |
-| Ghost speed increase | Ghost speed increase when user change level | Medium |
+| Lives cap | Player can't have less than 0 lives | Medium |
+
+
+---
 
 ### Game-testing sessions
 
----
 
 #### Overview
 
-Due to the difficulty of creating a test bot for an assembler game running on an emulator and the time allocated to this project. One of the chosen testing solutions was to test the code manually. To do this, a tester has to play the game and perform several specific actions to find bugs and errors. All the tests are defined in this [document](./Test-Cases.md).
+Due to the difficulty of creating a test bot for an assembler game 
+and the time allocated to this project. We will rely on manual 
+testing, we will use a combination of **[Smoke Testing](#smoke-testing)** and **[Collaborative Game-Testing Sessions](#collaborative-game-testing-sessions)** to ensure the quality of the game. 
 
-To identify errors as accurately as possible, the tester must record his or her screen throughout the test session, using the "Snipping tool" on Windows computers and "QuickTime Player" on Apple computers.
+To identify errors as accurately as possible, the tester must record 
+his or her screen throughout the test session, using the "Snipping 
+tool" on Windows computers and "QuickTime Player" on Apple computers. 
+This will allow us to have a visual representation of the errors and 
+to be able to reproduce them more easily.
 
----
 
 #### Smoke Testing
 
@@ -170,20 +210,20 @@ During each smoke testing session, the following steps will be executed:
 
 ---
 
-#### Group Game-Testing
+#### Collaborative Game-Testing Sessions
 
 To gain a better overview of the project, a collaboration with the [3rd team's quality assurance team](Collaboration-QA.md) was set up. This collaboration enables the 2 teams to have an external view of the game and simply identify errors and bugs. The main advantage of this collaboration is to have several points of view on the same situation and to see or share new working methods.
 
-##### Group Game-Testing
+##### Session Scope
 
-Group sessions are designed primarily to:
+Sessions are designed primarily to:
 
 1. **Verify that the game is working as expected:** Check that all the game's basic and additional game mechanics are working properly.
 2. **Sharing tests:** Share tests between the 2 teams to have a better overview of the game and to find more bugs and errors.
 3. **Identify bugs and errors:** Find bugs and errors in the game to improve it.
 4. **Identify improvements and missing features:** Find improvements and missing features in the game to bring it closer to the original.
 
-##### A Sequence of a Group Game-Testing
+##### A Sequence of a Session
 
 A group testing session will take place once a week during one of the hours allocated to the project.
 Each session will follow the following steps:
@@ -195,23 +235,30 @@ Each session will follow the following steps:
 
 For the sake of simplicity, during test sessions, the game will be launched on the computer of the team developing it. This allows our team to record each test session and avoid sending the recorded files afterward.
 
-### Monitoring and tools
-
 ---
+
+### Monitoring and tools
 
 #### GitHub
 
-##### Overview
+##### GitHub Overview
 
-For this project, GitHub is imposed to store our code, GitHub is a web-based version control and collaboration platform for software developers. It provides a centralized repository for storing and managing source code, facilitating collaboration between developers.
 
-But more than just a code storage system, it's a powerful tool for many other tasks. Here, it will be used for project monitoring to help each team member with his various tasks. The GitHub add-ons used in this project are [**GitHub Actions**](#github-actions) and [**GitHub Issues**](#github-issues).
+GitHub serves as our central platform for version control, collaboration, and issue tracking, fortunatly GitHub also provides a CI/CD tool(Continuous Integration/Continuous Deployment) called GitHub Actions, this tool allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch on each push.
+
+We will also use GitHub Issues to report bugs and errors, it will allow us to make available to the development team a list of bugs and errors to be corrected, and to have a better overview of the progress of the project.
 
 ---
 
 ##### GitHub Actions
 
-GitHub Actions is a CI/CD tool that allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch. This will also permit to have an integrated overview of the failure of the code directly in GitHub.
+###### GitHub Actions Scope
+
+
+GitHub Actions are utilized for continuous integration and deployment. The workflow is triggered on each push to the main branch, ensuring the automatic execution of tests. (During the development phase, the workflow will also be triggered on each push to the dev branch.)
+
+It will allow us to know if the code is unfunctional at some points when did it appear and which changes caused it.
+
 
 ###### GitHub Actions Scope
 
@@ -223,20 +270,28 @@ The GitHub Actions will be activated on pull requests on the dev and main branch
 
 ###### Workflow
 
-The workflow defines the different steps to be executed by GitHub Actions. The workflow is defined in the file [pacman.yml](../.github/workflows/pacman.yml) and is executed on each pull request on the main or dev branch.
+The workflow consists of the following steps:
 
-The workflow we will use to improve project quality is defined in the following diagrams:
+1. **Checkout:** Retrieves the repository.
+2. **Build:** Builds the project.
+3. **Test:** Executes unit tests and game-testing scripts.
+4. **Publish Test Results:** Publish the test results as artifacts.
+
+
+Here is a diagram of the workflow:
 
 ![GitWorkflow](../pictures/GitWorkflow.png)
+
+
+If any of the steps fail, the workflow will be marked as failed and the development team will be notified at which step the error occurred.
 
 ###### Configuration
 
 Actions such as assembling and execution of unit tests are performed on a computer or server. These actions are enabled and synchronized with GitHub thanks to a runner provided by GitHub. To install the runner, there is GitHub [documentation](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners) explaining the various steps involved. Once the runner has been installed and activated on a computer, it can be selected to execute the various workflow actions.
 
-As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff:
 
-- Thomas Planchard
-- Maxime Caron
+As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff. This allows us to have a runner available at all times and to have a better overview of the errors that may occur.
+
 
 Next, the various actions and workflow steps are defined in the [pacman.yml](/pacman.yml) file, which is saved at the root of the repository.
 
@@ -244,10 +299,7 @@ Next, the various actions and workflow steps are defined in the [pacman.yml](/pa
 
 #### GitHub Issues
 
-GitHub Issues is a tool that allows us to create and manage issues and
-assign them to team members. This tool is integrated into GitHub and
-allows us to have a better overview of the project and to have a better
-organization.
+GitHub Issues is a built-in issue-tracking tool that allows us to create and manage issues and assign them to team members.
 
 We define:
 
@@ -301,8 +353,6 @@ The folder [Tests Report](./Tests%20Report/) will contain all the test reports o
 
 #### Bug Data Report Spreadsheet
 
-**Overview:**
-
 The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZyj7Igid2MQinLGrvEB3opBlmk/edit?usp=sharing) serves as a tool for documenting and tracking test cases, their results, and overall testing progress. The spreadsheet is divided into three sections: Test Case Pattern, Testing Sessions, and Graphics.
 
 
@@ -348,23 +398,31 @@ The [Bug Data Report](https://docs.google.com/spreadsheets/d/1Wm9y6b1pe2TSEv-pNZ
 To enhance transparency, collaboration, and knowledge sharing within our development process, we are adopting a centralized documentation approach using [GitHub Wiki](https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4/wiki). This platform will serve as a comprehensive repository for all documentation related to our codebase. Here are the key points regarding this initiative:
 
 1. **GitHub Wiki as a Knowledge Hub:**
-   - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure and functions.
+   - The GitHub Wiki will function as a centralized knowledge hub for our project, housing detailed documentation on code structure, functions, and project-related information.
 
 2. **Structured and Accessible Information:**
    - Documentation will be organized in a structured manner, with a table of contents for easy navigation.
    - Each complex function will have dedicated pages for in-depth information.
+   - Integrate visual aids such as flowcharts or diagrams to enhance the understanding of complex processes.
 
 3. **Developer-Friendly Templates:**
    - To facilitate developers in documenting their code effectively, we will provide a template that guides them on the essential information to include.
-   - The template will be available on the project GitHub in the folder QA inside the folder documents, the file name is "[Function-documentation-template](Function-documentation-template.md)". Developers can use it as a reference when documenting their code.
+   - The template will be available on the project GitHub in the folder `QA` inside the folder `documents`, the file name is "[Function-documentation-template](Function-documentation-template.md)". Developers can use it as a reference when documenting their code.
+   - Encourage developers to provide examples and use cases in their documentation to make it more practical and user-friendly.
 
 4. **Improved Onboarding and Collaboration:**
    - Centralized documentation simplifies onboarding for new team members by providing a single, accessible source of truth.
-   - Developers can collaborate more efficiently when documentation is readily available, reducing the need for constant inquiries.
+   - Emphasize the importance of keeping documentation up-to-date, especially during onboarding periods, to ensure accuracy for new team members.
+   - Consider including a section on common development practices and coding conventions to streamline collaboration.
 
 5. **Versioned Documentation:**
    - GitHub Wiki supports versioning, allowing us to maintain historical documentation for different releases.
    - Developers can refer to documentation relevant to a specific version.
+   - Encourage developers to specify the version number in their documentation to maintain clarity on which version the information pertains to.
+
+6. **Feedback Mechanism:**
+   - Implement a feedback mechanism or suggestion process within the Wiki to encourage continuous improvement and collaboration among team members.
+   - Consider holding periodic documentation reviews to ensure the documentation remains accurate and relevant.
 
 ## Test Criteria
 
@@ -397,6 +455,7 @@ Before the game can be considered ready for distribution, certain benchmarks mus
   
 3. **Documentation Completeness:**
    - Comprehensive documentation, including test plans, test cases, test results, functional specifications, and technical specifications, must be finalized and reviewed for completeness.
+   - Documentation should be easily understandable and accessible to all team members, ensuring a clear understanding of the testing process and results.
 
 ## Allocated Resources
 
@@ -440,6 +499,10 @@ For this project, the people involved are the 2 quality assurances of team 4 but
 
 ## Test Schedule and Estimation
 
+The estimated time for each task in the Test Schedule and Estimation table is based on the efforts of the entire Quality Assurance team, which consists of 2 team members. The allocation of time considers the collaborative nature of the testing process, where tasks are distributed and performed collectively by the team. The total time mentioned for each task reflects the cumulative efforts of both team members working together.
+
+This collaborative approach aims to leverage the strengths and expertise of each team member, ensuring efficient task execution and comprehensive testing coverage. Adjustments to the schedule can be made based on the team's capacity and any specific skill sets required for certain tasks.
+
 ### Tasks Time Estimation
 
 | Task                                           | Start Date          | End Date            | Duration             |
@@ -460,7 +523,7 @@ For this project, the people involved are the 2 quality assurances of team 4 but
 
 **Note:**
 
-- Duration are calculated on working days.
+- Duration is calculated on working days.
 - Weekends are not included in the duration.
 - For tasks spanning multiple weeks, the duration reflects continuous work, considering full-time efforts.
 
