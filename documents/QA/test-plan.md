@@ -435,7 +435,7 @@ testing activities may be temporarily halted. The following suspension criteria 
    - Critical bugs are those with a "High" impact on the core functionality of the software.
 
 2. **Resource Unavailability:**
-   - If essential testing resources, such as testing environments, tools, or personnel, become unavailable for an extended period, testing may be suspended.
+   - If essential testing resources, such as testing environments, tools, or personal, become unavailable for an extended period, testing may be suspended.
    - This criteria ensures that testing can resume only when necessary resources are accessible.
 
 ### Exit Criteria
