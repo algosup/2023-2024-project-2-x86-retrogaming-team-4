@@ -22,18 +22,10 @@
       - [Time spent](#time-spent)
     - [Operational expenses](#operational-expenses)
       - [Performance](#performance)
-        - [Response time](#response-time)
-        - [Framerate](#framerate)
       - [Reliability](#reliability)
-        - [Bug presence](#bug-presence)
-        - [Crash presence](#crash-presence)
       - [Security](#security)
-        - [Network](#network)
       - [Operability](#operability)
-        - [Supported platforms](#supported-platforms)
       - [Recovery](#recovery)
-        - [Game crash handling](#game-crash-handling)
-        - [High score](#high-score)
       - [Maintainability](#maintainability)
   - [VII. Solution overview](#vii-solution-overview)
     - [System architecture](#system-architecture)
@@ -44,17 +36,19 @@
       - [Graphics](#graphics)
         - [Colors](#colors)
         - [Fonts](#fonts)
-        - [Game window](#game-window)
+        - [Maze layout](#maze-layout)
         - [Sprites](#sprites)
         - [Animations](#animations)
       - [Sound system](#sound-system)
     - [Gameplay](#gameplay)
       - [Player Controls](#player-controls)
       - [Movement](#movement)
+        - [Direction change](#direction-change)
       - [Interactions](#interactions)
         - [Pellets eating](#pellets-eating)
         - [Power Pellets](#power-pellets)
         - [Cherry](#cherry)
+      - [Tunnels](#tunnels)
       - [Ghosts](#ghosts)
         - [Ghosts movements](#ghosts-movements)
         - [Behaviour modes management](#behaviour-modes-management)
@@ -63,6 +57,7 @@
         - [Inky (Blue ghost)](#inky-blue-ghost)
         - [Clyde (Orange ghost)](#clyde-orange-ghost)
         - [Frightened mode](#frightened-mode)
+        - [Eaten ghosts](#eaten-ghosts)
       - [Game Rules](#game-rules)
       - [Game Over Screen](#game-over-screen)
   - [VIII. Usage example](#viii-usage-example)
@@ -129,7 +124,7 @@ Here is a table of the different milestones and the deliverables dates associate
 | Date                      | Milestone / Deliverable  |
 | ------------------------- | ------------------------ |
 | November 13, 2023, 1.30pm | Functional specification |
-| November 27, 2023, 5pm    | Technical specification  |
+| November 27, 2023, 1.30pm | Technical specification  |
 | December 8, 2023, 5pm     | Test plan                |
 | December 11, 2023, 5pm    | Working prototype        |
 | December 21, 2023, 5pm    | Final product            |
@@ -192,45 +187,45 @@ The following personas are based on the target audience we assume to have.
 
 #### Performance
 
-##### Response time
+- **Response time:**
 
-- The response time between a key is pressed by a user and the action taken into account by the program should be under or equal to 100 milliseconds.
+  - The response time between a key is pressed by a user and the action taken into account by the program should be under or equal to 100 milliseconds.
 
-##### Framerate
+- **Framerate:**
 
-- At least 24 frame per second, but to guarantee a smoother user-experience, our game should refresh at a 60 hertz framerate.
+  - At least 24 frame per second, but to guarantee a smoother user-experience, our game should refresh at a 60 hertz framerate.
 
 #### Reliability
 
-##### Bug presence
+- **Bug presence:**
 
-- The game should not contain bugs which are impacting the user-experience.
+  - The game should not contain bugs which are impacting the user-experience.
 
-##### Crash presence
+- **Crash presence:**
 
-- The game should not crash as any crash cancels the current game and inherently destroys the user experience.
+  - The game should not crash as any crash cancels the current game and inherently destroys the user experience.
 
 #### Security
 
-##### Network
+- **Network:**
 
-- The game will not be using the network and the program will be contained in DOSBox emulator.
+  - The game will not be using the network and the program will be contained in DOSBox emulator.
 
 #### Operability
 
-##### Supported platforms
+- **Supported platforms:**
 
-- The game should run on any platform compatible with DOSBox emulator.
+  - The game should run on any platform compatible with DOSBox emulator.
 
 #### Recovery
 
-##### Game crash handling
+- **Game crash handling:**
 
-- The game should restart from the beginning in case of a crash.
+  - The game should restart from the beginning in case of a crash.
 
-##### High score
+- **High score:**
 
-- Stored in an external .txt file which reloads in case of a crash.
+  - Stored in an external .txt file which reloads in case of a crash.
 
 #### Maintainability
 
@@ -305,11 +300,9 @@ Here is the color palette we are going to use:
 
 We will be using the [Emulogic font](https://www.urbanfonts.com/fonts/Emulogic.htm) designs which fatifully reproduce original Pac-Man texts. Every text is displayed with a font size of 7 pixels, equivalent to a 7/8th of a tile.
 
-##### Game window
+##### Maze layout
 
-The game will take place in a maze similar to the example displayed below. It will be displayed in the command line window of the DOSBox emulator. This window will be displayed in full screen.
-
-<!-- Modifier image du maze pour donner les mesures -->
+The game will take place in a maze similar to the example displayed below with a width of 224 pixels and a height of 288 pixels. It will be displayed in the command line window of the DOSBox emulator. This window will be displayed in full screen.
 
 ![Pac-maze](../pictures/Pac-Maze.png)
 
@@ -325,6 +318,7 @@ Here are the different sprites that will be used to create the game:
 | Scared Ghosts | 16x8       | ![ScaredGhosts](../pictures/ScaredGhosts.png) |
 | Eyes          | 5x5        | ![Eyes](../pictures/Eyes.png)                 |
 | Cherry        | 8x8        | ![Cherry](../pictures/Cherry.png)             |
+| Scores        | 7x5        | ![Scores](../pictures/scores_display.png)     |
 
 Pac-Man will be able to face 4 directions, up, left, down, and right, and open his mouth.  
 Ghosts will be able to see in those 4 directions.
@@ -335,7 +329,68 @@ At the start of each level, the map will be similar to this
 
 ##### Animations
 
-<!-- TO DO -->
+- **Pac-Man base animation:**
+
+Pac-Man animations are based on the display of three Pac-Man sprites to give the impression Pac-Man is eating while moving. Each face is associated to a time described in the following table:
+
+| Frame name        | Displayed Pac-Man                                                        | Time displayed   |
+| ----------------- | ------------------------------------------------------------------------ | ---------------- |
+| Opened mouth      | ![Pac-Man right open](../pictures/Pac-Man-open-face-right.png)           | 200 milliseconds |
+| Semi-opened mouth | ![Pac-Man right semi-open](../pictures/Pac-Man-semi-open-face-right.png) | 200 milliseconds |
+| Closed mouth      | ![Pac-Man closed](../pictures/Pac-Man-closed.png)                        | 200 milliseconds |
+
+Whenever Pac-Man is in the following cases, its animations are not activated and instead display the semi-opened mouth sprite:
+
+- Pac-Man hits a wall and is stopped without any keystroke pressed
+- Pac-Man is not moving at the begining of a level and the player does not press any keystroke
+- Whenever Pac-Man is being eaten by a ghost
+
+- **Pac-Man dying animation:**
+
+When Pac-Man dies, a death animation is triggered after 1 second, not regarding the number of lives left he has. Here is the table summarizing this animation:
+
+| Animation sprite number | Sprite                                                       | Time displayed    |
+| ----------------------- | ------------------------------------------------------------ | ----------------- |
+| #1                      | ![Pac-Man animation 1](../pictures/Pac-Man-open-face-up.png) | 1/6th of a second |
+| #2                      | ![Pac-Man animation 2](../pictures/Pac-Man-dying-2.png)      | 1/6th of a second |
+| #3                      | ![Pac-Man animation 3](../pictures/Pac-Man-dying-3.png)      | 1/6th of a second |
+| #4                      | ![Pac-Man animation 4](../pictures/Pac-Man-dying-4.png)      | 1/6th of a second |
+| #5                      | ![Pac-Man animation 5](../pictures/Pac-Man-dying-5.png)      | 1/6th of a second |
+| #6                      | ![Pac-Man animation 6](../pictures/Pac-Man-dying-6.png)      | 1/6th of a second |
+| #7                      | ![Pac-Man animation 7](../pictures/Pac-Man-dying-7.png)      | 1/6th of a second |
+| #8                      | ![Pac-Man animation 8](../pictures/Pac-Man-dying-8.png)      | 1/6th of a second |
+| #9                      | ![Pac-Man animation 9](../pictures/Pac-Man-dying-9.png)      | 1/6th of a second |
+| #10                     | ![Pac-Man animation 10](../pictures/Pac-Man-dying-10.png)    | 1/6th of a second |
+| #11                     | ![Pac-Man animation 11](../pictures/Pac-Man-dying-11.png)    | 1/6th of a second |
+
+After, it doesn't display pac-man sprite until the game restarts and spawn another Pac-Man if the life counter of the player was greater or equal to 1, or until a new game is relaunch after prompting the user and showing the "Game Over screen"
+
+- **Ghosts Animations:**
+
+When moving, the ghosts are animated, giving the impression of a seamless move to the user. It consists in only two frames per ghost, animating the bottom of the sprite. The following table summarizes the images corresponding to each ghost:
+
+| Ghost name | Orientation | Image n°1                                                  | Image n°2                                                  |
+| ---------- | ----------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Blinky     | Left        | ![Blinky left animation 1](../pictures/Blinky-left1.png)   | ![Blinky left animation 2](../pictures/Blinky-left2.png)   |
+| Blinky     | Right       | ![Blinky right animation 1](../pictures/Blinky-right1.png) | ![Blinky right animation 2](../pictures/Blinky-right2.png) |
+| Blinky     | Up          | ![Blinky up animation 1](../pictures/Blinky-up1.png)       | ![Blinky up animation 2](../pictures/Blinky-up2.png)       |
+| Blinky     | Down        | ![Blinky down animation 1](../pictures/Blinky-down1.png)   | ![Blinky down animation 2](../pictures/Blinky-down2.png)   |
+| Pinky      | Left        | ![Pinky left animation 1](../pictures/Pinky-left1.png)     | ![Pinky left animation 2](../pictures/Pinky-left2.png)     |
+| Pinky      | Right       | ![Pinky right animation 1](../pictures/Pinky-right1.png)   | ![Pinky right animation 2](../pictures/Pinky-right2.png)   |
+| Pinky      | Up          | ![Pinky up animation 1](../pictures/Pinky-up1.png)         | ![Pinky up animation 2](../pictures/Pinky-up2.png)         |
+| Pinky      | Down        | ![Pinky down animation 1](../pictures/Pinky-down1.png)     | ![Pinky down animation 2](../pictures/Pinky-down2.png)     |
+| Inky       | Left        | ![Inky left animation 1](../pictures/Inky-left1.png)       | ![Inky left animation 2](../pictures/Inky-left2.png)       |
+| Inky       | Right       | ![Inky right animation 1](../pictures/Inky-right1.png)     | ![Inky right animation 2](../pictures/Inky-right2.png)     |
+| Inky       | Up          | ![Inky up animation 1](../pictures/Inky-up1.png)           | ![Inky up animation 2](../pictures/Inky-up2.png)           |
+| Inky       | Down        | ![Inky down animation 1](../pictures/Inky-down1.png)       | ![Inky down animation 2](../pictures/Inky-down2.png)       |
+| Clyde      | Left        | ![Clyde left animation 1](../pictures/Clyde-left1.png)     | ![Clyde left animation 2](../pictures/Clyde-left2.png)     |
+| Clyde      | Right       | ![Clyde right animation 1](../pictures/Clyde-right1.png)   | ![Clyde right animation 2](../pictures/Clyde-right2.png)   |
+| Clyde      | Up          | ![Clyde up animation 1](../pictures/Clyde-up1.png)         | ![Clyde up animation 2](../pictures/Clyde-up2.png)         |
+| Clyde      | Down        | ![Clyde down animation 1](../pictures/Clyde-down1.png)     | ![Clyde down animation 2](../pictures/Clyde-down2.png)     |
+
+- **Frightening mode ghosts animations:**
+
+When frightened, the ghosts are not able to 
 
 #### Sound system
 
@@ -374,7 +429,18 @@ The list of all the sounds and their players can also be found on [this link](ht
 
 #### Movement
 
-Pac-Man moves through the maze at the rate of 11 pixels per second, or 11/8th of a tile. Each frame is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second is the targeted framerate.
+Pac-Man moves through the maze at the rate of 11 pixels per second, or 11/8th of a tile. The game is rendered at, at least 24 frames per second, ensuring smooth movement for human eyes. However, we keep in mind that 60 frames per second is the targeted framerate.
+
+##### Direction change
+
+When Pac-Man changes direction, the sprite representing it changes in direction, here are the sprites corresponding to each directions:
+
+| Direction | Open face sprite                                               | Semi-opened face                                                         | Closed face                                       |
+| --------- | -------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------- |
+| Up        | ![Pac-Man up open](../pictures/Pac-Man-open-face-up.png)       | ![Pac-Man up semi-open](../pictures/Pac-Man-semi-open-face-up.png)       | ![Pac-Man closed](../pictures/Pac-Man-closed.png) |
+| Down      | ![Pac-Man down open](../pictures/Pac-Man-open-face-down.png)   | ![Pac-Man down semi-open](../pictures/Pac-Man-semi-open-face-down.png)   | ![Pac-Man closed](../pictures/Pac-Man-closed.png) |
+| Left      | ![Pac-Man left open](../pictures/Pac-Man-open-face-left.png)   | ![Pac-Man left semi-open](../pictures/Pac-Man-semi-open-face-left.png)   | ![Pac-Man closed](../pictures/Pac-Man-closed.png) |
+| Right     | ![Pac-Man right open](../pictures/Pac-Man-open-face-right.png) | ![Pac-Man right semi-open](../pictures/Pac-Man-semi-open-face-right.png) | ![Pac-Man closed](../pictures/Pac-Man-closed.png) |
 
 #### Interactions
 
@@ -382,13 +448,18 @@ Pac-Man moves through the maze at the rate of 11 pixels per second, or 11/8th of
 
 - Small dots, which are also called pellets, are strategically almost completely placed throughout the maze, as shown in the following image. When Pac-Man comes into contact with a pellet, it is immediately consumed and disappears from the screen, as well as increasing the player current game score by 10 points.
 
-<!-- Add image -->
+
+<p align="center"><img src="../pictures/pellets_layout.png" alt="Pellets layout" width="250"></p>
+
+In this image, the little red dots situated in the center of the corridors of the maze are the pellets which can be eaten by Pac-Man. They are following the placing of the dots indicated in the [User interface section](#user-interface)
 
 ##### Power Pellets
 
 - There are four power pellets located in the corners of the maze following the places indicated in the following image. When Pac-Man consumes a power pellet, it gains the ability to eat ghosts for a limited amount of time by turning them into frightened mode, as well as earning 50 points which are incremented to the player's score.
 
-<!-- Add image -->
+<p align="center"><img src="../pictures/power_pellets_layout.png" alt="Power pellets layout" width="250"></p>
+
+In this image, the bigger red dots situated in the center of the maze are the pellets which can be eaten by Pac-Man.
 
 ##### Cherry
 
@@ -398,6 +469,16 @@ Pac-Man moves through the maze at the rate of 11 pixels per second, or 11/8th of
 | ---------- | -------------- | ------------ |
 | 70         | 10s            | 100          |
 | 170        | 8s             | 100          |
+
+After eating a cherry, a text sprite indicating the player earned 100 points in Salmon color appears at the exact position where the cherry was and disappears after 2 seconds.
+
+<p align="center"><img src="../pictures/100_pts.png" alt="100 points" width="64"></p>
+
+#### Tunnels
+
+There are two paths (also called tunnel) in the middle of the maze, one on the left and one on the right as shown in red in the image. These paths have no border at the edge of the screen, and when Pac-Man or the ghosts take them, they teleport to the opposite side of the path. For example, if Pac-Man takes the right tunnel and hits the border, it will be teleported to the left tunnel layer by layer.
+
+<p align="center"><img src="../pictures/Tunnels.png" alt="Tunnels layout" width="250"></p>
 
 #### Ghosts
 
@@ -579,6 +660,19 @@ As Pac-Man is more than eight tiles away using the most efficient path, Clyde re
   | 18           | 1                                               |
   | 19 and after | 0                                               |
 
+##### Eaten ghosts
+
+If a ghost is being eaten by Pac-Man, its sprite disappears except its eyes which are coming back to the ghost house following the maze layout. Once at their spawn point, their sprite reappears in the ghost box.
+
+Here are the different eye sprites corresponding to the direction they are travelling to:
+
+| Eyes direction | Sprite                                    |
+| -------------- | ----------------------------------------- |
+| Up             | ![Up eyes](../pictures/eyes-up.png)       |
+| Down           | ![Down eyes](../pictures/eyes-down.png)   |
+| Left           | ![Left eyes](../pictures/eyes-left.png)   |
+| Right          | ![Right eyes](../pictures/eyes-right.png) |
+
 #### Game Rules
 
 - **Scoring:**
@@ -694,13 +788,14 @@ As Pac-Man is still under license, we had to take into consideration the fact th
 ## XII. Bonus/additional features
 
 As a bonus which will be added if we don't face any issues during the development and testing phases, we plan to add some additional features to give players more varied experiences in terms of gameplay.  
-This section will stay quite concise and won't explain in detail how each of the game modes and menus will work, so an additional document describing these additional gameplay elements will be included in a future specification.
 
 ### Additional game modes
 
 #### 2 players game mode
 
 This game mode can be played by two players at the same time. Both players control their own Pac-Man sprite on the same keyboard. The objective of this game mode is strictly the same as the original Pac-Man game. The second character is wearing a hair bow and is called "Miss Pac-Man".
+
+<p align="center"><img src="../pictures/Miss_Pac-Man.png" alt="Miss Pac-Man sprite" width="250"></p>
 
 ##### Specificities
 
