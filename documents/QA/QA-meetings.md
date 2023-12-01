@@ -68,7 +68,7 @@ The team is expected to implement the optimized code commenting practices discus
 
 # 3. QA Team 5-Minute Meeting 
 
-## Meeting Date and Time: 
+## Meeting Date and Time: 2023-12-1 10:00 AM
 
 ## Objective: 
 
