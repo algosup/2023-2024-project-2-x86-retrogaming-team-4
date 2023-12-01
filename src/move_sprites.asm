@@ -1,6 +1,4 @@
 section .data
-    xPos dw 160
-    yPos dw 80
     xVelocity dw 1
     PACMANDir dw PACMAN_RIGHT_2
 
@@ -21,15 +19,6 @@ section .data
 
 
 section .text
-
-DrawSprite:
-    mov ax, [yPos]
-    mov bx, [xPos]
-    call calculate_screen_position
-    mov ax, [PACMANDir]
-    call calculate_spritesheet_position
-    call draw_sprite
-    ret
 
 changePacManPosition:
 
