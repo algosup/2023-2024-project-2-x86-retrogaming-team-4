@@ -781,7 +781,7 @@ To assess the performance and quality of the project, a set of evaluation criter
 As Pac-Man is still under license, we had to take into consideration the fact that it could be an issue. After asking the client, they told us this should not be an issue for several reasons, but advised us to reach out directly to Bandai Namco Entertainment Inc.[^4]. We sent an email to them, and received an answer, saying there could not give an explicit approval for us to use their product in our project. The only piece of advide they could give us was to make sure everything we ere doing was falling in the relevant legal framework. As a consequence, we decided to take the following measures:
 
 - Include in the first line of the README a reference to the non-commercial usage of the software, as it was only made with educational and entertainment purpose.
-- Include a Creative Commons BY-NC license which restrcits to non-commercial and personal usages only. This license limits the usage of the software, as well as clearing our names from violating a copyright.
+- Include a Creative Commons BY-NC-ND license which restrcits to non-commercial and personal usages only. This license limits the usage of the software, as well as clearing our names from violating a copyright.
 - Explicitly say we are not the authors of the original Pac-Man game and we only pay a tribute to the original Pac-Man in the README.
 - With these actions, we can leave the GitHub repository publicly accessible to anyone.
 
