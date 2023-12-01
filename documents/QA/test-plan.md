@@ -155,7 +155,7 @@ Each test comprises the following components:
 
 | Function | Expected Result | Severity |
 | --- | --- | --- |
-| Clyde behavior | Clyde is supposed to be near PacMan and within 8 squares he becomes random. | Medium |
+| Clyde behavior | Clyde is supposed to be near PacMan and within 8 pellets he becomes random. | Medium |
 | Wall collision (Pac-Man) | Ensure Pac-Man halts at every environmental wall | High |
 | Wall collision (Ghost) | Ensure ghosts halt at every environmental wall | High |
 | Ghosts collision (Ghost) | Ensure ghosts halt at every other ghost | High |

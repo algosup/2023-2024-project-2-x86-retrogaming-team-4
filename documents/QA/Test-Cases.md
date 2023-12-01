@@ -150,10 +150,10 @@ Test priorities are indicated by the following colors:
 | ID | T13 |
 | --- | --- |
 | Name | Pac-Man Eat Bonus Fruits/Items |
-| Test Description | Verify that Pac-Man can eat bonus fruits/items and the score increases |
+| Test Description | Verify that Pac-Man can eat Cherry and the score increases |
 | Requirement(s) | The game is started, and Pac-Man eats a Cherry |
 | Step(s) | 1. Start the game, 2. Play the game, 3. Eat a Cherry |
-| Expected Result | The score should increase |
+| Expected Result | The score should increase of 100 points |
 | Priority | 🟨 |
 
 ## 14. Ghost Collision: Ghost
@@ -344,7 +344,7 @@ Test priorities are indicated by the following colors:
 | Priority | 🟧 |
 
 ## 31. Pac-Man Spawn Location 
-| ID | 31 |
+| ID | T31 |
 | --- | --- |
 | Name | Pac-Man Spawn Location |
 | Test Description | Confirm that Pac-Man spawns in the correct location at the start of the game |
