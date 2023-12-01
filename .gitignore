@@ -1,4 +1,7 @@
-
-.vscode/settings.json
-./src/pac.map
-./src/build-pacman.com
+.vscode/*
+.vscode
+*/*.map
+*/*.com
+*/*.cmd
+bin/
+nasm/
