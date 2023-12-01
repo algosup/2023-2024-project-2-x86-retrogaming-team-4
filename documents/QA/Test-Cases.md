@@ -352,3 +352,50 @@ Test priorities are indicated by the following colors:
 | Step(s) | 1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Observe Pac-Man spawn location |
 | Expected Result | Pac-Man should spawn below the ghost home |
 | Priority | 🟨 |
+
+## 32. Ghost Spawn Location (Inky, Clyde, Pinky)
+
+| ID | T32 |
+| --- | --- |
+| Name | Ghost Spawn Location |
+| Test Description | Confirm that the ghosts spawn in the ghost house at the start of the game |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Observe ghost spawn location |
+| Expected Result | Inky, Clyde, and Pinky should spawn in the ghost house |
+| Priority | 🟧 |
+
+## 33. Ghost Spawn Location (Blinky)
+
+| ID | T33 |
+| --- | --- |
+| Name | Ghost Spawn Location |
+| Test Description | Confirm that Blinky spawns above the ghost house at the start of the game |
+| Requirement(s) | The game is started |
+| Step(s) | 1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Observe Blinky spawn location |
+| Expected Result | Blinky should spawn above the ghost house |
+| Priority | 🟧 |
+
+
+## 34. Pac-Man Animation (Mouth Open)
+
+| ID | T34 |
+| --- | --- |
+| Name | Pac-Man Animation (Mouth Open) |
+| Test Descritpion | Verify the Pac-Man animation with an open mouth |
+| Requirement(s) | The game is started |
+| Step(s) |1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Navigate Pac-Man through the maze.|
+| Expected Result | Pac-Man displays an open mouth animation |
+| Priority | 🟧 |
+
+
+## 35. Pac-Man Animation (Mouth Closed)
+
+| ID | T35 |
+| --- | --- |
+| Name | Pac-Man Animation (Mouth Closed) |
+| Test Description | Verify the Pac-Man animation with a closed mouth |
+| Requirement(s) | The game is started |
+| Step(s) |1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Navigate Pac-Man through the maze.|
+| Expected Result | Pac-Man displays a closed mouth animation after the "mouth open".  |
+| Priority | 🟧 |
+
