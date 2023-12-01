@@ -1,30 +1,38 @@
 
-;%ifndef "entry.asm"
-;%endif "entry.asm"
+section .text
 
-start:
-    ; Set video mode to 320x200 256 colors graphic mode
-    mov ax, 0013h
-    int 10h
-    push 0a000h
-    pop es
+    start:
+        call SetVideoMode
+        call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
+        
+        ;call ClearScreen
+        call BuildBackgroundBuffer
+        call MazeToBGbuffer
+        call DisplayMaze
+        ;call FirstDisplayPacMan
+        call FirstDisplayGhosts
 
-
-    ;;;;;;;;;;;;;;;;;;;;;;
-    ;;                  ;;
-    ;;  MAIN CODE HERE  ;;
-    ;;                  ;;
-    ;;;;;;;;;;;;;;;;;;;;;;
-
-
-    ; Exit
-    jmp exit
+        
+        
+        
+        
 
 
 
-exit:
-    ; Wait for key and terminate the program
-    mov al,01h ; Clear buffer
-    mov ah,0ch ; Read key
-    int 21h ; Execute
-    int 20h ; Exit
+
+;-----------------------------------------------------------------------------------------
+;THE GAME LOOP
+    gameloop:
+;-------------------------------------------------
+    
+    call ClearPinky
+    call changePinkyPosition
+    call Display_Pinky
+    call UpdateScreen
+
+
+;-------------------------------------------------
+; GOTO GAME LOOP
+    jmp gameloop
+;-----------------------------------------------------------------------------------------
+
