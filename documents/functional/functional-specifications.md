@@ -369,28 +369,33 @@ After, it doesn't display pac-man sprite until the game restarts and spawn anoth
 
 When moving, the ghosts are animated, giving the impression of a seamless move to the user. It consists in only two frames per ghost, animating the bottom of the sprite. The following table summarizes the images corresponding to each ghost:
 
-| Ghost name | Orientation | Image n°1                                                  | Image n°2                                                  |
-| ---------- | ----------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| Blinky     | Left        | ![Blinky left animation 1](../pictures/Blinky-left1.png)   | ![Blinky left animation 2](../pictures/Blinky-left2.png)   |
-| Blinky     | Right       | ![Blinky right animation 1](../pictures/Blinky-right1.png) | ![Blinky right animation 2](../pictures/Blinky-right2.png) |
-| Blinky     | Up          | ![Blinky up animation 1](../pictures/Blinky-up1.png)       | ![Blinky up animation 2](../pictures/Blinky-up2.png)       |
-| Blinky     | Down        | ![Blinky down animation 1](../pictures/Blinky-down1.png)   | ![Blinky down animation 2](../pictures/Blinky-down2.png)   |
-| Pinky      | Left        | ![Pinky left animation 1](../pictures/Pinky-left1.png)     | ![Pinky left animation 2](../pictures/Pinky-left2.png)     |
-| Pinky      | Right       | ![Pinky right animation 1](../pictures/Pinky-right1.png)   | ![Pinky right animation 2](../pictures/Pinky-right2.png)   |
-| Pinky      | Up          | ![Pinky up animation 1](../pictures/Pinky-up1.png)         | ![Pinky up animation 2](../pictures/Pinky-up2.png)         |
-| Pinky      | Down        | ![Pinky down animation 1](../pictures/Pinky-down1.png)     | ![Pinky down animation 2](../pictures/Pinky-down2.png)     |
-| Inky       | Left        | ![Inky left animation 1](../pictures/Inky-left1.png)       | ![Inky left animation 2](../pictures/Inky-left2.png)       |
-| Inky       | Right       | ![Inky right animation 1](../pictures/Inky-right1.png)     | ![Inky right animation 2](../pictures/Inky-right2.png)     |
-| Inky       | Up          | ![Inky up animation 1](../pictures/Inky-up1.png)           | ![Inky up animation 2](../pictures/Inky-up2.png)           |
-| Inky       | Down        | ![Inky down animation 1](../pictures/Inky-down1.png)       | ![Inky down animation 2](../pictures/Inky-down2.png)       |
-| Clyde      | Left        | ![Clyde left animation 1](../pictures/Clyde-left1.png)     | ![Clyde left animation 2](../pictures/Clyde-left2.png)     |
-| Clyde      | Right       | ![Clyde right animation 1](../pictures/Clyde-right1.png)   | ![Clyde right animation 2](../pictures/Clyde-right2.png)   |
-| Clyde      | Up          | ![Clyde up animation 1](../pictures/Clyde-up1.png)         | ![Clyde up animation 2](../pictures/Clyde-up2.png)         |
-| Clyde      | Down        | ![Clyde down animation 1](../pictures/Clyde-down1.png)     | ![Clyde down animation 2](../pictures/Clyde-down2.png)     |
+| Ghost name | Orientation | Image n°1                                                  | Image n°2                                                  | Time between image change |
+| ---------- | ----------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ------------------------- |
+| Blinky     | Left        | ![Blinky left animation 1](../pictures/Blinky-left1.png)   | ![Blinky left animation 2](../pictures/Blinky-left2.png)   | 1/6th of a second         |
+| Blinky     | Right       | ![Blinky right animation 1](../pictures/Blinky-right1.png) | ![Blinky right animation 2](../pictures/Blinky-right2.png) | 1/6th of a second         |
+| Blinky     | Up          | ![Blinky up animation 1](../pictures/Blinky-up1.png)       | ![Blinky up animation 2](../pictures/Blinky-up2.png)       | 1/6th of a second         |
+| Blinky     | Down        | ![Blinky down animation 1](../pictures/Blinky-down1.png)   | ![Blinky down animation 2](../pictures/Blinky-down2.png)   | 1/6th of a second         |
+| Pinky      | Left        | ![Pinky left animation 1](../pictures/Pinky-left1.png)     | ![Pinky left animation 2](../pictures/Pinky-left2.png)     | 1/6th of a second         |
+| Pinky      | Right       | ![Pinky right animation 1](../pictures/Pinky-right1.png)   | ![Pinky right animation 2](../pictures/Pinky-right2.png)   | 1/6th of a second         |
+| Pinky      | Up          | ![Pinky up animation 1](../pictures/Pinky-up1.png)         | ![Pinky up animation 2](../pictures/Pinky-up2.png)         | 1/6th of a second         |
+| Pinky      | Down        | ![Pinky down animation 1](../pictures/Pinky-down1.png)     | ![Pinky down animation 2](../pictures/Pinky-down2.png)     | 1/6th of a second         |
+| Inky       | Left        | ![Inky left animation 1](../pictures/Inky-left1.png)       | ![Inky left animation 2](../pictures/Inky-left2.png)       | 1/6th of a second         |
+| Inky       | Right       | ![Inky right animation 1](../pictures/Inky-right1.png)     | ![Inky right animation 2](../pictures/Inky-right2.png)     | 1/6th of a second         |
+| Inky       | Up          | ![Inky up animation 1](../pictures/Inky-up1.png)           | ![Inky up animation 2](../pictures/Inky-up2.png)           | 1/6th of a second         |
+| Inky       | Down        | ![Inky down animation 1](../pictures/Inky-down1.png)       | ![Inky down animation 2](../pictures/Inky-down2.png)       | 1/6th of a second         |
+| Clyde      | Left        | ![Clyde left animation 1](../pictures/Clyde-left1.png)     | ![Clyde left animation 2](../pictures/Clyde-left2.png)     | 1/6th of a second         |
+| Clyde      | Right       | ![Clyde right animation 1](../pictures/Clyde-right1.png)   | ![Clyde right animation 2](../pictures/Clyde-right2.png)   | 1/6th of a second         |
+| Clyde      | Up          | ![Clyde up animation 1](../pictures/Clyde-up1.png)         | ![Clyde up animation 2](../pictures/Clyde-up2.png)         | 1/6th of a second         |
+| Clyde      | Down        | ![Clyde down animation 1](../pictures/Clyde-down1.png)     | ![Clyde down animation 2](../pictures/Clyde-down2.png)     | 1/6th of a second         |
 
 - **Frightening mode ghosts animations:**
 
-When frightened, the ghosts are not able to 
+When frightened, the ghosts have a different sprite from the one they have in other modes. Each of the ghost have the same sprite. 2.5 seconds before the end of frightening mode, the ghost blinks in blue and white as described in the following table:
+
+| Moment in frightening mode                               | Sprite n°1                                                 | Sprite n°2                                                 | Sprite n°3                                           | Sprite n°4                                           | Time between each sprite display on the screen |
+| -------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ------------------------ |
+| Classic frightening mode                                 | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | /                                                    | /                                                    | 1/6th of a second        |
+| Flashing frightening mode (end of frightening mode time) | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | ![Ghost blinking 1](../pictures/Ghost-Blinking1.png) | ![Ghost blinking 2](../pictures/Ghost-Blinking2.png) | 1/6th of a second        |
 
 #### Sound system
 
