@@ -22,20 +22,6 @@ section .data
 
 section .text
 
-changePos:
-;switch the direction if the ghost reached a side of the screen
-    cmp byte [oldKeyPressed] ,113
-    je MoveLeft
-
-    cmp byte [oldKeyPressed] ,100
-    je MoveRight
-
-    cmp byte [oldKeyPressed] ,122
-    je MoveUp
-
-    cmp byte [oldKeyPressed] ,115
-    je MoveDown
-
 DrawSprite:
     mov ax, [yPos]
     mov bx, [xPos]
