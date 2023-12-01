@@ -29,7 +29,6 @@
         - [GitHub Overview](#github-overview)
         - [GitHub Actions](#github-actions)
           - [GitHub Actions Scope](#github-actions-scope)
-          - [GitHub Actions Scope](#github-actions-scope-1)
           - [Workflow](#workflow)
           - [Configuration](#configuration)
       - [GitHub Issues](#github-issues)
@@ -251,8 +250,6 @@ We will also use GitHub Issues to report bugs and errors, it will allow us to ma
 ---
 
 ##### GitHub Actions
-
-###### GitHub Actions Scope
 
 
 GitHub Actions are utilized for continuous integration and deployment. The workflow is triggered on each push to the main branch, ensuring the automatic execution of tests. (During the development phase, the workflow will also be triggered on each push to the dev branch.)
