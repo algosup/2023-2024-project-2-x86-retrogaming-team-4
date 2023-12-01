@@ -26,13 +26,26 @@ section .text
 ;THE GAME LOOP
     gameloop:
 ;-------------------------------------------------
+        ;clear all
         call ClearPinky
+        call ClearBlinky
+        call ClearInky
+        call ClearClyde
         call ClearPacMan
-        call readKeyboard
-        call changePinkyPosition
-        call Display_PacMan
 
+        call readKeyboard
+
+        call changePinkyPosition
+        call changeBlinkyPosition
+        call changeInkyPosition
+        call changeClydePosition
+
+        call Display_PacMan
         call Display_Pinky
+        call Display_Blinky
+        call Display_Inky
+        call Display_Clyde
+
         call UpdateScreen
 
 

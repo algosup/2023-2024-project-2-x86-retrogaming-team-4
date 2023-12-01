@@ -6,13 +6,13 @@ section .data
 
     afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
-    x_BlinkyPosition dw 30 ; x position of Blinky at the beginning (it will be changed each time it will move)
-    y_BlinkyPosition dw 100 ; y position of Blinky at the beginning (it will be changed each time it will move)
+    x_BlinkyPosition dw 274 ; x position of Blinky at the beginning (it will be changed each time it will move)
+    y_BlinkyPosition dw 30 ; y position of Blinky at the beginning (it will be changed each time it will move)
     frameOf_Blinky dw BLINKY_1
     frameOf_Blinky_eyes dw EYES_RIGHT
 
-    x_PinkyPosition dw 50 ; x position of Pinky at the beginning (it will be changed each time it will move)
-    y_PinkyPosition dw 100 ; y position of Pinky at the beginning (it will be changed each time it will move)
+    x_PinkyPosition dw 30 ; x position of Pinky at the beginning (it will be changed each time it will move)
+    y_PinkyPosition dw 30 ; y position of Pinky at the beginning (it will be changed each time it will move)
     frameOf_Pinky dw PINKY_1
     frameOf_Pinky_eyes dw EYES_RIGHT
 
@@ -53,6 +53,53 @@ section .text
 
         ret
     
+    Display_Blinky:
+        mov bx, [x_BlinkyPosition]
+        mov ax, [y_BlinkyPosition]
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Blinky]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        mov ax, [frameOf_Blinky_eyes]
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
+    
+    Display_Inky:
+        mov bx, [x_InkyPosition]
+        mov ax, [y_InkyPosition]
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Inky]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        mov ax, [frameOf_Inky_eyes]
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
+    
+    Display_Clyde:
+        mov bx, [x_ClydePosition]
+        mov ax, [y_ClydePosition]
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Clyde]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        mov ax, [frameOf_Clyde_eyes]
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
+
+
+    
     ClearPacMan:
         mov ax, [y_PacManPosition]
         mov bx, [x_PacManPosition]
@@ -62,6 +109,24 @@ section .text
     ClearPinky:
         mov ax, [y_PinkyPosition]
         mov bx, [x_PinkyPosition]
+        call ClearSprite
+        ret
+    
+    ClearInky:
+        mov ax, [y_InkyPosition]
+        mov bx, [x_InkyPosition]
+        call ClearSprite
+        ret
+    
+    ClearBlinky:
+        mov ax, [y_BlinkyPosition]
+        mov bx, [x_BlinkyPosition]
+        call ClearSprite
+        ret
+    
+    ClearClyde:
+        mov ax, [y_ClydePosition]
+        mov bx, [x_ClydePosition]
         call ClearSprite
         ret
 
