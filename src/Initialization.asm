@@ -1,27 +1,10 @@
 section .bss
-
    BackgroundBufferSegment resw 1 ; where is stored the dynamic background (dynamic cuz gums are disappearing). Used to restore the screen after a ghost's passage
    ScreenBufferSegment resw 1
 
 section .data
-
-   base: equ 0xf9fe
-   old_time: equ base+0x06
-
+   
 section .text
-
-   GetClockAndCompare:
-      pusha
-
-      mov ax, 0
-      int 1ah ; BIOS clock read
-      cmp dx, [old_time] ; Wait for change
-      je gameloop ; Loop
-      mov [old_time], dx
-      
-      popa
-
-   ret
 
    BuildScreenBuffer:
       call heapInit
@@ -64,14 +47,8 @@ section .text
 
    ClearScreen:
       ;clear the screen by filling it with a unique color (stored in al)
-      mov al, 0x83 ; color to fill the screen (white = 0x0F, black = 0x00)
-      call FillScreen
-   ret
-
-   FillScreen:
-
-      ;stosb copy byte per byte the content from 'al' to 'es:di', di increasing.
-      
+      mov al, 0x00 ; color to fill the screen (white = 0x0F, black = 0x00)
+            
       ;set the destination 'es:di' :
       push word [ScreenBufferSegment] ; video memory adress = 0xA000
       pop es ; define it as the adress of the destination segment
@@ -79,8 +56,6 @@ section .text
       mov cx, SCREEN_WIDTH*SCREEN_HEIGHT ; how many times 'rep' action will be repeated
       rep stosb ; store (byte per byte) the content of al into es:di, es = 0xA000, di increasing from 0 to 200*320
    ret
-
-   
 
    BuildBackgroundBuffer: 
       mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
