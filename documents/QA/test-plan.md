@@ -29,7 +29,6 @@
         - [GitHub Overview](#github-overview)
         - [GitHub Actions](#github-actions)
           - [GitHub Actions Scope](#github-actions-scope)
-          - [GitHub Actions Scope](#github-actions-scope-1)
           - [Workflow](#workflow)
           - [Configuration](#configuration)
       - [GitHub Issues](#github-issues)
@@ -252,8 +251,6 @@ We will also use GitHub Issues to report bugs and errors, it will allow us to ma
 
 ##### GitHub Actions
 
-###### GitHub Actions Scope
-
 
 GitHub Actions are utilized for continuous integration and deployment. The workflow is triggered on each push to the main branch, ensuring the automatic execution of tests. (During the development phase, the workflow will also be triggered on each push to the dev branch.)
 
@@ -438,7 +435,7 @@ testing activities may be temporarily halted. The following suspension criteria 
    - Critical bugs are those with a "High" impact on the core functionality of the software.
 
 2. **Resource Unavailability:**
-   - If essential testing resources, such as testing environments, tools, or personnel, become unavailable for an extended period, testing may be suspended.
+   - If essential testing resources, such as testing environments, tools, or personal, become unavailable for an extended period, testing may be suspended.
    - This criteria ensures that testing can resume only when necessary resources are accessible.
 
 ### Exit Criteria
