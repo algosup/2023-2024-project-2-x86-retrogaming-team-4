@@ -35,11 +35,11 @@ The team is expected to implement the optimized code commenting practices discus
   
 - Additionally, the Dev team is not entirely comfortable with GitHub, and the QA team suggests enhancing their Git knowledge for smoother collaboration.
   
--  The Dev team will begin populating the wiki with the templates provided by the QA team, who will concurrently start drafting test cases for the project. 
+- The Dev team will begin populating the wiki with the templates provided by the QA team, who will concurrently start drafting test cases for the project. 
   
--  Discussions regarding the wiki's purpose aim to establish a consistent architecture between the wiki and the code for better comprehension.
+- Discussions regarding the wiki's purpose aim to establish a consistent architecture between the wiki and the code for better comprehension.
 
--   Guidance on creating and responding to GitHub issues will be provided to facilitate effective communication within the team.
+- Guidance on creating and responding to GitHub issues will be provided to facilitate effective communication within the team.
 
 
 ### After-Consequences:
@@ -70,13 +70,17 @@ The team is expected to implement the optimized code commenting practices discus
 
 ## Meeting Date and Time: 2023-12-1 10:00 AM
 
-## Objective: 
+## Objective: Team Coordination and d
 
 ### Content:
-
-
+- Developers struggle to work cohesively, leading to project issues, notable consequences include code duplication and project slowdown.
+- Essential project functions lack documentation and sharing.
+- Developers express discomfort with Git.
 
 ### After-Consequences:
+- **Code Management Strategy:** Implemented code pooling on a dedicated Git branch, aiming to improve collaboration and alleviate code duplication issues.
+- **Documentation start:** Developers took the initiative to update documentation for critical functions.
+- **Git Usage Enhancement:** Initiated fine-tuning for Git usage to enhance developer comfort and enforce best practices.
 
 
 
