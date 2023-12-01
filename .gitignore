@@ -1,3 +1,4 @@
 
 .vscode/settings.json
 ./src/pac.map
+./src/build-pacman.com

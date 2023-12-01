@@ -1,3 +1,5 @@
+section .bss
+    buffScreen resb SPRITE_SIZE*SPRITE_SIZE ; where is stored the backuped screen
 
 section .text
 
@@ -24,15 +26,14 @@ section .text
 ;THE GAME LOOP
     gameloop:
 ;-------------------------------------------------
-    
-    call ClearPinky
-    call changePinkyPosition
-    call Display_Pinky
-    call UpdateScreen
+        call ClearPinky
+        call changePinkyPosition
+        call Display_Pinky
+        call UpdateScreen
 
 
 ;-------------------------------------------------
 ; GOTO GAME LOOP
-    jmp gameloop
+        jmp gameloop
 ;-----------------------------------------------------------------------------------------
 
