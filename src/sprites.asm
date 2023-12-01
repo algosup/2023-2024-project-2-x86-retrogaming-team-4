@@ -1,5 +1,3 @@
-calculate_screen_position:
-
 section .data
 
     x_PacManPosition dw 10 ; x position of pacman at the beginning (it will be changed each time it will move)

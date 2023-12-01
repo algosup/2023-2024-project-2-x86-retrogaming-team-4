@@ -31,36 +31,15 @@ DrawSprite:
     call draw_sprite
     ret
 
-MoveRight:
-    mov bx, [xVelocity]
-    add [xPos], bx
-    mov word [PACMANDir], PACMAN_RIGHT_2
-    ;call clearScreen
-    call DrawSprite
-    ret
+changePacManPosition:
 
-MoveLeft:
-    mov bx, [xVelocity]
-    sub [xPos], bx
-    mov word [PACMANDir], PACMAN_LEFT_2
-    ;call clearScreen
-    call DrawSprite
-    ret
+    mov bx, [x_PacManPosition]
+    add bx, [x_PacManVelocity]
+    mov [x_PacManPosition], bx
 
-MoveUp:
-    mov bx, [xVelocity]
-    sub [yPos], bx
-    mov word [PACMANDir], PACMAN_UP_2
-    ;call clearScreen
-    call DrawSprite
-    ret
-
-MoveDown:
-    mov bx, [xVelocity]
-    add [yPos], bx
-    mov word [PACMANDir], PACMAN_DOWN_2
-    ;call clearScreen
-    call DrawSprite
+    mov ax, [y_PacManPosition]
+    add ax, [y_PacManVelocity]
+    mov [y_PacManPosition], ax
     ret
 
 changePinkyPosition:

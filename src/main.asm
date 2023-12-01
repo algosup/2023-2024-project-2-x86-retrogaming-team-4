@@ -11,7 +11,7 @@ section .text
         call BuildBackgroundBuffer
         call MazeToBGbuffer
         call DisplayMaze
-        ;call FirstDisplayPacMan
+        call FirstDisplayPacMan
         call FirstDisplayGhosts
 
         
@@ -27,7 +27,11 @@ section .text
     gameloop:
 ;-------------------------------------------------
         call ClearPinky
+        call ClearPacMan
+        call readKeyboard
         call changePinkyPosition
+        call Display_PacMan
+
         call Display_Pinky
         call UpdateScreen
 
