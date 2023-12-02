@@ -242,15 +242,3 @@ section .text
             jne .draw_loop
         pop es
         ret
-
-    DrawMaze:
-        mov ax, 0xA000
-        mov es, ax
-        mov dx, 8
-        .eachLine:
-            mov cx, 8
-            rep movsb
-            add di, 320-8
-            dec dx
-            jnz .eachLine
-            ret

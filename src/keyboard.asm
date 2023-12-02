@@ -65,5 +65,3 @@ readKeyboard:
 
     ret
 
-    exit:
-    int 20h

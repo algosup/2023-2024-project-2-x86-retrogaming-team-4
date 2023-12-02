@@ -7,10 +7,14 @@ section .text
         call SetVideoMode
         call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
         
-        ;call ClearScreen
+        call ClearScreen
+        call UpdateScreen
+
         call BuildBackgroundBuffer
         call MazeToBGbuffer
         call DisplayMaze
+        call UpdateScreen
+        jmp exit
         call FirstDisplayPacMan
         call FirstDisplayGhosts
 
@@ -53,4 +57,9 @@ section .text
 ; GOTO GAME LOOP
         jmp gameloop
 ;-----------------------------------------------------------------------------------------
+
+exit:
+;reset the keyboard buffer and then wait for a keypress :
+   mov ax, 0C01h ;
+   int 21h
 
