@@ -116,7 +116,7 @@ section .text
 
             push cx
             shr cx, 1 ; from the 'cx'ième pixel, we convert it into the 'cx'ième byte where it is stored (1 byte = 2 nibbles = 2 pixels)
-            mov si, MazeModel4LE
+            mov si, MazeModel5LE
             add si, cx
             mov al, [ds:si] ; now al contains the 2 hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
             
