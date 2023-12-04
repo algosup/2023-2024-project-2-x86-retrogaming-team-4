@@ -21,10 +21,8 @@ section .text
         call FirstDisplayPacMan
         call FirstDisplayGhosts
 
-        ; Display the period
         mov eax, PERIOD
         shr eax, 16
-        ; Store the current time
         rdtsc
         mov [timestamp_of_next_frame], eax
 

@@ -1,27 +1,18 @@
 section .data
 
-
     frameOf_PacMan dw PACMAN_RIGHT_2
 
     afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
-    x_BlinkyPosition dw 274 ; x position of Blinky at the beginning (it will be changed each time it will move)
-    y_BlinkyPosition dw 30 ; y position of Blinky at the beginning (it will be changed each time it will move)
     frameOf_Blinky dw BLINKY_1
     frameOf_Blinky_eyes dw EYES_RIGHT
 
-    x_PinkyPosition dw 30 ; x position of Pinky at the beginning (it will be changed each time it will move)
-    y_PinkyPosition dw 30 ; y position of Pinky at the beginning (it will be changed each time it will move)
     frameOf_Pinky dw PINKY_1
     frameOf_Pinky_eyes dw EYES_RIGHT
 
-    x_ClydePosition dw 70 ; x position of Clyde at the beginning (it will be changed each time it will move)
-    y_ClydePosition dw 100 ; y position of Clyde at the beginning (it will be changed each time it will move)
     frameOf_Clyde dw CLYDE_1
     frameOf_Clyde_eyes dw EYES_RIGHT
 
-    x_InkyPosition dw 90 ; x position of Inky at the beginning (it will be changed each time it will move)
-    y_InkyPosition dw 100 ; y position of Inky at the beginning (it will be changed each time it will move)
     frameOf_Inky dw INKY_1
     frameOf_Inky_eyes dw EYES_RIGHT
 
@@ -37,24 +28,9 @@ section .text
         call draw_sprite
         ret
 
-    Display_Pinky:
-        mov bx, [x_PinkyPosition]
-        mov ax, [y_PinkyPosition]
-        call calculate_screen_position
-        push dx
-        mov ax, [frameOf_Pinky]
-        call calculate_spritesheet_position
-        call draw_sprite
-        pop dx
-        mov ax, [frameOf_Pinky_eyes]
-        call calculate_spritesheet_position
-        call draw_sprite
-
-        ret
-    
     Display_Blinky:
-        mov bx, [x_BlinkyPosition]
-        mov ax, [y_BlinkyPosition]
+        mov bx, [strcBlinky + posX]
+        mov ax, [strcBlinky + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Blinky]
@@ -68,8 +44,8 @@ section .text
         ret
     
     Display_Inky:
-        mov bx, [x_InkyPosition]
-        mov ax, [y_InkyPosition]
+        mov bx, [strcInky + posX]
+        mov ax, [strcInky + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Inky]
@@ -81,10 +57,25 @@ section .text
         call draw_sprite
 
         ret
+
+    Display_Pinky:
+        mov bx, [strcPinky + posX]
+        mov ax, [strcPinky + posY]
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Pinky]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        mov ax, [frameOf_Pinky_eyes]
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
     
     Display_Clyde:
-        mov bx, [x_ClydePosition]
-        mov ax, [y_ClydePosition]
+        mov bx, [strcClyde + posX]
+        mov ax, [strcClyde + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Clyde]
@@ -100,32 +91,32 @@ section .text
 
     
     ClearPacMan:
-        mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
+        mov bx, [strcPacMan + posX]
+        call ClearSprite
+        ret
+
+    ClearBlinky:
+        mov ax, [strcBlinky + posY]
+        mov bx, [strcBlinky + posX]
+        call ClearSprite
+        ret
+
+    ClearInky:
+        mov ax, [strcInky + posY]
+        mov bx, [strcInky + posX]
         call ClearSprite
         ret
 
     ClearPinky:
-        mov ax, [y_PinkyPosition]
-        mov bx, [x_PinkyPosition]
-        call ClearSprite
-        ret
-    
-    ClearInky:
-        mov ax, [y_InkyPosition]
-        mov bx, [x_InkyPosition]
-        call ClearSprite
-        ret
-    
-    ClearBlinky:
-        mov ax, [y_BlinkyPosition]
-        mov bx, [x_BlinkyPosition]
+        mov ax, [strcPinky + posY]
+        mov bx, [strcPinky + posX]
         call ClearSprite
         ret
     
     ClearClyde:
-        mov ax, [y_ClydePosition]
-        mov bx, [x_ClydePosition]
+        mov ax, [strcClyde + posY]
+        mov bx, [strcClyde + posX]
         call ClearSprite
         ret
 
@@ -195,49 +186,49 @@ section .text
         ; Number of pixels draw
         mov cx, 0x00ff ; TODO: DSP
 
-    .draw_loop:
-        inc dx
-        inc cl ; TODO: DSP
+        .draw_loop:
+            inc dx
+            inc cl ; TODO: DSP
 
-        ; Read the color index
-        push cx
-        shr cx, 1 ; Because there are two pixels in a byte
-        mov di, spritesheet
-        add di, bx
-        add di, cx
-        mov al, [ds:di]
-
-        ; Check if the color is in the high or low nibble
-        pop cx
-        test cl, 1 ; TODO: DSP
-        jnz .low_byte
-        shr ax, 4
-
-        .low_byte:
-            and ax, 0xf ; TODO: DSP
-            je .transparent_skip
-
-            ; Get color from palette
-            mov di, palette
-            add di, ax
+            ; Read the color index
+            push cx
+            shr cx, 1 ; Because there are two pixels in a byte
+            mov di, spritesheet
+            add di, bx
+            add di, cx
             mov al, [ds:di]
 
-            ; Set the pixel
-            mov di, dx
-            
-            push word [ScreenBufferSegment] 
-            pop es
-            mov [es:di], al
-        
+            ; Check if the color is in the high or low nibble
+            pop cx
+            test cl, 1 ; TODO: DSP
+            jnz .low_byte
+            shr ax, 4
 
-        ; If we need to go to the next line
-        .transparent_skip:
-            not cl
-            test cl, 0xf ; TODO: DSP
-            not cl
-            jne .draw_loop
-            add dx, SCREEN_WIDTH - SPRITE_SIZE
-            cmp cl, 0xff
-            jne .draw_loop
-        pop es
-        ret
+            .low_byte:
+                and ax, 0xf ; TODO: DSP
+                je .transparent_skip
+
+                ; Get color from palette
+                mov di, palette
+                add di, ax
+                mov al, [ds:di]
+
+                ; Set the pixel
+                mov di, dx
+                
+                push word [ScreenBufferSegment] 
+                pop es
+                mov [es:di], al
+            
+
+            ; If we need to go to the next line
+            .transparent_skip:
+                not cl
+                test cl, 0xf ; TODO: DSP
+                not cl
+                jne .draw_loop
+                add dx, SCREEN_WIDTH - SPRITE_SIZE
+                cmp cl, 0xff
+                jne .draw_loop
+            pop es
+            ret

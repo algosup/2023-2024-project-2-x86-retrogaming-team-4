@@ -54,9 +54,6 @@ section .data
             at isDead, db 0
         iend
 
-    x_PacManVelocity dw 0 ; PacMan's translation vector on x axis (px/screen update) (if it=-3, pac man will go down  3 pixel, 24 times per second)
-    y_PacManVelocity dw 0 ; PacMan's translation vector on y axis (px/screen update) (if it=+2, pac man will go right 2 pixel, 24 times per second)
-
     x_BlinkyVelocity dw 0 ; Blinky's translation vector on x axis (px/screen update) (if it=-3, Blinky will go down  3 pixel, 24 times per second)
     y_BlinkyVelocity dw 0 ; Blinky's translation vector on y axis (px/screen update) (if it=+2, Blinky will go right 2 pixel, 24 times per second)
 
@@ -72,140 +69,134 @@ section .data
 
 section .text
 
-changePacManPosition:
-    mov bx, [strcPacMan + posX]
-    add bx, [strcPacMan + velocityX]
-    mov [strcPacMan + posX], bx
+    changePacManPosition:
+        mov bx, [strcPacMan + posX]
+        add bx, [strcPacMan + velocityX]
+        mov [strcPacMan + posX], bx
 
-    mov ax, [strcPacMan + posY]
-    add ax, [strcPacMan + velocityY]
-    mov [strcPacMan + posY], ax
-    ret
+        mov ax, [strcPacMan + posY]
+        add ax, [strcPacMan + velocityY]
+        mov [strcPacMan + posY], ax
+        ret
 
-changeGhostPosition:
+    changeGhostPosition:
 
-    ;switch the direction if the ghost reached a side of the screen
-    cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
-    jb .noXflip
-    neg dx
+        ;switch the direction if the ghost reached a side of the screen
+        cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
+        jb .noXflip
+        neg dx
 
-    .noXflip:
-    cmp ax, SCREEN_HEIGHT - SPRITE_SIZE 
-    jb .noYflip
-    neg cx
+        .noXflip:
+        cmp ax, SCREEN_HEIGHT - SPRITE_SIZE 
+        jb .noYflip
+        neg cx
 
-    .noYflip:
-    ;inc/decremente the position
-    add ax, cx
-    add bx, dx
+        .noYflip:
+        ;inc/decremente the position
+        add ax, cx
+        add bx, dx
 
-    ret
+        ret
 
-changeGhostFrames:
+    changeGhostFrames:
 
-    cmp dx, 1
-    jne .noEyesRight
-    mov ax, EYES_RIGHT
-    .noEyesRight:
+        cmp dx, 1
+        jne .noEyesRight
+        mov ax, EYES_RIGHT
+        .noEyesRight:
 
-    cmp dx, -1
-    jne .noEyesLeft
-    mov ax, EYES_LEFT
-    .noEyesLeft:
+        cmp dx, -1
+        jne .noEyesLeft
+        mov ax, EYES_LEFT
+        .noEyesLeft:
 
-    cmp cx, 1
-    jne .noEyesDown
-    mov ax, EYES_DOWN
-    .noEyesDown:
+        cmp cx, 1
+        jne .noEyesDown
+        mov ax, EYES_DOWN
+        .noEyesDown:
 
-    cmp cx, -1
-    jne .noEyesUp
-    mov ax, EYES_UP
-    .noEyesUp:
+        cmp cx, -1
+        jne .noEyesUp
+        mov ax, EYES_UP
+        .noEyesUp:
 
-    ret
-
-changePinkyPosition:
-
-    mov ax, [y_PinkyPosition]
-    mov bx, [x_PinkyPosition]
-    mov cx, [y_PinkyVelocity]
-    mov dx, [x_PinkyVelocity]
-
-    call changeGhostPosition
-
-    mov word [y_PinkyPosition], ax
-    mov word [x_PinkyPosition], bx
-    mov word [y_PinkyVelocity], cx
-    mov word [x_PinkyVelocity], dx
-
-    call changeGhostFrames
-
-    mov word [frameOf_Pinky_eyes], ax
-
-    ret
-
-changeInkyPosition:
-
-    mov ax, [y_InkyPosition]
-    mov bx, [x_InkyPosition]
-    mov cx, [y_InkyVelocity]
-    mov dx, [x_InkyVelocity]
-
-    call changeGhostPosition
-
-    mov word [y_InkyPosition], ax
-    mov word [x_InkyPosition], bx
-    mov word [y_InkyVelocity], cx
-    mov word [x_InkyVelocity], dx
-
-    call changeGhostFrames
-
-    mov word [frameOf_Inky_eyes], ax
-
-    ret
-
-changeClydePosition:
-
-    mov ax, [y_ClydePosition]
-    mov bx, [x_ClydePosition]
-    mov cx, [y_ClydeVelocity]
-    mov dx, [x_ClydeVelocity]
-
-    call changeGhostPosition
-
-    mov word [y_ClydePosition], ax
-    mov word [x_ClydePosition], bx
-    mov word [y_ClydeVelocity], cx
-    mov word [x_ClydeVelocity], dx
-
-    call changeGhostFrames
-
-    mov word [frameOf_Clyde_eyes], ax
-
-    ret
-
-changeBlinkyPosition:
-
-    mov ax, [y_BlinkyPosition]
-    mov bx, [x_BlinkyPosition]
-    mov cx, [y_BlinkyVelocity]
-    mov dx, [x_BlinkyVelocity]
-
-    call changeGhostPosition
-
-    mov word [y_BlinkyPosition], ax
-    mov word [x_BlinkyPosition], bx
-    mov word [y_BlinkyVelocity], cx
-    mov word [x_BlinkyVelocity], dx
-
-    call changeGhostFrames
-
-    mov word [frameOf_Blinky_eyes], ax
-
-    ret
+        ret
 
 
+    changeBlinkyPosition:
+        mov ax, [strcBlinky + posY]
+        mov bx, [strcBlinky + posX]
+        mov cx, [y_BlinkyVelocity]
+        mov dx, [x_BlinkyVelocity]
 
+        call changeGhostPosition
 
-    
+        mov word [strcBlinky + posY], ax
+        mov word [strcBlinky + posX], bx
+        mov word [y_BlinkyVelocity], cx
+        mov word [x_BlinkyVelocity], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Blinky_eyes], ax
+
+        ret
+
+    changeInkyPosition:
+        mov ax, [strcInky + posY]
+        mov bx, [strcInky + posX]
+        mov cx, [y_InkyVelocity]
+        mov dx, [x_InkyVelocity]
+
+        call changeGhostPosition
+
+        mov word [strcInky + posY], ax
+        mov word [strcInky + posX], bx
+        mov word [y_InkyVelocity], cx
+        mov word [x_InkyVelocity], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Inky_eyes], ax
+
+        ret
+
+    changePinkyPosition:
+        mov ax, [strcPinky + posY]
+        mov bx, [strcPinky + posX]
+        mov cx, [y_PinkyVelocity]
+        mov dx, [x_PinkyVelocity]
+
+        call changeGhostPosition
+
+        mov word [strcPinky + posY], ax
+        mov word [strcPinky + posX], bx
+        mov word [y_PinkyVelocity], cx
+        mov word [x_PinkyVelocity], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Pinky_eyes], ax
+
+        ret
+
+    changeClydePosition:
+        mov ax, [strcClyde + posY]
+        mov bx, [strcClyde + posX]
+        mov cx, [y_ClydeVelocity]
+        mov dx, [x_ClydeVelocity]
+
+        call changeGhostPosition
+
+        mov word [strcClyde + posY], ax
+        mov word [strcClyde + posX], bx
+        mov word [y_ClydeVelocity], cx
+        mov word [x_ClydeVelocity], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Clyde_eyes], ax
+
+        ret
+
+        
