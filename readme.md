@@ -4,23 +4,28 @@
 
 <details>
 <summary>Table of Contents</summary>
+
 - [2023-2024 Project-2 x86-retrogaming Team-4](#2023-2024-project-2-x86-retrogaming-team-4)
 - [Pac-Man Clone](#pac-man-clone)
   - [Who are we?](#who-are-we)
   - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  
 </details>
 
 ## Who are we?
 
-| Name         | Role            | Picture                                                                        | 🔗                                                       |
-| ------------ | --------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------- |
-| Léo CHARTIER | Project Manager | ![Léo's profile picture](https://avatars.githubusercontent.com/u/91249751?size=200) | [Léo's Github profile](https://github.com/leo-chartier) |t
-| Antoine PREVOST | Program Manager | ![Antoine's profile picture](https://avatars.githubusercontent.com/u/81081224?size=200) | [Antoine's Github profile](https://github.com/leo-chartier) |
-| Malo ARCHIMBAUD | Tech Lead | ![Malo's profile picture](https://avatars.githubusercontent.com/u/97161471?size=200) | [Malo's Github profile](https://github.com/Malo-Archimbaud) |
-| Maxime THIZEAU | Junior Software Developer | ![Maxime's profile picture](https://avatars.githubusercontent.com/u/145995586?size=200) | [Maxime's Github profile](https://github.com/MaximeTAlgosup) |
-| Benoît DE KEYN | Junior Software Developer | ![Benoît's profile picture](https://avatars.githubusercontent.com/u/146000855?size=200) | [Benoît's Github profile](https://github.com/benoitdekeyn-algosup) |
-| Maxime CARON | Quality Assurance | ![Maxime's profile picture](https://avatars.githubusercontent.com/u/145995231?size=200) | [Maxime's Github profile](https://github.com/MaximeAlgosup) |
-| Thomas PLANCHARD | Quality Assurance | ![Thomas's profile picture](https://avatars.githubusercontent.com/u/91249646?size=200) | [Thomas's Github profile](https://github.com/thomas-planchard) |
+| Name             | Role                      | Picture                                                                                 | 🔗                                                                  |
+| ---------------- | ------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Léo CHARTIER     | Project Manager           | ![Léo's profile picture](https://avatars.githubusercontent.com/u/91249751?size=200)     | [Léo's Github profile](https://github.com/leo-chartier)            | t |
+| Antoine PREVOST  | Program Manager           | ![Antoine's profile picture](https://avatars.githubusercontent.com/u/81081224?size=200) | [Antoine's Github profile](https://github.com/leo-chartier)        |
+| Malo ARCHIMBAUD  | Tech Lead                 | ![Malo's profile picture](https://avatars.githubusercontent.com/u/97161471?size=200)    | [Malo's Github profile](https://github.com/Malo-Archimbaud)        |
+| Maxime THIZEAU   | Junior Software Developer | ![Maxime's profile picture](https://avatars.githubusercontent.com/u/145995586?size=200) | [Maxime's Github profile](https://github.com/MaximeTAlgosup)       |
+| Benoît DE KEYN   | Junior Software Developer | ![Benoît's profile picture](https://avatars.githubusercontent.com/u/146000855?size=200) | [Benoît's Github profile](https://github.com/benoitdekeyn-algosup) |
+| Maxime CARON     | Quality Assurance         | ![Maxime's profile picture](https://avatars.githubusercontent.com/u/145995231?size=200) | [Maxime's Github profile](https://github.com/MaximeAlgosup)        |
+| Thomas PLANCHARD | Quality Assurance         | ![Thomas's profile picture](https://avatars.githubusercontent.com/u/91249646?size=200)  | [Thomas's Github profile](https://github.com/thomas-planchard)     |
 
 ## Overview
 
