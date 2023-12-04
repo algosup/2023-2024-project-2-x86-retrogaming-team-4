@@ -32,7 +32,7 @@
           - [3.6.1.2.2. Workflow](#36122-workflow)
           - [3.6.1.2.3. Configuration](#36123-configuration)
       - [3.6.2. GitHub Issues](#362-github-issues)
-      - [3.6.3. Tests Report](#363-tests-report)
+      - [3.6.3. Tests Report and Meetings](#363-tests-report-and-meetings)
       - [3.6.4. Bug Data Report Spreadsheet](#364-bug-data-report-spreadsheet)
         - [3.6.4.1. Spreadsheet Structure](#3641-spreadsheet-structure)
     - [3.7. Documentation](#37-documentation)
@@ -340,11 +340,15 @@ By implementing these strategies, we aim to foster a more organized and efficien
 
 ---
 
-#### 3.6.3. Tests Report
+#### 3.6.3. Tests Report and Meetings
 
-**Overview:**
+**Test Report:**
 
 The folder [Tests Report](./Tests%20Report/) will contain all the test reports of the project. Each test report will be named with the date of the test session and the name of the tester as follows: `YYYY-MM-DD-TesterName.md`.
+
+**QA Meetings:**
+
+The file [QA-meetings](./QA-meetings.md) will contain all the reports of the meetings with the Dev team.
 
 ---
 
