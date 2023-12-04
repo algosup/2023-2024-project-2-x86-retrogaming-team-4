@@ -59,7 +59,7 @@ section .text
 ;-----------------------------------------------------------------------------------------
 
 exit:
-;reset the keyboard buffer and then wait for a keypress :
-   mov ax, 0C01h ;
-   int 21h
+    mov ax, 3h
+    int 10h
+    int 20h
 
