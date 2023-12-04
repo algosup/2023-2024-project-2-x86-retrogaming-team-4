@@ -56,7 +56,7 @@
 %define POWER_PELLET 44
 
 ;not used, just there to see the matching table to write the maze just below
-%define INTER                       0                     
+%define INTER                       0             
 %define OUT_TOP_LEFT_CORNER         1
 %define OUT_TOP_RIGHT_CORNER        2
 %define OUT_BOTTOM_LEFT_CORNER      3
