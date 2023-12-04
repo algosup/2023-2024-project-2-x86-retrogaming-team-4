@@ -357,7 +357,7 @@ Test priorities are indicated by the following colors:
 
 | ID | T32 |
 | --- | --- |
-| Name | Ghost Spawn Location |
+| Name | Ghost Spawn Location (Inky, Clyde, Pinky) |
 | Test Description | Confirm that the ghosts spawn in the ghost house at the start of the game |
 | Requirement(s) | The game is started |
 | Step(s) | 1. Launch DOSBox, 2. Execute PacMan file in DOSBox, 3. Observe ghost spawn location |
