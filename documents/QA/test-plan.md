@@ -289,9 +289,6 @@ Actions such as assembling and execution of unit tests are performed on a comput
 
 As our team does not have a server to host the runner, the decision was made to install the runners on the computers of the project's quality assurance staff. This allows us to have a runner available at all times and to have a better overview of the errors that may occur.
 
-
-Next, the various actions and workflow steps are defined in the [pacman.yml](/pacman.yml) file, which is saved at the root of the repository.
-
 ---
 
 #### 3.6.2. GitHub Issues
