@@ -47,7 +47,7 @@ section .text
 
    ClearScreen:
       ;clear the screen by filling it with a unique color (stored in al)
-      mov al, 0x00 ; color to fill the screen (white = 0x0F, black = 0x00)
+      mov al, 0x29 ; color to fill the screen (white = 0x0F, black = 0x00)
             
       ;set the destination 'es:di' :
       push word [ScreenBufferSegment] ; video memory adress = 0xA000
@@ -64,20 +64,100 @@ section .text
    
    ret
 
-   MazeToBGbuffer:
-      ;source of stosb 'al'
-      mov al, 0x36 ; color of the background (simulate the maze) (to be change)
-      
-      ;destination of stosb 'es:di'
-      push word [BackgroundBufferSegment] 
-      pop es
-      xor di,di
 
-      mov cx, SCREEN_WIDTH*SCREEN_HEIGHT ; set the counter for rep
-      rep stosb ; to copy al into each byte of the target adress es:di byte per byte
-      
-      ; as es was containing ds, and ds was changed , we need to revert es and ds as in the begginning
-   ret
+
+
+
+
+
+
+
+
+
+
+
+
+
+   MazeToBGbuffer: 
+   int3
+      xor dx, dx
+      push word [BackgroundBufferSegment]
+      pop es
+      ;ds is ok
+      .eachBlocsLine:
+         mov dl, 0 ; blocs in a line
+         .eachBlocOfTheLine:
+            push dx
+            mov ax, 0xA00 ; number of pixels in a bloc's line
+            mov bl, dh
+            and bx, 0x00FF
+            mul bx
+            mov di, ax ; di contains the number of pixels in complete lines
+            pop dx
+
+            push dx
+            mov ax, 40 ; number of blocs in a bloc's line
+            mov bl, dh
+            mul bl
+            mov cx, ax ; cx contains the number of blocs in complete lines
+            pop dx
+
+            push dx
+            and dx, 0x00FF
+            add cx, dx ; cx now contains the number of complete blocs
+            pop dx
+
+            push dx
+            mov ax, 8
+            mov bl, dl
+            mul bl
+            add di, ax ; di now contains the position to write the next bloc
+            pop dx
+
+            push cx
+            shr cx, 1 ; from the 'cx'ième pixel, we convert it into the 'cx'ième byte where it is stored (1 byte = 2 nibbles = 2 pixels)
+            mov si, MazeModel5LE
+            add si, cx
+            mov al, [ds:si] ; now al contains the 2 hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
+            
+            ;check if the hexa code is in the high or low nibble, by looking at the parity of the counter
+            pop cx
+            test cl, 1 ; 
+            jnz .NoSecondNibble
+            shr ax, 4
+            .NoSecondNibble:
+
+            push dx
+            ; pick the sprite to display following the hexacode
+            and ax, 0xf ; keep only the concerned nibble containing the hexa code
+            ; Get the offset of the sprite, following the hexa code
+            mov si, MazeSpriteSheet
+            mov bx, 8*8
+            mul bx
+            add si, ax ; si contains the offset of the sprite to display
+            pop dx
+            
+            ;we draw the bloc
+            push cx
+            push dx
+            mov dx,8
+            .eachPixelsLine:
+               mov cx, 8
+               rep movsb
+               add di, SCREEN_WIDTH - 8
+               dec dx
+               jnz .eachPixelsLine
+            pop dx
+            pop cx
+
+            inc dl
+            cmp dl, 40
+            jne .eachBlocOfTheLine
+         inc dh
+         cmp dh, 25
+         jne .eachBlocsLine
+      ret
+
 
    DisplayMaze:
       push es
@@ -101,7 +181,7 @@ section .text
 
       pop ds
       pop es
-   ret
+      ret
 
    FirstDisplayPacMan:
 
@@ -110,7 +190,7 @@ section .text
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
 
       call Display_PacMan
-   ret
+      ret
 
    FirstDisplayGhosts:
 
