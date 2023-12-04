@@ -1,7 +1,6 @@
 section .data
 
-    x_PacManPosition dw 10 ; x position of pacman at the beginning (it will be changed each time it will move)
-    y_PacManPosition dw 10 ; y position of pacman at the beginning (it will be changed each time it will move)
+
     frameOf_PacMan dw PACMAN_RIGHT_2
 
     afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
@@ -29,8 +28,8 @@ section .data
 section .text
     
     Display_PacMan:
-        mov bx, [x_PacManPosition]
-        mov ax, [y_PacManPosition]
+        mov bx, [strcPacMan + posX]
+        mov ax, [strcPacMan + posY]
         call calculate_screen_position
 
         mov ax, [frameOf_PacMan]
@@ -101,8 +100,8 @@ section .text
 
     
     ClearPacMan:
-        mov ax, [y_PacManPosition]
-        mov bx, [x_PacManPosition]
+        mov bx, [strcPacMan + posX]
+        mov ax, [strcPacMan + posY]
         call ClearSprite
         ret
 

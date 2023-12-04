@@ -66,20 +66,8 @@ section .text
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
    MazeToBGbuffer: 
-   int3
+      int3
       xor dx, dx
       push word [BackgroundBufferSegment]
       pop es
@@ -185,8 +173,8 @@ section .text
 
    FirstDisplayPacMan:
 
-      mov word [x_PacManPosition], 100
-      mov word [y_PacManPosition], 100
+      mov word [strcPacMan + posX], 100
+      mov word [strcPacMan + posY], 100
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
 
       call Display_PacMan

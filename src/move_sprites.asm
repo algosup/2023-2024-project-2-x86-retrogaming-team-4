@@ -1,4 +1,58 @@
 section .data
+    strcPacMan:
+        istruc PacMan
+            at posX, dw 10
+            at posY, dw 10
+            at absPos, dw 10*10
+            at velocityX, db 0
+            at velocityY, db 0
+            at isChased, db 1
+            at isDead, db 0
+        iend
+    
+    strcBlinky:
+        istruc Blinky
+            at posX, dw 274
+            at posY, dw 30
+            at absPos, dw 274*30
+            at velocityX, db 0
+            at velocityY, db 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
+
+    strcInky:
+        istruc Inky
+            at posX, dw 90
+            at posY, dw 100
+            at absPos, dw 90*100
+            at velocityX, db 0
+            at velocityY, db 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
+
+    strcPinky:
+        istruc Pinky
+            at posX, dw 30
+            at posY, dw 30
+            at absPos, dw 30*30
+            at velocityX, db 0
+            at velocityY, db 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
+
+    strcClyde:
+        istruc Clyde
+            at posX, dw 70
+            at posY, dw 100
+            at absPos, dw 70*100
+            at velocityX, db 0
+            at velocityY, db 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
 
     x_PacManVelocity dw 0 ; PacMan's translation vector on x axis (px/screen update) (if it=-3, pac man will go down  3 pixel, 24 times per second)
     y_PacManVelocity dw 0 ; PacMan's translation vector on y axis (px/screen update) (if it=+2, pac man will go right 2 pixel, 24 times per second)
@@ -19,13 +73,13 @@ section .data
 section .text
 
 changePacManPosition:
-    mov bx, [x_PacManPosition]
-    add bx, [x_PacManVelocity]
-    mov [x_PacManPosition], bx
+    mov bx, [strcPacMan + posX]
+    add bx, [strcPacMan + velocityX]
+    mov [strcPacMan + posX], bx
 
-    mov ax, [y_PacManPosition]
-    add ax, [y_PacManVelocity]
-    mov [y_PacManPosition], ax
+    mov ax, [strcPacMan + posY]
+    add ax, [strcPacMan + velocityY]
+    mov [strcPacMan + posY], ax
     ret
 
 changeGhostPosition:
