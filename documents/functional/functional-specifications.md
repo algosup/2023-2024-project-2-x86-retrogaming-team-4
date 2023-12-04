@@ -579,7 +579,7 @@ The following table is showing the duration of each phase in seconds depending o
   | Level 19  | 120                                      | 100%             | 60                                        | 105%             |
   | Level 20+ | 120                                      | 100%             | 60                                        | 105%             |
 
-  - If the player loses a life after being affected by at least one speed increase, Blinky will return back to its default speed until the orange ghost (Clyde) leaves the ghost house. In this case, the applied sppeed to the ghost will be the speed matching the level and remaining pellets in the maze.
+  - If the player loses a life after being affected by at least one speed increase, Blinky will return back to its default speed until the orange ghost (Clyde) leaves the ghost house. In this case, the applied speed to the ghost will be the speed matching the level and remaining pellets in the maze.
 
 - **Pac-Man targetting:**
   - When Blinky is in chase mode, he is targetting the tile where Pac-Man is currently situated, which makes it a danger in the early game.
@@ -598,7 +598,7 @@ The following table is showing the duration of each phase in seconds depending o
 - **Speed variations:**
   - The speed of Pinky is constant and follows the Ghost speed table across the different levels
 - **Pac-Man targetting:**
-  - When Pinky is in chase mode, he looks for Pac-Man position and orientation, and he targets the tile situated four tiles ahead of Pac-Man current position.<br>This behaviour works for the right, left and down position. However, due to an overflow error, when Pac-Man faces up Pinky targets 4 tiles ahead and 4 tiles to the left of him. Even if this behaviour is unintentional, we should reproduce it to have a faithful Pac-Man clone.
+  - When Pinky is in chase mode, it looks for Pac-Man position and orientation, and it targets the tile situated four tiles ahead of Pac-Man current position.<br>This behaviour works for the right, left and down position. However, due to an overflow error, when Pac-Man faces up Pinky targets 4 tiles ahead and 4 tiles to the left of it. Even if this behaviour is unintentional, we should reproduce it to have a faithful Pac-Man clone.
 
 <p align="center"><img src="../pictures/pinky-targeting.png" alt="pac-man gif" width="250"></p>
 
