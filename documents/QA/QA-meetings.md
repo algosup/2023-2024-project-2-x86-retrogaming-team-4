@@ -29,17 +29,17 @@ The team is expected to implement the optimized code commenting practices discus
 
 ### Content:
 
-- The Dev team currently follows the practice of using a single branch, "dev," for coding, which may not be optimal. We recommend adopting a strategy of using different branches for various code components and merging them into the "dev" branch after thorough code review. 
+- The Dev team currently follows the practice of using a single branch, "dev," for coding, which may not be optimal. We recommend adopting a strategy of using different branches for various code components and merging them into the "dev" branch after a thorough code review. 
   
 - It has been observed that the Dev team is building upon the code of Gary Iglesias rather than focusing on the project itself and initiating coding with best practices. 
   
 - Additionally, the Dev team is not entirely comfortable with GitHub, and the QA team suggests enhancing their Git knowledge for smoother collaboration.
   
--  The Dev team will begin populating the wiki with the templates provided by the QA team, who will concurrently start drafting test cases for the project. 
+- The Dev team will begin populating the wiki with the templates provided by the QA team, who will concurrently start drafting test cases for the project. 
   
--  Discussions regarding the wiki's purpose aim to establish a consistent architecture between the wiki and the code for better comprehension.
+- Discussions regarding the wiki's purpose aim to establish a consistent architecture between the wiki and the code for better comprehension.
 
--   Guidance on creating and responding to GitHub issues will be provided to facilitate effective communication within the team.
+- Guidance on creating and responding to GitHub issues will be provided to facilitate effective communication within the team.
 
 
 ### After-Consequences:
@@ -50,9 +50,9 @@ The team is expected to implement the optimized code commenting practices discus
 
 - **GitHub Proficiency:** Initiatives launched to enhance the Dev team's proficiency in GitHub, aiming for improved collaboration and utilization of Git functionalities.
 
-- **Wiki Population:** Dev team will actively populating the wiki with templates provided by the QA team..
+- **Wiki Population:** The dev team will actively populate the wiki with templates provided by the QA team.
 
-- **Test Case Formulation:** QA team initiated the development of  test cases for the project.
+- **Test Case Formulation:** The QA team initiated the development of test cases for the project.
 
 - **Architecture Consistency:** Ongoing discussions to align the architecture between the wiki and the codebase.
 
@@ -68,15 +68,19 @@ The team is expected to implement the optimized code commenting practices discus
 
 # 3. QA Team 5-Minute Meeting 
 
-## Meeting Date and Time: 
+## Meeting Date and Time: 2023-12-1 10:00 AM
 
-## Objective: 
+## Objective: Team Coordination and d
 
 ### Content:
-
-
+- Developers struggle to work cohesively, leading to project issues, notable consequences include code duplication and project slowdown.
+- Essential project functions lack documentation and sharing.
+- Developers express discomfort with Git.
 
 ### After-Consequences:
+- **Code Management Strategy:** Implemented code pooling on a dedicated Git branch, aiming to improve collaboration and alleviate code duplication issues.
+- **Documentation start:** Developers took the initiative to update documentation for critical functions.
+- **Git Usage Enhancement:** Initiated fine-tuning for Git usage to enhance developer comfort and enforce best practices.
 
 
 
