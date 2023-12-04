@@ -72,6 +72,12 @@
 %define PELLET                    0xD
 %define SUPER_PELLET              0xE
 %define BACKGROUND                0xF
+; Clock cycle per second and desired FPS
+%define CCPS 3000000
+%define FPS 24
+
+; Clock percision is in µs
+%define PERIOD CCPS / FPS
 
 
 section .data
