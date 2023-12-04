@@ -91,7 +91,7 @@ The software specifications encompass the DOSBox emulator, while the hardware re
 
 ## 3. Strategy
 
-Our testing strategy employs a multifaceted approach. **[Unit Tests](#unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution.
+Our testing strategy employs a multifaceted approach. **[Unit Tests](##32-unit-tests)** form the bedrock, scrutinizing individual components for functionality. **[Game-testing sessions](#35-game-testing-sessions)** take center stage, offering a holistic evaluation of gameplay, user interactions, and overall user experience. Augmenting our strategy are sophisticated **[monitoring tools](#36-monitoring-and-tools)**, enabling real-time analysis of system performance, identifying potential bugs, and ensuring optimal execution.
 
 ### 3.1. Scope of Testing
 
@@ -172,7 +172,7 @@ Each test comprises the following components:
 
 Due to the difficulty of creating a test bot for an assembler game 
 and the time allocated to this project. We will rely on manual 
-testing, we will use a combination of **[Smoke Testing](#smoke-testing)** and **[Collaborative Game-Testing Sessions](#collaborative-game-testing-sessions)** to ensure the quality of the game. 
+testing, we will use a combination of **[Smoke Testing](#352-smoke-testing)** and **[Collaborative Game-Testing Sessions](#353-collaborative-game-testing-sessions)** to ensure the quality of the game. 
 
 To identify errors as accurately as possible, the tester must record 
 his or her screen throughout the test session, using the "Snipping 
@@ -243,7 +243,7 @@ For the sake of simplicity, during test sessions, the game will be launched on t
 ##### 3.6.1.1. GitHub Overview
 
 
-GitHub serves as our central platform for version control, collaboration, and issue tracking, fortunatly GitHub also provides a CI/CD tool(Continuous Integration/Continuous Deployment) called GitHub Actions, this tool allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch on each push.
+GitHub serves as our central platform for version control, collaboration, and issue tracking, fortunately GitHub also provides a CI/CD tool(Continuous Integration/Continuous Deployment) called GitHub Actions, this tool allows us to run tests automatically after various actions on the repository and avoid errors on the dev or main branch on each push.
 
 We will also use GitHub Issues to report bugs and errors, it will allow us to make available to the development team a list of bugs and errors to be corrected, and to have a better overview of the progress of the project.
 
