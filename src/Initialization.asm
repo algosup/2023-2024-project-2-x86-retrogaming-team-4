@@ -187,32 +187,32 @@ section .text
       mov word [frameOf_Blinky], BLINKY_1
       mov word [frameOf_Blinky_eyes], EYES_RIGHT
       call Display_Blinky
-      mov word [x_BlinkyVelocity], 1
-      mov word [y_BlinkyVelocity], 0
+      mov word [strcBlinky + velocityX], 1
+      mov word [strcBlinky + velocityY], 0
 
       mov word [strcInky + posX], 30
       mov word [strcInky + posY], 146
       mov word [frameOf_Inky], INKY_1
       mov word [frameOf_Inky_eyes], EYES_DOWN
       call Display_Inky
-      mov word [x_InkyVelocity], 0
-      mov word [y_InkyVelocity], 1
+      mov word [strcInky + velocityX], 0
+      mov word [strcInky + velocityY], 1
 
       mov word [strcPinky + posX], 30
       mov word [strcPinky + posY], 30
       mov word [frameOf_Pinky], PINKY_1
       mov word [frameOf_Pinky_eyes], EYES_UP
       call Display_Pinky
-      mov word [x_PinkyVelocity], 0
-      mov word [y_PinkyVelocity], -1
+      mov word [strcPinky + velocityX], 0
+      mov word [strcPinky + velocityY], -1
 
       mov word [strcClyde + posX], 274
       mov word [strcClyde + posY], 146
       mov word [frameOf_Clyde], CLYDE_1
       mov word [frameOf_Clyde_eyes], EYES_LEFT
       call Display_Clyde
-      mov word [x_ClydeVelocity], -1
-      mov word [y_ClydeVelocity], 0
+      mov word [strcClyde + velocityX], -1
+      mov word [strcClyde + velocityY], 0
 
    ret
 

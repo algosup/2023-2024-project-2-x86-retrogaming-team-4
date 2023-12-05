@@ -4,8 +4,8 @@ section .data
             at posX, dw 10
             at posY, dw 10
             at absPos, dw 10*10
-            at velocityX, db 0
-            at velocityY, db 0
+            at velocityX, dw 0
+            at velocityY, dw 0
             at isChased, db 1
             at isDead, db 0
         iend
@@ -15,8 +15,8 @@ section .data
             at posX, dw 274
             at posY, dw 30
             at absPos, dw 274*30
-            at velocityX, db 0
-            at velocityY, db 0
+            at velocityX, dw 0
+            at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -26,8 +26,8 @@ section .data
             at posX, dw 90
             at posY, dw 100
             at absPos, dw 90*100
-            at velocityX, db 0
-            at velocityY, db 0
+            at velocityX, dw 0
+            at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -37,8 +37,8 @@ section .data
             at posX, dw 30
             at posY, dw 30
             at absPos, dw 30*30
-            at velocityX, db 0
-            at velocityY, db 0
+            at velocityX, dw 0
+            at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -48,24 +48,11 @@ section .data
             at posX, dw 70
             at posY, dw 100
             at absPos, dw 70*100
-            at velocityX, db 0
-            at velocityY, db 0
+            at velocityX, dw 0
+            at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
         iend
-
-    x_BlinkyVelocity dw 0 ; Blinky's translation vector on x axis (px/screen update) (if it=-3, Blinky will go down  3 pixel, 24 times per second)
-    y_BlinkyVelocity dw 0 ; Blinky's translation vector on y axis (px/screen update) (if it=+2, Blinky will go right 2 pixel, 24 times per second)
-
-    x_PinkyVelocity dw 0 ; Pinky's translation vector on x axis (px/screen update) (if it=-3, Pinky will go down  3 pixel, 24 times per second)
-    y_PinkyVelocity dw 0 ; Pinky's translation vector on y axis (px/screen update) (if it=+2, Pinky will go right 2 pixel, 24 times per second)
-
-    x_ClydeVelocity dw 0 ; Clyde's translation vector on x axis (px/screen update) (if it=-3, Clyde will go down  3 pixel, 24 times per second)
-    y_ClydeVelocity dw 0 ; Clyde's translation vector on y axis (px/screen update) (if it=+2, Clyde will go right 2 pixel, 24 times per second)
-
-    x_InkyVelocity dw 0 ; Inky's translation vector on x axis (px/screen update) (if it=-3, Inky will go down  3 pixel, 24 times per second)
-    y_InkyVelocity dw 0 ; Inky's translation vector on y axis (px/screen update) (if it=+2, Inky will go right 2 pixel, 24 times per second)
-
 
 section .text
 
@@ -126,15 +113,15 @@ section .text
     changeBlinkyPosition:
         mov ax, [strcBlinky + posY]
         mov bx, [strcBlinky + posX]
-        mov cx, [y_BlinkyVelocity]
-        mov dx, [x_BlinkyVelocity]
+        mov cx, [strcBlinky + velocityY]
+        mov dx, [strcBlinky + velocityX]
 
         call changeGhostPosition
 
         mov word [strcBlinky + posY], ax
         mov word [strcBlinky + posX], bx
-        mov word [y_BlinkyVelocity], cx
-        mov word [x_BlinkyVelocity], dx
+        mov word [strcBlinky + velocityY], cx
+        mov word [strcBlinky + velocityX], dx
 
         call changeGhostFrames
 
@@ -145,15 +132,15 @@ section .text
     changeInkyPosition:
         mov ax, [strcInky + posY]
         mov bx, [strcInky + posX]
-        mov cx, [y_InkyVelocity]
-        mov dx, [x_InkyVelocity]
+        mov cx, [strcInky + velocityY]
+        mov dx, [strcInky + velocityX]
 
         call changeGhostPosition
 
         mov word [strcInky + posY], ax
         mov word [strcInky + posX], bx
-        mov word [y_InkyVelocity], cx
-        mov word [x_InkyVelocity], dx
+        mov word [strcInky + velocityY], cx
+        mov word [strcInky + velocityX], dx
 
         call changeGhostFrames
 
@@ -164,15 +151,15 @@ section .text
     changePinkyPosition:
         mov ax, [strcPinky + posY]
         mov bx, [strcPinky + posX]
-        mov cx, [y_PinkyVelocity]
-        mov dx, [x_PinkyVelocity]
+        mov cx, [strcPinky + velocityY]
+        mov dx, [strcPinky + velocityX]
 
         call changeGhostPosition
 
         mov word [strcPinky + posY], ax
         mov word [strcPinky + posX], bx
-        mov word [y_PinkyVelocity], cx
-        mov word [x_PinkyVelocity], dx
+        mov word [strcPinky + velocityY], cx
+        mov word [strcPinky + velocityX], dx
 
         call changeGhostFrames
 
@@ -183,15 +170,15 @@ section .text
     changeClydePosition:
         mov ax, [strcClyde + posY]
         mov bx, [strcClyde + posX]
-        mov cx, [y_ClydeVelocity]
-        mov dx, [x_ClydeVelocity]
+        mov cx, [strcClyde + velocityY]
+        mov dx, [strcClyde + velocityX]
 
         call changeGhostPosition
 
         mov word [strcClyde + posY], ax
         mov word [strcClyde + posX], bx
-        mov word [y_ClydeVelocity], cx
-        mov word [x_ClydeVelocity], dx
+        mov word [strcClyde + velocityY], cx
+        mov word [strcClyde + velocityX], dx
 
         call changeGhostFrames
 

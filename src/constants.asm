@@ -1,52 +1,52 @@
-struc PacMan
-    posX: resw 1
-    posY: resw 1
-    absPos: resw 1
-    velocityX: resb 1
-    velocityY: resb 1
-    isChased: resb 1
-    isDead: resb 1
-endstruc
+    struc PacMan
+        posX: resw 1
+        posY: resw 1
+        absPos: resw 1
+        velocityX: resw 1
+        velocityY: resw 1
+        isChased: resb 1
+        isDead: resb 1
+    endstruc
 
-struc Blinky
-    posX: resw 1
-    posY: resw 1
-    absPos: resw 1
-    velocityX: resb 1
-    velocityY: resb 1
-    isChased: resb 1
-    isDead: resb 1
-endstruc
+    struc Blinky
+        posX: resw 1
+        posY: resw 1
+        absPos: resw 1
+        velocityX: resw 1
+        velocityY: resw 1
+        isChased: resb 1
+        isDead: resb 1
+    endstruc
 
-struc Inky
-    posX: resw 1
-    posY: resw 1
-    absPos: resw 1
-    velocityX: resb 1
-    velocityY: resb 1
-    isChased: resb 1
-    isDead: resb 1
-endstruc
+    struc Inky
+        posX: resw 1
+        posY: resw 1
+        absPos: resw 1
+        velocityX: resw 1
+        velocityY: resw 1
+        isChased: resb 1
+        isDead: resb 1
+    endstruc
 
-struc Pinky
-    posX: resw 1
-    posY: resw 1
-    absPos: resw 1
-    velocityX: resb 1
-    velocityY: resb 1
-    isChased: resb 1
-    isDead: resb 1
-endstruc
+    struc Pinky
+        posX: resw 1
+        posY: resw 1
+        absPos: resw 1
+        velocityX: resw 1
+        velocityY: resw 1
+        isChased: resb 1
+        isDead: resb 1
+    endstruc
 
-struc Clyde
-    posX: resw 1
-    posY: resw 1
-    absPos: resw 1
-    velocityX: resb 1
-    velocityY: resb 1
-    isChased: resb 1
-    isDead: resb 1
-endstruc
+    struc Clyde
+        posX: resw 1
+        posY: resw 1
+        absPos: resw 1
+        velocityX: resw 1
+        velocityY: resw 1
+        isChased: resb 1
+        isDead: resb 1
+    endstruc
 
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200
