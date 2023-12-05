@@ -49,23 +49,23 @@ changeGhostPosition:
 
 changeGhostFrames:
 
-    cmp dx, 1
-    jne .noEyesRight
+    cmp dx, 0
+    jle .noEyesRight
     mov ax, EYES_RIGHT
     .noEyesRight:
 
-    cmp dx, -1
-    jne .noEyesLeft
+    cmp dx, 0
+    jge .noEyesLeft
     mov ax, EYES_LEFT
     .noEyesLeft:
 
-    cmp cx, 1
-    jne .noEyesDown
+    cmp cx, 0
+    jle .noEyesDown
     mov ax, EYES_DOWN
     .noEyesDown:
 
-    cmp cx, -1
-    jne .noEyesUp
+    cmp cx, 0
+    jge .noEyesUp
     mov ax, EYES_UP
     .noEyesUp:
 
