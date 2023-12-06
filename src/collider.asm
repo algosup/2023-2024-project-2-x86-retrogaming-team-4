@@ -20,18 +20,23 @@ section .data
 
 section .text
     isCollided:
-        xor cx, cx
+        mov byte[cornerNumber], 0
         call getCorner
         .cornerLoop:
-            mov [cornerNumber], cx
+            int3
             call chooseCorner
             call getTileAbsPos
             call checkNextTileAbsPos
             cmp byte[isCollid], 1
-            jne .end
-            cmp cx, 3
+            jne .CanGo
+            mov word [strcPacMan + velocityX], 0
+            mov word [strcPacMan + velocityY], 0
+            jmp .end
+            .CanGo:
+
+            cmp byte [cornerNumber], 3
             je .end
-            inc cx
+            inc byte [cornerNumber]
             jmp .cornerLoop
         .end:
         ret
@@ -124,7 +129,7 @@ section .text
         inc ax
         mov [nextTileAbsPos], ax
 
-        mov si, MazeModel5BE 
+        mov si, MazeModel5BE
         add si, [nextTileAbsPos]
 
         cmp si, 1
