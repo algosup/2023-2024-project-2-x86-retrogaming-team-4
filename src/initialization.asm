@@ -2,7 +2,6 @@ section .bss
    BackgroundBufferSegment resw 1 ; where is stored the dynamic background (dynamic cuz gums are disappearing). Used to restore the screen after a ghost's passage
    ScreenBufferSegment resw 1
 
-section .data
    
 section .text
 
@@ -65,22 +64,8 @@ section .text
    ret
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
    MazeToBGbuffer: 
-   int3
-      xor dx, dx
+      xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete blocs in this line
       push word [BackgroundBufferSegment]
       pop es
       ;ds is ok
@@ -88,9 +73,9 @@ section .text
          mov dl, 0 ; blocs in a line
          .eachBlocOfTheLine:
             push dx
-            mov ax, 0xA00 ; number of pixels in a bloc's line
+            mov ax, 8*SCREEN_WIDTH ; number of pixels in a bloc's line = 320*8 = 8*8*(40 blocs in a line) 
             mov bl, dh
-            and bx, 0x00FF
+            and bx, 0x00FF 
             mul bx
             mov di, ax ; di contains the number of pixels in complete lines
             pop dx
@@ -116,9 +101,9 @@ section .text
 
             mov si, MazeModel
             add si, cx
+            xor ax, ax
             mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
             
-           
             
             push dx
             ; pick the sprite to display following the hexacode
@@ -144,10 +129,10 @@ section .text
 
             inc dl
             cmp dl, 40
-            jne .eachBlocOfTheLine
+            jb .eachBlocOfTheLine
          inc dh
          cmp dh, 25
-         jne .eachBlocsLine
+         jb .eachBlocsLine
       ret
 
 
