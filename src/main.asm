@@ -11,7 +11,6 @@ section .text
         call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
         
         call ClearScreen
-        call UpdateScreen
 
         call BuildBackgroundBuffer
         call MazeToBGbuffer
