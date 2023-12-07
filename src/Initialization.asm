@@ -98,7 +98,7 @@ section .text
             mov si, MazeModel
             add si, cx
             xor ax, ax
-            mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'ème Tile of mazemodel 
+            mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'th Tile of mazemodel 
             
             
             push dx
