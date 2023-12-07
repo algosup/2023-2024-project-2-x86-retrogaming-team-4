@@ -54,16 +54,34 @@ section .data
             at isDead, db 0
         iend
 
+    pacManNextPosX dw 0
+    pacManNextPosY dw 0
+
 section .text
 
     changePacManPosition:
+        ; set next position
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
-        mov [strcPacMan + posX], bx
+        mov [pacManNextPosX], bx
 
         mov ax, [strcPacMan + posY]
         add ax, [strcPacMan + velocityY]
+        mov [pacManNextPosY], ax
+
+        ; check collision
+        call isCollided
+        cmp byte[isCollid], 1
+        je .exit
+
+        ; if no collision, set next position
+        mov bx, [pacManNextPosX]
+        mov [strcPacMan + posX], bx
+
+        mov ax, [pacManNextPosY]
         mov [strcPacMan + posY], ax
+        .exit:
+
         ret
 
     changeGhostPosition:
@@ -184,6 +202,11 @@ section .text
 
         mov word [frameOf_Clyde_eyes], ax
 
+        ret
+
+    stopPackMan:
+        mov word [strcPacMan + velocityX], 0
+        mov word [strcPacMan + velocityY], 0
         ret
 
         

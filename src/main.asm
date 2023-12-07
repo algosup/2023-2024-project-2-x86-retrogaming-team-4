@@ -39,8 +39,6 @@ section .text
         call ClearPacMan
 
         call readKeyboard
-        
-        call isCollided
 
         call changePinkyPosition
         call changeBlinkyPosition

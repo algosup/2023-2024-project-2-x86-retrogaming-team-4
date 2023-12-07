@@ -10,8 +10,6 @@ section .data
 
     isCollid db 0
 
-    cornerNumber db 0
-
     checkedCornerX dw 0
     checkedCornerY dw 0
 
@@ -20,26 +18,47 @@ section .data
 
 section .text
     isCollided:
-        mov byte[cornerNumber], 0
         call getCorner
-        .cornerLoop:
-            int3
-            call chooseCorner
-            call getTileAbsPos
-            call checkNextTileAbsPos
-            cmp byte[isCollid], 1
-            jne .CanGo
-            mov word [strcPacMan + velocityX], 0
-            mov word [strcPacMan + velocityY], 0
-            jmp .end
-            .CanGo:
+        ; Set corner to check
+        mov ax, [corner0X]
+        mov bx, [corner0Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
 
-            cmp byte [cornerNumber], 3
-            je .end
-            inc byte [cornerNumber]
-            jmp .cornerLoop
-        .end:
+        mov ax, [corner1X]
+        mov bx, [corner1Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
+
+        mov ax, [corner2X]
+        mov bx, [corner2Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
+
+        mov ax, [corner3X]
+        mov bx, [corner3Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call isWall
+        cmp byte[isCollid], 1
+        jne .skip
+
+        .collision:
+        call stopPackMan
+        .skip:
+    
         ret
+
+    
 
     getCorner:
         mov bx, [strcPacMan + posX]
@@ -72,45 +91,10 @@ section .text
 
         ret
 
-    chooseCorner:
-        cmp byte[cornerNumber], 0
-        jne .not0
-        mov bx, [corner0X]
-        mov ax, [corner0Y]
-        mov [checkedCornerX], bx
-        mov [checkedCornerY], ax
-        ret
-        .not0:
 
-        cmp byte[cornerNumber], 1
-        jne .not1
-        mov bx, [corner1X]
-        mov ax, [corner1Y]
-        mov [checkedCornerX], bx
-        mov [checkedCornerY], ax
-        ret
-        .not1:
-
-        cmp byte[cornerNumber], 2
-        jne .not2
-        mov bx, [corner2X]
-        mov ax, [corner2Y]
-        mov [checkedCornerX], bx
-        mov [checkedCornerY], ax
-        ret
-        .not2:
-
-        cmp byte[cornerNumber], 3
-        jne .not3
-        mov bx, [corner3X]
-        mov ax, [corner3Y]
-        mov [checkedCornerX], bx
-        mov [checkedCornerY], ax
-        ret
-        .not3:
-
-        ret
-
+    ; Get absolute position of tile
+    ; Param: checkedCornerX, checkedCornerY
+    ; Return: tileAbsPos
     getTileAbsPos:
         mov ax, [checkedCornerX]
         mov cx, 8
@@ -123,15 +107,15 @@ section .text
         mov [tileAbsPos], ax
         ret
         
-
-    checkNextTileAbsPos:
+    isWall:
+        ;Take the next tile's Absolute Position in ax
         mov ax, [tileAbsPos]
-        inc ax
-        mov [nextTileAbsPos], ax
 
+        ;Read the chosen tile in the maze table
         mov si, MazeModel5BE
-        add si, [nextTileAbsPos]
+        add si, [tileAbsPos]
 
+        ;compare all the differents wall's sprites and return is collided if the compare is equal
         cmp si, 1
         jne .not1
         mov byte[isCollid], 1
