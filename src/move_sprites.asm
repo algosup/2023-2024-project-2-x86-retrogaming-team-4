@@ -1,6 +1,6 @@
 section .data
     strcPacMan:
-        istruc PacMan
+        istruc Sprite
             at posX, dw 10
             at posY, dw 10
             at absPos, dw 10*10
@@ -11,7 +11,7 @@ section .data
         iend
     
     strcBlinky:
-        istruc Blinky
+        istruc Sprite
             at posX, dw 274
             at posY, dw 30
             at absPos, dw 274*30
@@ -22,7 +22,7 @@ section .data
         iend
 
     strcInky:
-        istruc Inky
+        istruc Sprite
             at posX, dw 90
             at posY, dw 100
             at absPos, dw 90*100
@@ -33,7 +33,7 @@ section .data
         iend
 
     strcPinky:
-        istruc Pinky
+        istruc Sprite
             at posX, dw 30
             at posY, dw 30
             at absPos, dw 30*30
@@ -44,7 +44,7 @@ section .data
         iend
 
     strcClyde:
-        istruc Clyde
+        istruc Sprite
             at posX, dw 70
             at posY, dw 100
             at absPos, dw 70*100
@@ -81,7 +81,7 @@ section .text
         mov ax, [pacManNextPosY]
         mov [strcPacMan + posY], ax
         .exit:
-        cmp byte[isCollid], 0
+        mov byte[isCollid], 0x00
         ret
 
     changeGhostPosition:

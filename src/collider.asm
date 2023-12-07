@@ -18,6 +18,7 @@ section .data
     tileAbsPos dw 0
 
 section .text
+    
     isCollided:
         call getCorner
         ; Set corner to check
@@ -60,7 +61,7 @@ section .text
         ret
 
     
-
+    ; Get the corner of the PacMan tile
     getCorner:
         mov bx, [strcPacMan + posX]
         add bx, 5
@@ -108,7 +109,7 @@ section .text
         add [tileAbsPos], ax
         ret
 
-        
+    ; Check if the tile is a wall
     isWall:
         ;Get the tile's absolute position
         call getTileAbsPos
