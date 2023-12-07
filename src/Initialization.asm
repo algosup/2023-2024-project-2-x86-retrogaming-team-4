@@ -114,22 +114,14 @@ section .text
             add di, ax ; di now contains the position to write the next bloc
             pop dx
 
-            push cx
-            shr cx, 1 ; from the 'cx'ième pixel, we convert it into the 'cx'ième byte where it is stored (1 byte = 2 nibbles = 2 pixels)
-            mov si, MazeModel5LE
+            mov si, MazeModel
             add si, cx
-            mov al, [ds:si] ; now al contains the 2 hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
+            mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
             
-            ;check if the hexa code is in the high or low nibble, by looking at the parity of the counter
-            pop cx
-            test cl, 1 ; 
-            jnz .NoSecondNibble
-            shr ax, 4
-            .NoSecondNibble:
-
+           
+            
             push dx
             ; pick the sprite to display following the hexacode
-            and ax, 0xf ; keep only the concerned nibble containing the hexa code
             ; Get the offset of the sprite, following the hexa code
             mov si, MazeSpriteSheet
             mov bx, 8*8
