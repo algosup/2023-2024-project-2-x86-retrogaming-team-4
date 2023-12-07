@@ -63,6 +63,7 @@ section .text
    
    ret
 
+   ; read the Maze model from the maze.asm, and build each bloc according to the hexacode, drawing the background into the background buffer
 
    MazeToBGbuffer: 
       xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
