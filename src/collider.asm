@@ -187,5 +187,5 @@ section .text
         mov byte[isCollid], 1
         ret
         .notC:
-
+        
         ret

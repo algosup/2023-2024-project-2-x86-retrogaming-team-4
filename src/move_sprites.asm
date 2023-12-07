@@ -81,7 +81,7 @@ section .text
         mov ax, [pacManNextPosY]
         mov [strcPacMan + posY], ax
         .exit:
-
+        cmp byte[isCollid], 0
         ret
 
     changeGhostPosition:
