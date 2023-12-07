@@ -158,41 +158,41 @@ section .text
 
    FirstDisplayPacMan:
 
-      mov word [x_PacManPosition], 100
-      mov word [y_PacManPosition], 100
+      mov word [x_PacManPosition], 160
+      mov word [y_PacManPosition], 132
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
 
       call Display_PacMan
       ret
 
    FirstDisplayGhosts:
-
-      mov word [x_PinkyPosition], 30
-      mov word [y_PinkyPosition], 30
+      ;pinky
+      mov word [x_PinkyPosition], 160
+      mov word [y_PinkyPosition], 108
       mov word [frameOf_Pinky], PINKY_1
       mov word [frameOf_Pinky_eyes], EYES_UP
       call Display_Pinky
       mov word [x_PinkyVelocity], 0
       mov word [y_PinkyVelocity], -1
-
-      mov word [x_BlinkyPosition], 274
-      mov word [y_BlinkyPosition], 30
+      ;blinky
+      mov word [x_BlinkyPosition], 160
+      mov word [y_BlinkyPosition], 84
       mov word [frameOf_Blinky], BLINKY_1
       mov word [frameOf_Blinky_eyes], EYES_RIGHT
       call Display_Blinky
       mov word [x_BlinkyVelocity], 1
       mov word [y_BlinkyVelocity], 0
-
-      mov word [x_InkyPosition], 30
-      mov word [y_InkyPosition], 146
+      ;inky
+      mov word [x_InkyPosition], 144
+      mov word [y_InkyPosition], 108
       mov word [frameOf_Inky], INKY_1
       mov word [frameOf_Inky_eyes], EYES_DOWN
       call Display_Inky
       mov word [x_InkyVelocity], 0
       mov word [y_InkyVelocity], 1
-
-      mov word [x_ClydePosition], 274
-      mov word [y_ClydePosition], 146
+      ;clyde
+      mov word [x_ClydePosition], 176
+      mov word [y_ClydePosition], 108
       mov word [frameOf_Clyde], CLYDE_1
       mov word [frameOf_Clyde_eyes], EYES_LEFT
       call Display_Clyde
