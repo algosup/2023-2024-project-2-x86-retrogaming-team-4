@@ -73,7 +73,7 @@ section .text
          mov dl, 0 ; blocs in a line
          .eachBlocOfTheLine:
             push dx
-            mov ax, 8*SCREEN_WIDTH ; number of pixels in a bloc's line = 320*8 = 8*8*(40 blocs in a line) 
+            mov ax, 8*SCREEN_WIDTH ; number of pixels in a bloc's line = 320*8 = (8*8 pixels)*(40 blocs in a line) 
             mov bl, dh
             and bx, 0x00FF 
             mul bx
