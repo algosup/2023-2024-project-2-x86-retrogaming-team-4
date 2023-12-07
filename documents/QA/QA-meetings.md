@@ -15,10 +15,6 @@ How to optimize code commenting for enhanced understanding?
 
 The team is expected to implement the optimized code commenting practices discussed, ensuring clarity and accessibility. Additionally, the utilization of the wiki for thorough code documentation, including individual pages for functions and specific documentation for complex functions, should be seamlessly integrated into the development workflow. This approach enhances code readability and supports ongoing collaboration within the team.
 
-
-#### Note:
-/
-
 ----
 
 # 2. QA Team 5-Minute Meeting 
@@ -59,10 +55,6 @@ The team is expected to implement the optimized code commenting practices discus
 - **GitHub Issue Guidance:** Introduction of guidance on GitHub issue creation and response.
 
 
-#### Note:
-/ 
-
-
 
 ----
 
@@ -70,7 +62,7 @@ The team is expected to implement the optimized code commenting practices discus
 
 ## Meeting Date and Time: 2023-12-1 10:00 AM
 
-## Objective: Team Coordination and d
+## Objective: Team Coordination 
 
 ### Content:
 - Developers struggle to work cohesively, leading to project issues, notable consequences include code duplication and project slowdown.
@@ -84,5 +76,40 @@ The team is expected to implement the optimized code commenting practices discus
 
 
 
-#### Note:
-/ 
+
+----
+
+# 4. QA Team 5-Minute Meeting 
+
+## Meeting Date and Time: 2023-12-7 10:00 AM
+
+## Objective: Code Sanitization
+
+### Content:
+- **Branches to Delete:**
+  - Ghost-AI
+  - maze_to_back_buffer_ben
+  - movement-on-key-release
+  - collisions
+
+- **Branch "maze" Status:**
+  - Branch "maze" is significantly behind the current codebase.
+
+- **Code Sanitization:**
+  - Comments must provide meaningful insights beyond what is evident in the code.
+  - Variable names need to be clearer.
+  - Enforce naming conventions for casing and style.
+  - Group similar elements together, especially in the constants file.
+  - Remove debug code once its purpose is fulfilled.
+
+- **Pull Request Review Process:**
+  - Two reviewers for pull requests in both the main and dev branches.
+  - Reviewers include 1 QA and either the project manager or the tech leader.
+
+- **Code Merge:**
+  - Merge entry.asm and main.asm for streamlined code organization.
+
+
+### After-Consequences:
+The identified branches have been successfully deleted. The "maze" branch has been updated to align with the latest codebase. Code sanitization efforts are underway, emphasizing meaningful comments and improved variable naming. The team is committed to adhering to naming conventions and organizing code more systematically. The two-reviewer system for pull requests in the main and dev branches has been implemented, involving 1 QA and either the project manager or the tech leader. The merging of entry.asm and main.asm has contributed to a more cohesive codebase. These actions collectively aim to enhance code quality and collaboration within the development team.
+
