@@ -1,52 +1,59 @@
-    struc PacMan
-        posX: resw 1
-        posY: resw 1
-        absPos: resw 1
-        velocityX: resw 1
-        velocityY: resw 1
-        isChased: resb 1
-        isDead: resb 1
-    endstruc
+; Clock cycle per second and desired FPS
+%define CCPS 3000000
+%define FPS 24
 
-    struc Blinky
-        posX: resw 1
-        posY: resw 1
-        absPos: resw 1
-        velocityX: resw 1
-        velocityY: resw 1
-        isChased: resb 1
-        isDead: resb 1
-    endstruc
+; Clock percision is in µs
+%define PERIOD CCPS / FPS
 
-    struc Inky
-        posX: resw 1
-        posY: resw 1
-        absPos: resw 1
-        velocityX: resw 1
-        velocityY: resw 1
-        isChased: resb 1
-        isDead: resb 1
-    endstruc
+struc PacMan
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
 
-    struc Pinky
-        posX: resw 1
-        posY: resw 1
-        absPos: resw 1
-        velocityX: resw 1
-        velocityY: resw 1
-        isChased: resb 1
-        isDead: resb 1
-    endstruc
+struc Blinky
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
 
-    struc Clyde
-        posX: resw 1
-        posY: resw 1
-        absPos: resw 1
-        velocityX: resw 1
-        velocityY: resw 1
-        isChased: resb 1
-        isDead: resb 1
-    endstruc
+struc Inky
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
+
+struc Pinky
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
+
+struc Clyde
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
 
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200
