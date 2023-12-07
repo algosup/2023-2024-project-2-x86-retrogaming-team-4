@@ -14,7 +14,6 @@ section .text
         call MazeToBGbuffer
         call DisplayMaze
         call UpdateScreen
-        jmp exit
        
         call FirstDisplayPacMan
         call FirstDisplayGhosts

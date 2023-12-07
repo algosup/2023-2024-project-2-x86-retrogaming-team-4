@@ -80,24 +80,20 @@ section .text
             mov di, ax ; di contains the number of pixels in complete lines
             pop dx
 
-            push dx
             mov ax, 40 ; number of blocs in a bloc's line
             mov bl, dh
             mul bl
             mov cx, ax ; cx contains the number of blocs in complete lines
-            pop dx
 
             push dx
             and dx, 0x00FF
             add cx, dx ; cx now contains the number of complete blocs
             pop dx
 
-            push dx
             mov ax, 8
             mov bl, dl
             mul bl
             add di, ax ; di now contains the position to write the next bloc
-            pop dx
 
             mov si, MazeModel
             add si, cx
