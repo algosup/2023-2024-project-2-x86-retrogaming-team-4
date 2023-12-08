@@ -177,6 +177,35 @@ section .text
 
         ret
 
+    ReplaceTile:
+    ; replace the 8x8 bloc of pixels where is the sprite, by the content of the background buffer at the same location, according to its x y positions
+        push es
+        push ds
+        mov cx, SCREEN_WIDTH
+        mul cx
+        add bx, ax
+        push word [ScreenBufferSegment] 
+        pop es 
+        mov di, bx
+        push word [BackgroundBufferSegment]
+        pop ds
+        mov si, di        
+        mov dx, TILE_SIZE ; set the counter for 8 lines per sprite
+        .eachLine:
+            mov cx, TILE_SIZE ; set the counter for 8 pixel per line
+            rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
+            add di, SCREEN_WIDTH - TILE_SIZE
+            add si, SCREEN_WIDTH - TILE_SIZE ; increment the position register to the next line 
+            dec dx
+            jnz .eachLine 
+
+        pop ds     
+        pop es
+
+        ret
+    
+    
+
 
     calculate_screen_position:
         ; Set first position on screen

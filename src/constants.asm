@@ -11,6 +11,7 @@ endstruc
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200
 %define SPRITE_SIZE 16
+%define TILE_SIZE 8
 
 %define UP_KEY_SCANCODE 48h
 %define DOWN_KEY_SCANCODE 50h
