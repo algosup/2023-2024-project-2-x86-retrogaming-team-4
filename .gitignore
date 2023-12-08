@@ -3,5 +3,6 @@
 */*.map
 */*.com
 */*.cmd
+*/*.EXE
 bin/
 nasm/

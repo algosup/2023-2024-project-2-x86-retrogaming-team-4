@@ -7,6 +7,7 @@ jmp start
 %include "constants.asm"
 %include "maze.asm"
 %include "sprites.asm"
+%include "collider.asm"
 %include "main.asm"
 %include "initialization.asm"
 %include "keyboard.asm"
