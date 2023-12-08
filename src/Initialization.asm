@@ -63,46 +63,43 @@ section .text
    
    ret
 
+   ; read the Maze model from the maze.asm, and build each bloc according to the hexacode, drawing the background into the background buffer
 
    MazeToBGbuffer: 
-      xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete blocs in this line
+      xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
       push word [BackgroundBufferSegment]
       pop es
       ;ds is ok
-      .eachBlocsLine:
-         mov dl, 0 ; blocs in a line
-         .eachBlocOfTheLine:
+      .eachTilesLine:
+         mov dl, 0 ; Tiles in a line
+         .eachTileOfTheLine:
             push dx
-            mov ax, 8*SCREEN_WIDTH ; number of pixels in a bloc's line = 320*8 = 8*8*(40 blocs in a line) 
+            mov ax, 8*SCREEN_WIDTH ; number of pixels in a Tile's line = 320*8 = (8*8 pixels)*(40 Tiles in a line) 
             mov bl, dh
             and bx, 0x00FF 
             mul bx
             mov di, ax ; di contains the number of pixels in complete lines
             pop dx
 
-            push dx
-            mov ax, 40 ; number of blocs in a bloc's line
+            mov ax, 40 ; number of Tiles in a Tile's line
             mov bl, dh
             mul bl
-            mov cx, ax ; cx contains the number of blocs in complete lines
-            pop dx
+            mov cx, ax ; cx contains the number of Tiles in complete lines
 
             push dx
             and dx, 0x00FF
-            add cx, dx ; cx now contains the number of complete blocs
+            add cx, dx ; cx now contains the number of complete Tiles
             pop dx
 
-            push dx
             mov ax, 8
             mov bl, dl
             mul bl
-            add di, ax ; di now contains the position to write the next bloc
-            pop dx
+            add di, ax ; di now contains the position to write the next Tile
 
             mov si, MazeModel
             add si, cx
             xor ax, ax
-            mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'ème bloc of mazemodel 
+            mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'th Tile of mazemodel 
             
             
             push dx
@@ -114,7 +111,7 @@ section .text
             add si, ax ; si contains the offset of the sprite to display
             pop dx
             
-            ;we draw the bloc
+            ;we draw the Tile
             push cx
             push dx
             mov dx,8
@@ -129,10 +126,10 @@ section .text
 
             inc dl
             cmp dl, 40
-            jb .eachBlocOfTheLine
+            jb .eachTileOfTheLine
          inc dh
          cmp dh, 25
-         jb .eachBlocsLine
+         jb .eachTilesLine
       ret
 
 
@@ -171,32 +168,32 @@ section .text
 
    FirstDisplayGhosts:
 
-      mov word [strcBlinky + posX], 274
-      mov word [strcBlinky + posY], 30
+      mov word [strcBlinky + posX], 160
+      mov word [strcBlinky + posY], 84
       mov word [frameOf_Blinky], BLINKY_1
       mov word [frameOf_Blinky_eyes], EYES_RIGHT
       call Display_Blinky
       mov word [strcBlinky + velocityX], 1
       mov word [strcBlinky + velocityY], 0
 
-      mov word [strcInky + posX], 30
-      mov word [strcInky + posY], 146
+      mov word [strcInky + posX], 144
+      mov word [strcInky + posY], 108
       mov word [frameOf_Inky], INKY_1
       mov word [frameOf_Inky_eyes], EYES_DOWN
       call Display_Inky
       mov word [strcInky + velocityX], 0
       mov word [strcInky + velocityY], 1
 
-      mov word [strcPinky + posX], 30
-      mov word [strcPinky + posY], 30
+      mov word [strcPinky + posX], 160
+      mov word [strcPinky + posY], 108
       mov word [frameOf_Pinky], PINKY_1
       mov word [frameOf_Pinky_eyes], EYES_UP
       call Display_Pinky
       mov word [strcPinky + velocityX], 0
       mov word [strcPinky + velocityY], -1
 
-      mov word [strcClyde + posX], 274
-      mov word [strcClyde + posY], 146
+      mov word [strcClyde + posX], 176
+      mov word [strcClyde + posY], 108
       mov word [frameOf_Clyde], CLYDE_1
       mov word [frameOf_Clyde_eyes], EYES_LEFT
       call Display_Clyde

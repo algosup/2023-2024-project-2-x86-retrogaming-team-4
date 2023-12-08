@@ -96,19 +96,25 @@ section .text
         jb .noYflip
         neg cx
 
-        .noYflip:
-        ;inc/decremente the position
-        add ax, cx
-        add bx, dx
+    cmp dx, 0
+    jle .noEyesRight
+    mov ax, EYES_RIGHT
+    .noEyesRight:
 
-        ret
+    cmp dx, 0
+    jge .noEyesLeft
+    mov ax, EYES_LEFT
+    .noEyesLeft:
 
-    changeGhostFrames:
+    cmp cx, 0
+    jle .noEyesDown
+    mov ax, EYES_DOWN
+    .noEyesDown:
 
-        cmp dx, 1
-        jne .noEyesRight
-        mov ax, EYES_RIGHT
-        .noEyesRight:
+    cmp cx, 0
+    jge .noEyesUp
+    mov ax, EYES_UP
+    .noEyesUp:
 
         cmp dx, -1
         jne .noEyesLeft

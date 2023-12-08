@@ -11,7 +11,6 @@ section .text
         call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
         
         call ClearScreen
-        call UpdateScreen
 
         call BuildBackgroundBuffer
         call MazeToBGbuffer
@@ -59,10 +58,10 @@ section .text
         jmp gameloop
 ;-----------------------------------------------------------------------------------------
 
-    exit:
-    ;reset the keyboard buffer and then wait for a keypress :
-       ;mov ax, 0C01h ;
-       int 20h
+exit:
+    mov ax, 3h
+    int 10h
+    int 20h
 
 ;-----------------------------------------------------------------------------------------
 ; WAIT FOR THE NEXT FRAME

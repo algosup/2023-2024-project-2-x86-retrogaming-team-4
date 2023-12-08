@@ -1,5 +1,6 @@
 section .data
     keyPressed dw 0
+    changed db 0
 
 section .text
 readKeyboard:
@@ -33,6 +34,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_LEFT_2
+        inc byte[changed]
         .NoLeft:
 
         ; Right
@@ -42,6 +44,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_RIGHT_2
+        inc byte[changed]
         .NoRight:
 
         ; Up
@@ -51,6 +54,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], -1
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_UP_2
+        inc byte[changed]
         .NoUp:
 
         ; Down
@@ -60,7 +64,14 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 1
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_DOWN_2
+        inc byte[changed]
         .NoDown:
 
+        cmp byte [changed], 0
+        jne .NoChange
+        call changePacManPosition
+        .NoChange:
+
+        and byte [changed], 00
     ret
 
