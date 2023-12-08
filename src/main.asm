@@ -37,12 +37,12 @@ section .text
         
         call waitLoop
         
-        ;call ClearPinky        
-        ;call ClearBlinky
-        ;call ClearInky
-        ;call ClearClyde
-        ;call ClearPacMan 
-        call DisplayMaze
+        call ClearPinky        
+        call ClearBlinky
+        call ClearInky
+        call ClearClyde
+        call ClearPacMan 
+        ;call DisplayMaze
 
         call readKeyboard
 
