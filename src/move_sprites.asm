@@ -18,138 +18,156 @@ section .data
 
 section .text
 
-changePacManPosition:
-    mov bx, [x_PacManPosition]
-    add bx, [x_PacManVelocity]
-    mov [x_PacManPosition], bx
+    changePacManPosition:
+    ; only changes the Pacman's positions values according to the current velocity 
 
-    mov ax, [y_PacManPosition]
-    add ax, [y_PacManVelocity]
-    mov [y_PacManPosition], ax
-    ret
+        mov bx, [x_PacManPosition]
+        add bx, [x_PacManVelocity]
+        mov [x_PacManPosition], bx
 
-changeGhostPosition:
+        mov ax, [y_PacManPosition]
+        add ax, [y_PacManVelocity]
+        mov [y_PacManPosition], ax
 
-    ;switch the direction if the ghost reached a side of the screen
-    cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
-    jb .noXflip
-    neg dx
+        ret
 
-    .noXflip:
-    cmp ax, SCREEN_HEIGHT - SPRITE_SIZE 
-    jb .noYflip
-    neg cx
+    changeGhostPosition:
+    ; changes the ghosts' positions values according to the current velocity
+    ; changes the direction if encounter a wall
 
-    .noYflip:
-    ;inc/decremente the position
-    add ax, cx
-    add bx, dx
+        ;switch the direction if the ghost reached a side of the screen
+        cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
+        jb .noXflip
+        neg dx
 
-    ret
+        .noXflip:
+        cmp ax, SCREEN_HEIGHT - SPRITE_SIZE 
+        jb .noYflip
+        neg cx
 
-changeGhostFrames:
+        .noYflip:
+        ;inc/decremente the position
+        add ax, cx
+        add bx, dx
 
-    cmp dx, 0
-    jle .noEyesRight
-    mov ax, EYES_RIGHT
-    .noEyesRight:
+        ret
 
-    cmp dx, 0
-    jge .noEyesLeft
-    mov ax, EYES_LEFT
-    .noEyesLeft:
+    changeGhostFrames:
+    ; only changes the eyes' sprite according to the new direction
 
-    cmp cx, 0
-    jle .noEyesDown
-    mov ax, EYES_DOWN
-    .noEyesDown:
+        cmp dx, 0
+        jle .noEyesRight
+        mov ax, EYES_RIGHT
+        .noEyesRight:
 
-    cmp cx, 0
-    jge .noEyesUp
-    mov ax, EYES_UP
-    .noEyesUp:
+        cmp dx, 0
+        jge .noEyesLeft
+        mov ax, EYES_LEFT
+        .noEyesLeft:
 
-    ret
+        cmp cx, 0
+        jle .noEyesDown
+        mov ax, EYES_DOWN
+        .noEyesDown:
 
-changePinkyPosition:
+        cmp cx, 0
+        jge .noEyesUp
+        mov ax, EYES_UP
+        .noEyesUp:
 
-    mov ax, [y_PinkyPosition]
-    mov bx, [x_PinkyPosition]
-    mov cx, [y_PinkyVelocity]
-    mov dx, [x_PinkyVelocity]
+        ret
 
-    call changeGhostPosition
+    changePinkyPosition:
+    ; changes the Pinky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
 
-    mov word [y_PinkyPosition], ax
-    mov word [x_PinkyPosition], bx
-    mov word [y_PinkyVelocity], cx
-    mov word [x_PinkyVelocity], dx
+        mov ax, [y_PinkyPosition]
+        mov bx, [x_PinkyPosition]
+        mov cx, [y_PinkyVelocity]
+        mov dx, [x_PinkyVelocity]
 
-    call changeGhostFrames
+        call changeGhostPosition
 
-    mov word [frameOf_Pinky_eyes], ax
+        mov word [y_PinkyPosition], ax
+        mov word [x_PinkyPosition], bx
+        mov word [y_PinkyVelocity], cx
+        mov word [x_PinkyVelocity], dx
 
-    ret
+        call changeGhostFrames
 
-changeInkyPosition:
+        mov word [frameOf_Pinky_eyes], ax
 
-    mov ax, [y_InkyPosition]
-    mov bx, [x_InkyPosition]
-    mov cx, [y_InkyVelocity]
-    mov dx, [x_InkyVelocity]
+        ret
 
-    call changeGhostPosition
+    changeInkyPosition:
+    ; changes the Inky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
 
-    mov word [y_InkyPosition], ax
-    mov word [x_InkyPosition], bx
-    mov word [y_InkyVelocity], cx
-    mov word [x_InkyVelocity], dx
+        mov ax, [y_InkyPosition]
+        mov bx, [x_InkyPosition]
+        mov cx, [y_InkyVelocity]
+        mov dx, [x_InkyVelocity]
 
-    call changeGhostFrames
+        call changeGhostPosition
 
-    mov word [frameOf_Inky_eyes], ax
+        mov word [y_InkyPosition], ax
+        mov word [x_InkyPosition], bx
+        mov word [y_InkyVelocity], cx
+        mov word [x_InkyVelocity], dx
 
-    ret
+        call changeGhostFrames
 
-changeClydePosition:
+        mov word [frameOf_Inky_eyes], ax
 
-    mov ax, [y_ClydePosition]
-    mov bx, [x_ClydePosition]
-    mov cx, [y_ClydeVelocity]
-    mov dx, [x_ClydeVelocity]
+        ret
 
-    call changeGhostPosition
+    changeClydePosition:
+    ; changes the Clyde's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
 
-    mov word [y_ClydePosition], ax
-    mov word [x_ClydePosition], bx
-    mov word [y_ClydeVelocity], cx
-    mov word [x_ClydeVelocity], dx
+        mov ax, [y_ClydePosition]
+        mov bx, [x_ClydePosition]
+        mov cx, [y_ClydeVelocity]
+        mov dx, [x_ClydeVelocity]
 
-    call changeGhostFrames
+        call changeGhostPosition
 
-    mov word [frameOf_Clyde_eyes], ax
+        mov word [y_ClydePosition], ax
+        mov word [x_ClydePosition], bx
+        mov word [y_ClydeVelocity], cx
+        mov word [x_ClydeVelocity], dx
 
-    ret
+        call changeGhostFrames
 
-changeBlinkyPosition:
+        mov word [frameOf_Clyde_eyes], ax
 
-    mov ax, [y_BlinkyPosition]
-    mov bx, [x_BlinkyPosition]
-    mov cx, [y_BlinkyVelocity]
-    mov dx, [x_BlinkyVelocity]
+        ret
 
-    call changeGhostPosition
+    changeBlinkyPosition:
+    ; changes the Blinky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
 
-    mov word [y_BlinkyPosition], ax
-    mov word [x_BlinkyPosition], bx
-    mov word [y_BlinkyVelocity], cx
-    mov word [x_BlinkyVelocity], dx
+        mov ax, [y_BlinkyPosition]
+        mov bx, [x_BlinkyPosition]
+        mov cx, [y_BlinkyVelocity]
+        mov dx, [x_BlinkyVelocity]
 
-    call changeGhostFrames
+        call changeGhostPosition
 
-    mov word [frameOf_Blinky_eyes], ax
+        mov word [y_BlinkyPosition], ax
+        mov word [x_BlinkyPosition], bx
+        mov word [y_BlinkyVelocity], cx
+        mov word [x_BlinkyVelocity], dx
 
-    ret
+        call changeGhostFrames
+
+        mov word [frameOf_Blinky_eyes], ax
+
+        ret
 
 
 

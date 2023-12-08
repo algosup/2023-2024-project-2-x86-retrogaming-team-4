@@ -13,7 +13,6 @@ jmp start
 %include "keyboard.asm"
 %include "move_sprites.asm"
 
-
 section .text
 
 ;-----------------------------------------------------------------------------------------

@@ -1,7 +1,9 @@
 section .text
 
     BuildScreenBuffer:
-        call heapInit
+    ;allocates the space for the buffer in the 'heap' memory
+    
+        call heapInit ; called ONCE, before any use of the rest of the heap library
         mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
         call heapAllocParagraph
         mov [ScreenBufferSegment],bx
@@ -9,19 +11,22 @@ section .text
         ret
     
     BuildBackgroundBuffer: 
-      mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
-      call heapAllocParagraph
-      mov [BackgroundBufferSegment],bx
+    ;allocates the space for the buffer in the 'heap' memory
+        mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
+        call heapAllocParagraph
+        mov [BackgroundBufferSegment],bx
    
-      ret
+        ret
 
     UpdateScreen:
+    ; clone the content of the screen buffer in the video memory adress to display it
+
         push ds
         push es
 
         mov ax,cs:[ScreenBufferSegment]
         mov ds,ax ; backBuffer segment adress
-        mov ax,0xa000 ; video memory segment adress
+        mov ax,0xA000 ; video memory segment adress
         mov es,ax 
         xor si,si ; beginning of the backbuffer (0)
         xor di,di ; beginning of the video memory (0)
@@ -33,8 +38,10 @@ section .text
 
         ret
 
-   ; read the Maze model from the maze.asm, and build each bloc according to the hexacode, drawing the background into the background buffer
+   
    MazeToBGbuffer: 
+   ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
+
         xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
         push word [BackgroundBufferSegment]
         pop es
@@ -104,6 +111,8 @@ section .text
 
 
     DisplayMaze:
+    ; it just clones the background buffer into the screen buffer
+
         push es
         push ds
         ;HEART OF THE FUNCTION : 'movsb' writes byte per byte the content from 'ds:si' to 'es:di', increasing both si and di each time it is executed
@@ -118,10 +127,9 @@ section .text
         pop ds
         xor si, si
 
-        
-        
-        mov cx, SCREEN_WIDTH*SCREEN_HEIGHT ; set the counter for rep
-        rep movsb ; 'movsb' writes byte per byte the content from 'ds:si' to 'es:di', increasing both si and di each time it is executed
+        ;write
+        mov cx, SCREEN_WIDTH*SCREEN_HEIGHT 
+        rep movsb 
 
         pop ds
         pop es

@@ -29,6 +29,8 @@ section .data
 section .text
     
     Display_PacMan:
+    ; display PacMan according to current positions values
+
         mov bx, [x_PacManPosition]
         mov ax, [y_PacManPosition]
         call calculate_screen_position
@@ -36,9 +38,12 @@ section .text
         mov ax, [frameOf_PacMan]
         call calculate_spritesheet_position
         call draw_sprite
+
         ret
 
     Display_Pinky:
+    ; display Pinky and its eyes, according to current positions values
+
         mov bx, [x_PinkyPosition]
         mov ax, [y_PinkyPosition]
         call calculate_screen_position
@@ -54,6 +59,8 @@ section .text
         ret
     
     Display_Blinky:
+    ; display Blinky and its eyes, according to current positions values
+
         mov bx, [x_BlinkyPosition]
         mov ax, [y_BlinkyPosition]
         call calculate_screen_position
@@ -69,6 +76,8 @@ section .text
         ret
     
     Display_Inky:
+    ; display Inky and its eyes, according to current positions values
+
         mov bx, [x_InkyPosition]
         mov ax, [y_InkyPosition]
         call calculate_screen_position
@@ -84,6 +93,8 @@ section .text
         ret
     
     Display_Clyde:
+    ; display Clyde and its eyes, according to current positions values
+
         mov bx, [x_ClydePosition]
         mov ax, [y_ClydePosition]
         call calculate_screen_position
@@ -101,36 +112,53 @@ section .text
 
     
     ClearPacMan:
+    ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
+
         mov ax, [y_PacManPosition]
         mov bx, [x_PacManPosition]
         call ClearSprite
+
         ret
 
     ClearPinky:
+    ; replace the 16x16 bloc of pixels where is Pinky, by the content of the background buffer at the same location, according to its x y positions
+
         mov ax, [y_PinkyPosition]
         mov bx, [x_PinkyPosition]
         call ClearSprite
+
         ret
     
     ClearInky:
+    ; replace the 16x16 bloc of pixels where is Inky, by the content of the background buffer at the same location, according to its x y positions
+
         mov ax, [y_InkyPosition]
         mov bx, [x_InkyPosition]
         call ClearSprite
+
         ret
     
     ClearBlinky:
+    ; replace the 16x16 bloc of pixels where is Blinky, by the content of the background buffer at the same location, according to its x y positions
+
         mov ax, [y_BlinkyPosition]
         mov bx, [x_BlinkyPosition]
         call ClearSprite
+
         ret
     
     ClearClyde:
+    ; replace the 16x16 bloc of pixels where is Clyde, by the content of the background buffer at the same location, according to its x y positions
+
         mov ax, [y_ClydePosition]
         mov bx, [x_ClydePosition]
         call ClearSprite
+
         ret
 
     ClearSprite:
+    ;; replace the 16x16 bloc of pixels where is the sprite, by the content of the background buffer at the same location, according to its x y positions
+
         push es
         push ds
         mov cx, SCREEN_WIDTH
@@ -157,6 +185,7 @@ section .text
 
         pop ds     
         pop es
+
         ret
 
 
@@ -165,12 +194,14 @@ section .text
         ; Parameters: y coord in ax, x coord in bx
         ; Result in dx
         ; Override: ax, bx, dx
+
         push bx
         mov bx, SCREEN_WIDTH
         mul bx
         pop bx
         add ax, bx
         mov dx, ax
+
         ret
 
     calculate_spritesheet_position:
@@ -178,46 +209,48 @@ section .text
         ; Parameter: sprite ID in ax
         ; Result in bx
         ; Override: ax, bx
+
         push dx
         mov dx, SPRITE_SIZE * SPRITE_SIZE
         mul dx
         shr ax, 1 ; Because there are two pixels in a byte
         mov bx, ax
         pop dx
+
         ret
 
     draw_sprite:
-        push es
+    ; this function needs : 
+    ; bx: Base position on spritesheet
+    ; dx: Linear position on screen to display
 
-        ; TODO: Dynamic sprite size (DSP)
-        ; bx: Base position on spritesheet
-        ; cx: Index on sprite
-        ; dx: Pos on screen
+        push es ; pop at the end of the function
 
         ; Decrement as increment is at the beginning of the loop
         dec dx
         ; Number of pixels draw
         mov cx, 0x00ff ; TODO: DSP
 
-    .draw_loop:
-        inc dx
-        inc cl ; TODO: DSP
+        .draw_loop:
 
-        ; Read the color index
-        push cx
-        shr cx, 1 ; Because there are two pixels in a byte
-        mov di, spritesheet
-        add di, bx
-        add di, cx
-        mov al, [ds:di]
+            inc dx
+            inc cl ; TODO: DSP
 
-        ; Check if the color is in the high or low nibble
-        pop cx
-        test cl, 1 ; TODO: DSP
-        jnz .low_byte
-        shr ax, 4
+            ; Read the color index
+            push cx
+            shr cx, 1 ; Because there are two pixels in a byte
+            mov di, spritesheet
+            add di, bx
+            add di, cx
+            mov al, [ds:di]
 
-        .low_byte:
+            ; Check if the color is in the high or low nibble
+            pop cx
+            test cl, 1 ; TODO: DSP
+            jnz .low_byte
+            shr ax, 4
+
+            .low_byte:
             and ax, 0xf ; TODO: DSP
             je .transparent_skip
 
@@ -232,16 +265,18 @@ section .text
             push word [ScreenBufferSegment] 
             pop es
             mov [es:di], al
-        
+            
 
-        ; If we need to go to the next line
-        .transparent_skip:
-            not cl
-            test cl, 0xf ; TODO: DSP
-            not cl
-            jne .draw_loop
-            add dx, SCREEN_WIDTH - SPRITE_SIZE
-            cmp cl, 0xff
-            jne .draw_loop
+            ; If we need to go to the next line
+            .transparent_skip:
+                not cl
+                test cl, 0xf ; TODO: DSP
+                not cl
+                jne .draw_loop
+                add dx, SCREEN_WIDTH - SPRITE_SIZE
+                cmp cl, 0xff
+                jne .draw_loop
+
         pop es
+
         ret
