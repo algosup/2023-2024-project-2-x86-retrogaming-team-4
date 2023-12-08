@@ -1,4 +1,5 @@
 section .data
+
     corner0X dw 0
     corner0Y dw 0
     corner1X dw 0
@@ -20,6 +21,7 @@ section .data
 section .text
     
     isColliding:
+
         call getCorners
         ; Set corner to check
         mov ax, [corner0X]
@@ -51,19 +53,19 @@ section .text
         mov [checkedCornerX], ax
         mov [checkedCornerY], bx
         call isWall
+
         cmp byte[isCollid], 1
         je .collision
-
         ret
 
         .collision:
         call stopPackMan
     
         ret
-
     
-    ; Get the corner of the PacMan tile
     getCorners:
+    ; Get the corner of the PacMan tile
+
         mov bx, [pacManNextPosX]
         add bx, 4
         mov [corner0X], bx
@@ -93,12 +95,12 @@ section .text
         mov [corner3Y], ax
 
         ret
-
-
+    
+    getTileAbsPos:
     ; Get absolute position of tile
     ; Param: checkedCornerX, checkedCornerY
     ; Return: tileAbsPos
-    getTileAbsPos:
+
         mov ax, [checkedCornerY]
         shr ax, 3
         mov bx, SCREEN_WIDTH/8
@@ -110,8 +112,9 @@ section .text
         add [tileAbsPos], ax
         ret
 
-    ; Check if the tile is a wall
     isWall:
+    ; Check if the tile is a wall
+    
         ;Get the tile's absolute position
         call getTileAbsPos
 

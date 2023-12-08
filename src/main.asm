@@ -13,6 +13,7 @@ jmp start
 %include "buffers.asm"
 %include "keyboard.asm"
 %include "move_sprites.asm"
+%include "contact.asm"
 
 section .text
 
@@ -49,6 +50,9 @@ section .text
         
         call waitLoop
         
+        ;read if a ghost hit pacman or the reverse
+        call readContact
+
         ;clear All the moving sprites
         call ClearPinky        
         call ClearBlinky
@@ -79,3 +83,14 @@ section .text
 ; GOTO GAME LOOP
         jmp gameloop
 ;-----------------------------------------------------------------------------------------
+
+outOfGameLoop:
+
+;reset the keyboard buffer and then wait for a keypress :
+   mov ax, 0C01h ;
+   int 21h
+ 
+;dos box default video mode
+   mov ax, 03h
+   int 21h
+
