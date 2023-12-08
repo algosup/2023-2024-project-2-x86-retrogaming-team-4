@@ -131,6 +131,8 @@ section .text
         ret
 
     ClearSprite:
+        push es
+        push ds
         mov cx, SCREEN_WIDTH
         mul cx
         add bx, ax
@@ -148,12 +150,13 @@ section .text
         .eachLine:
             mov cx, SPRITE_SIZE ; set the counter for 8 pixel per line
             rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
-            add di, SCREEN_WIDTH - SPRITE_SIZE ; increment the position register to the next line 
+            add di, SCREEN_WIDTH - SPRITE_SIZE
+            add si, SCREEN_WIDTH - SPRITE_SIZE ; increment the position register to the next line 
             dec dx ; decrementatin de dx, when it reach 0, the flag is 0 too cause of the dec propreties
             jnz .eachLine ; while the flag != 0, it continues
 
-        push cs       
-        pop ds
+        pop ds     
+        pop es
         ret
 
 
