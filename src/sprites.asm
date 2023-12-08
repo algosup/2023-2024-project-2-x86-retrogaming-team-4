@@ -157,7 +157,7 @@ section .text
         ret
 
     ClearSprite:
-    ;; replace the 16x16 bloc of pixels where is the sprite, by the content of the background buffer at the same location, according to its x y positions
+    ; replace the 16x16 bloc of pixels where is the sprite, by the content of the background buffer at the same location, according to its x y positions
 
         push es
         push ds
