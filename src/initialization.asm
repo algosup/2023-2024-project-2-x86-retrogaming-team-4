@@ -43,7 +43,7 @@ section .text
          jb .wait_for_next_frame
 
       ; Set next wait time
-      ; mov eax, [timestamp_of_next_frame]
+      mov eax, [timestamp_of_next_frame]
       add eax, PERIOD
       mov [timestamp_of_next_frame], eax
 

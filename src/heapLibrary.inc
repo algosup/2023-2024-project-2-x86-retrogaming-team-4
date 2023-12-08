@@ -19,9 +19,9 @@ section .text
 
     heapAllocParagraph:
     ; this function will allocate a piece of the heap : 
-    ; in ax, put how many paragraphs (16 bits) (cause a paragraph is a segment with the offset=0 , and between two segment at the offset 0, there are 16 bits)
+    ; in ax, put how many paragraphs (16 bits)
     ; the segment corresponding to this space allocated is moved in bx
-    ; then, we change the value of the next segment available, at the end at the one just created
+    ; then, we change the value of the next segment available
 
         mov bx, cs:[nextFreeSegment] ; we 
         add cs:[nextFreeSegment], ax
