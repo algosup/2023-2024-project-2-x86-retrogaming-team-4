@@ -1,2 +1,7 @@
-
-.vscode/settings.json
+.vscode/*
+.vscode
+*/*.map
+*/*.com
+*/*.cmd
+bin/
+nasm/
