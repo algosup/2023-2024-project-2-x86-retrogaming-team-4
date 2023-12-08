@@ -119,8 +119,6 @@ section .text
         mov si, MazeModel
         add si, [tileAbsPos]
         
-        int3
-
         ;compare all the differents wall's sprites and return is collided if the compare is equal
         cmp byte[si], 0x01
         jne .not1
