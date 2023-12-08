@@ -70,18 +70,18 @@ section .text
         mov [pacManNextPosY], ax
 
         ; check collision
-        call isCollided
-        cmp byte[isCollid], 1
-        je .exit
+        call isColliding
 
         ; if no collision, set next position
-        mov bx, [pacManNextPosX]
+
+        mov bx, [strcPacMan + posX]
+        add bx, [strcPacMan + velocityX]
         mov [strcPacMan + posX], bx
 
-        mov ax, [pacManNextPosY]
+        mov ax, [strcPacMan + posY]
+        add ax, [strcPacMan + velocityY]
         mov [strcPacMan + posY], ax
-        .exit:
-        mov byte[isCollid], 0x00
+
         ret
 
     changeGhostPosition:
@@ -204,6 +204,7 @@ section .text
     stopPackMan:
         mov word [strcPacMan + velocityX], 0
         mov word [strcPacMan + velocityY], 0
+        mov byte[isCollid], 0x00
         ret
 
         

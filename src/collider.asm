@@ -19,8 +19,8 @@ section .data
 
 section .text
     
-    isCollided:
-        call getCorner
+    isColliding:
+        call getCorners
         ; Set corner to check
         mov ax, [corner0X]
         mov bx, [corner0Y]
@@ -52,43 +52,44 @@ section .text
         mov [checkedCornerY], bx
         call isWall
         cmp byte[isCollid], 1
-        jne .skip
+        je .collision
+
+        ret
 
         .collision:
         call stopPackMan
-        .skip:
     
         ret
 
     
     ; Get the corner of the PacMan tile
-    getCorner:
-        mov bx, [strcPacMan + posX]
-        add bx, 5
+    getCorners:
+        mov bx, [pacManNextPosX]
+        add bx, 4
         mov [corner0X], bx
-        mov ax, [strcPacMan + posY]
-        add ax, 5
+        mov ax, [pacManNextPosY]
+        add ax, 4
         mov [corner0Y], ax
 
-        mov bx, [strcPacMan + posX]
-        add bx, 5
+        mov bx, [pacManNextPosX]
+        add bx, 4
         mov [corner1X], bx
-        mov ax, [strcPacMan + posY]
-        add ax, 12
+        mov ax, [pacManNextPosY]
+        add ax, 11
         mov [corner1Y], ax
 
-        mov bx, [strcPacMan + posX]
-        add bx, 12
+        mov bx, [pacManNextPosX]
+        add bx, 11
         mov [corner2X], bx
-        mov ax, [strcPacMan + posY]
-        add ax, 5
+        mov ax, [pacManNextPosY]
+        add ax, 4
         mov [corner2Y], ax
 
-        mov bx, [strcPacMan + posX]
-        add bx, 12
+        mov bx, [pacManNextPosX]
+        add bx, 11
         mov [corner3X], bx
-        mov ax, [strcPacMan + posY]
-        add ax, 12
+        mov ax, [pacManNextPosY]
+        add ax, 11
         mov [corner3Y], ax
 
         ret
@@ -121,73 +122,73 @@ section .text
         int3
 
         ;compare all the differents wall's sprites and return is collided if the compare is equal
-        cmp word[si], 0x01
+        cmp byte[si], 0x01
         jne .not1
         mov byte[isCollid], 1
         ret
         .not1:
 
-        cmp word[si], 0x02
+        cmp byte[si], 0x02
         jne .not2
         mov byte[isCollid], 1
         ret
         .not2:
 
-        cmp word[si], 0x03
+        cmp byte[si], 0x03
         jne .not3
         mov byte[isCollid], 1
         ret
         .not3:
 
-        cmp word[si], 0x04
+        cmp byte[si], 0x04
         jne .not4
         mov byte[isCollid], 1
         ret
         .not4:
 
-        cmp word[si], 0x05
+        cmp byte[si], 0x05
         jne .not5
         mov byte[isCollid], 1
         ret
         .not5:
 
-        cmp word[si], 0x06
+        cmp byte[si], 0x06
         jne .not6
         mov byte[isCollid], 1
         ret
         .not6:
 
-        cmp word[si], 0x07
+        cmp byte[si], 0x07
         jne .not7
         mov byte[isCollid], 1
         ret
         .not7:
 
-        cmp word[si], 0x08
+        cmp byte[si], 0x08
         jne .not8
         mov byte[isCollid], 1
         ret
         .not8:
 
-        cmp word[si], 0x09
+        cmp byte[si], 0x09
         jne .not9
         mov byte[isCollid], 1
         ret
         .not9:
 
-        cmp word[si], 0x0A
+        cmp byte[si], 0x0A
         jne .notA
         mov byte[isCollid], 1
         ret
         .notA:
 
-        cmp word[si], 0x0B
+        cmp byte[si], 0x0B
         jne .notB
         mov byte[isCollid], 1
         ret
         .notB:
 
-        cmp word[si], 0x0C
+        cmp byte[si], 0x0C
         jne .notC
         mov byte[isCollid], 1
         ret
