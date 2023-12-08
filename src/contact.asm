@@ -3,62 +3,68 @@ section .text
     readContact:
 
         .PinkyContact:
-            mov cx, [strcPinky  + posX]
-            mov dx, [strcPinky  + posY]
+            mov bx, [strcPinky  + posX]
+            mov ax, [strcPinky  + posY]
             call isThereContact
         
         .BlinkyContact:
-            mov cx, [strcBlinky  + posX]
-            mov dx, [strcBlinky  + posY]
+            mov bx, [strcBlinky  + posX]
+            mov ax, [strcBlinky  + posY]
             call isThereContact
 
         .InkyContact:
-            mov cx, [strcInky  + posX]
-            mov dx, [strcInky  + posY]
+            mov bx, [strcInky  + posX]
+            mov ax, [strcInky  + posY]
             call isThereContact
         
         .ClydeContact:
-            mov cx, [strcClyde  + posX]
-            mov dx, [strcClyde  + posY]
+            mov bx, [strcClyde  + posX]
+            mov ax, [strcClyde  + posY]
             call isThereContact
 
         ret
 
     isThereContact:
-
     ; read if a ghost touched pacman (or the reverse)
-        mov ax, [strcPacMan + posX]
-        mov bx, [strcPacMan + posY]
 
-        int3
-        cmp ax, cx
-        je .onSameXaxis
-        cmp bx, dx
-        je .onSameYaxis
+        push ds ; pop at the end
+
+        ;calculates the linear position of the ghost (result in ax)
+        mov cx, SCREEN_WIDTH
+        mul cx
+        add ax, bx 
+
+        ;stores the color of pacman into 'ah'
+        mov di, palette
+        inc di, ;(add 1 to di) cause '1' is the color of pacman according to the palette of colors for the spritesheet
+        xor bx, bx
+        mov bl, [ds:di]
+
+        ;the destination is 'al'
         
-        jmp  .notTouched
-
-        .onSameXaxis:
-            mov ax, bx
-            mov cx, dx
-
-        .onSameYaxis:
-            int3
-            ; get the difference between pacman and ghost position
-            sub ax, cx
-
-            ; get the absolute value of this difference
-            mov cx, ax
-            sar cx, 15
-            xor ax, cx
-            shr cx, 15
-            add ax, cx
-            
-            ; check if they are touching each other
-            cmp ax, SPRITE_SIZE
-            jg .notTouched
+        ;set the source 'ds:si'
+        push word [ScreenBufferSegment]
+        pop ds
+        mov si, ax  
+        
+        mov dx, SPRITE_SIZE
+        .eachLine:
+            mov cx, SPRITE_SIZE
+            .eachPixel:
+                lodsb 
+                int3
+                cmp al, bl
+                je .touched
+                dec cx
+                jnz .eachPixel
+            add si, SCREEN_WIDTH - SPRITE_SIZE
+            dec dx
+            jnz .eachLine
+        pop ds
+        jmp .notTouched
 
         .touched:
+            pop ds
             cmp byte [afraid], 0
             je .normalContact
             
@@ -68,10 +74,10 @@ section .text
 
         .normalContact:
 
-            call outOfGameLoop
+            jmp resetPoint
 
         .notTouched:
-
+        
         ret
 
 
