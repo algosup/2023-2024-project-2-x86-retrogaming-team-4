@@ -1,33 +1,47 @@
-section .bss
-    buffScreen resb SPRITE_SIZE*SPRITE_SIZE ; where is stored the backuped screen
 
-section .data
-    timestamp_of_next_frame dd 0, 0 ; timestamp of the next frame
+org 100h
+
+jmp start
+
+;To merge all the files into one program
+%include "heapLibrary.inc"
+%include "constants.asm"
+%include "maze.asm"
+%include "sprites.asm"
+%include "collider.asm"
+%include "initialization.asm"
+%include "buffers.asm"
+%include "keyboard.asm"
+%include "move_sprites.asm"
 
 section .text
 
+;-----------------------------------------------------------------------------------------
+;THE SETTINGS
     start:
+;-----------------------------------------------------------------------------------------
+        ;Set the VideoMode
         call SetVideoMode
-        call BuildScreenBuffer ; set of functions allowing to write not directly in the video memory but in a buffer
-        
+
+        ;Set the Screen
+        call BuildScreenBuffer 
         call ClearScreen
 
+        ;Set the maze
         call BuildBackgroundBuffer
         call MazeToBGbuffer
         call DisplayMaze
+
+        ;Set the sprites (first state)
         call FirstDisplayPacMan
         call FirstDisplayGhosts
-        call UpdateScreen
         
+        ;Display all
+        call UpdateScreen
 
-        mov eax, PERIOD
-        shr eax, 16
-        rdtsc
-        mov [timestamp_of_next_frame], eax
-
-        ;mov cx, 0
-        ;push cx
-
+        ;Set the Timer and clock for the game loop
+        call setTimer
+        
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:
@@ -35,64 +49,33 @@ section .text
         
         call waitLoop
         
+        ;clear All the moving sprites
         call ClearPinky        
         call ClearBlinky
         call ClearInky
         call ClearClyde
         call ClearPacMan 
-        ;call DisplayMaze
 
+        ;look at "arrows pressed ?" and move PacMan according to the direction pressed
         call readKeyboard
 
+        ; move the ghosts according to the defined velocity of each one
         call changePinkyPosition
         call changeBlinkyPosition
         call changeInkyPosition
         call changeClydePosition
 
+        ;display all in the screen buffer according to the new positions (quite slow) 
         call Display_PacMan
         call Display_Pinky
         call Display_Blinky
         call Display_Inky
         call Display_Clyde
 
+        ;display all on the real screen (quick)
         call UpdateScreen
-        ;pop cx
-        ;inc cx
-        ;cmp cx, 10
-        ;je DebugExit
-        ;push cx
         
-
-
 ;-------------------------------------------------
 ; GOTO GAME LOOP
         jmp gameloop
-;-----------------------------------------------------------------------------------------
-
-DebugExit: 
-;reset the keyboard buffer and then wait for a keypress :
-mov ax, 0C01h ; 
-int 21h
-
-exit:
-    mov ax, 3h
-    int 10h
-    int 20h
-
-;-----------------------------------------------------------------------------------------
-; WAIT FOR THE NEXT FRAME
-    waitLoop:
-        .wait_for_next_frame:
-            ; Read the current time
-            rdtsc
-
-            ; If not yet the correct time, keep going
-            cmp eax, [timestamp_of_next_frame]
-            jb .wait_for_next_frame
-
-        ; Set next wait time
-        ; mov eax, [timestamp_of_next_frame]
-        add eax, PERIOD
-        mov [timestamp_of_next_frame], eax
-        ret
 ;-----------------------------------------------------------------------------------------
