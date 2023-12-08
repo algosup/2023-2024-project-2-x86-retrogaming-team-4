@@ -30,6 +30,20 @@ readKeyboard:
         ; Left
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
         jne .NoLeft
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 1
+        cmp byte[si], 0x0B
+        je .NoLeft
+        cmp byte[si], 0x06
+        je .NoLeft
+        cmp byte[si], 0x08
+        je .NoLeft
+        cmp byte[si], 0x02
+        je .NoLeft
+        cmp byte[si], 0x04
+        je .NoLeft
         mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
@@ -40,6 +54,20 @@ readKeyboard:
         ; Right
         cmp byte [keyPressed], RIGHT_KEY_SCANCODE
         jne .NoRight
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        add si, 1
+        cmp byte[si], 0x0C
+        je .NoRight
+        cmp byte[si], 0x07
+        je .NoRight
+        cmp byte[si], 0x05
+        je .NoRight
+        cmp byte[si], 0x03
+        je .NoRight
+        cmp byte[si], 0x01
+        je .NoRight
         mov word[strcPacMan + velocityX], 1
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
@@ -50,6 +78,20 @@ readKeyboard:
         ; Up
         cmp byte [keyPressed], UP_KEY_SCANCODE
         jne .NoUp
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 40
+        cmp byte[si], 0x09
+        je .NoUp
+        cmp byte[si], 0x07
+        je .NoUp
+        cmp byte[si], 0x08
+        je .NoUp
+        cmp byte[si], 0x03
+        je .NoUp
+        cmp byte[si], 0x04
+        je .NoUp
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], -1
         call changePacManPosition
@@ -60,6 +102,20 @@ readKeyboard:
         ; Down
         cmp byte [keyPressed], DOWN_KEY_SCANCODE
         jne .NoDown
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        add si, 40
+        cmp byte[si], 0x0A
+        je .NoDown
+        cmp byte[si], 0x06
+        je .NoDown
+        cmp byte[si], 0x05
+        je .NoDown
+        cmp byte[si], 0x01
+        je .NoDown
+        cmp byte[si], 0x02
+        je .NoDown
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], 1
         call changePacManPosition
