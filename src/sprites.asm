@@ -127,14 +127,13 @@ section .text
 
         
         .writeTheTile:
-            ;set the source 'ds:si'
-            ; ds is already well set (= code segment)
-            mov si, MazeSpriteSheet
-            add si, 0x0F*64; get the adress of the background tile :'OxOF'*64 (pixels in a tile) 
+            ;set the source 'al' : the background color
+            mov al, BACKGROUND_COLOR
+            
             mov dx, SPRITE_SIZE
             .eachLine:
                 mov cx, SPRITE_SIZE
-                rep movsb
+                rep stosb
                 add di, SCREEN_WIDTH - SPRITE_SIZE
                 dec dx
                 jnz .eachLine
