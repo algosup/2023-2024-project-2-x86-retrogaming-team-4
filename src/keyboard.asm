@@ -11,7 +11,7 @@ readKeyboard:
 
     ; Read last key in buffer:
     .keepReadingBuffer:
-        int3
+        
         mov ah, 00h
         int 16h
         mov bx, ax

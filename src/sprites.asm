@@ -131,6 +131,7 @@ section .text
         ret
 
     ClearSprite:
+    
         mov cx, SCREEN_WIDTH
         mul cx
         add bx, ax

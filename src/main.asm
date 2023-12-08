@@ -15,10 +15,10 @@ section .text
         call BuildBackgroundBuffer
         call MazeToBGbuffer
         call DisplayMaze
-        call UpdateScreen
-       
         call FirstDisplayPacMan
         call FirstDisplayGhosts
+        call UpdateScreen
+        
 
         ; Display the period
         mov eax, PERIOD
@@ -27,17 +27,22 @@ section .text
         rdtsc
         mov [timestamp_of_next_frame], eax
 
+        ;mov cx, 0
+        ;push cx
+
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:
 ;-------------------------------------------------
-        ;clear all
+        
         call waitLoop
-        call ClearPinky
-        call ClearBlinky
-        call ClearInky
-        call ClearClyde
-        call ClearPacMan
+        
+        ;call ClearPinky        
+        ;call ClearBlinky
+        ;call ClearInky
+        ;call ClearClyde
+        ;call ClearPacMan 
+        call DisplayMaze
 
         call readKeyboard
 
@@ -53,12 +58,23 @@ section .text
         call Display_Clyde
 
         call UpdateScreen
+        ;pop cx
+        ;inc cx
+        ;cmp cx, 10
+        ;je DebugExit
+        ;push cx
+        
 
 
 ;-------------------------------------------------
 ; GOTO GAME LOOP
         jmp gameloop
 ;-----------------------------------------------------------------------------------------
+
+DebugExit: 
+;reset the keyboard buffer and then wait for a keypress :
+mov ax, 0C01h ; 
+int 21h
 
 exit:
     mov ax, 3h
