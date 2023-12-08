@@ -104,8 +104,42 @@ section .text
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
         mov ax, [strcPacMan + posY]
-        mov bx, [strcPacMan + posX]
-        call ClearSprite
+        mov bx, [strcPacMan + posX]      
+
+        ;calculate the linear position of the sprite
+        mov cx, SCREEN_WIDTH
+        mul cx
+        add bx, ax
+
+        ;set the destination 'es:di'
+        push word [ScreenBufferSegment] 
+        pop es 
+        mov di, bx
+        mov ax, 1
+        jmp .writeTheTile
+
+        .nowTheBackgroundBuffer:
+        ;set the destination 'es:di'
+        push word [BackgroundBufferSegment] 
+        pop es 
+        mov di, bx
+        mov ax, 0
+
+        
+        .writeTheTile:
+            ;set the source 'ds:si'
+            ; ds is already well set (= code segment)
+            mov si, MazeSpriteSheet
+            add si, 0x0F*64; get the adress of the background tile :'OxOF'*64 (pixels in a tile) 
+            mov dx, SPRITE_SIZE
+            .eachLine:
+                mov cx, SPRITE_SIZE
+                rep movsb
+                add di, SCREEN_WIDTH - SPRITE_SIZE
+                dec dx
+                jnz .eachLine
+            cmp ax, 1
+            je .nowTheBackgroundBuffer
 
         ret
 
