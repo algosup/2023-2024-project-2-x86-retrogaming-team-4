@@ -85,7 +85,6 @@ section .text
         ret
 
     changeGhostPosition:
-
         ;switch the direction if the ghost reached a side of the screen
         cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
         jb .noXflip
@@ -96,43 +95,35 @@ section .text
         jb .noYflip
         neg cx
 
-    cmp dx, 0
-    jle .noEyesRight
-    mov ax, EYES_RIGHT
-    .noEyesRight:
+        .noYflip:
+        ;inc/decremente the position
+        add ax, cx
+        add bx, dx
 
-    cmp dx, 0
-    jge .noEyesLeft
-    mov ax, EYES_LEFT
-    .noEyesLeft:
+        ret
 
-    cmp cx, 0
-    jle .noEyesDown
-    mov ax, EYES_DOWN
-    .noEyesDown:
+    changeGhostFrames:
+        cmp dx, 0
+        jle .noEyesRight
+        mov ax, EYES_RIGHT
+        .noEyesRight:
 
-    cmp cx, 0
-    jge .noEyesUp
-    mov ax, EYES_UP
-    .noEyesUp:
-
-        cmp dx, -1
-        jne .noEyesLeft
+        cmp dx, 0
+        jge .noEyesLeft
         mov ax, EYES_LEFT
         .noEyesLeft:
 
-        cmp cx, 1
-        jne .noEyesDown
+        cmp cx, 0
+        jle .noEyesDown
         mov ax, EYES_DOWN
         .noEyesDown:
 
-        cmp cx, -1
-        jne .noEyesUp
+        cmp cx, 0
+        jge .noEyesUp
         mov ax, EYES_UP
         .noEyesUp:
 
         ret
-
 
     changeBlinkyPosition:
         mov ax, [strcBlinky + posY]
