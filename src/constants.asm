@@ -1,3 +1,13 @@
+struc Sprite
+    posX: resw 1
+    posY: resw 1
+    absPos: resw 1
+    velocityX: resw 1
+    velocityY: resw 1
+    isChased: resb 1
+    isDead: resb 1
+endstruc
+
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200
 %define SPRITE_SIZE 16

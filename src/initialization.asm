@@ -7,6 +7,7 @@ section .data
 
     timestamp_of_next_frame dd 0, 0 ; timestamp of the next frame
 
+   
 section .text
 
    setTimer:
@@ -58,11 +59,10 @@ section .text
       push word [ScreenBufferSegment] 
       pop es
 
-      ret
+   ret
 
    ClearScreen:
-   ;clear the screen by filling it with a unique color (stored in al)
-
+      ;clear the screen by filling it with a unique color (stored in al)
       mov al, 0x29 ; color to fill the screen (white = 0x0F, black = 0x00)
             
       ;set the destination 'es:di' :
@@ -77,52 +77,48 @@ section .text
    FirstDisplayPacMan:
    ; set the initial position and frame (mouth closed or not, ...) and display it
 
-      mov word [x_PacManPosition], 160
-      mov word [y_PacManPosition], 132
+      mov word [strcPacMan + posX], 160
+      mov word [strcPacMan + posY], 132
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
-      call Display_PacMan
 
+      call Display_PacMan
       ret
 
    FirstDisplayGhosts:
    ; for each ghost : set the initial : -POSITION- -FRAME- -EYES FRAME- -DIRECTION- -SPEED- and then display it
 
-      ;pinky
-      mov word [x_PinkyPosition], 160
-      mov word [y_PinkyPosition], 108
-      mov word [frameOf_Pinky], PINKY_1
-      mov word [frameOf_Pinky_eyes], EYES_UP
-      call Display_Pinky
-      mov word [x_PinkyVelocity], 0
-      mov word [y_PinkyVelocity], -1
-
-      ;blinky
-      mov word [x_BlinkyPosition], 160
-      mov word [y_BlinkyPosition], 84
+      mov word [strcBlinky + posX], 160
+      mov word [strcBlinky + posY], 84
       mov word [frameOf_Blinky], BLINKY_1
       mov word [frameOf_Blinky_eyes], EYES_RIGHT
       call Display_Blinky
-      mov word [x_BlinkyVelocity], 1
-      mov word [y_BlinkyVelocity], 0
+      mov word [strcBlinky + velocityX], 1
+      mov word [strcBlinky + velocityY], 0
 
-      ;inky
-      mov word [x_InkyPosition], 144
-      mov word [y_InkyPosition], 108
+      mov word [strcInky + posX], 144
+      mov word [strcInky + posY], 108
       mov word [frameOf_Inky], INKY_1
       mov word [frameOf_Inky_eyes], EYES_DOWN
       call Display_Inky
-      mov word [x_InkyVelocity], 0
-      mov word [y_InkyVelocity], 1
+      mov word [strcInky + velocityX], 0
+      mov word [strcInky + velocityY], 1
 
-      ;clyde
-      mov word [x_ClydePosition], 176
-      mov word [y_ClydePosition], 108
+      mov word [strcPinky + posX], 160
+      mov word [strcPinky + posY], 108
+      mov word [frameOf_Pinky], PINKY_1
+      mov word [frameOf_Pinky_eyes], EYES_UP
+      call Display_Pinky
+      mov word [strcPinky + velocityX], 0
+      mov word [strcPinky + velocityY], -1
+
+      mov word [strcClyde + posX], 176
+      mov word [strcClyde + posY], 108
       mov word [frameOf_Clyde], CLYDE_1
       mov word [frameOf_Clyde_eyes], EYES_LEFT
       call Display_Clyde
-      mov word [x_ClydeVelocity], -1
-      mov word [y_ClydeVelocity], 0
+      mov word [strcClyde + velocityX], -1
+      mov word [strcClyde + velocityY], 0
 
-      ret
+   ret
 
    

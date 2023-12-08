@@ -1,28 +1,18 @@
 section .data
 
-    x_PacManPosition dw 10 ; x position of pacman at the beginning (it will be changed each time it will move)
-    y_PacManPosition dw 10 ; y position of pacman at the beginning (it will be changed each time it will move)
     frameOf_PacMan dw PACMAN_RIGHT_2
 
     afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
-    x_BlinkyPosition dw 274 ; x position of Blinky at the beginning (it will be changed each time it will move)
-    y_BlinkyPosition dw 30 ; y position of Blinky at the beginning (it will be changed each time it will move)
     frameOf_Blinky dw BLINKY_1
     frameOf_Blinky_eyes dw EYES_RIGHT
 
-    x_PinkyPosition dw 30 ; x position of Pinky at the beginning (it will be changed each time it will move)
-    y_PinkyPosition dw 30 ; y position of Pinky at the beginning (it will be changed each time it will move)
     frameOf_Pinky dw PINKY_1
     frameOf_Pinky_eyes dw EYES_RIGHT
 
-    x_ClydePosition dw 70 ; x position of Clyde at the beginning (it will be changed each time it will move)
-    y_ClydePosition dw 100 ; y position of Clyde at the beginning (it will be changed each time it will move)
     frameOf_Clyde dw CLYDE_1
     frameOf_Clyde_eyes dw EYES_RIGHT
 
-    x_InkyPosition dw 90 ; x position of Inky at the beginning (it will be changed each time it will move)
-    y_InkyPosition dw 100 ; y position of Inky at the beginning (it will be changed each time it will move)
     frameOf_Inky dw INKY_1
     frameOf_Inky_eyes dw EYES_RIGHT
 
@@ -31,8 +21,8 @@ section .text
     Display_PacMan:
     ; display PacMan according to current positions values
 
-        mov bx, [x_PacManPosition]
-        mov ax, [y_PacManPosition]
+        mov bx, [strcPacMan + posX]
+        mov ax, [strcPacMan + posY]
         call calculate_screen_position
 
         mov ax, [frameOf_PacMan]
@@ -41,28 +31,11 @@ section .text
 
         ret
 
-    Display_Pinky:
-    ; display Pinky and its eyes, according to current positions values
-
-        mov bx, [x_PinkyPosition]
-        mov ax, [y_PinkyPosition]
-        call calculate_screen_position
-        push dx
-        mov ax, [frameOf_Pinky]
-        call calculate_spritesheet_position
-        call draw_sprite
-        pop dx
-        mov ax, [frameOf_Pinky_eyes]
-        call calculate_spritesheet_position
-        call draw_sprite
-
-        ret
-    
     Display_Blinky:
     ; display Blinky and its eyes, according to current positions values
 
-        mov bx, [x_BlinkyPosition]
-        mov ax, [y_BlinkyPosition]
+        mov bx, [strcBlinky + posX]
+        mov ax, [strcBlinky + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Blinky]
@@ -78,8 +51,8 @@ section .text
     Display_Inky:
     ; display Inky and its eyes, according to current positions values
 
-        mov bx, [x_InkyPosition]
-        mov ax, [y_InkyPosition]
+        mov bx, [strcInky + posX]
+        mov ax, [strcInky + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Inky]
@@ -91,12 +64,28 @@ section .text
         call draw_sprite
 
         ret
+
+    Display_Pinky:
+    ; display Pinky and its eyes, according to current positions values
+        mov bx, [strcPinky + posX]
+        mov ax, [strcPinky + posY]
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Pinky]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        mov ax, [frameOf_Pinky_eyes]
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
     
     Display_Clyde:
     ; display Clyde and its eyes, according to current positions values
 
-        mov bx, [x_ClydePosition]
-        mov ax, [y_ClydePosition]
+        mov bx, [strcClyde + posX]
+        mov ax, [strcClyde + posY]
         call calculate_screen_position
         push dx
         mov ax, [frameOf_Clyde]
@@ -114,35 +103,35 @@ section .text
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
-        mov ax, [y_PacManPosition]
-        mov bx, [x_PacManPosition]
+        mov ax, [strcPacMan + posY]
+        mov bx, [strcPacMan + posX]
+        call ClearSprite
+
+        ret
+
+    ClearBlinky:
+    ; replace the 16x16 bloc of pixels where is Blinky, by the content of the background buffer at the same location, according to its x y positions
+
+        mov ax, [strcBlinky + posY]
+        mov bx, [strcBlinky + posX]
+        call ClearSprite
+
+        ret
+
+    ClearInky:
+    ; replace the 16x16 bloc of pixels where is Inky, by the content of the background buffer at the same location, according to its x y positions
+
+        mov ax, [strcInky + posY]
+        mov bx, [strcInky + posX]
         call ClearSprite
 
         ret
 
     ClearPinky:
-    ; replace the 16x16 bloc of pixels where is Pinky, by the content of the background buffer at the same location, according to its x y positions
+    ; replace the 16x16 bloc of pixels where is Plinky, by the content of the background buffer at the same location, according to its x y positions
 
-        mov ax, [y_PinkyPosition]
-        mov bx, [x_PinkyPosition]
-        call ClearSprite
-
-        ret
-    
-    ClearInky:
-    ; replace the 16x16 bloc of pixels where is Inky, by the content of the background buffer at the same location, according to its x y positions
-
-        mov ax, [y_InkyPosition]
-        mov bx, [x_InkyPosition]
-        call ClearSprite
-
-        ret
-    
-    ClearBlinky:
-    ; replace the 16x16 bloc of pixels where is Blinky, by the content of the background buffer at the same location, according to its x y positions
-
-        mov ax, [y_BlinkyPosition]
-        mov bx, [x_BlinkyPosition]
+        mov ax, [strcPinky + posY]
+        mov bx, [strcPinky + posX]
         call ClearSprite
 
         ret
@@ -150,8 +139,8 @@ section .text
     ClearClyde:
     ; replace the 16x16 bloc of pixels where is Clyde, by the content of the background buffer at the same location, according to its x y positions
 
-        mov ax, [y_ClydePosition]
-        mov bx, [x_ClydePosition]
+        mov ax, [strcClyde + posY]
+        mov bx, [strcClyde + posX]
         call ClearSprite
 
         ret

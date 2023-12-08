@@ -1,33 +1,86 @@
 section .data
+    strcPacMan:
+        istruc Sprite
+            at posX, dw 10
+            at posY, dw 10
+            at absPos, dw 10*10
+            at velocityX, dw 0
+            at velocityY, dw 0
+            at isChased, db 1
+            at isDead, db 0
+        iend
+    
+    strcBlinky:
+        istruc Sprite
+            at posX, dw 274
+            at posY, dw 30
+            at absPos, dw 274*30
+            at velocityX, dw 0
+            at velocityY, dw 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
 
-    x_PacManVelocity dw 0 ; PacMan's translation vector on x axis (px/screen update) (if it=-3, pac man will go down  3 pixel, 24 times per second)
-    y_PacManVelocity dw 0 ; PacMan's translation vector on y axis (px/screen update) (if it=+2, pac man will go right 2 pixel, 24 times per second)
+    strcInky:
+        istruc Sprite
+            at posX, dw 90
+            at posY, dw 100
+            at absPos, dw 90*100
+            at velocityX, dw 0
+            at velocityY, dw 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
 
-    x_BlinkyVelocity dw 0 ; Blinky's translation vector on x axis (px/screen update) (if it=-3, Blinky will go down  3 pixel, 24 times per second)
-    y_BlinkyVelocity dw 0 ; Blinky's translation vector on y axis (px/screen update) (if it=+2, Blinky will go right 2 pixel, 24 times per second)
+    strcPinky:
+        istruc Sprite
+            at posX, dw 30
+            at posY, dw 30
+            at absPos, dw 30*30
+            at velocityX, dw 0
+            at velocityY, dw 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
 
-    x_PinkyVelocity dw 0 ; Pinky's translation vector on x axis (px/screen update) (if it=-3, Pinky will go down  3 pixel, 24 times per second)
-    y_PinkyVelocity dw 0 ; Pinky's translation vector on y axis (px/screen update) (if it=+2, Pinky will go right 2 pixel, 24 times per second)
+    strcClyde:
+        istruc Sprite
+            at posX, dw 70
+            at posY, dw 100
+            at absPos, dw 70*100
+            at velocityX, dw 0
+            at velocityY, dw 0
+            at isChased, db 0
+            at isDead, db 0
+        iend
 
-    x_ClydeVelocity dw 0 ; Clyde's translation vector on x axis (px/screen update) (if it=-3, Clyde will go down  3 pixel, 24 times per second)
-    y_ClydeVelocity dw 0 ; Clyde's translation vector on y axis (px/screen update) (if it=+2, Clyde will go right 2 pixel, 24 times per second)
-
-    x_InkyVelocity dw 0 ; Inky's translation vector on x axis (px/screen update) (if it=-3, Inky will go down  3 pixel, 24 times per second)
-    y_InkyVelocity dw 0 ; Inky's translation vector on y axis (px/screen update) (if it=+2, Inky will go right 2 pixel, 24 times per second)
-
+    pacManNextPosX dw 0
+    pacManNextPosY dw 0
 
 section .text
 
     changePacManPosition:
-    ; only changes the Pacman's positions values according to the current velocity 
+        ; set next position
+        mov bx, [strcPacMan + posX]
+        add bx, [strcPacMan + velocityX]
+        mov [pacManNextPosX], bx
 
-        mov bx, [x_PacManPosition]
-        add bx, [x_PacManVelocity]
-        mov [x_PacManPosition], bx
+        mov ax, [strcPacMan + posY]
+        add ax, [strcPacMan + velocityY]
+        mov [pacManNextPosY], ax
 
-        mov ax, [y_PacManPosition]
-        add ax, [y_PacManVelocity]
-        mov [y_PacManPosition], ax
+        ; check collision
+        call isColliding
+
+        ; if no collision, set next position
+
+        mov bx, [strcPacMan + posX]
+        add bx, [strcPacMan + velocityX]
+        mov [strcPacMan + posX], bx
+
+        mov ax, [strcPacMan + posY]
+        add ax, [strcPacMan + velocityY]
+        mov [strcPacMan + posY], ax
 
         ret
 
@@ -77,91 +130,22 @@ section .text
 
         ret
 
-    changePinkyPosition:
-    ; changes the Pinky's positions values according to the current velocity 
-    ; changes the direction if encounter a wall
-    ; changes the eyes' sprite according to the new direction
-
-        mov ax, [y_PinkyPosition]
-        mov bx, [x_PinkyPosition]
-        mov cx, [y_PinkyVelocity]
-        mov dx, [x_PinkyVelocity]
-
-        call changeGhostPosition
-
-        mov word [y_PinkyPosition], ax
-        mov word [x_PinkyPosition], bx
-        mov word [y_PinkyVelocity], cx
-        mov word [x_PinkyVelocity], dx
-
-        call changeGhostFrames
-
-        mov word [frameOf_Pinky_eyes], ax
-
-        ret
-
-    changeInkyPosition:
-    ; changes the Inky's positions values according to the current velocity 
-    ; changes the direction if encounter a wall
-    ; changes the eyes' sprite according to the new direction
-
-        mov ax, [y_InkyPosition]
-        mov bx, [x_InkyPosition]
-        mov cx, [y_InkyVelocity]
-        mov dx, [x_InkyVelocity]
-
-        call changeGhostPosition
-
-        mov word [y_InkyPosition], ax
-        mov word [x_InkyPosition], bx
-        mov word [y_InkyVelocity], cx
-        mov word [x_InkyVelocity], dx
-
-        call changeGhostFrames
-
-        mov word [frameOf_Inky_eyes], ax
-
-        ret
-
-    changeClydePosition:
-    ; changes the Clyde's positions values according to the current velocity 
-    ; changes the direction if encounter a wall
-    ; changes the eyes' sprite according to the new direction
-
-        mov ax, [y_ClydePosition]
-        mov bx, [x_ClydePosition]
-        mov cx, [y_ClydeVelocity]
-        mov dx, [x_ClydeVelocity]
-
-        call changeGhostPosition
-
-        mov word [y_ClydePosition], ax
-        mov word [x_ClydePosition], bx
-        mov word [y_ClydeVelocity], cx
-        mov word [x_ClydeVelocity], dx
-
-        call changeGhostFrames
-
-        mov word [frameOf_Clyde_eyes], ax
-
-        ret
-
     changeBlinkyPosition:
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-
-        mov ax, [y_BlinkyPosition]
-        mov bx, [x_BlinkyPosition]
-        mov cx, [y_BlinkyVelocity]
-        mov dx, [x_BlinkyVelocity]
+        mov ax, [strcBlinky + posY]
+        mov bx, [strcBlinky + posX]
+        mov cx, [strcBlinky + velocityY]
+        mov dx, [strcBlinky + velocityX]
 
         call changeGhostPosition
+        call changeGhostPosition
 
-        mov word [y_BlinkyPosition], ax
-        mov word [x_BlinkyPosition], bx
-        mov word [y_BlinkyVelocity], cx
-        mov word [x_BlinkyVelocity], dx
+        mov word [strcBlinky + posY], ax
+        mov word [strcBlinky + posX], bx
+        mov word [strcBlinky + velocityY], cx
+        mov word [strcBlinky + velocityX], dx
 
         call changeGhostFrames
 
@@ -169,7 +153,78 @@ section .text
 
         ret
 
+    changeInkyPosition:
+    ; changes the Inky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
+        mov ax, [strcInky + posY]
+        mov bx, [strcInky + posX]
+        mov cx, [strcInky + velocityY]
+        mov dx, [strcInky + velocityX]
 
+        call changeGhostPosition
+        call changeGhostPosition
 
+        mov word [strcInky + posY], ax
+        mov word [strcInky + posX], bx
+        mov word [strcInky + velocityY], cx
+        mov word [strcInky + velocityX], dx
 
-    
+        call changeGhostFrames
+        call changeGhostFrames
+
+        mov word [frameOf_Inky_eyes], ax
+
+        ret
+
+    changePinkyPosition:
+    ; changes the Pinky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
+        mov ax, [strcPinky + posY]
+        mov bx, [strcPinky + posX]
+        mov cx, [strcPinky + velocityY]
+        mov dx, [strcPinky + velocityX]
+
+        call changeGhostPosition
+
+        mov word [strcPinky + posY], ax
+        mov word [strcPinky + posX], bx
+        mov word [strcPinky + velocityY], cx
+        mov word [strcPinky + velocityX], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Pinky_eyes], ax
+
+        ret
+
+    changeClydePosition:
+    ; changes the Clyde's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
+        mov ax, [strcClyde + posY]
+        mov bx, [strcClyde + posX]
+        mov cx, [strcClyde + velocityY]
+        mov dx, [strcClyde + velocityX]
+
+        call changeGhostPosition
+
+        mov word [strcClyde + posY], ax
+        mov word [strcClyde + posX], bx
+        mov word [strcClyde + velocityY], cx
+        mov word [strcClyde + velocityX], dx
+
+        call changeGhostFrames
+
+        mov word [frameOf_Clyde_eyes], ax
+
+        ret
+
+    stopPackMan:
+        mov word [strcPacMan + velocityX], 0
+        mov word [strcPacMan + velocityY], 0
+        mov byte[isCollid], 0x00
+        ret
+
+        

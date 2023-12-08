@@ -34,8 +34,8 @@ section .text
             ; Left
             cmp byte [keyPressed], LEFT_KEY_SCANCODE
             jne .NoLeft
-            mov word[x_PacManVelocity], -1
-            mov word[y_PacManVelocity], 0
+            mov word[strcPacMan + velocityX], -1
+            mov word[strcPacMan + velocityY], 0
             call changePacManPosition
             mov word[frameOf_PacMan], PACMAN_LEFT_2
             inc byte[changed]
@@ -44,8 +44,8 @@ section .text
             ; Right
             cmp byte [keyPressed], RIGHT_KEY_SCANCODE
             jne .NoRight
-            mov word[x_PacManVelocity], 1
-            mov word[y_PacManVelocity], 0
+            mov word[strcPacMan + velocityX], 1
+            mov word[strcPacMan + velocityY], 0
             call changePacManPosition
             mov word[frameOf_PacMan], PACMAN_RIGHT_2
             inc byte[changed]
@@ -54,8 +54,8 @@ section .text
             ; Up
             cmp byte [keyPressed], UP_KEY_SCANCODE
             jne .NoUp
-            mov word[x_PacManVelocity], 0
-            mov word[y_PacManVelocity], -1
+            mov word[strcPacMan + velocityX], 0
+            mov word[strcPacMan + velocityY], -1
             call changePacManPosition
             mov word[frameOf_PacMan], PACMAN_UP_2
             inc byte[changed]
@@ -64,8 +64,8 @@ section .text
             ; Down
             cmp byte [keyPressed], DOWN_KEY_SCANCODE
             jne .NoDown
-            mov word[x_PacManVelocity], 0
-            mov word[y_PacManVelocity], 1
+            mov word[strcPacMan + velocityX], 0
+            mov word[strcPacMan + velocityY], 1
             call changePacManPosition
             mov word[frameOf_PacMan], PACMAN_DOWN_2
             inc byte[changed]
