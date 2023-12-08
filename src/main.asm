@@ -9,6 +9,7 @@ jmp start
 %include "maze.asm"
 %include "sprites.asm"
 %include "initialization.asm"
+%include "buffers.asm"
 %include "keyboard.asm"
 %include "move_sprites.asm"
 
