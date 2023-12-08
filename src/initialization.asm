@@ -59,7 +59,7 @@ section .text
       push word [ScreenBufferSegment] 
       pop es
 
-   ret
+      ret
 
    ClearScreen:
       ;clear the screen by filling it with a unique color (stored in al)
@@ -82,6 +82,7 @@ section .text
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
 
       call Display_PacMan
+
       ret
 
    FirstDisplayGhosts:
@@ -115,6 +116,7 @@ section .text
       mov word [strcClyde + velocityX], -1
       mov word [strcClyde + velocityY], 0
 
-   ret
+      ret
 
+   
    
