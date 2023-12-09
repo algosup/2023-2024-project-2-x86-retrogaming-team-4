@@ -9,8 +9,6 @@ section .data
     corner3X dw 0
     corner3Y dw 0
 
-    testBuffer dw 0
-
     isCollid db 0
 
     checkedCornerX dw 0

@@ -81,7 +81,8 @@ section .text
         mov ax, [strcPacMan + posY]
         add ax, [strcPacMan + velocityY]
         mov [strcPacMan + posY], ax
-
+        ; Pellet eating
+        call pelletEating
         ret
 
     changeGhostPosition:
