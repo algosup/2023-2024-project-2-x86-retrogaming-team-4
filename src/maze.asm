@@ -1,3 +1,7 @@
+section .bss
+
+    MazeModelBuffer resb MAZE_HEIGHT*MAZE_WIDTH
+
 ; MATCHING TABLE :
 
 ; INTER                       00             

@@ -18,6 +18,26 @@ section .text
    
         ret
 
+    BuildMazeModelBuffer:
+    ; clone the MazeModel to be modified while keeping the original
+
+        push ds ; poped at the end
+
+        ;set the destination 'es:di'
+        push MazeModelBuffer
+        pop es
+        mov di, 0
+
+        ;set the source 'ds:si'
+        push MazeModel
+        pop ds
+        mov si, 0
+
+        mov cx, MAZE_HEIGHT*MAZE_WIDTH
+        rep movsb
+
+        pop ds
+
     UpdateScreen:
     ; clone the content of the screen buffer in the video memory adress to display it
 
