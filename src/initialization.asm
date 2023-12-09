@@ -102,8 +102,8 @@ section .text
       mov word [strcInky + velocityX], 0
       mov word [strcInky + velocityY], 1
 
-      mov word [strcPinky + posX], 200
-      mov word [strcPinky + posY], 132
+      mov word [strcPinky + posX], 160
+      mov word [strcPinky + posY], 108
       mov word [frameOf_Pinky], PINKY_1
       call Display_Pinky
       mov word [strcPinky + velocityX], 1
@@ -117,6 +117,17 @@ section .text
       mov word [strcClyde + velocityY], 0
 
       ret
+   
+   resetGame:
+      mov word [strcPacMan + velocityX], 0
+      mov word [strcPacMan + velocityY], 0
+      mov byte [keyPressed], 0
+      jmp resetPoint
 
-   
-   
+      ret
+
+   waitForAnyKeyPressed:
+      mov ax, 0C01h
+      int 21h
+
+      ret

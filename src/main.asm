@@ -13,7 +13,6 @@ jmp start
 %include "buffers.asm"
 %include "keyboard.asm"
 %include "move_sprites.asm"
-%include "contact.asm"
 
 section .text
 
@@ -30,7 +29,9 @@ section .text
 
         ;Set the maze
         call BuildBackgroundBuffer
+
         resetPoint:
+
         call MazeToBGbuffer
         call DisplayMaze
 
@@ -44,6 +45,7 @@ section .text
         ;Set the Timer and clock for the game loop
         call setTimer
         
+        call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:
