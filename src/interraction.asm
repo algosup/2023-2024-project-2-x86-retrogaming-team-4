@@ -8,11 +8,11 @@ section .data
 section .text
 
     pelletEating:
-         mov bx, [strcPacMan + posX]
-        add bx, 4
+        mov bx, [strcPacMan + posX]
+        add bx, 5
         mov [pacManCenterX], bx
         mov ax, [strcPacMan + posY]
-        add ax, 4
+        add ax, 5
         mov [pacManCenterY], ax
 
         ; get pacman's position in tile coordinates
@@ -49,8 +49,10 @@ section .text
         ; add si, [pacManTilePos]
 
         ; set the tile to empty
-        mov byte[si], 0x0F
+        ; mov byte[si], 0x0F
+        xor ax, ax
+        xor bx, bx
         mov ax, [pacManCenterY]
         mov bx, [pacManCenterX]
-        call ReplaceTile
+        call replaceTile
         ret
