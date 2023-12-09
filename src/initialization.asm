@@ -59,7 +59,7 @@ section .text
       push word [ScreenBufferSegment] 
       pop es
 
-   ret
+      ret
 
    ClearScreen:
       ;clear the screen by filling it with a unique color (stored in al)
@@ -82,6 +82,7 @@ section .text
       mov word [frameOf_PacMan], PACMAN_RIGHT_2
 
       call Display_PacMan
+
       ret
 
    FirstDisplayGhosts:
@@ -90,15 +91,13 @@ section .text
       mov word [strcBlinky + posX], 160
       mov word [strcBlinky + posY], 84
       mov word [frameOf_Blinky], BLINKY_1
-      mov word [frameOf_Blinky_eyes], EYES_RIGHT
       call Display_Blinky
-      mov word [strcBlinky + velocityX], 1
-      mov word [strcBlinky + velocityY], 0
+      mov word [strcBlinky + velocityX], 0
+      mov word [strcBlinky + velocityY], -1
 
       mov word [strcInky + posX], 144
       mov word [strcInky + posY], 108
       mov word [frameOf_Inky], INKY_1
-      mov word [frameOf_Inky_eyes], EYES_DOWN
       call Display_Inky
       mov word [strcInky + velocityX], 0
       mov word [strcInky + velocityY], 1
@@ -106,19 +105,29 @@ section .text
       mov word [strcPinky + posX], 160
       mov word [strcPinky + posY], 108
       mov word [frameOf_Pinky], PINKY_1
-      mov word [frameOf_Pinky_eyes], EYES_UP
       call Display_Pinky
-      mov word [strcPinky + velocityX], 0
-      mov word [strcPinky + velocityY], -1
+      mov word [strcPinky + velocityX], 1
+      mov word [strcPinky + velocityY], 0
 
       mov word [strcClyde + posX], 176
       mov word [strcClyde + posY], 108
       mov word [frameOf_Clyde], CLYDE_1
-      mov word [frameOf_Clyde_eyes], EYES_LEFT
       call Display_Clyde
       mov word [strcClyde + velocityX], -1
       mov word [strcClyde + velocityY], 0
 
-   ret
-
+      ret
    
+   resetGame:
+      mov word [strcPacMan + velocityX], 0
+      mov word [strcPacMan + velocityY], 0
+      mov byte [keyPressed], 0
+      jmp resetPoint
+
+      ret
+
+   waitForAnyKeyPressed:
+      mov ax, 0C01h
+      int 21h
+
+      ret

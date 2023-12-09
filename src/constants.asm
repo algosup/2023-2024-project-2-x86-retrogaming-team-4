@@ -21,6 +21,7 @@ endstruc
 %define RIGHT_KEY_SCANCODE 4dh
 %define EXIT_KEY_SCANCODE 01h
 
+%define BACKGROUND_COLOR 0
 
 %define BLINKY_1 0
 %define BLINKY_2 1
@@ -76,7 +77,7 @@ endstruc
 %define PERIOD CCPS / FPS
 
 
-section .data
+section .data 
 
     ;color palette of the following sprites
     palette db 0, 44, 40, 15, 66, 33, 84, 52, 88, 48, 78, 3, 65, 0

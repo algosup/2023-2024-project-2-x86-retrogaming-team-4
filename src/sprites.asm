@@ -104,8 +104,41 @@ section .text
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
         mov ax, [strcPacMan + posY]
-        mov bx, [strcPacMan + posX]
-        call ClearSprite
+        mov bx, [strcPacMan + posX]      
+
+        ;calculate the linear position of the sprite
+        mov cx, SCREEN_WIDTH
+        mul cx
+        add bx, ax
+
+        ;set the destination 'es:di'
+        push word [ScreenBufferSegment] 
+        pop es 
+        mov di, bx
+        mov ax, 1
+        jmp .writeTheTile
+
+        .nowTheBackgroundBuffer:
+        ;set the destination 'es:di'
+        push word [BackgroundBufferSegment] 
+        pop es 
+        mov di, bx
+        mov ax, 0
+
+        
+        .writeTheTile:
+            ;set the source 'al' : the background color
+            mov al, BACKGROUND_COLOR
+            
+            mov dx, SPRITE_SIZE
+            .eachLine:
+                mov cx, SPRITE_SIZE
+                rep stosb
+                add di, SCREEN_WIDTH - SPRITE_SIZE
+                dec dx
+                jnz .eachLine
+            cmp ax, 1
+            je .nowTheBackgroundBuffer
 
         ret
 
@@ -148,29 +181,34 @@ section .text
     ClearSprite:
     ; replace the 16x16 bloc of pixels where is the sprite, by the content of the background buffer at the same location, according to its x y positions
 
+        ;poped at the end
         push es
         push ds
+
+        ;calculate the linear position of the sprite
         mov cx, SCREEN_WIDTH
         mul cx
         add bx, ax
-        ;set the destination 'es:di' of the movsb function
+
+        ;set the destination 'es:di'
         push word [ScreenBufferSegment] 
-        pop es ; define it as the adress of the destination segment
-        mov di, bx ; define the offset destination as the same xPos, where was displayed the ghost
-        ;set the source 'ds:si' as the backup of the background
-        push word [BackgroundBufferSegment]; load the effective adress (L.E.A.) of the backup in the destination offset
+        pop es 
+        mov di, bx
+
+        ;set the source 'ds:si'
+        push word [BackgroundBufferSegment]
         pop ds
-        mov si, di        
-        ;mov, byte per byte the content of the ghost in the video memory 
-        mov dx, SPRITE_SIZE ; set the counter for 8 lines per sprite
+        mov si, di      
+         
+        mov dx, SPRITE_SIZE
 
         .eachLine:
-            mov cx, SPRITE_SIZE ; set the counter for 8 pixel per line
-            rep movsb ; to mov the source from adress ds:si into the target from adress es:di byte per byte, 8 time (8 bits)
+            mov cx, SPRITE_SIZE
+            rep movsb
             add di, SCREEN_WIDTH - SPRITE_SIZE
-            add si, SCREEN_WIDTH - SPRITE_SIZE ; increment the position register to the next line 
-            dec dx ; decrementatin de dx, when it reach 0, the flag is 0 too cause of the dec propreties
-            jnz .eachLine ; while the flag != 0, it continues
+            add si, SCREEN_WIDTH - SPRITE_SIZE
+            dec dx
+            jnz .eachLine
 
         pop ds     
         pop es
