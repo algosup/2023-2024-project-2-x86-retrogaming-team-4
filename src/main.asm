@@ -30,12 +30,15 @@ section .text
 
         ;Set the maze
         call BuildBackgroundBuffer
+
+        resetPoint:
+
         call MazeToBGbuffer
         call DisplayMaze
 
-        ;Set the sprites (first state)
-        call FirstDisplayPacMan
+        ;Set the sprites (first state) 
         call FirstDisplayGhosts
+        call FirstDisplayPacMan
         
         ;Display all
         call UpdateScreen
@@ -43,6 +46,7 @@ section .text
         ;Set the Timer and clock for the game loop
         call setTimer
         
+        call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:
@@ -50,7 +54,7 @@ section .text
         
         call waitLoop
         
-        ;clear All the moving sprites
+        ;clear All the moving sprites 
         call ClearPinky        
         call ClearBlinky
         call ClearInky
@@ -67,11 +71,16 @@ section .text
         call changeClydePosition
 
         ;display all in the screen buffer according to the new positions (quite slow) 
-        call Display_PacMan
+        ; !!! first ghosts, then pacman !!! (to see if pacman overwrited a ghost = touched it)
         call Display_Pinky
         call Display_Blinky
         call Display_Inky
         call Display_Clyde
+        call Display_PacMan
+
+        ;read if a ghost hit pacman or the reverse
+        call readContact
+
 
         ;display all on the real screen (quick)
         call UpdateScreen
@@ -79,4 +88,6 @@ section .text
 ;-------------------------------------------------
 ; GOTO GAME LOOP
         jmp gameloop
-;-----------------------------------------------------------------------------------------
+;----------------------------------------------------------------------------------------
+
+    

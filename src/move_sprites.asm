@@ -222,7 +222,7 @@ section .text
 
         ret
 
-    stopPackMan:
+    stopPacMan:
         mov word [strcPacMan + velocityX], 0
         mov word [strcPacMan + velocityY], 0
         mov byte[isCollid], 0x00
