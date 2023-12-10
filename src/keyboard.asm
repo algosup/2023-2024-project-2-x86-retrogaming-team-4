@@ -30,6 +30,13 @@ readKeyboard:
         ; Left
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
         jne .NoLeft
+
+        call getCorners
+
+        mov ax, [corner0X]
+        mov bx, [corner0Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -44,6 +51,64 @@ readKeyboard:
         je .NoLeft
         cmp byte[si], 0x04
         je .NoLeft
+
+        mov ax, [corner1X]
+        mov bx, [corner1Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 1
+        cmp byte[si], 0x0B
+        je .NoLeft
+        cmp byte[si], 0x06
+        je .NoLeft
+        cmp byte[si], 0x08
+        je .NoLeft
+        cmp byte[si], 0x02
+        je .NoLeft
+        cmp byte[si], 0x04
+        je .NoLeft
+
+        mov ax, [corner2X]
+        mov bx, [corner2Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 1
+        cmp byte[si], 0x0B
+        je .NoLeft
+        cmp byte[si], 0x06
+        je .NoLeft
+        cmp byte[si], 0x08
+        je .NoLeft
+        cmp byte[si], 0x02
+        je .NoLeft
+        cmp byte[si], 0x04
+        je .NoLeft
+
+        mov ax, [corner3X]
+        mov bx, [corner3Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 1
+        cmp byte[si], 0x0B
+        je .NoLeft
+        cmp byte[si], 0x06
+        je .NoLeft
+        cmp byte[si], 0x08
+        je .NoLeft
+        cmp byte[si], 0x02
+        je .NoLeft
+        cmp byte[si], 0x04
+        je .NoLeft
+
         mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
@@ -130,4 +195,3 @@ readKeyboard:
 
         and byte [changed], 00
     ret
-
