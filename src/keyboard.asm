@@ -31,6 +31,8 @@ readKeyboard:
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
         jne .NoLeft
 
+        ; We use the same kind of process as used for collisions, but we only check walls were we cannot go left
+        ; The direction stays in buffer until Pac-Man can go left
         call getCorners
 
         mov ax, [corner0X]
@@ -120,6 +122,8 @@ readKeyboard:
         cmp byte [keyPressed], RIGHT_KEY_SCANCODE
         jne .NoRight
 
+        ; We use the same kind of process as used for collisions, but we only check walls were we cannot go right
+        ; The direction stays in buffer until Pac-Man can go right
         call getCorners
 
         mov ax, [corner0X]
@@ -209,6 +213,8 @@ readKeyboard:
         cmp byte [keyPressed], UP_KEY_SCANCODE
         jne .NoUp
 
+        ; We use the same kind of process as used for collisions, but we only check walls were we cannot go up
+        ; The direction stays in buffer until Pac-Man can go up
         call getCorners
 
         mov ax, [corner0X]
@@ -300,6 +306,8 @@ readKeyboard:
 
         call getCorners
 
+        ; We use the same kind of process as used for collisions, but we only check walls were we cannot go down
+        ; The direction stays in buffer until Pac-Man can go down
         mov ax, [corner0X]
         mov bx, [corner0Y]
         mov [checkedCornerX], ax
