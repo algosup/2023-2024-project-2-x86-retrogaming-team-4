@@ -12,3 +12,4 @@ jmp start
 %include "initialization.asm"
 %include "keyboard.asm"
 %include "move_sprites.asm"
+%include "blinky.asm"

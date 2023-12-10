@@ -131,7 +131,7 @@ section .text
         mov cx, [strcBlinky + velocityY]
         mov dx, [strcBlinky + velocityX]
 
-        call changeGhostPosition
+        call blinkySimpleAI
 
         mov word [strcBlinky + posY], ax
         mov word [strcBlinky + posX], bx
