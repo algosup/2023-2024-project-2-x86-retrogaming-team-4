@@ -54,5 +54,5 @@ section .text
         xor bx, bx
         mov ax, [pacManCenterY]
         mov bx, [pacManCenterX]
-        call replaceTile
+        call RemovePellet
         ret

@@ -182,37 +182,28 @@ section .text
 
         ret
 
-    replaceTile:
-        ; replace the 8x8 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
-        ;calculate the linear position of the tile
+    RemovePellet:
+    ; replace the 8x8 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
+    ; calculate the linear position of the tile
+
         mov cx, SCREEN_WIDTH
         mul cx
         add bx, ax
 
-        ;set the destination 'es:di'
-        push word [ScreenBufferSegment] 
-        pop es 
-        mov di, bx
-        mov ah, 1
+        .updateTheScreenBuffer:
+            ;set the destination 'es:di'
+            push word [ScreenBufferSegment] 
+            pop es 
+            mov di, bx
 
-        ;set the source 'al' : the background color
-        mov al, BACKGROUND_COLOR
-        mov dx, TILE_SIZE
-
-        jmp .writeTheTile
-
-        .nowTheBackgroundBuffer:
-        ;set the destination 'es:di'
-        push word [BackgroundBufferSegment] 
-        pop es 
-        mov di, bx
-        mov ah, 0
-
-        
-        .writeTheTile:
             ;set the source 'al' : the background color
             mov al, BACKGROUND_COLOR
-            
+            mov dx, TILE_SIZE
+
+            ;set the source 'al' : the background color
+            mov al, BACKGROUND_COLOR
+
+            ;overwrite the pellet
             mov dx, TILE_SIZE
             .eachLine:
                 mov cx, TILE_SIZE
@@ -220,9 +211,9 @@ section .text
                 add di, SCREEN_WIDTH - TILE_SIZE
                 dec dx
                 jnz .eachLine
-            cmp ah, 1
-            je .nowTheBackgroundBuffer  
-
+        
+        .updateTheMazeBuffer:
+        ; nothing yet. I will first change the clear sprite function to use the maze buffer and not the background to restore
         ret
 
 
