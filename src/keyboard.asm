@@ -208,6 +208,13 @@ readKeyboard:
         ; Up
         cmp byte [keyPressed], UP_KEY_SCANCODE
         jne .NoUp
+
+        call getCorners
+
+        mov ax, [corner0X]
+        mov bx, [corner0Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -222,6 +229,64 @@ readKeyboard:
         je .NoUp
         cmp byte[si], 0x04
         je .NoUp
+        
+        mov ax, [corner1X]
+        mov bx, [corner1Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 40
+        cmp byte[si], 0x09
+        je .NoUp
+        cmp byte[si], 0x07
+        je .NoUp
+        cmp byte[si], 0x08
+        je .NoUp
+        cmp byte[si], 0x03
+        je .NoUp
+        cmp byte[si], 0x04
+        je .NoUp
+        
+        mov ax, [corner2X]
+        mov bx, [corner2Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 40
+        cmp byte[si], 0x09
+        je .NoUp
+        cmp byte[si], 0x07
+        je .NoUp
+        cmp byte[si], 0x08
+        je .NoUp
+        cmp byte[si], 0x03
+        je .NoUp
+        cmp byte[si], 0x04
+        je .NoUp
+        
+        mov ax, [corner3X]
+        mov bx, [corner3Y]
+        mov [checkedCornerX], ax
+        mov [checkedCornerY], bx
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
+        sub si, 40
+        cmp byte[si], 0x09
+        je .NoUp
+        cmp byte[si], 0x07
+        je .NoUp
+        cmp byte[si], 0x08
+        je .NoUp
+        cmp byte[si], 0x03
+        je .NoUp
+        cmp byte[si], 0x04
+        je .NoUp
+
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], -1
         call changePacManPosition
