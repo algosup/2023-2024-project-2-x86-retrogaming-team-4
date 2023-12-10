@@ -215,9 +215,7 @@ section .text
             
             .writeTheTile:
                 ;set the source 'al' : the background color
-                mov al, [colorrandom]
-                
-                ;mov al, BACKGROUND_COLOR
+                mov al, BACKGROUND_COLOR
                 
                 mov dx, TILE_SIZE
                 .eachLine:
@@ -226,8 +224,6 @@ section .text
                     add di, SCREEN_WIDTH - TILE_SIZE
                     dec dx
                     jnz .eachLine
-                inc al
-                mov byte [colorrandom], al
                 cmp ah, 1
                 je .nowTheBackgroundBuffer
 
