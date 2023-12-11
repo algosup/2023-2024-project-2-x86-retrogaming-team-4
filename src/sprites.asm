@@ -2,7 +2,7 @@ section .data
 
     frameOf_PacMan dw PACMAN_RIGHT_2
 
-    afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
+    afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
     frameOf_Blinky dw BLINKY_1
     frameOf_Blinky_eyes dw EYES_RIGHT

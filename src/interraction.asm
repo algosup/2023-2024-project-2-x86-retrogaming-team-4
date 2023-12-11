@@ -4,6 +4,7 @@ section .data
     pacManCenterX: dw 0
     pacManCenterY: dw 0
     score: dw 0
+    endFrightTime: dd 0, 0
 
 section .text
 
@@ -55,4 +56,35 @@ section .text
         mov ax, [pacManCenterY]
         mov bx, [pacManCenterX]
         call replaceTile
+        ret
+
+    frightTime:
+        mov byte[strcBlinky + isChased], 1
+        mov byte[strcInky + isChased], 1
+        mov byte[strcPinky + isChased], 1
+        mov byte[strcClyde + isChased], 1
+        mov byte[strcPacMan + isChased], 0
+        mov eax, [timestamp_of_next_frame]
+        add eax, 18000000
+        mov [endFrightTime], eax
+        mov word [frameOf_Blinky], AFRAID_1
+        mov word [frameOf_Inky], AFRAID_1
+        mov word [frameOf_Pinky], AFRAID_1
+        mov word [frameOf_Clyde], AFRAID_1
+        ret
+
+    checkFrightTime:
+        mov eax, [timestamp_of_next_frame]
+        cmp eax, [endFrightTime]
+        jne .stillFrightTime
+            mov byte[strcBlinky + isChased], 0
+            mov word [frameOf_Blinky], BLINKY_1
+            mov word [frameOf_Inky], INKY_1
+            mov word [frameOf_Pinky], PINKY_1
+            mov word [frameOf_Clyde], CLYDE_1
+            mov byte[strcInky + isChased], 0
+            mov byte[strcPinky + isChased], 0
+            mov byte[strcClyde + isChased], 0
+            mov byte[strcPacMan + isChased], 1
+        .stillFrightTime:
         ret

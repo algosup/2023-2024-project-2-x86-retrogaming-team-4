@@ -24,21 +24,31 @@ section .text
         .PinkyContact:
             mov bx, [strcPinky  + posX]
             mov ax, [strcPinky  + posY]
+            ; mov dx, [strcPinky + isChased]
+            ; mov [afraid], dx
             call isThereContact
         
         .BlinkyContact:
             mov bx, [strcBlinky  + posX]
             mov ax, [strcBlinky  + posY]
+
+            mov cx, [strcBlinky + isChased]
+            mov [afraid], cx
+
             call isThereContact
 
         .InkyContact:
             mov bx, [strcInky  + posX]
             mov ax, [strcInky  + posY]
+            ; mov dx, [strcInky + isChased]
+            ; mov [afraid], dx
             call isThereContact
         
         .ClydeContact:
             mov bx, [strcClyde  + posX]
             mov ax, [strcClyde  + posY]
+            ; mov dx, [strcClyde + isChased]
+            ; mov [afraid], dx
             call isThereContact
 
         ret
