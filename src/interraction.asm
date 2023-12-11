@@ -117,3 +117,16 @@ section .text
             mov byte[strcPacMan + isChased], 1
         .stillFrightTime:
         ret
+    
+    IsOnTeleporter:
+        ; check if on teleporter
+        ; teleport to the other side
+        cmp word[strcPacMan + posX], 0
+        jne .noTPLeft
+        add word[strcPacMan + posX], 303
+        .noTPLeft:
+        cmp word[strcPacMan + posX], 304
+        jne .noTP
+        sub word[strcPacMan + posX], 303
+        .noTP:
+        ret
