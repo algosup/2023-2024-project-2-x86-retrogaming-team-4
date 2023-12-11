@@ -29,7 +29,11 @@ section .text
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
-        
+                
+        ;compare the tile to the pellet
+        cmp byte[si], 0x0E
+        je .powerPellet   
+
         ;compare the tile to the pellet
         cmp byte[si], 0x0D
         je .pellet        
@@ -40,10 +44,13 @@ section .text
             call isOnPellet
         ret
 
+        .powerPellet:
+            call isOnPowerPellet
+        ret
+
     isOnPellet:
-    int3
         ; increment score
-        inc word[score]
+        add word[score], 10
 
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
@@ -57,4 +64,8 @@ section .text
         mov bx, [pacManCenterX]
         ; (and si contains the offset of the tile into the mazemodel ('ds:si' = hexacode of the tile))
         call RemovePellet
+        ret
+
+    isOnPowerPellet:
+        int3
         ret

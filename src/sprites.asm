@@ -227,15 +227,6 @@ section .text
                 cmp ah, 1
                 je .nowTheBackgroundBuffer
 
-        .updateTheTiledBuffer:
-        ; replace the hexacode of a pellet by the hexacode of a background into the mazeModelBuffer
-
-            ;set the destination
-            mov di, MazeModelBuffer
-            add di, [pacManTilePos]
-            ;change the tile pellet by background into the MazeModel buffer
-            mov byte [ds:di], BACKGROUND_TILE_HEXACODE
-
         ret
 
 
