@@ -27,6 +27,9 @@ section .text
 
         .skipBufferRead:
 
+        cmp byte [keyPressed], EXIT_KEY_SCANCODE
+        je exit
+
         ; Left
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
         jne .NoLeft

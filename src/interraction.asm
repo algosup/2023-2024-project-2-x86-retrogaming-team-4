@@ -19,7 +19,7 @@ section .text
         ; get pacman's position in tile coordinates
         mov ax, [pacManCenterY]
         shr ax, 3
-        mov bx, SCREEN_WIDTH/8
+        mov bx, MAZE_WIDTH
         mul bx
         mov [pacManTilePos], ax
 
@@ -28,34 +28,61 @@ section .text
         add [pacManTilePos], ax
 
         ; get the tile at pacman's position
-        mov si, MazeModel
+        mov si, MazeModelBuffer
         add si, [pacManTilePos]
-        
         ;compare the tile to the pellet
         cmp byte[si], 0x0D
-        je .pellet        
+        je .pellet    
 
-        ret
+        cmp byte[si], 0x0E
+        je .powerPellet      
 
-        .pellet:
-            call isOnPellet
-        ret
-
-    isOnPellet:
-        ; increment score
-        ; inc word[score]
-
-        ; get the tile at pacman's position
-        ; mov si, MazeModel
-        ; add si, [pacManTilePos]
-
-        ; set the tile to empty
-        ; mov byte[si], 0x0F
+        .erase:
         xor ax, ax
         xor bx, bx
         mov ax, [pacManCenterY]
         mov bx, [pacManCenterX]
         call replaceTile
+
+
+        ret
+
+        .pellet:
+            call isPellet
+            jmp .erase
+
+        .powerPellet:
+            call isPowerPellet
+            jmp .erase
+
+    isPellet:
+        ; increment score
+        add word[score], 10
+
+        ; get the tile at pacman's position
+        mov si, MazeModelBuffer
+        add si, [pacManTilePos]
+
+        ; set the tile to empty
+        mov byte[si], 0x0F
+        xor ax, ax
+        xor bx, bx
+
+        ret
+
+    isPowerPellet:
+        ; increment score
+        add word[score], 50
+
+        ; get the tile at pacman's position
+        mov si, MazeModelBuffer
+        add si, [pacManTilePos]
+
+        ; set the tile to empty
+        mov byte[si], 0x0F
+        xor ax, ax
+        xor bx, bx
+
         ret
 
     frightTime:
