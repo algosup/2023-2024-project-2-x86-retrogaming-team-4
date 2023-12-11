@@ -43,11 +43,11 @@ section .text
     isOnPellet:
     int3
         ; increment score
-        ; inc word[score]
+        inc word[score]
 
         ; get the tile at pacman's position
-        ; mov si, MazeModel
-        ; add si, [pacManTilePos]
+        mov si, MazeModelBuffer
+        add si, [pacManTilePos]
 
         ; set the tile to empty
         ; mov byte[si], 0x0F
