@@ -46,7 +46,7 @@ section .text
         ;Set the Timer and clock for the game loop
         call setTimer
         
-        call waitForAnyKeyPressed
+        ;call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:

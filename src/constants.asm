@@ -4,6 +4,7 @@ struc Sprite
     absPos: resw 1
     velocityX: resw 1
     velocityY: resw 1
+    direction: resb 1
     isChased: resb 1
     isDead: resb 1
 endstruc
@@ -19,6 +20,13 @@ endstruc
 %define LEFT_KEY_SCANCODE 4bh
 %define RIGHT_KEY_SCANCODE 4dh
 %define EXIT_KEY_SCANCODE 01h
+
+
+%define RIGHT_DIRECTION 0
+%define    UP_DIRECTION 1
+%define  LEFT_DIRECTION 2
+%define  DOWN_DIRECTION 3
+
 
 %define BLINKY_1 0
 %define BLINKY_2 1

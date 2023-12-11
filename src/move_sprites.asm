@@ -6,6 +6,7 @@ section .data
             at absPos, dw 10*10
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 1
             at isDead, db 0
         iend
@@ -17,6 +18,7 @@ section .data
             at absPos, dw 274*30
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -28,6 +30,7 @@ section .data
             at absPos, dw 90*100
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -39,6 +42,7 @@ section .data
             at absPos, dw 30*30
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -50,6 +54,7 @@ section .data
             at absPos, dw 70*100
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -60,6 +65,9 @@ section .data
 section .text
 
     changePacManPosition:
+    
+        call SwitchMouthOpening
+        
         ; set next position
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]

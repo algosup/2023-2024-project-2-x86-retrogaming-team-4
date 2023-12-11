@@ -2,8 +2,6 @@ section .data
 
     frameOf_PacMan dw PACMAN_RIGHT_2
 
-    afraid db 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
-
     frameOf_Blinky dw BLINKY_1
     frameOf_Blinky_eyes dw EYES_RIGHT
 
@@ -16,8 +14,46 @@ section .data
     frameOf_Inky dw INKY_1
     frameOf_Inky_eyes dw EYES_RIGHT
 
+    afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
+
 section .text
-    
+
+
+    SwitchMouthOpening:
+        ;mov ax, [strcPacMan + direction]
+        
+        ;mov bl, 2
+        ;mul bl
+        ;add ax, 15 ; ax = the frame 1 of the direction of pacman
+
+        mov bx, [frameOf_PacMan]
+        mov ax, bx
+        cmp bx, PACMAN_RIGHT_1
+        je .toSecondFrame
+        cmp bx, PACMAN_UP_1
+        je .toSecondFrame
+        cmp bx, PACMAN_LEFT_1
+        je .toSecondFrame
+        cmp bx, PACMAN_DOWN_1
+        je .toSecondFrame
+
+        inc bx
+        mov word[frameOf_PacMan],  bx
+        ret
+
+        .toSecondFrame:
+        mov bx, [frameOf_PacMan]
+        dec bx
+        mov word[frameOf_PacMan],  bx
+        
+        mov cx, 0xFFFF
+        .loopy:
+        dec cx
+        jnz .loopy
+
+        ret
+
+
     Display_PacMan:
     ; display PacMan according to current positions values
 
