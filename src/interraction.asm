@@ -35,17 +35,36 @@ section .text
         je .pellet    
 
         cmp byte[si], 0x0E
-        je .powerPellet      
+        je .powerPellet
 
+        cmp byte[si], 0x10
+        je .strawberry
+
+        cmp byte[si], 0x11
+        je .orange
+
+        cmp byte[si], 0x12
+        je .apple
+
+        cmp byte[si], 0x13
+        je .melon
+
+        cmp byte[si], 0x14
+        je .galaxianStarship
+
+        cmp byte[si], 0x15
+        je .bell
+
+        cmp byte[si], 0x16
+        je .key
+        
         .erase:
-        xor ax, ax
-        xor bx, bx
-        mov ax, [pacManCenterY]
-        mov bx, [pacManCenterX]
-        call replaceTile
-
-
-        ret
+            xor ax, ax
+            xor bx, bx
+            mov ax, [pacManCenterY]
+            mov bx, [pacManCenterX]
+            call replaceTile
+            ret
 
         .pellet:
             call isPellet
@@ -55,18 +74,38 @@ section .text
             call isPowerPellet
             jmp .erase
 
+        .strawberry:
+            call isStrawberry
+            jmp .erase
+
+        .orange:
+            call isOrange
+            jmp .erase
+
+        .apple:
+            call isApple
+            jmp .erase
+
+        .melon:
+            call isMelon
+            jmp .erase
+
+        .galaxianStarship:
+            call isGalaxianStarship
+            jmp .erase
+
+        .bell:
+            call isBell
+            jmp .erase
+
+        .key:
+            call isKey
+            jmp .erase
+
     isPellet:
         ; increment score
         add word[score], 10
-
-        ; get the tile at pacman's position
-        mov si, MazeModelBuffer
-        add si, [pacManTilePos]
-
-        ; set the tile to empty
-        mov byte[si], 0x0F
-        xor ax, ax
-        xor bx, bx
+        call setTileEmpty
 
         ret
 
@@ -75,17 +114,68 @@ section .text
         add word[score], 50
 
         call frightTime
+        call setTileEmpty
 
+        ret
+
+    isStrawberry:
+        ; increment score
+        add word[score], 300
+        call setTileEmpty
+
+        ret
+
+    isOrange:
+        ; increment score
+        add word[score], 500
+        call setTileEmpty
+
+        ret
+
+    isApple:
+        ; increment score
+        add word[score], 700
+        call setTileEmpty
+
+        ret
+
+    isMelon:
+        ; increment score
+        add word[score], 1000
+        call setTileEmpty
+
+        ret
+
+    isGalaxianStarship	:
+        ; increment score
+        add word[score], 2000
+        call setTileEmpty
+
+        ret
+
+    isBell:
+        ; increment score
+        add word[score], 3000
+        call setTileEmpty
+
+        ret
+
+    isKey:
+        ; increment score
+        add word[score], 5000
+        call setTileEmpty
+
+        ret
+
+    setTileEmpty
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
 
         ; set the tile to empty
         mov byte[si], 0x0F
-        xor ax, ax
-        xor bx, bx
-
         ret
+    
 
     frightTime:
         mov byte[strcBlinky + isChased], 1
