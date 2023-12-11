@@ -85,6 +85,7 @@ section .text
         mov [strcPacMan + posY], ax
         ; Pellet eating
         call pelletEating
+        
         ret
 
     changeGhostPosition:

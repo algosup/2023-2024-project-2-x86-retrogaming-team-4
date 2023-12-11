@@ -18,6 +18,22 @@ section .text
    
         ret
 
+    BuildMazeModelBuffer:
+    ; clone the MazeModel to be modified while keeping the original
+
+        ;set the destination 'es:di'
+        push ds
+        pop es
+        mov di, MazeModelBuffer
+
+        ;set the source 'ds:si'
+        mov si, MazeModel
+
+        mov cx, MAZE_HEIGHT*MAZE_WIDTH
+        rep movsb
+
+        ret
+
     UpdateScreen:
     ; clone the content of the screen buffer in the video memory adress to display it
 
@@ -39,8 +55,8 @@ section .text
         ret
 
    
-   MazeToBGbuffer: 
-   ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
+    MazeToBGbuffer: 
+    ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
 
         xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
         push word [BackgroundBufferSegment]
@@ -77,8 +93,8 @@ section .text
             xor ax, ax
             mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'th Tile of mazemodel 
             
-            
             push dx
+            
             ; pick the sprite to display following the hexacode
             ; Get the offset of the sprite, following the hexa code
             mov si, MazeSpriteSheet

@@ -70,8 +70,7 @@ section .text
         .eachLine:
             mov cx, SPRITE_SIZE
             .eachPixel:
-                lodsb 
-                int3
+                lodsb
                 cmp al, bl
                 je .touched
                 dec cx
@@ -198,7 +197,7 @@ section .text
         call getTileAbsPos
 
         ;Read the chosen tile in the maze table
-        mov si, MazeModel
+        mov si, MazeModelBuffer
         add si, [tileAbsPos]
         
         ;compare all the differents wall's sprites and return is collided if the compare is equal
