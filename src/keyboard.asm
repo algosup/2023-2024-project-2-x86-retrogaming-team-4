@@ -1,31 +1,31 @@
 section .data
+
     keyPressed dw 0
-    changed db 0
+    keyChanged db 0
 
 section .text
-readKeyboard:
-    ; Don't do anything if no key was pressed
-    mov ah, 01h
-    int 16h
-    jz .skipBufferRead
 
-    ; Read last key in buffer:
-    .keepReadingBuffer:
-        mov ah, 00h
-        int 16h
-        mov bx, ax
+    readKeyboard:
+    
+        ; Don't do anything if no key was pressed
         mov ah, 01h
         int 16h
-        jnz .keepReadingBuffer
+        jz .skipBufferRead
 
-    ; Overwrite the first char in 'charDump' with received char:
-    mov [keyPressed], bh
+        ; Read last key in buffer:
+        .keepReadingBuffer:
+            
+            mov ah, 00h
+            int 16h
+            mov bx, ax
+            mov ah, 01h
+            int 16h
+            jnz .keepReadingBuffer
 
-    .skipBufferRead:
+        ; Overwrite the first char in 'charDump' with received char:
+        mov [keyPressed], bh
 
-        ; Exit if ESCAPE
-        cmp byte [keyPressed], EXIT_KEY_SCANCODE
-        je exit
+        .skipBufferRead:
 
         ; Left
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
@@ -115,7 +115,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_LEFT_2
-        inc byte[changed]
+        inc byte[keyChanged]
         .NoLeft:
 
         ; Right
@@ -206,7 +206,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 0
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_RIGHT_2
-        inc byte[changed]
+        inc byte[keyChanged]
         .NoRight:
 
         ; Up
@@ -297,7 +297,7 @@ readKeyboard:
         mov word[strcPacMan + velocityY], -1
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_UP_2
-        inc byte[changed]
+        inc byte[keyChanged]
         .NoUp:
 
         ; Down
@@ -388,13 +388,14 @@ readKeyboard:
         mov word[strcPacMan + velocityY], 1
         call changePacManPosition
         mov word[frameOf_PacMan], PACMAN_DOWN_2
-        inc byte[changed]
+        inc byte[keyChanged]
         .NoDown:
+            cmp byte [keyChanged], 0
+            jne .NoChange
+            call changePacManPosition
+            .NoChange:
 
-        cmp byte [changed], 0
-        jne .NoChange
-        call changePacManPosition
-        .NoChange:
+            and byte [keyChanged], 00
+        
+        ret
 
-        and byte [changed], 00
-    ret

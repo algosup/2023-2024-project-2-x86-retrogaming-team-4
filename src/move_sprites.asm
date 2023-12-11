@@ -81,10 +81,14 @@ section .text
         mov ax, [strcPacMan + posY]
         add ax, [strcPacMan + velocityY]
         mov [strcPacMan + posY], ax
-
+        ; Pellet eating
+        call pelletEating
         ret
 
     changeGhostPosition:
+    ; changes the ghosts' positions values according to the current velocity
+    ; changes the direction if encounter a wall
+
         ;switch the direction if the ghost reached a side of the screen
         cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
         jb .noXflip
@@ -103,6 +107,8 @@ section .text
         ret
 
     changeGhostFrames:
+    ; only changes the eyes' sprite according to the new direction
+
         cmp dx, 0
         jle .noEyesRight
         mov ax, EYES_RIGHT
@@ -126,11 +132,15 @@ section .text
         ret
 
     changeBlinkyPosition:
+    ; changes the Blinky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
         mov ax, [strcBlinky + posY]
         mov bx, [strcBlinky + posX]
         mov cx, [strcBlinky + velocityY]
         mov dx, [strcBlinky + velocityX]
 
+        call changeGhostPosition
         call changeGhostPosition
 
         mov word [strcBlinky + posY], ax
@@ -145,11 +155,15 @@ section .text
         ret
 
     changeInkyPosition:
+    ; changes the Inky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
         mov ax, [strcInky + posY]
         mov bx, [strcInky + posX]
         mov cx, [strcInky + velocityY]
         mov dx, [strcInky + velocityX]
 
+        call changeGhostPosition
         call changeGhostPosition
 
         mov word [strcInky + posY], ax
@@ -158,12 +172,16 @@ section .text
         mov word [strcInky + velocityX], dx
 
         call changeGhostFrames
+        call changeGhostFrames
 
         mov word [frameOf_Inky_eyes], ax
 
         ret
 
     changePinkyPosition:
+    ; changes the Pinky's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
         mov ax, [strcPinky + posY]
         mov bx, [strcPinky + posX]
         mov cx, [strcPinky + velocityY]
@@ -183,6 +201,9 @@ section .text
         ret
 
     changeClydePosition:
+    ; changes the Clyde's positions values according to the current velocity 
+    ; changes the direction if encounter a wall
+    ; changes the eyes' sprite according to the new direction
         mov ax, [strcClyde + posY]
         mov bx, [strcClyde + posX]
         mov cx, [strcClyde + velocityY]
@@ -201,7 +222,7 @@ section .text
 
         ret
 
-    stopPackMan:
+    stopPacMan:
         mov word [strcPacMan + velocityX], 0
         mov word [strcPacMan + velocityY], 0
         mov byte[isCollid], 0x00
