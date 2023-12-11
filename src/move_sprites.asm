@@ -74,6 +74,8 @@ section .text
 
         ; if no collision, set next position
 
+        call IsOnTeleporter
+
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
         mov [strcPacMan + posX], bx
