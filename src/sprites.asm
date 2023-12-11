@@ -182,7 +182,7 @@ section .text
 
         ret
 
-    RemovePellet:
+    replaceTile:
     ; replace the 8x8 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
     ; calculate the linear position of the tile
 
@@ -205,7 +205,7 @@ section .text
 
             jmp .writeTheTile
 
-            .nowTheBackgroundBuffer:
+            .writeBgBuffer:
             ;set the destination 'es:di'
             push word [BackgroundBufferSegment] 
             pop es 
@@ -225,7 +225,7 @@ section .text
                     dec dx
                     jnz .eachLine
                 cmp ah, 1
-                je .nowTheBackgroundBuffer
+                je .writeBgBuffer
 
         ret
 

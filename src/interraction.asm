@@ -29,26 +29,32 @@ section .text
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
-                
-        ;compare the tile to the pellet
-        cmp byte[si], 0x0E
-        je .powerPellet   
-
         ;compare the tile to the pellet
         cmp byte[si], 0x0D
-        je .pellet        
+        je .pellet    
+
+        cmp byte[si], 0x0E
+        je .powerPellet      
+
+        .erase:
+        xor ax, ax
+        xor bx, bx
+        mov ax, [pacManCenterY]
+        mov bx, [pacManCenterX]
+        call replaceTile
+
 
         ret
 
         .pellet:
-            call isOnPellet
-        ret
+            call isPellet
+            jmp .erase
 
         .powerPellet:
-            call isOnPowerPellet
-        ret
+            call isPowerPellet
+            jmp .erase
 
-    isOnPellet:
+    isPellet:
         ; increment score
         add word[score], 10
 
@@ -57,15 +63,23 @@ section .text
         add si, [pacManTilePos]
 
         ; set the tile to empty
-        ; mov byte[si], 0x0F
+        mov byte[si], 0x0F
         xor ax, ax
         xor bx, bx
-        mov ax, [pacManCenterY]
-        mov bx, [pacManCenterX]
-        ; (and si contains the offset of the tile into the mazemodel ('ds:si' = hexacode of the tile))
-        call RemovePellet
+
         ret
 
-    isOnPowerPellet:
-        int3
+    isPowerPellet:
+        ; increment score
+        add word[score], 50
+
+        ; get the tile at pacman's position
+        mov si, MazeModelBuffer
+        add si, [pacManTilePos]
+
+        ; set the tile to empty
+        mov byte[si], 0x0F
+        xor ax, ax
+        xor bx, bx
+
         ret
