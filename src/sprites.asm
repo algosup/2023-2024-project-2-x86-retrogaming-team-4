@@ -97,6 +97,19 @@ section .text
         call draw_sprite
 
         ret
+    
+    displayFruit:
+    ; display the fruit according to its current position values
+
+        mov bx, 128
+        mov ax, 132
+        call calculate_screen_position
+
+        mov ax, CHERRY
+        call calculate_spritesheet_position
+        call draw_sprite
+
+        ret
 
 
     

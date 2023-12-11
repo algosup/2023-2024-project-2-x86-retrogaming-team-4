@@ -116,6 +116,8 @@ section .text
       mov word [strcClyde + velocityX], -1
       mov word [strcClyde + velocityY], 0
 
+      call displayFruit
+
       ret
    
    resetGame:

@@ -37,6 +37,9 @@ section .text
         cmp byte[si], 0x0E
         je .powerPellet
 
+        cmp byte[si], 0x17
+        je .cherry
+
         cmp byte[si], 0x10
         je .strawberry
 
@@ -50,7 +53,7 @@ section .text
         je .melon
 
         cmp byte[si], 0x14
-        je .galaxianStarship
+        je .galaxianFlagship
 
         cmp byte[si], 0x15
         je .bell
@@ -74,6 +77,10 @@ section .text
             call isPowerPellet
             jmp .erase
 
+        .cherry:
+            call isCherry
+            jmp .erase
+
         .strawberry:
             call isStrawberry
             jmp .erase
@@ -90,8 +97,8 @@ section .text
             call isMelon
             jmp .erase
 
-        .galaxianStarship:
-            call isGalaxianStarship
+        .galaxianFlagship:
+            call isGalaxianFlagship
             jmp .erase
 
         .bell:
@@ -114,6 +121,13 @@ section .text
         add word[score], 50
 
         call frightTime
+        call setTileEmpty
+
+        ret
+
+    isCherry:
+        ; increment score
+        add word[score], 200
         call setTileEmpty
 
         ret
@@ -146,7 +160,7 @@ section .text
 
         ret
 
-    isGalaxianStarship	:
+    isGalaxianFlagship	:
         ; increment score
         add word[score], 2000
         call setTileEmpty
@@ -167,7 +181,7 @@ section .text
 
         ret
 
-    setTileEmpty
+    setTileEmpty:
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
