@@ -14,6 +14,7 @@ jmp start
 %include "keyboard.asm"
 %include "move_sprites.asm"
 %include "interraction.asm"
+%include "blinky.asm"
 
 section .text
 

@@ -92,8 +92,8 @@ section .text
       mov word [strcBlinky + posY], 84
       mov word [frameOf_Blinky], BLINKY_1
       call Display_Blinky
-      mov word [strcBlinky + velocityX], 0
-      mov word [strcBlinky + velocityY], -1
+      mov word [strcBlinky + velocityX], 1
+      mov word [strcBlinky + velocityY], 0
 
       mov word [strcInky + posX], 144
       mov word [strcInky + posY], 108

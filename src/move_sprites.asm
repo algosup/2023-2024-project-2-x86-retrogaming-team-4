@@ -19,6 +19,7 @@ section .data
             at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
+            
         iend
 
     strcInky:
@@ -56,6 +57,7 @@ section .data
 
     pacManNextPosX dw 0
     pacManNextPosY dw 0
+  
 
 section .text
 
@@ -135,13 +137,14 @@ section .text
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
+
         mov ax, [strcBlinky + posY]
         mov bx, [strcBlinky + posX]
         mov cx, [strcBlinky + velocityY]
         mov dx, [strcBlinky + velocityX]
-
-        call changeGhostPosition
-        call changeGhostPosition
+   
+        call blinkyAi
+       
 
         mov word [strcBlinky + posY], ax
         mov word [strcBlinky + posX], bx
@@ -228,4 +231,9 @@ section .text
         mov byte[isCollid], 0x00
         ret
 
-        
+    
+    stopBlinky:
+        mov word [strcBlinky + velocityX], 0
+        mov word [strcBlinky + velocityY], 0
+        mov byte[isCollid], 0x00
+        ret
