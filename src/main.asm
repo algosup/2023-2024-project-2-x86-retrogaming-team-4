@@ -1,4 +1,5 @@
 
+
 org 100h
 
 jmp start
@@ -35,6 +36,8 @@ section .text
 
         call MazeToBGbuffer
         call DisplayMaze
+        call BuildMazeModelBuffer
+        
 
         ;Set the sprites (first state) 
         call FirstDisplayGhosts
@@ -53,6 +56,7 @@ section .text
 ;-------------------------------------------------
         
         call waitLoop
+        call checkFrightTime
         
         ;clear All the moving sprites 
         call ClearPinky        

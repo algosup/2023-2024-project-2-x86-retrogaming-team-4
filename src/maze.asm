@@ -1,3 +1,9 @@
+%define BACKGROUND_TILE_HEXACODE 0x0F 
+
+section .bss
+
+    MazeModelBuffer resb MAZE_HEIGHT*MAZE_WIDTH
+
 ; MATCHING TABLE :
 
 ; INTER                       00             

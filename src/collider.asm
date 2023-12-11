@@ -16,32 +16,90 @@ section .data
 
     tileAbsPos dw 0
 
+    ghostCollision db 0
+
 section .text
 
     readContact:
     ; check if pacman hit a ghost
+            call BlinkyContact
+            call InkyContact
+            call PinkyContact
+            call ClydeContact
+            ret
 
-        .PinkyContact:
-            mov bx, [strcPinky  + posX]
-            mov ax, [strcPinky  + posY]
-            call isThereContact
-        
-        .BlinkyContact:
-            mov bx, [strcBlinky  + posX]
-            mov ax, [strcBlinky  + posY]
-            call isThereContact
-
-        .InkyContact:
-            mov bx, [strcInky  + posX]
-            mov ax, [strcInky  + posY]
-            call isThereContact
-        
-        .ClydeContact:
-            mov bx, [strcClyde  + posX]
-            mov ax, [strcClyde  + posY]
-            call isThereContact
-
+    PinkyContact:
+        mov bx, [strcPinky  + posX]
+        mov ax, [strcPinky  + posY]
+        mov dx, [strcPinky + isChased]
+        mov [afraid], dx
+        call isThereContact
+        cmp byte [ghostCollision], 1
+        jne .noGhostCollision
+            call ClearPinky
+            mov word [strcPinky  + posX], 160
+            mov word [strcPinky  + posY], 108
+            mov byte [ghostCollision], 0
+            mov word [frameOf_Pinky], PINKY_1
+            mov byte [strcPinky + isChased], 0
+            call Display_Pinky
+        .noGhostCollision:
         ret
+        
+    BlinkyContact:
+        mov bx, [strcBlinky  + posX]
+        mov ax, [strcBlinky  + posY]
+        mov dx, [strcBlinky + isChased]
+        mov [afraid], dx
+        call isThereContact
+        cmp byte [ghostCollision], 1
+        jne .noGhostCollision
+            call ClearBlinky
+            mov word [strcBlinky  + posX], 160
+            mov word [strcBlinky  + posY], 108
+            mov byte [ghostCollision], 0
+            mov word [frameOf_Blinky], BLINKY_1
+            mov byte [strcBlinky + isChased], 0
+            call Display_Blinky
+        .noGhostCollision:
+        ret
+
+    InkyContact:
+        mov bx, [strcInky  + posX]
+        mov ax, [strcInky  + posY]
+        mov dx, [strcInky + isChased]
+        mov [afraid], dx
+        call isThereContact
+        cmp byte [ghostCollision], 1
+        jne .noGhostCollision
+            call ClearInky
+            mov word [strcInky  + posX], 160
+            mov word [strcInky  + posY], 108
+            mov byte [ghostCollision], 0
+            mov word [frameOf_Inky], INKY_1
+            mov byte [strcInky + isChased], 0
+            call Display_Inky
+        .noGhostCollision:
+        ret
+    
+    ClydeContact:
+        mov bx, [strcClyde  + posX]
+        mov ax, [strcClyde  + posY]
+        mov dx, [strcClyde + isChased]
+        mov [afraid], dx
+        call isThereContact
+        cmp byte [ghostCollision], 1
+        jne .noGhostCollision
+            call ClearClyde
+            mov word [strcClyde  + posX], 160
+            mov word [strcClyde  + posY], 108
+            mov byte [ghostCollision], 0
+            mov word [frameOf_Clyde], CLYDE_1
+            mov byte [strcClyde + isChased], 0
+            call Display_Clyde
+        .noGhostCollision:
+        ret
+
 
     isThereContact:
     ; read if a ghost touched pacman (or the reverse)
@@ -70,8 +128,7 @@ section .text
         .eachLine:
             mov cx, SPRITE_SIZE
             .eachPixel:
-                lodsb 
-                int3
+                lodsb
                 cmp al, bl
                 je .touched
                 dec cx
@@ -88,7 +145,7 @@ section .text
             je .normalContact
             
         .afraidContact:
-            ;nothing yet (never afraid for now)
+            mov byte [ghostCollision], 1
             jmp .notTouched
 
         .normalContact:
@@ -198,7 +255,7 @@ section .text
         call getTileAbsPos
 
         ;Read the chosen tile in the maze table
-        mov si, MazeModel
+        mov si, MazeModelBuffer
         add si, [tileAbsPos]
         
         ;compare all the differents wall's sprites and return is collided if the compare is equal

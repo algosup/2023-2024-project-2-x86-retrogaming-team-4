@@ -12,6 +12,9 @@ endstruc
 %define SCREEN_HEIGHT 200
 %define SPRITE_SIZE 16
 %define TILE_SIZE 8
+%define MAZE_WIDTH 40
+%define MAZE_HEIGHT 25
+
 %define BACKGROUND_COLOR 0
 
 %define UP_KEY_SCANCODE 48h

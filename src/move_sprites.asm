@@ -74,6 +74,8 @@ section .text
 
         ; if no collision, set next position
 
+        call IsOnTeleporter
+
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
         mov [strcPacMan + posX], bx
@@ -83,6 +85,7 @@ section .text
         mov [strcPacMan + posY], ax
         ; Pellet eating
         call pelletEating
+        
         ret
 
     changeGhostPosition:
@@ -141,7 +144,6 @@ section .text
         mov dx, [strcBlinky + velocityX]
 
         call changeGhostPosition
-        call changeGhostPosition
 
         mov word [strcBlinky + posY], ax
         mov word [strcBlinky + posX], bx
@@ -164,14 +166,12 @@ section .text
         mov dx, [strcInky + velocityX]
 
         call changeGhostPosition
-        call changeGhostPosition
 
         mov word [strcInky + posY], ax
         mov word [strcInky + posX], bx
         mov word [strcInky + velocityY], cx
         mov word [strcInky + velocityX], dx
 
-        call changeGhostFrames
         call changeGhostFrames
 
         mov word [frameOf_Inky_eyes], ax
