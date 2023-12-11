@@ -50,8 +50,6 @@ section .text
         call setTimer
         
         call waitForAnyKeyPressed
-
-        call frightTime
 ;-----------------------------------------------------------------------------------------
 ;THE GAME LOOP
     gameloop:

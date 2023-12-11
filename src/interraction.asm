@@ -74,6 +74,8 @@ section .text
         ; increment score
         add word[score], 50
 
+        call frightTime
+
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
