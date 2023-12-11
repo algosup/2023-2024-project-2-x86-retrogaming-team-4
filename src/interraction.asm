@@ -18,7 +18,7 @@ section .text
         ; get pacman's position in tile coordinates
         mov ax, [pacManCenterY]
         shr ax, 3
-        mov bx, SCREEN_WIDTH/8
+        mov bx, MAZE_WIDTH
         mul bx
         mov [pacManTilePos], ax
 
@@ -27,7 +27,7 @@ section .text
         add [pacManTilePos], ax
 
         ; get the tile at pacman's position
-        mov si, MazeModel
+        mov si, MazeModelBuffer
         add si, [pacManTilePos]
         
         ;compare the tile to the pellet
@@ -41,6 +41,7 @@ section .text
         ret
 
     isOnPellet:
+    int3
         ; increment score
         ; inc word[score]
 
@@ -54,5 +55,6 @@ section .text
         xor bx, bx
         mov ax, [pacManCenterY]
         mov bx, [pacManCenterX]
-        call replaceTile
+        ; (and si contains the offset of the tile into the mazemodel ('ds:si' = hexacode of the tile))
+        call RemovePellet
         ret

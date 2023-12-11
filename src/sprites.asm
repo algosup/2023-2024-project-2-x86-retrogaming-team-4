@@ -182,46 +182,59 @@ section .text
 
         ret
 
-    replaceTile:
-        ; replace the 8x8 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
-        ;calculate the linear position of the tile
-        mov cx, SCREEN_WIDTH
-        mul cx
-        add bx, ax
+    RemovePellet:
+    ; replace the 8x8 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
+    ; calculate the linear position of the tile
 
-        ;set the destination 'es:di'
-        push word [ScreenBufferSegment] 
-        pop es 
-        mov di, bx
-        mov ah, 1
+        .updateThePixeledBuffers:
+        ; overwrite the pellet with background color into the screenbuffer and the backgroundbuffer
 
-        ;set the source 'al' : the background color
-        mov al, BACKGROUND_COLOR
-        mov dx, TILE_SIZE
+            mov cx, SCREEN_WIDTH
+            mul cx
+            add bx, ax
 
-        jmp .writeTheTile
+            ;set the destination 'es:di'
+            push word [ScreenBufferSegment] 
+            pop es 
+            mov di, bx
+            mov ah, 1
 
-        .nowTheBackgroundBuffer:
-        ;set the destination 'es:di'
-        push word [BackgroundBufferSegment] 
-        pop es 
-        mov di, bx
-        mov ah, 0
-
-        
-        .writeTheTile:
             ;set the source 'al' : the background color
             mov al, BACKGROUND_COLOR
-            
             mov dx, TILE_SIZE
-            .eachLine:
-                mov cx, TILE_SIZE
-                rep stosb
-                add di, SCREEN_WIDTH - TILE_SIZE
-                dec dx
-                jnz .eachLine
-            cmp ah, 1
-            je .nowTheBackgroundBuffer  
+
+            jmp .writeTheTile
+
+            .nowTheBackgroundBuffer:
+            ;set the destination 'es:di'
+            push word [BackgroundBufferSegment] 
+            pop es 
+            mov di, bx
+            mov ah, 0
+
+            
+            .writeTheTile:
+                ;set the source 'al' : the background color
+                mov al, BACKGROUND_COLOR
+                
+                mov dx, TILE_SIZE
+                .eachLine:
+                    mov cx, TILE_SIZE
+                    rep stosb
+                    add di, SCREEN_WIDTH - TILE_SIZE
+                    dec dx
+                    jnz .eachLine
+                cmp ah, 1
+                je .nowTheBackgroundBuffer
+
+        .updateTheTiledBuffer:
+        ; replace the hexacode of a pellet by the hexacode of a background into the mazeModelBuffer
+
+            ;set the destination
+            mov di, MazeModelBuffer
+            add di, [pacManTilePos]
+            ;change the tile pellet by background into the MazeModel buffer
+            mov byte [ds:di], BACKGROUND_TILE_HEXACODE
 
         ret
 
