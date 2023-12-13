@@ -101,12 +101,10 @@ section .text
     displayFruit:
     ; display the fruit according to its current position values
         mov dx, FRUIT_POS_X + FRUIT_POS_Y
-        push dx
-        mov ax, CHERRY
+        mov ax, [fruitSprite]
         call calculate_spritesheet_position
         call draw_sprite
         call draw_sprite_bg_buffer
-        pop dx
         ret
 
     clearFruit:

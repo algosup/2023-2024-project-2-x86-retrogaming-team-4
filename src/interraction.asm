@@ -6,6 +6,7 @@ section .data
     score: dw 0
     endFrightTime: dd 0, 0
     fruitTilePos: dw 0
+    fruitSprite: dw 0
 
 section .text
 
@@ -196,7 +197,7 @@ section .text
         add si, FRUIT_TILE_POS
         mov byte[si], 0x17
         
-        mov ax, CHERRY
+        mov word[fruitSprite], CHERRY
         call displayFruit
         ret
 

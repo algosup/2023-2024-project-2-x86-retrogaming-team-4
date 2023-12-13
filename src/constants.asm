@@ -10,8 +10,8 @@ endstruc
 
 %define PACMAN_START_X 160
 %define PACMAN_START_Y 132
-%define FRUIT_TILE_POS 698
-%define FRUIT_POS_X 128
+%define FRUIT_TILE_POS 697
+%define FRUIT_POS_X 134
 %define FRUIT_POS_Y 41600
 
 %define SCREEN_WIDTH 320
