@@ -8,6 +8,12 @@ struc Sprite
     isDead: resb 1
 endstruc
 
+%define PACMAN_START_X 160
+%define PACMAN_START_Y 132
+%define FRUIT_TILE_POS 698
+%define FRUIT_POS_X 128
+%define FRUIT_POS_Y 41600
+
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200
 %define SPRITE_SIZE 16

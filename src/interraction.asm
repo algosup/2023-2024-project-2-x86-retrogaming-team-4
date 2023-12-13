@@ -5,6 +5,7 @@ section .data
     pacManCenterY: dw 0
     score: dw 0
     endFrightTime: dd 0, 0
+    fruitTilePos: dw 0
 
 section .text
 
@@ -68,6 +69,12 @@ section .text
             mov bx, [pacManCenterX]
             call replaceTile
             ret
+        
+        .eraseFruit:
+            xor ax, ax
+            xor bx, bx
+            call replaceFruit
+            ret
 
         .pellet:
             call isPellet
@@ -79,7 +86,7 @@ section .text
 
         .cherry:
             call isCherry
-            jmp .erase
+            jmp .eraseFruit
 
         .strawberry:
             call isStrawberry
@@ -87,19 +94,19 @@ section .text
 
         .orange:
             call isOrange
-            jmp .erase
+            jmp .eraseFruit
 
         .apple:
             call isApple
-            jmp .erase
+            jmp .eraseFruit
 
         .melon:
             call isMelon
-            jmp .erase
+            jmp .eraseFruit
 
         .galaxianFlagship:
             call isGalaxianFlagship
-            jmp .erase
+            jmp .eraseFruit
 
         .bell:
             call isBell
@@ -107,7 +114,7 @@ section .text
 
         .key:
             call isKey
-            jmp .erase
+            jmp .eraseFruit
 
     isPellet:
         ; increment score
@@ -126,9 +133,12 @@ section .text
         ret
 
     isCherry:
+        int3
         ; increment score
         add word[score], 200
         call setTileEmpty
+
+
 
         ret
 
@@ -179,6 +189,15 @@ section .text
         add word[score], 5000
         call setTileEmpty
 
+        ret
+
+    addCherry:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+        mov byte[si], 0x17
+        
+        mov ax, CHERRY
+        call displayFruit
         ret
 
     setTileEmpty:
