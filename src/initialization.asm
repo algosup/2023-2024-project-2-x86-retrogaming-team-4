@@ -116,8 +116,6 @@ section .text
       mov word [strcClyde + velocityX], -1
       mov word [strcClyde + velocityY], 0
 
-      call addCherry
-
       ret
    
    resetGame:

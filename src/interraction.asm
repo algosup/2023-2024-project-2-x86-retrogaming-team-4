@@ -4,6 +4,7 @@ section .data
     pacManCenterX: dw 0
     pacManCenterY: dw 0
     score: dw 0
+    pelletEaten: dw 0
     endFrightTime: dd 0, 0
     fruitTilePos: dw 0
     fruitSprite: dw 0
@@ -91,7 +92,7 @@ section .text
 
         .strawberry:
             call isStrawberry
-            jmp .erase
+            jmp .eraseFruit
 
         .orange:
             call isOrange
@@ -111,7 +112,7 @@ section .text
 
         .bell:
             call isBell
-            jmp .erase
+            jmp .eraseFruit
 
         .key:
             call isKey
@@ -120,6 +121,7 @@ section .text
     isPellet:
         ; increment score
         add word[score], 10
+        inc word[pelletEaten]
         call setTileEmpty
 
         ret
@@ -134,16 +136,14 @@ section .text
         ret
 
     isCherry:
-        int3
         ; increment score
         add word[score], 200
         call setTileEmpty
 
-
-
         ret
 
     isStrawberry:
+        
         ; increment score
         add word[score], 300
         call setTileEmpty
@@ -195,10 +195,113 @@ section .text
     addCherry:
         mov si, MazeModelBuffer
         add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
         mov byte[si], 0x17
-        
         mov word[fruitSprite], CHERRY
         call displayFruit
+
+        .exit:
+        ret
+
+    addStrawberry:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x10
+        mov word[fruitSprite], STRAWBERRY
+        call displayFruit
+
+        .exit:
+        ret
+
+    addOrange:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x11
+        mov word[fruitSprite], ORANGE
+        call displayFruit
+        
+        .exit:
+        ret
+
+    addApple:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x12
+        mov word[fruitSprite], APPLE
+        call displayFruit
+        
+        .exit:
+        ret
+
+    addMelon:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x13
+        mov word[fruitSprite], MELON
+        call displayFruit
+        
+        .exit:
+        ret
+
+    addGalaxianFlagship:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x14
+        mov word[fruitSprite], GALAXIAN
+        call displayFruit
+        
+        .exit:
+        ret
+
+    addBell:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x15
+        mov word[fruitSprite], BELL
+        call displayFruit
+        
+        .exit:
+        ret
+    
+    addKey:
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+
+        cmp byte[si], 0x0F
+        jne .exit
+
+        mov byte[si], 0x16
+        mov word[fruitSprite], KEY
+        call displayFruit
+        
+        .exit:
         ret
 
     setTileEmpty:
@@ -253,4 +356,31 @@ section .text
         jne .noTP
         sub word[strcPacMan + posX], 303
         .noTP:
+        ret
+
+    setFruits:
+        cmp word[pelletEaten], 70
+        je addCherry
+        
+        cmp word[pelletEaten], 170
+        je addStrawberry
+
+        cmp word[pelletEaten], 270
+        je addOrange
+
+        cmp word[pelletEaten], 370
+        je addApple
+
+        cmp word[pelletEaten], 470
+        je addMelon
+
+        cmp word[pelletEaten], 570
+        je addGalaxianFlagship
+
+        cmp word[pelletEaten], 670
+        je addBell
+
+        cmp word[pelletEaten], 770
+        je addKey
+
         ret

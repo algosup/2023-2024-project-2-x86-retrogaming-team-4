@@ -100,20 +100,15 @@ section .text
     
     displayFruit:
     ; display the fruit according to its current position values
-        mov dx, FRUIT_POS_X + FRUIT_POS_Y
         mov ax, [fruitSprite]
         call calculate_spritesheet_position
+        mov dx, FRUIT_POS_X + FRUIT_POS_Y
+        push dx
         call draw_sprite
+        pop dx
         call draw_sprite_bg_buffer
         ret
 
-    clearFruit:
-    ; clear the fruit according to its current position values
-        call ClearSprite
-        ret
-
-
-    
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
