@@ -34,9 +34,12 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
+        cmp word[strcBlinky + isChased], 1
+        je .noEyes
         mov ax, [Blinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
@@ -52,9 +55,12 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
+        cmp word[strcInky + isChased], 1
+        je .noEyes
         mov ax, [Inky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
 
@@ -70,9 +76,12 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
+        cmp word[strcInky + isChased], 1
+        je .noEyes
         mov ax, [Pinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
@@ -88,9 +97,12 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
+        cmp word[strcInky + isChased], 1
+        je .noEyes
         mov ax, [Clyde_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
