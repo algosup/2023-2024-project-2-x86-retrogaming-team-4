@@ -6,6 +6,7 @@ section .data
     score: dw 0
     pelletEaten: dw 0
     endFrightTime: dd 0, 0
+    endFruitTime: dd 0, 0
     fruitTilePos: dw 0
     fruitSprite: dw 0
 
@@ -73,8 +74,6 @@ section .text
             ret
         
         .eraseFruit:
-            xor ax, ax
-            xor bx, bx
             call replaceFruit
             ret
 
@@ -203,6 +202,10 @@ section .text
         mov word[fruitSprite], CHERRY
         call displayFruit
 
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
+
         .exit:
         ret
 
@@ -217,6 +220,10 @@ section .text
         mov word[fruitSprite], STRAWBERRY
         call displayFruit
 
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
+
         .exit:
         ret
 
@@ -230,6 +237,10 @@ section .text
         mov byte[si], 0x11
         mov word[fruitSprite], ORANGE
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -244,6 +255,10 @@ section .text
         mov byte[si], 0x12
         mov word[fruitSprite], APPLE
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -258,6 +273,10 @@ section .text
         mov byte[si], 0x13
         mov word[fruitSprite], MELON
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -272,6 +291,10 @@ section .text
         mov byte[si], 0x14
         mov word[fruitSprite], GALAXIAN
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -286,6 +309,10 @@ section .text
         mov byte[si], 0x15
         mov word[fruitSprite], BELL
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -300,6 +327,10 @@ section .text
         mov byte[si], 0x16
         mov word[fruitSprite], KEY
         call displayFruit
+
+        mov eax, [timestamp_of_next_frame]
+        add eax, 30000000
+        mov [endFruitTime], eax
         
         .exit:
         ret
@@ -383,4 +414,18 @@ section .text
         cmp word[pelletEaten], 770
         je addKey
 
+        ret
+
+    checkFruitPrint:
+        mov eax, [timestamp_of_next_frame]
+        cmp eax, [endFruitTime]
+        jne .stillFruitTime
+
+        int3
+        mov si, MazeModelBuffer
+        add si, FRUIT_TILE_POS
+        mov byte[si], 0x0F
+        call replaceFruit
+
+        .stillFruitTime:
         ret

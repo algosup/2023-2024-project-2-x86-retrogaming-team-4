@@ -239,6 +239,8 @@ section .text
         ret
     
     replaceFruit:
+        xor ax, ax
+        xor bx, bx
         ; replace the 16x16 bloc of pixels where is tile, by the content of the background buffer at the same location, according to its x y positions
         ; calculate the linear position of the tile
 

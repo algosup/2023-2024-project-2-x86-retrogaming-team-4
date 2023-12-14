@@ -85,6 +85,7 @@ section .text
 
         ;display fruits
         call setFruits
+        call checkFruitPrint
 
         ;display all on the real screen (quick)
         call UpdateScreen
