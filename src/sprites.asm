@@ -22,10 +22,11 @@ section .data
 section .text
 
     AnimateSprites:
+        inc word [animationCounter]
         mov bx, word[frameOf_PacMan] ; ax contain the actual frame
         mov cl, 2
         mov ax, [strcPacMan + direction]
-        mov cx, ax
+        mov dx, ax
         mul cl
         add ax, 16 ; ax = the frame 1 of the direction of pacman
 
@@ -45,14 +46,14 @@ section .text
 
     UpdateFrameOfPacman:
 
-        cmp cx, word [directionBuffer] 
+        cmp dx, word [directionBuffer] 
         jne .changeDirection
 
         ret
 
         .changeDirection:
         mov word[frameOf_PacMan],  ax
-        mov word [directionBuffer], cx
+        mov word [directionBuffer], dx
 
         ret
 
@@ -73,7 +74,6 @@ section .text
     Display_PacMan:
     ; display PacMan according to current positions values
         call AnimateSprites
-        inc word [animationCounter]
         mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
         call calculate_screen_position

@@ -78,8 +78,8 @@ endstruc
 %define CCPS 3000000
 %define FPS 24
 
-; Clock percision is in µs
-%define PERIOD CCPS / FPS
+; Clock percision is in µs , here a periode (timelapse beetween 2 frame update) is equal to aproximately 42 ms (1/24th second)
+%define PERIOD CCPS / FPS 
 
 
 section .data 
