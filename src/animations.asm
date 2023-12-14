@@ -3,42 +3,105 @@ section .data
     afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
     PacmanAnimationCounter dw 0
+    PinkyAnimationCounter dw 0
+    BlinkyAnimationCounter dw 0
+    InkyAnimationCounter dw 0
+    ClydeAnimationCounter dw 0
     GhostsAnimationCounter dw 0
     directionBuffer dw 0
 
 section .text
 
+    AnimateGhosts:
+        ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
+
+        inc word [GhostsAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
+        cmp  word [GhostsAnimationCounter], 0x6 ; check the timer
+        jne .noAnimation
+        mov word [GhostsAnimationCounter],0 ; reset the counter/timer
+        jmp .toggle ; toogle the frames of ghosts
+
+        ret
+
+        .toggle:
+            call AnimatePinky
+            call AnimateInky
+            call AnimateBlinky
+            call AnimateClyde
+
+        .noAnimation:
+    
+        ret
+
+    SwitchGhostFrame:
+    ; So afraid or not, it toogle the frame of the ghost, need to define : 
+    ; bx = actual frame of the ghost
+    ; cx = first frame of the ghost
+    ; dx = is afraid or not (0 or 1)
+
+        cmp dx, 1
+        je .afraid
+
+        mov ax, bx
+        cmp ax, cx
+        je .toSecondFrame
+        mov word bx, cx
+
+        ret
+
+        .toSecondFrame:
+        inc cx
+        mov word bx, cx
+
+        ret
+
+        .afraid:
+            mov ax, bx
+            cmp ax, AFRAID_1
+            je .toSecondAfraidFrame
+            mov word bx, AFRAID_1
+
+        ret
+
+        .toSecondAfraidFrame:
+            mov word bx, AFRAID_2
+
+        ret
+
     AnimateBlinky:
-        cmp word[strcBlinky + isChased], 1
-        je .afraid
-        mov word[strcBlinky + frame], BLINKY_1
+        mov dx, word[strcBlinky + isChased]
+        mov bx, [strcBlinky + frame]
+        mov cx, BLINKY_1
+        call SwitchGhostFrame
+        mov word[strcBlinky + frame], bx
+
         ret
-        .afraid:
-            mov word[strcBlinky + frame], AFRAID_1
-        ret
+
     AnimateClyde:
-        cmp word[strcClyde + isChased], 1
-        je .afraid
-        mov word[strcClyde + frame], CLYDE_1
+        mov dx, word[strcClyde + isChased]
+        mov bx, [strcClyde + frame]
+        mov cx, CLYDE_1
+        call SwitchGhostFrame
+        mov word[strcClyde + frame], bx
+
         ret
-        .afraid:
-            mov word[strcClyde + frame], AFRAID_1
-        ret
+
     AnimateInky:
-        cmp word[strcInky + isChased], 1
-        je .afraid
-        mov word[strcInky + frame], INKY_1
+        mov dx, word[strcInky + isChased]
+        mov bx, [strcInky + frame]
+        mov cx, INKY_1
+        call SwitchGhostFrame
+        mov word[strcInky + frame], bx
+
         ret
-        .afraid:
-            mov word[strcInky + frame], AFRAID_1
-        ret
+
     AnimatePinky:
-        cmp word[strcPinky + isChased], 1
-        je .afraid
-        mov word[strcPinky + frame], PINKY_1
-        ret
-        .afraid:
-            mov word[strcPinky + frame], AFRAID_1
+        mov dx, word[strcPinky + isChased]
+        mov bx, [strcPinky + frame]
+        mov cx, PINKY_1
+        call SwitchGhostFrame
+        mov word[strcPinky + frame], bx
+
         ret
 
     AnimatePacMan:
@@ -95,7 +158,7 @@ section .text
         ret
 
     SwitchMouthOpening:
-    ; just toogle the frame of pacman if opened -> closed, and the reverse
+    ; just toogles the frame of pacman if opened -> closed, and the reverse
 
         cmp ax, bx ; checks if the actual frame is the '_1'
         je .toSecondFrame

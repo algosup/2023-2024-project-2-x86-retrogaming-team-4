@@ -76,7 +76,8 @@ section .text
         call changeInkyPosition
         call changeClydePosition
         
-        
+        call AnimatePacMan
+        call AnimateGhosts
 
         ;display all in the screen buffer according to the new positions (quite slow) 
         ; !!! first ghosts, then pacman !!! (to see if pacman overwrited a ghost = touched it)

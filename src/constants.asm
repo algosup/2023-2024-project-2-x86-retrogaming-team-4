@@ -42,7 +42,7 @@ endstruc
 %define BLINKY_1 0
 %define BLINKY_2 1
 %define PINKY_1 2
-%define PINK_2 3
+%define PINKY_2 3
 %define INKY_1 4
 %define INKY_2 5
 %define CLYDE_1 6

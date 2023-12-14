@@ -12,7 +12,7 @@ section .text
 
     Display_PacMan:
     ; display PacMan according to current positions values
-        call AnimatePacMan ; to update the frame for animation
+    
         mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
         call calculate_screen_position
@@ -25,7 +25,7 @@ section .text
 
     Display_Blinky:
     ; display Blinky and its eyes, according to current positions values
-        call AnimateBlinky
+       
         mov bx, [strcBlinky + posX]
         mov ax, [strcBlinky + posY]
         call calculate_screen_position
@@ -46,7 +46,6 @@ section .text
     Display_Inky:
     ; display Inky and its eyes, according to current positions values
 
-        call AnimateInky
         mov bx, [strcInky + posX]
         mov ax, [strcInky + posY]
         call calculate_screen_position
@@ -67,7 +66,6 @@ section .text
     Display_Pinky:
     ; display Pinky and its eyes, according to current positions values
 
-        call AnimatePinky
         mov bx, [strcPinky + posX]
         mov ax, [strcPinky + posY]
         call calculate_screen_position
@@ -88,7 +86,6 @@ section .text
     Display_Clyde:
     ; display Clyde and its eyes, according to current positions values
 
-        call AnimateClyde
         mov bx, [strcClyde + posX]
         mov ax, [strcClyde + posY]
         call calculate_screen_position
@@ -108,6 +105,7 @@ section .text
     
     displayFruit:
     ; display the fruit according to its current position values
+
         mov ax, [fruitSprite]
         call calculate_spritesheet_position
         mov dx, FRUIT_POS_X + FRUIT_POS_Y
@@ -115,6 +113,7 @@ section .text
         call draw_sprite
         pop dx
         call draw_sprite_bg_buffer
+        
         ret
 
     ClearPacMan:
