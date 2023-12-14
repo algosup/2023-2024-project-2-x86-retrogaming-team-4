@@ -22,6 +22,14 @@ section .bss
 ; PELLET                    0x0D
 ; SUPER_PELLET              0x0E
 ; BACKGROUND                0x0F
+; CHERRY                    0x17
+; STRAWBERRY                0x10
+; ORANGE                    0x11
+; APPLE                     0x12
+; MELON                     0x13
+; GALAXIAN FLAGSHIP         0x14
+; BELL                      0x15
+; KEY                       0x16
 
 
 section .data

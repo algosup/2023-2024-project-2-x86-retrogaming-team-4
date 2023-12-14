@@ -1,5 +1,3 @@
-
-
 org 100h
 
 jmp start
@@ -85,6 +83,9 @@ section .text
         ;read if a ghost hit pacman or the reverse
         call readContact
 
+        ;display fruits
+        call setFruits
+        call checkFruitPrint
 
         ;display all on the real screen (quick)
         call UpdateScreen
