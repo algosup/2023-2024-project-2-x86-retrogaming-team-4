@@ -149,7 +149,10 @@ section .text
             jmp .notTouched
 
         .normalContact:
-
+            mov word [strcBlinky + isChased], 0
+            mov word [strcPinky + isChased], 0
+            mov word [strcInky + isChased], 0
+            mov word [strcClyde + isChased], 0
             call resetGame
 
         .notTouched:
