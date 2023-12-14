@@ -35,6 +35,8 @@ section .text
 
         call MazeToBGbuffer
         call DisplayMaze
+        call BuildMazeModelBuffer
+        
 
         ;Set the sprites (first state) 
         call FirstDisplayGhosts
@@ -53,6 +55,7 @@ section .text
 ;-------------------------------------------------
         
         call waitLoop
+        call checkFrightTime
         
         ;clear All the moving sprites 
         call ClearPinky        
@@ -85,6 +88,10 @@ section .text
         ;read if a ghost hit pacman or the reverse
         
         call readContact
+
+        ;display fruits
+        call setFruits
+        call checkFruitPrint
 
         ;display all on the real screen (quick)
         call UpdateScreen

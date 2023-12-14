@@ -77,12 +77,8 @@ section .text
    FirstDisplayPacMan:
    ; set the initial position and frame (mouth closed or not, ...) and display it
 
-      mov word [strcPacMan + posX], 160
-      mov word [strcPacMan + posY], 132
-      mov word [strcPacMan + velocityX], 1
-      mov word [strcPacMan + velocityY], 0
-      mov byte [strcPacMan + direction], RIGHT_DIRECTION
-      mov word [frameOf_PacMan], PACMAN_RIGHT_2
+      mov word [strcPacMan + posX], PACMAN_START_X
+      mov word [strcPacMan + posY], PACMAN_START_Y
 
       call Display_PacMan
 
