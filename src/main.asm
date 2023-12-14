@@ -1,4 +1,4 @@
-
+[map symbols pac.map]
 org 100h
 
 jmp start
@@ -60,17 +60,19 @@ section .text
         call ClearInky
         call ClearClyde
         call ClearPacMan 
-
+        
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
+        
         call readKeyboard
+        
 
         ; move the ghosts according to the defined velocity of each one
         call changePinkyPosition
         call changeBlinkyPosition
         call changeInkyPosition
         call changeClydePosition
-
-        call AnimateSprites
+        
+        
 
         ;display all in the screen buffer according to the new positions (quite slow) 
         ; !!! first ghosts, then pacman !!! (to see if pacman overwrited a ghost = touched it)
@@ -81,8 +83,8 @@ section .text
         call Display_PacMan
 
         ;read if a ghost hit pacman or the reverse
+        
         call readContact
-
 
         ;display all on the real screen (quick)
         call UpdateScreen

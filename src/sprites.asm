@@ -17,70 +17,67 @@ section .data
     afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
     animationCounter dw 0
+    directionBuffer dw 2
 
 section .text
 
     AnimateSprites:
-        mov bx, word [animationCounter]
-        push bx
-        cmp bx, 0x6
+        mov bx, word[frameOf_PacMan] ; ax contain the actual frame
+        mov cl, 2
+        mov ax, [strcPacMan + direction]
+        mov cx, ax
+        mul cl
+        add ax, 16 ; ax = the frame 1 of the direction of pacman
+
+        int3
+
+        cmp  word [animationCounter], 0x6
         jne .noAnimation
-
+        
+        mov word [animationCounter],0
         call SwitchMouthOpening
-
-        jmp .resetCounter
+        ret
 
         .noAnimation:
-            pop bx
-            inc bx
-            mov word [animationCounter], bx
+            call UpdateFrameOfPacman
             ret
-
-        .resetCounter:
-            pop bx
-            xor bx, bx
-            mov word [animationCounter], bx
-            ret
-
-    SwitchMouthOpening:
         
-        ;mov ax, [strcPacMan + direction]
-        
-        ;mov bl, 2
-        ;mul bl
-        ;add ax, 15 ; ax = the frame 1 of the direction of pacman
 
-        mov bx, [frameOf_PacMan]
-        mov ax, bx
-        cmp bx, PACMAN_RIGHT_1
-        je .toSecondFrame
-        cmp bx, PACMAN_UP_1
-        je .toSecondFrame
-        cmp bx, PACMAN_LEFT_1
-        je .toSecondFrame
-        cmp bx, PACMAN_DOWN_1
-        je .toSecondFrame
+    UpdateFrameOfPacman:
 
-        dec bx
-        mov word[frameOf_PacMan],  bx
+        cmp cx, word [directionBuffer] 
+        jne .changeDirection
 
         ret
 
-        .toSecondFrame:
-        mov bx, [frameOf_PacMan]
-        inc bx
-        mov word[frameOf_PacMan],  bx
+        .changeDirection:
+        mov word[frameOf_PacMan],  ax
+        mov word [directionBuffer], cx
 
+        ret
+
+    SwitchMouthOpening:
+
+        cmp ax, bx ; looks if the actual frame is the '_1'
+        je .toFirstFrame
+
+        mov word[frameOf_PacMan],  ax
+        ret
+
+        .toFirstFrame:
+        inc ax
+        mov word[frameOf_PacMan],  ax
         ret
 
 
     Display_PacMan:
     ; display PacMan according to current positions values
-
+        call AnimateSprites
+        inc word [animationCounter]
         mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
         call calculate_screen_position
-
+        
         mov ax, [frameOf_PacMan]
         call calculate_spritesheet_position
         call draw_sprite
