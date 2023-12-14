@@ -3,61 +3,71 @@ section .data
         istruc Sprite
             at posX, dw 10
             at posY, dw 10
-            at absPos, dw 10*10
             at velocityX, dw 0
             at velocityY, dw 0
             at isChased, db 1
             at isDead, db 0
+            at nextPosX, dw 10
+            at nextPosY, dw 10
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
     
     strcBlinky:
         istruc Sprite
             at posX, dw 274
             at posY, dw 30
-            at absPos, dw 274*30
             at velocityX, dw 0
             at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
-            
+            at nextPosX, dw 274
+            at nextPosY, dw 30
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcInky:
         istruc Sprite
             at posX, dw 90
             at posY, dw 100
-            at absPos, dw 90*100
             at velocityX, dw 0
             at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
+            at nextPosX, dw 90
+            at nextPosY, dw 100
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcPinky:
         istruc Sprite
             at posX, dw 30
             at posY, dw 30
-            at absPos, dw 30*30
             at velocityX, dw 0
             at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
+            at nextPosX, dw 30
+            at nextPosY, dw 30
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcClyde:
         istruc Sprite
             at posX, dw 70
             at posY, dw 100
-            at absPos, dw 70*100
             at velocityX, dw 0
             at velocityY, dw 0
             at isChased, db 0
             at isDead, db 0
+            at nextPosX, dw 70
+            at nextPosY, dw 100
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
-
-    pacManNextPosX dw 0
-    pacManNextPosY dw 0
-  
 
 section .text
 
@@ -65,11 +75,11 @@ section .text
         ; set next position
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
-        mov [pacManNextPosX], bx
+        mov [strcPacMan + nextPosX], bx
 
         mov ax, [strcPacMan + posY]
         add ax, [strcPacMan + velocityY]
-        mov [pacManNextPosY], ax
+        mov [strcPacMan + nextPosY], ax
 
         ; check collision
         call isColliding
@@ -137,23 +147,27 @@ section .text
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
+        
+         ; set next position
+        mov bx, [strcBlinky + posX]
+        add bx, [strcBlinky + velocityX]
+        mov [strcBlinky + nextPosX], bx
+
+ 
+        
+
+        mov bx, [strcBlinky + posX]
+        add bx, [strcBlinky + velocityX]
+        mov [strcBlinky + posX], bx
 
         mov ax, [strcBlinky + posY]
-        mov bx, [strcBlinky + posX]
-        mov cx, [strcBlinky + velocityY]
-        mov dx, [strcBlinky + velocityX]
-   
-        call blinkyAi
-       
+        add ax, [strcBlinky + velocityY]
+        mov [strcBlinky + posY], ax
 
-        mov word [strcBlinky + posY], ax
-        mov word [strcBlinky + posX], bx
-        mov word [strcBlinky + velocityY], cx
-        mov word [strcBlinky + velocityX], dx
 
-        call changeGhostFrames
+        ; call changeGhostFrames
 
-        mov word [frameOf_Blinky_eyes], ax
+        ; mov word [frameOf_Blinky_eyes], ax
 
         ret
 
@@ -232,8 +246,3 @@ section .text
         ret
 
     
-    stopBlinky:
-        mov word [strcBlinky + velocityX], 0
-        mov word [strcBlinky + velocityY], 0
-        mov byte[isCollid], 0x00
-        ret

@@ -1,12 +1,26 @@
 struc Sprite
     posX: resw 1
     posY: resw 1
-    absPos: resw 1
     velocityX: resw 1
     velocityY: resw 1
     isChased: resb 1
     isDead: resb 1
+    nextPosX: resw 1
+    nextPosY: resw 1
+    nextVelocityX: resw 1
+    nextVelocityY: resw 1
 endstruc
+
+struc Ghost 
+    canRight: resb 1
+    canLeft: resb 1
+    canUp: resb 1
+    canDown: resb 1
+    targetX: resb 1
+    targetY: resb 1
+endstruc
+
+
 
 %define SCREEN_WIDTH 320
 %define SCREEN_HEIGHT 200

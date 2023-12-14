@@ -66,10 +66,7 @@ section .text
         call readKeyboard
 
         ; move the ghosts according to the defined velocity of each one
-        call changePinkyPosition
-        call changeBlinkyPosition
-        call changeInkyPosition
-        call changeClydePosition
+        call moveGhosts
 
         ;display all in the screen buffer according to the new positions (quite slow) 
         ; !!! first ghosts, then pacman !!! (to see if pacman overwrited a ghost = touched it)

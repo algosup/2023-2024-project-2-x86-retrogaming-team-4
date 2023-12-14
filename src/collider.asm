@@ -107,6 +107,7 @@ section .text
         mov bx, [corner0Y]
         mov [checkedCornerX], ax
         mov [checkedCornerY], bx
+        call getTileAbsPos
         call isWall
         cmp byte[isCollid], 1
         je .collision
@@ -115,22 +116,27 @@ section .text
         mov bx, [corner1Y]
         mov [checkedCornerX], ax
         mov [checkedCornerY], bx
+        call getTileAbsPos
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
         mov ax, [corner2X]
         mov bx, [corner2Y]
-        mov [checkedCornerX], ax
+
+X], ax
         mov [checkedCornerY], bx
+        call getTileAbsPos
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
         mov ax, [corner3X]
-        mov bx, [corner3Y]
+
+
         mov [checkedCornerX], ax
         mov [checkedCornerY], bx
+        call getTileAbsPos
         call isWall
 
         cmp byte[isCollid], 1
@@ -145,36 +151,36 @@ section .text
     getCorners:
     ; Get the corner of the PacMan tile
 
-        mov bx, [pacManNextPosX]
+        mov bx, [strcPacMan + nextPosX]
         add bx, 4
         mov [corner0X], bx
-        mov ax, [pacManNextPosY]
+        mov ax, [strcPacMan + nextPosY]
         add ax, 4
         mov [corner0Y], ax
 
-        mov bx, [pacManNextPosX]
+        mov bx, [strcPacMan + nextPosX]
         add bx, 4
         mov [corner1X], bx
-        mov ax, [pacManNextPosY]
+        mov ax, [strcPacMan + nextPosY]
         add ax, 11
         mov [corner1Y], ax
 
-        mov bx, [pacManNextPosX]
+        mov bx, [strcPacMan + nextPosX]
         add bx, 11
         mov [corner2X], bx
-        mov ax, [pacManNextPosY]
+        mov ax, [strcPacMan + nextPosY]
         add ax, 4
         mov [corner2Y], ax
 
-        mov bx, [pacManNextPosX]
+        mov bx, [strcPacMan + nextPosX]
         add bx, 11
         mov [corner3X], bx
-        mov ax, [pacManNextPosY]
+        mov ax, [strcPacMan + nextPosY]
         add ax, 11
         mov [corner3Y], ax
 
         ret
-    
+   
     getTileAbsPos:
     ; Get absolute position of tile
     ; Param: checkedCornerX, checkedCornerY
@@ -189,13 +195,11 @@ section .text
         mov ax, [checkedCornerX]
         shr ax, 3
         add [tileAbsPos], ax
+
         ret
 
     isWall:
     ; Check if the tile is a wall
-    
-        ;Get the tile's absolute position
-        call getTileAbsPos
 
         ;Read the chosen tile in the maze table
         mov si, MazeModel

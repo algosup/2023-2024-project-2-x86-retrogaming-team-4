@@ -1,124 +1,187 @@
 section .data
+    
+    strcBlinkyBehaviour:
+        istruc Ghost
+            at canRight, db 0
+            at canLeft, db 0
+            at canUp, db 0
+            at canDown, db 0
+            at targetX, db 0
+            at targetY, db 0
+        iend
 
-    blinkyNextPosX dw 0
-    blinkyNextPosY dw 0
+    strcInkyBehaviour:
+        istruc Ghost
+            at canRight, db 0
+            at canLeft, db 0
+            at canUp, db 0
+            at canDown, db 0
+            at targetX, db 0
+            at targetY, db 0
+        iend
 
-    isCollidBlinky db 0
+    strcPinkyBehaviour:
+        istruc Ghost
+            at canRight, db 0
+            at canLeft, db 0
+            at canUp, db 0
+            at canDown, db 0
+            at targetX, db 0
+            at targetY, db 0
+        iend
+
+    strcClydeBehaviour:
+        istruc Ghost
+            at canRight, db 0
+            at canLeft, db 0
+            at canUp, db 0
+            at canDown, db 0
+            at targetX, db 0
+            at targetY, db 0
+        iend
+
+    afterMoveTileX db 0
+    afterMoveTileY db 0
+
+    checkTileX db 0
+    checkTileY db 0
+    checkVelocityX db 0
+    checkVelocityY db 0
+
+    bestDistance dw 0
+    bestVelocityX dw 0
+    bestVelocityY dw 0
+
 section .text
 
-    blinkyAi:
-    
-        call getBlinkyNextPos
-        call isCollidingBlinky
-        cmp byte[isCollidBlinky], 1
-        je .collision
-
+    moveGhosts:
         call moveBlinky
+        ; call movePinky
+        ; call moveInky
+        ; call moveClyde
         ret
-
-        .collision:
-        call stopBlinky
-        ret
-
-
-
-    getBlinkyNextPos:
-        mov ax, [strcBlinky + posX]
-        mov bx, [strcBlinky + posY]
-        add ax, [strcBlinky + velocityX]
-        add bx, [strcBlinky + velocityY]
-        mov [blinkyNextPosX], ax
-        mov [blinkyNextPosY], bx
-        ret
-
+    
     moveBlinky:
-        mov ax, [strcBlinky + posX]
-        mov bx, [strcBlinky + posY]
-        add ax, [strcBlinky + velocityX]
-        add bx, [strcBlinky + velocityY]
-        mov [strcBlinky + posX], ax
-        mov [strcBlinky + posY], bx
+        mov di, strcBlinkyBehaviour
+        call moveGhost
+
+        ; TODO
+        ; Check if we changed tile
+        ; if not changed tile
+        ;     ret
+        ; if colliding:
+        ;     recenter on tile
+
+        ; Change velocity
+        mov ax, [strcBlinky + nextVelocityX]
+        mov [strcBlinky + velocityX], ax
+        mov ax, [strcBlinky + nextVelocityY]
+        mov [strcBlinky + velocityY], ax
+
+        ; Initialize best distance, dx and dy
+        mov [bestDistance], 0xffff
+        mov [bestVelocityX], 0
+        mov [bestVelocityY], 0
+
+        ; Check in all directions for the best tile
+        ; TODO: Check for overflows (if check tile is outside the maze)
+        ; TODO: Skip tile if the tile is in our back
+        ; Check up
+        mov ax, [afterMoveTileX]
+        mov [checkTileX], ax
+        mov ax, [afterMoveTileY]
+        dec ax
+        mov [checkTileY], ax
+        call checkTile
+        ; Check left
+        mov ax, [afterMoveTileX]
+        dec ax
+        mov [checkTileX], ax
+        mov ax, [afterMoveTileY]
+        mov [checkTileY], ax
+        call checkTile
+        ; Check down
+        mov ax, [afterMoveTileX]
+        mov [checkTileX], ax
+        mov ax, [afterMoveTileY]
+        inc ax
+        mov [checkTileY], ax
+        call checkTile
+        ; Check right
+        mov ax, [afterMoveTileX]
+        inc ax
+        mov [checkTileX], ax
+        mov ax, [afterMoveTileY]
+        mov [checkTileY], ax
+        call checkTile
+
+        ; Set next velocities
+        mov ax, [bestVelocityX]
+        mov [strcBlinky + nextVelocityX], ax
+        mov ax, [bestVelocityY]
+        mov [strcBlinky + nextVelocityY], ax
+
         ret
 
+    moveGhost:
+        ; Move
+        add [di + posX], [di + velocityX]
+        add [di + posY], [di + velocityY]
     
-    isCollidingBlinky: 
-        call getCornersBlinky
-        ; Set corner to check
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
-        call isWall
-        cmp byte[isCollidBlinky], 1
-        je .collision
+        ; Calculate new tile position
+        mov bx, TILE_SIZE
+        mov ax, [di + posX]
+        xor dx, dx
+        div bx
+        mov [afterMoveTileX], ax
+        mov ax, [di + posY]
+        xor dx, dx
+        div bx
+        mov [afterMoveTileY], ax
 
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
-        call isWall
-        cmp byte[isCollidBlinky], 1
-        je .collision
-
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
-        call isWall
-        cmp byte[isCollidBlinky], 1
-        je .collision
-
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
-        call isWall
-
-        cmp byte[isCollidBlinky], 1
-        je .collision
-        ret
-
-        .collision:
-        call stopBlinky
-    
-        ret
-    
-    getCornersBlinky:
-    ; Get the corner of the blinky tile
-
-        mov bx, [blinkyNextPosX]
-        add bx, 4
-        mov [corner0X], bx
-        mov ax, [blinkyNextPosY]
-        add ax, 4
-        mov [corner0Y], ax
-
-        mov bx, [blinkyNextPosX]
-        add bx, 4
-        mov [corner1X], bx
-        mov ax, [blinkyNextPosY]
-        add ax, 11
-        mov [corner1Y], ax
-
-        mov bx, [blinkyNextPosX]
-        add bx, 11
-        mov [corner2X], bx
-        mov ax, [blinkyNextPosY]
-        add ax, 4
-        mov [corner2Y], ax
-
-        mov bx, [blinkyNextPosX]
-        add bx, 11
-        mov [corner3X], bx
-        mov ax, [blinkyNextPosY]
-        add ax, 11
-        mov [corner3Y], ax
+        ; TODO: Check collision
 
         ret
     
+    checkTile:
+        ; Check if there is a wall
+        xor dx, dx
+        mov ax, [checkTileY]
+        mov bx, SCREEN_TILE_WIDTH
+        mul bx
+        add ax, [checkTileX]
+        mov [tileAbsPos], ax
+        call isWall
+        cmp [isCollid], 1
+        je .exit
 
+        ; TODO: Return if tile is in our back
 
+        call calcDistance
+        cmp ax, [bestDistance]
+        jae .exit ; The priorities have been defined above in case of equality
+        mov [bestDistance], ax
+        mov [bestDistance], ax
+        .exit
 
+        ret
+    
+    calcDistance:
+        ;  Calculate the difference in x and y coordinate
+        mov ax, [strcPacMan + posX]
+        shr ax, 3 
+        sub ax, [checkTileX]
+        mov bx, [strcPacMan + posY] 
+        shr bx, 3
+        sub bx, [checkTileY]
+    
+        ; Calculate the squared values of the differences
+        imul ax, ax
+        imul bx, bx
 
+        ; add squared in ax
+        add ax, bx 
+       
+        ret
 
-        
+    
