@@ -65,8 +65,6 @@ section .data
 section .text
 
     changePacManPosition:
-    
-        call SwitchMouthOpening
         
         ; set next position
         mov bx, [strcPacMan + posX]

@@ -70,8 +70,7 @@ section .text
         .eachLine:
             mov cx, SPRITE_SIZE
             .eachPixel:
-                lodsb 
-                int3
+                lodsb
                 cmp al, bl
                 je .touched
                 dec cx

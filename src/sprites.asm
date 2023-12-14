@@ -16,10 +16,34 @@ section .data
 
     afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
+    animationCounter dw 0
+
 section .text
 
+    AnimateSprites:
+        mov bx, word [animationCounter]
+        push bx
+        cmp bx, 0x6
+        jne .noAnimation
+
+        call SwitchMouthOpening
+
+        jmp .resetCounter
+
+        .noAnimation:
+            pop bx
+            inc bx
+            mov word [animationCounter], bx
+            ret
+
+        .resetCounter:
+            pop bx
+            xor bx, bx
+            mov word [animationCounter], bx
+            ret
 
     SwitchMouthOpening:
+        
         ;mov ax, [strcPacMan + direction]
         
         ;mov bl, 2
@@ -37,19 +61,15 @@ section .text
         cmp bx, PACMAN_DOWN_1
         je .toSecondFrame
 
-        inc bx
+        dec bx
         mov word[frameOf_PacMan],  bx
+
         ret
 
         .toSecondFrame:
         mov bx, [frameOf_PacMan]
-        dec bx
+        inc bx
         mov word[frameOf_PacMan],  bx
-        
-        mov cx, 0xFFFF
-        .loopy:
-        dec cx
-        jnz .loopy
 
         ret
 
