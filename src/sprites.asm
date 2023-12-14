@@ -16,6 +16,8 @@ section .data
     frameOf_Inky dw INKY_1
     frameOf_Inky_eyes dw EYES_RIGHT
 
+    currentDisplayedScoreUnit: db 0
+
 section .text
     
     Display_PacMan:
@@ -98,7 +100,47 @@ section .text
 
         ret
 
+    displayScore:
+        mov eax, [score]
+        mov long [currentDisplayedScoreUnit], 0 ;cursor in the score
 
+        cmp eax, 0 ; Compare if the score is equal to 0
+        je .zero
+            call .scoreLoop
+        .zero: ; exit the function
+
+        ret
+
+    .scoreLoop:
+        inc long [currentDisplayedScoreUnit] ; Add one to the unit we edit
+
+        cmp long [currentDisplayedScoreUnit], 8 ; If we are at the eight number, we break
+        je .zero
+
+    .notZeroDisplayScore:
+        xor edx, edx
+        mov cx, 10
+        div cx ;Divides the score => 
+        mov [scoreUnit], dx ; reminder is stored in dx
+        push eax ; As eax contains the score, we need to preserve it
+        call displayUnit
+        pop eax
+        call .scoreLoop
+        ret
+
+
+    displayUnit:
+        ; mov ax, [scoreUnit]
+        ; mov bx, [currentDisplayedScoreUnit]
+        ; cmp ax, 0
+        ; mov ax, 16
+        ; mov bx, 172
+        ; call calculate_screen_position
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 21*64 ;Position on spritesheet
+        mov di, 16*SCREEN_WIDTH+17*8 ; Place to display
+        call draw_tile ;Draw the score unit
+        ret
     
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
@@ -320,4 +362,17 @@ section .text
 
         pop es
 
+        ret
+
+    draw_tile:
+    mov ax, [ScreenBufferSegment]
+    mov es, ax
+    mov dx, TILE_SIZE ;number of lines
+    .eachLine:
+        mov cx, TILE_SIZE
+        rep movsb
+        add di, SCREEN_WIDTH - TILE_SIZE
+        dec dx
+        cmp dx, 0
+            jne .eachLine
         ret

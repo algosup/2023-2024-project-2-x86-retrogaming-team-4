@@ -37,7 +37,7 @@ section .text
         call MazeToBGbuffer
         call DisplayMaze
         call BuildMazeModelBuffer
-        
+
 
         ;Set the sprites (first state) 
         call FirstDisplayGhosts
@@ -63,7 +63,7 @@ section .text
         call ClearBlinky
         call ClearInky
         call ClearClyde
-        call ClearPacMan 
+        call ClearPacMan
 
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
         call readKeyboard
@@ -81,6 +81,7 @@ section .text
         call Display_Inky
         call Display_Clyde
         call Display_PacMan
+        call displayScore
 
         ;read if a ghost hit pacman or the reverse
         call readContact

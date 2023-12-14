@@ -4,6 +4,7 @@ section .data
     pacManCenterX: dw 0
     pacManCenterY: dw 0
     score: dw 0
+    scoreUnit: dw 0
     endFrightTime: dd 0, 0
 
 section .text
@@ -73,8 +74,6 @@ section .text
     isPowerPellet:
         ; increment score
         add word[score], 50
-
-        call frightTime
 
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
