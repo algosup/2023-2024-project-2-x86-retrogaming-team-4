@@ -79,7 +79,7 @@ section .text
 
     Display_PacMan:
     ; display PacMan according to current positions values
-        call AnimateSprites ; to update the frame for animation
+        call AnimatePacMan ; to update the frame for animation
         mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
         call calculate_screen_position
