@@ -1,96 +1,14 @@
 section .data
 
-    frameOf_PacMan dw PACMAN_RIGHT_2
+    Blinky_eyes dw 0
 
-    frameOf_Blinky dw BLINKY_1
-    frameOf_Blinky_eyes dw EYES_RIGHT
+    Pinky_eyes dw 0
 
-    frameOf_Pinky dw PINKY_1
-    frameOf_Pinky_eyes dw EYES_RIGHT
+    Clyde_eyes dw 0
 
-    frameOf_Clyde dw CLYDE_1
-    frameOf_Clyde_eyes dw EYES_RIGHT
-
-    frameOf_Inky dw INKY_1
-    frameOf_Inky_eyes dw EYES_RIGHT
-
-    afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
-
-    PacmanAnimationCounter dw 0
-    GhostsPacmanAnimationCounter dw 0
-    directionBuffer dw 0
+    Inky_eyes dw 0
 
 section .text
-
-    AnimatePacMan:
-    ; changes at least the orientation of the frame, and, if the timer is reached, it switchs to the second frame of the actual orientation.
-        
-        inc word [PacmanAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
-
-        mov bx, word[frameOf_PacMan] ; ax contain the id of the actual frame
-        mov cl, 2
-        mov ax, [strcPacMan + direction]
-        mov dx, ax
-        mul cl
-        add ax, 16 ; ax contains the id of the frame "..._1" (the first) of the direction of pacman
-
-        mov cx , word[strcPacMan + velocityX] ; stops animation if pacman is stopped
-        add cx , word[strcPacMan + velocityY]
-        
-        cmp cx, 0
-        je .pauseAnimation
-
-        cmp  word [PacmanAnimationCounter], 0x6 ; check the timer
-        jne .noAnimation
-        
-        mov word [PacmanAnimationCounter],0 ; reset the counter/timer
-        call SwitchMouthOpening ; toogle the frame
-
-        ret
-
-        .noAnimation:
-            call UpdateFrameOfPacman 
-
-            ret
-        
-        .pauseAnimation:
-            mov word [PacmanAnimationCounter],0
-            inc ax ; to have the closed mouth frame in ax
-            mov word[frameOf_PacMan],  ax
-
-            ret
-
-
-    UpdateFrameOfPacman:
-    ; just to change the direction if necessary, to have a reactive changing of orientation when a key is pressed
-
-        cmp dx, word [directionBuffer] ; checks if the direction had changed from the last time
-        jne .changeDirection
-
-        ret
-
-        .changeDirection:
-            mov word[frameOf_PacMan],  ax
-            mov word [directionBuffer], dx
-
-            ret
-
-    SwitchMouthOpening:
-    ; just toogle the frame of pacman if opened -> closed, and the reverse
-
-        cmp ax, bx ; checks if the actual frame is the '_1'
-        je .toSecondFrame
-
-        mov word[frameOf_PacMan],  ax ; as the frame loaded in ax was the first one
-
-        ret
-
-        .toSecondFrame:
-            inc ax ; as the frame loaded in ax was the first one
-            mov word[frameOf_PacMan],  ax
-            
-            ret
-
 
     Display_PacMan:
     ; display PacMan according to current positions values
@@ -99,7 +17,7 @@ section .text
         mov ax, [strcPacMan + posY]
         call calculate_screen_position
         
-        mov ax, [frameOf_PacMan]
+        mov ax, [strcPacMan + frame]
         call calculate_spritesheet_position
         call draw_sprite
 
@@ -107,16 +25,16 @@ section .text
 
     Display_Blinky:
     ; display Blinky and its eyes, according to current positions values
-
+        call AnimateBlinky
         mov bx, [strcBlinky + posX]
         mov ax, [strcBlinky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Blinky]
+        mov ax, [strcBlinky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Blinky_eyes]
+        mov ax, [Blinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
 
@@ -125,15 +43,16 @@ section .text
     Display_Inky:
     ; display Inky and its eyes, according to current positions values
 
+        call AnimateInky
         mov bx, [strcInky + posX]
         mov ax, [strcInky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Inky]
+        mov ax, [strcInky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Inky_eyes]
+        mov ax, [Inky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
 
@@ -141,15 +60,17 @@ section .text
 
     Display_Pinky:
     ; display Pinky and its eyes, according to current positions values
+
+        call AnimatePinky
         mov bx, [strcPinky + posX]
         mov ax, [strcPinky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Pinky]
+        mov ax, [strcPinky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Pinky_eyes]
+        mov ax, [Pinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
 
@@ -158,15 +79,16 @@ section .text
     Display_Clyde:
     ; display Clyde and its eyes, according to current positions values
 
+        call AnimateClyde
         mov bx, [strcClyde + posX]
         mov ax, [strcClyde + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Clyde]
+        mov ax, [strcClyde + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Clyde_eyes]
+        mov ax, [Clyde_eyes]
         call calculate_spritesheet_position
         call draw_sprite
 

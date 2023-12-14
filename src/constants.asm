@@ -1,12 +1,14 @@
 struc Sprite
     posX: resw 1
     posY: resw 1
+    frame: resw 1
     absPos: resw 1
     velocityX: resw 1
     velocityY: resw 1
     direction: resb 1
     isChased: resb 1
     isDead: resb 1
+    
 endstruc
 
 %define PACMAN_START_X 160

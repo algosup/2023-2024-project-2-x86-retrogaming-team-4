@@ -13,6 +13,7 @@ jmp start
 %include "buffers.asm"
 %include "keyboard.asm"
 %include "move_sprites.asm"
+%include "animations.asm"
 %include "interraction.asm"
 
 section .text
