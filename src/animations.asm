@@ -3,10 +3,6 @@ section .data
     afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
     PacmanAnimationCounter dw 0
-    PinkyAnimationCounter dw 0
-    BlinkyAnimationCounter dw 0
-    InkyAnimationCounter dw 0
-    ClydeAnimationCounter dw 0
     GhostsAnimationCounter dw 0
     directionBuffer dw 0
 
@@ -16,18 +12,20 @@ section .text
         ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
 
         inc word [GhostsAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
+
         cmp  word [GhostsAnimationCounter], 0x6 ; check the timer
         jne .noAnimation
+
         mov word [GhostsAnimationCounter],0 ; reset the counter/timer
         jmp .toggle ; toogle the frames of ghosts
-
-        ret
 
         .toggle:
             call AnimatePinky
             call AnimateInky
             call AnimateBlinky
             call AnimateClyde
+
+        ret
 
         .noAnimation:
     
@@ -118,7 +116,6 @@ section .text
 
         mov cx , word[strcPacMan + velocityX] ; stops animation if pacman is stopped
         add cx , word[strcPacMan + velocityY]
-        
         cmp cx, 0
         je .pauseAnimation
 

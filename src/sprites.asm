@@ -74,7 +74,7 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        cmp word[strcInky + isChased], 1
+        cmp word[strcPinky + isChased], 1
         je .noEyes
         mov ax, [Pinky_eyes]
         call calculate_spritesheet_position
@@ -94,7 +94,7 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        cmp word[strcInky + isChased], 1
+        cmp word[strcClyde + isChased], 1
         je .noEyes
         mov ax, [Clyde_eyes]
         call calculate_spritesheet_position
@@ -113,7 +113,7 @@ section .text
         call draw_sprite
         pop dx
         call draw_sprite_bg_buffer
-        
+
         ret
 
     ClearPacMan:
