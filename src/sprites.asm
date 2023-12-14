@@ -16,15 +16,16 @@ section .data
 
     afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
 
-    animationCounter dw 0
-    directionBuffer dw 2
+    PacmanAnimationCounter dw 0
+    GhostsPacmanAnimationCounter dw 0
+    directionBuffer dw 0
 
 section .text
 
     AnimatePacMan:
     ; changes at least the orientation of the frame, and, if the timer is reached, it switchs to the second frame of the actual orientation.
         
-        inc word [animationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
+        inc word [PacmanAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
 
         mov bx, word[frameOf_PacMan] ; ax contain the id of the actual frame
         mov cl, 2
@@ -33,18 +34,32 @@ section .text
         mul cl
         add ax, 16 ; ax contains the id of the frame "..._1" (the first) of the direction of pacman
 
-        cmp  word [animationCounter], 0x6 ; check the timer
+        mov cx , word[strcPacMan + velocityX] ; stops animation if pacman is stopped
+        add cx , word[strcPacMan + velocityY]
+        
+        cmp cx, 0
+        je .pauseAnimation
+
+        cmp  word [PacmanAnimationCounter], 0x6 ; check the timer
         jne .noAnimation
         
-        mov word [animationCounter],0 ; reset the counter/timer
+        mov word [PacmanAnimationCounter],0 ; reset the counter/timer
         call SwitchMouthOpening ; toogle the frame
 
         ret
 
         .noAnimation:
             call UpdateFrameOfPacman 
+
             ret
         
+        .pauseAnimation:
+            mov word [PacmanAnimationCounter],0
+            inc ax ; to have the closed mouth frame in ax
+            mov word[frameOf_PacMan],  ax
+
+            ret
+
 
     UpdateFrameOfPacman:
     ; just to change the direction if necessary, to have a reactive changing of orientation when a key is pressed
