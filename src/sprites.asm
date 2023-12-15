@@ -133,8 +133,9 @@ section .text
             xor edx, edx
             mov cx, 10 
             push eax          ; As eax contains the score, we need to preserve it
+            int3
             div cx ;Divides the score => 
-            mov [scoreUnit], edx ; reminder is stored in dx
+            mov [scoreUnit], ax ; reminder is stored in dx
             call displayUnit
             pop eax
             call .scoreLoop
@@ -145,68 +146,72 @@ section .text
         mov si, MazeSpriteSheet ;Load the spritesheet
         cmp word [scoreUnit], 0
         jne .notzero
-        add si, 15*64 ;Position on spritesheet
+        add si, 16*64 ;Position on spritesheet
         call .displayScoreOnScreen
 
         .notzero:
         cmp word [scoreUnit], 1
         jne .notone
-        add si, 16*64 ;Position on spritesheet
+        add si, 17*64 ;Position on spritesheet
         call .displayScoreOnScreen
-          
+
 
         .notone:
         cmp word [scoreUnit], 2
         jne .nottwo
-        add si, 17*64 ;Position on spritesheet
+        add si, 18*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .nottwo:
         cmp word [scoreUnit], 3
         jne .notthree
-        add si, 18*64 ;Position on spritesheet
+        add si, 19*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notthree:
         cmp word [scoreUnit], 4
         jne .notfour
-        add si, 19*64 ;Position on spritesheet
+        add si, 20*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notfour:
         cmp word [scoreUnit], 5
         jne .notfive
-        add si, 20*64 ;Position on spritesheet
+        add si, 21*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notfive:
         cmp word [scoreUnit], 6
         jne .notsix
-        add si, 21*64 ;Position on spritesheet
-        call .displayScoreOnScreen
-        
-
-        .notsix:
-        cmp word [scoreUnit], 6
-        jne .notseven
         add si, 22*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
-        .notseven:
-        cmp word [scoreUnit], 6
-        jne .noteight
+        .notsix:
+        cmp word [scoreUnit], 7
+        jne .notseven
         add si, 23*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
-        .noteight:
-        add si, 64 ;Position on spritesheet
+        .notseven:
+        cmp word [scoreUnit], 8
+        jne .noteight
+        add si, 24*64 ;Position on spritesheet
         call .displayScoreOnScreen
+        
+
+        .noteight:
+        cmp word [scoreUnit], 9
+        jne .notnine
+        add si, 25*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+        .notnine:
         ret
         
     
@@ -290,7 +295,7 @@ section .text
         push word [BackgroundBufferSegment]
         pop ds
         mov si, di      
-         
+        
         mov dx, SPRITE_SIZE
 
         .eachLine:
