@@ -74,6 +74,7 @@ endstruc
 %define PACMAN_DEATH_10 42
 %define DOT 43
 %define POWER_PELLET 44
+%define BLACK 45
 
 %define TILE_INTER 0
 %define TILE_OUT_TOP_LEFT_CORNER 1

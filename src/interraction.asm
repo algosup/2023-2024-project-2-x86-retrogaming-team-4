@@ -448,19 +448,13 @@ section .text
             cmp byte [lifeCounter], 5
             je .noNewLife
             inc byte [lifeCounter]
+            mov word [frameOf_Lives], PACMAN_LEFT_2
             call whereToDisplayLife
             call displayLives
         .noNewLife:
         ret
 
     whereToDisplayLife:
-        ; dec byte [lifeCounter]
-        ; mov bx, 4
-        ; sub bx, [lifeCounter]
-        ; inc byte [lifeCounter]
-        ; mov ax, TILE_SIZE*3
-        ; mul bx
-        ; add ax, 28*TILE_SIZE
         cmp byte [lifeCounter], 2
         jne .notTwo
             mov ax, 28*TILE_SIZE+3*3*TILE_SIZE

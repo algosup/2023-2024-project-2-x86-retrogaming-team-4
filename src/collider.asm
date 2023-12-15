@@ -150,6 +150,11 @@ section .text
 
         .normalContact:
 
+            mov word [frameOf_Lives], BLACK
+            call whereToDisplayLife
+            call displayLives
+            dec byte [lifeCounter]
+            
             call resetGame
 
         .notTouched:

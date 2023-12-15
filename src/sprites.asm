@@ -16,6 +16,8 @@ section .data
     frameOf_Inky dw INKY_1
     frameOf_Inky_eyes dw EYES_RIGHT
 
+    frameOf_Lives dw PACMAN_LEFT_2
+
 section .text
     
     Display_PacMan:
@@ -115,7 +117,7 @@ section .text
         mov ax, TILE_SIZE
         call calculate_screen_position
         push dx
-        mov ax, PACMAN_LEFT_2
+        mov ax, [frameOf_Lives]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx

@@ -30,9 +30,11 @@ section .text
         ;Set the maze
         call BuildBackgroundBuffer
 
-        resetPoint:
 
         call MazeToBGbuffer
+
+        resetPoint:
+
         call DisplayMaze
         call BuildMazeModelBuffer
         
