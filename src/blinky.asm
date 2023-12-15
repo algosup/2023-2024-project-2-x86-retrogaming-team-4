@@ -40,13 +40,12 @@ section .data
             at targetY, db 0
         iend
 
-    afterMoveTileX db 0
-    afterMoveTileY db 0
-
-    checkTileX db 0
-    checkTileY db 0
-    checkVelocityX db 0
-    checkVelocityY db 0
+    afterMoveTileX dw 0
+    afterMoveTileY dw 0
+    checkTileX dw 0
+    checkTileY dw 0
+    checkVelocityX dw 0
+    checkVelocityY dw 0
 
     bestDistance dw 0
     bestVelocityX dw 0
@@ -62,7 +61,7 @@ section .text
         ret
     
     moveBlinky:
-        mov di, strcBlinkyBehaviour
+        mov di, strcBlinky
         call moveGhost
 
         ; TODO
@@ -79,40 +78,28 @@ section .text
         mov [strcBlinky + velocityY], ax
 
         ; Initialize best distance, dx and dy
-        mov [bestDistance], 0xffff
-        mov [bestVelocityX], 0
-        mov [bestVelocityY], 0
+        mov word [bestDistance], 0xffff
+        mov word [bestVelocityX], 0
+        mov word [bestVelocityY], 0
 
         ; Check in all directions for the best tile
         ; TODO: Check for overflows (if check tile is outside the maze)
         ; TODO: Skip tile if the tile is in our back
         ; Check up
-        mov ax, [afterMoveTileX]
-        mov [checkTileX], ax
-        mov ax, [afterMoveTileY]
-        dec ax
-        mov [checkTileY], ax
+        mov word [checkVelocityX], 0
+        mov word [checkVelocityY], -1
         call checkTile
         ; Check left
-        mov ax, [afterMoveTileX]
-        dec ax
-        mov [checkTileX], ax
-        mov ax, [afterMoveTileY]
-        mov [checkTileY], ax
+        mov word [checkVelocityX], -1
+        mov word [checkVelocityY], 0
         call checkTile
         ; Check down
-        mov ax, [afterMoveTileX]
-        mov [checkTileX], ax
-        mov ax, [afterMoveTileY]
-        inc ax
-        mov [checkTileY], ax
+        mov word [checkVelocityX], 0
+        mov word [checkVelocityY], 1
         call checkTile
         ; Check right
-        mov ax, [afterMoveTileX]
-        inc ax
-        mov [checkTileX], ax
-        mov ax, [afterMoveTileY]
-        mov [checkTileY], ax
+        mov word [checkVelocityX], 1
+        mov word [checkVelocityY], 0
         call checkTile
 
         ; Set next velocities
@@ -125,16 +112,21 @@ section .text
 
     moveGhost:
         ; Move
-        add [di + posX], [di + velocityX]
-        add [di + posY], [di + velocityY]
+        mov ax, [di + posY]
+        add ax, [di + velocityY]
+        mov [di + posY], ax
+        mov ax, [di + posX]
+        add ax, [di + velocityX]
+        mov [di + posX], ax
     
         ; Calculate new tile position
         mov bx, TILE_SIZE
-        mov ax, [di + posX]
+        add ax, SPRITE_SIZE / 2
         xor dx, dx
         div bx
         mov [afterMoveTileX], ax
         mov ax, [di + posY]
+        add ax, SPRITE_SIZE / 2
         xor dx, dx
         div bx
         mov [afterMoveTileY], ax
@@ -144,15 +136,21 @@ section .text
         ret
     
     checkTile:
+        mov ax, [afterMoveTileX]
+        add ax, [checkVelocityX]
+        mov [checkTileX], ax
+        mov ax, [afterMoveTileY]
+        add ax, [checkVelocityY]
+        mov [checkTileY], ax
+
         ; Check if there is a wall
         xor dx, dx
-        mov ax, [checkTileY]
-        mov bx, SCREEN_TILE_WIDTH
+        mov bx, SCREEN_WIDTH / TILE_SIZE
         mul bx
         add ax, [checkTileX]
         mov [tileAbsPos], ax
         call isWall
-        cmp [isCollid], 1
+        cmp byte [isCollid], 1
         je .exit
 
         ; TODO: Return if tile is in our back
@@ -161,9 +159,12 @@ section .text
         cmp ax, [bestDistance]
         jae .exit ; The priorities have been defined above in case of equality
         mov [bestDistance], ax
-        mov [bestDistance], ax
-        .exit
+        mov ax, [checkVelocityX]
+        mov [bestVelocityX], ax
+        mov ax, [checkVelocityY]
+        mov [bestVelocityY], ax
 
+        .exit:
         ret
     
     calcDistance:

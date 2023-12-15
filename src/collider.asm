@@ -71,7 +71,6 @@ section .text
             mov cx, SPRITE_SIZE
             .eachPixel:
                 lodsb 
-                int3
                 cmp al, bl
                 je .touched
                 dec cx
@@ -123,8 +122,7 @@ section .text
 
         mov ax, [corner2X]
         mov bx, [corner2Y]
-
-X], ax
+        mov [checkedCornerX], ax
         mov [checkedCornerY], bx
         call getTileAbsPos
         call isWall
@@ -132,8 +130,7 @@ X], ax
         je .collision
 
         mov ax, [corner3X]
-
-
+        mov bx, [corner3Y]
         mov [checkedCornerX], ax
         mov [checkedCornerY], bx
         call getTileAbsPos
@@ -200,6 +197,7 @@ X], ax
 
     isWall:
     ; Check if the tile is a wall
+        mov byte [isCollid], 0
 
         ;Read the chosen tile in the maze table
         mov si, MazeModel
