@@ -11,6 +11,9 @@ struc Sprite
     
 endstruc
 
+%define FRAMES_COUNTER_PACMAN_ANIMATION 3
+%define FRAMES_COUNTER_GHOSTS_ANIMATION 6
+
 %define PACMAN_START_X 160
 %define PACMAN_START_Y 132
 %define FRUIT_TILE_POS 697

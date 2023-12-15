@@ -8,6 +8,7 @@ section .data
     afraidBlinker db 0
 
     PacmanDeathCounter dw PACMAN_DEATH_1 - 1
+    PacmanFrameBuffer dw PACMAN_RIGHT_2
 
 section .text
 
@@ -16,7 +17,7 @@ section .text
 
         inc word [GhostsAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
 
-        cmp  word [GhostsAnimationCounter], 0x6 ; check the timer
+        cmp  word [GhostsAnimationCounter], FRAMES_COUNTER_GHOSTS_ANIMATION ; check the timer
         jne .noAnimation
 
         mov word [GhostsAnimationCounter],0 ; reset the counter/timer
@@ -135,7 +136,7 @@ section .text
         cmp cx, 0
         je .pauseAnimation
 
-        cmp  word [PacmanAnimationCounter], 0x6 ; check the timer
+        cmp  word [PacmanAnimationCounter], FRAMES_COUNTER_PACMAN_ANIMATION ; check the timer
         jne .noAnimation
         
         mov word [PacmanAnimationCounter],0 ; reset the counter/timer
@@ -152,6 +153,7 @@ section .text
             mov word [PacmanAnimationCounter],0
             inc ax ; to have the closed mouth frame in ax
             mov word[strcPacMan + frame],  ax
+            mov word[PacmanFrameBuffer], PACMAN_FULL
 
         ret
 
@@ -167,23 +169,38 @@ section .text
         .changeDirection:
             mov word[strcPacMan + frame],  ax
             mov word [directionBuffer], dx
+            mov word[PacmanFrameBuffer], PACMAN_FULL
 
         ret
 
     SwitchMouthOpening:
     ; just toogles the frame of pacman if opened -> closed, and the reverse
+        int3
+        cmp bx, PACMAN_FULL
+        je .toSlightlyClosed
 
-        cmp ax, bx ; checks if the actual frame is the '_1'
-        je .toSecondFrame
+        inc ax
+        cmp ax, bx ; checks if the actual frame is the '_2'
+        je .toOpenedOrCLosed
+        
 
-        mov word[strcPacMan + frame],  ax ; as the frame loaded in ax was the first one
-
+        .toSlightlyClosed:
+        
+            mov word[strcPacMan + frame], ax
+            mov word[PacmanFrameBuffer], bx
         ret
 
-        .toSecondFrame:
-            inc ax ; as the frame loaded in ax was the first one
-            mov word[strcPacMan + frame],  ax
+        .toOpenedOrCLosed:
+            dec ax
+            cmp word[PacmanFrameBuffer], ax
+            je .fullFrame
+            mov word[strcPacMan + frame], ax
+            mov word[PacmanFrameBuffer], bx
+        ret
 
+        .fullFrame:
+            mov word[strcPacMan + frame], PACMAN_FULL
+            mov word[PacmanFrameBuffer], bx
         ret
 
     PacmanDeathAnimation:

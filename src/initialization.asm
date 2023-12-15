@@ -80,7 +80,7 @@ section .text
 
       mov word [strcPacMan + posX], PACMAN_START_X
       mov word [strcPacMan + posY], PACMAN_START_Y
-      mov word [strcPacMan + frame], PACMAN_RIGHT_2
+      mov word [strcPacMan + frame], PACMAN_FULL
       call Display_PacMan
 
       ret
