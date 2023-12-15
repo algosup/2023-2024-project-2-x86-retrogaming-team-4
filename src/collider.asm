@@ -153,7 +153,7 @@ section .text
             mov word [strcPinky + isChased], 0
             mov word [strcInky + isChased], 0
             mov word [strcClyde + isChased], 0
-            call resetGame
+            mov word [strcPacMan + isDead], 1
 
         .notTouched:
         

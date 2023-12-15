@@ -6,6 +6,7 @@ section .bss
 section .data
 
     timestamp_of_next_frame dd 0, 0 ; timestamp of the next frame
+    timerDeathPacMan dw 0
 
    
 section .text
@@ -134,3 +135,18 @@ section .text
       int 21h
 
       ret
+   
+   checkDeath:
+      cmp word[strcPacMan + isDead], 1
+      je .death
+      ret
+      .death:
+         call DisplayMaze
+         inc word[timerDeathPacMan]
+         cmp word[timerDeathPacMan], 0x3
+         jne .NOTloadAnimation
+         call PacmanDeathAnimation
+         call Display_PacMan
+         
+         .NOTloadAnimation:
+         ret

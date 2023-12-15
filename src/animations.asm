@@ -5,6 +5,9 @@ section .data
     PacmanAnimationCounter dw 0
     GhostsAnimationCounter dw 0
     directionBuffer dw 0
+    afraidBlinker db 0
+
+    PacmanDeathCounter dw PACMAN_DEATH_1 - 1
 
 section .text
 
@@ -54,10 +57,23 @@ section .text
         ret
 
         .afraid:
+            cmp bx, AFRAID_4
+            je .noBlinker
+            mov edx, [endFrightTime]
+            sub edx, [timestamp_of_next_frame] ; edx contains the lefting time
+            cmp edx, 6000000 ; if , here, ax = 112, it's that eax was at 18 000 000 = 6 sec
+            jle .whiteAfraid
+            
+            .noBlinker:
             mov ax, bx
             cmp ax, AFRAID_1
             je .toSecondAfraidFrame
             mov word bx, AFRAID_1
+
+        ret
+
+            .whiteAfraid:
+                mov word bx, AFRAID_4
 
         ret
 
@@ -168,4 +184,19 @@ section .text
             inc ax ; as the frame loaded in ax was the first one
             mov word[strcPacMan + frame],  ax
 
+        ret
+
+    PacmanDeathAnimation:
+        
+        cmp word[PacmanDeathCounter], PACMAN_DEATH_10
+        jge .end
+        inc word[PacmanDeathCounter]
+        mov cx, word[PacmanDeathCounter]
+        mov word[strcPacMan + frame] , cx
+        mov word[timerDeathPacMan], 0
+        ret
+        .end:
+        mov word[PacmanDeathCounter], PACMAN_DEATH_1 - 1
+        mov word[strcPacMan + isDead], 0
+        call resetGame
         ret

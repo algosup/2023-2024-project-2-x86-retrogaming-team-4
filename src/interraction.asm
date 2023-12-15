@@ -352,7 +352,7 @@ section .text
         mov byte[strcClyde + isChased], 1
         mov byte[strcPacMan + isChased], 0
         mov eax, [timestamp_of_next_frame]
-        add eax, 18000000
+        add eax, 24000000 ; 8 sec (6 sec blue + 2 sec White/blue)
         mov [endFrightTime], eax
         
         ret
@@ -414,7 +414,6 @@ section .text
         cmp eax, [endFruitTime]
         jne .stillFruitTime
 
-        int3
         mov si, MazeModelBuffer
         add si, FRUIT_TILE_POS
         mov byte[si], 0x0F

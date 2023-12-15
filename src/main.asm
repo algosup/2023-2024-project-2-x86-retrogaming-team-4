@@ -56,6 +56,11 @@ section .text
 ;-------------------------------------------------
         
         call waitLoop
+
+        call checkDeath
+        cmp word[strcPacMan + isDead], 1
+        je .skipForDeath
+
         call checkFrightTime
         
         ;clear All the moving sprites 
@@ -76,7 +81,6 @@ section .text
         call changeInkyPosition
         call changeClydePosition
         
-        
 
         call AnimatePacMan
         call AnimateGhosts
@@ -87,6 +91,7 @@ section .text
         call Display_Blinky
         call Display_Inky
         call Display_Clyde
+        .skipForDeath:
         call Display_PacMan
 
         ;read if a ghost hit pacman or the reverse
@@ -96,7 +101,7 @@ section .text
         ;display fruits
         call setFruits
         call checkFruitPrint
-
+        
         ;display all on the real screen (quick)
         call UpdateScreen
         
