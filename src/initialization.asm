@@ -147,6 +147,13 @@ section .text
          jne .NOTloadAnimation
          call PacmanDeathAnimation
          call Display_PacMan
+         cmp word[strcPacMan + isDead], 0
+         je .resetGame
          
          .NOTloadAnimation:
          ret
+
+         .resetGame:
+            mov word[PacmanDeathCounter], PACMAN_DEATH_1-1
+            call resetGame
+            ret

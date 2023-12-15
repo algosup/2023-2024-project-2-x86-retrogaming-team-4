@@ -58,6 +58,7 @@ section .text
         call waitLoop
 
         call checkDeath
+        
         cmp word[strcPacMan + isDead], 1
         je .skipForDeath
 

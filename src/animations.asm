@@ -196,7 +196,7 @@ section .text
         mov word[timerDeathPacMan], 0
         ret
         .end:
-        mov word[PacmanDeathCounter], PACMAN_DEATH_1 - 1
+        mov word[timerDeathPacMan], 0
         mov word[strcPacMan + isDead], 0
-        call resetGame
+        
         ret
