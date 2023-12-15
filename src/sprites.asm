@@ -109,6 +109,19 @@ section .text
         call draw_sprite_bg_buffer
         ret
 
+    displayLives:
+    ; display the lives according to the current position values
+        mov bx, [livesPosX]
+        mov ax, TILE_SIZE
+        call calculate_screen_position
+        push dx
+        mov ax, PACMAN_LEFT_2
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        call draw_sprite_bg_buffer
+        ret
+
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 

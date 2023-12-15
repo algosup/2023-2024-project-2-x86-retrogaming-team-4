@@ -55,6 +55,7 @@ section .text
         
         call waitLoop
         call checkFrightTime
+        call lifeManagement
         
         ;clear All the moving sprites 
         call ClearPinky        
