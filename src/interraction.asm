@@ -132,7 +132,7 @@ section .text
     isPowerPellet:
         ; increment score
         add word[score], 50
-        add word[scoreForLife], 10000
+        add word[scoreForLife], 50
         call frightTime
         call setTileEmpty
 
