@@ -75,7 +75,7 @@ section .text
         
         call readKeyboard
         
-
+        call GhostsSpeedUpdate
         ; move the ghosts according to the defined velocity of each one
         call changePinkyPosition
         call changeBlinkyPosition

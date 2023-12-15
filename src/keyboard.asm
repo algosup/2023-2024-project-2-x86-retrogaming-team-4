@@ -114,7 +114,10 @@ section .text
         cmp byte[si], 0x04
         je .NoLeft
 
-        mov word[strcPacMan + velocityX], -1
+        mov dx, word[speeeed]
+        neg dx
+
+        mov word[strcPacMan + velocityX], dx
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], LEFT_DIRECTION
         call changePacManPosition
@@ -205,7 +208,9 @@ section .text
         cmp byte[si], 0x01
         je .NoRight
 
-        mov word[strcPacMan + velocityX], 1
+        mov dx, word[speeeed]
+
+        mov word[strcPacMan + velocityX], dx
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], RIGHT_DIRECTION
         call changePacManPosition
@@ -296,8 +301,11 @@ section .text
         cmp byte[si], 0x04
         je .NoUp
 
+        mov dx, word[speeeed]
+        neg dx
+
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], -1
+        mov word[strcPacMan + velocityY], dx
         mov word[strcPacMan + direction], UP_DIRECTION
         call changePacManPosition
         inc byte[keyChanged]
@@ -387,8 +395,10 @@ section .text
         cmp byte[si], 0x02
         je .NoDown
         
+        mov dx, word[speeeed]
+        
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], 1
+        mov word[strcPacMan + velocityY], dx
         mov word[strcPacMan + direction], DOWN_DIRECTION
         call changePacManPosition
         inc byte[keyChanged]
