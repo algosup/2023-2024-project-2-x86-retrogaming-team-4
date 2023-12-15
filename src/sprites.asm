@@ -17,6 +17,7 @@ section .data
     frameOf_Inky_eyes dw EYES_RIGHT
 
     currentDisplayedScoreUnit: db 0
+    numberPositionInSpritesheet: dw 0
 
 section .text
     
@@ -119,28 +120,99 @@ section .text
 
     .notZeroDisplayScore:
         xor edx, edx
-        mov cx, 10
+        int3
+        mov cx, 10 
+        push eax          ; As eax contains the score, we need to preserve it
         div cx ;Divides the score => 
-        mov [scoreUnit], dx ; reminder is stored in dx
-        push eax ; As eax contains the score, we need to preserve it
+        mov [scoreUnit], edx ; reminder is stored in dx
         call displayUnit
         pop eax
         call .scoreLoop
         ret
 
 
-    displayUnit:
-        ; mov ax, [scoreUnit]
-        ; mov bx, [currentDisplayedScoreUnit]
-        ; cmp ax, 0
-        ; mov ax, 16
-        ; mov bx, 172
-        ; call calculate_screen_position
+    displayUnit: ;ax usable to store data
         mov si, MazeSpriteSheet ;Load the spritesheet
+        cmp word [scoreUnit], 0
+        jne .notzero
+        add si, 15*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+
+        .notzero:
+        cmp word [scoreUnit], 1
+        jne .notone
+        add si, 16*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+          
+
+        .notone:
+        cmp word [scoreUnit], 2
+        jne .nottwo
+        add si, 17*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .nottwo:
+        cmp word [scoreUnit], 3
+        jne .notthree
+        add si, 18*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notthree:
+        cmp word [scoreUnit], 4
+        jne .notfour
+        add si, 19*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notfour:
+        cmp word [scoreUnit], 5
+        jne .notfive
+        add si, 20*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notfive:
+        cmp word [scoreUnit], 6
+        jne .notsix
         add si, 21*64 ;Position on spritesheet
-        mov di, 16*SCREEN_WIDTH+17*8 ; Place to display
-        call draw_tile ;Draw the score unit
+        call .displayScoreOnScreen
+        
+
+        .notsix:
+        cmp word [scoreUnit], 6
+        jne .notseven
+        add si, 22*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notseven:
+        cmp word [scoreUnit], 6
+        jne .noteight
+        add si, 23*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .noteight:
+        add si, 64 ;Position on spritesheet
+        call .displayScoreOnScreen
         ret
+        
+    
+        .displayScoreOnScreen:
+            ; mov bh, [currentDisplayedScoreUnit]
+            ; mov bl, 22
+            ; sub bl, bh
+            ; mov al, bl
+            ; mov bl, 8
+            ; mul bl
+            ; mov si, ax
+            mov di, 16*SCREEN_WIDTH+ 22*8 ; Place to display
+            ; add di, ax
+            call draw_tile ;Draw the score unit
+        ret
+        
     
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions

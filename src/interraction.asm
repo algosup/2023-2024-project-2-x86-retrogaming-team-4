@@ -4,7 +4,7 @@ section .data
     pacManCenterX: dw 0
     pacManCenterY: dw 0
     score: dw 0
-    scoreUnit: dw 0
+    scoreUnit: dd 0
     endFrightTime: dd 0, 0
 
 section .text
