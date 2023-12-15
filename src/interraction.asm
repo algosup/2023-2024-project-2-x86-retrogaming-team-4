@@ -38,6 +38,7 @@ section .text
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
+
         ;compare the tile to the pellet
         cmp byte[si], 0x0D
         je .pellet    
@@ -68,6 +69,7 @@ section .text
 
         cmp byte[si], 0x16
         je .key
+
         
         .erase:
             xor ax, ax
@@ -124,15 +126,8 @@ section .text
     isPellet:
         ; increment score
         add word[score], 10
-
-        ; get the tile at pacman's position
-        mov si, MazeModelBuffer
-        add si, [pacManTilePos]
-
-        ; set the tile to empty
-        mov byte[si], 0x0F
-        xor ax, ax
-        xor bx, bx
+        inc word[pelletEaten]
+        call setTileEmpty
 
         ret
 
@@ -140,14 +135,8 @@ section .text
         ; increment score
         add word[score], 50
 
-        ; get the tile at pacman's position
-        mov si, MazeModelBuffer
-        add si, [pacManTilePos]
-
-        ; set the tile to empty
-        mov byte[si], 0x0F
-        xor ax, ax
-        xor bx, bx
+        call frightTime
+        call setTileEmpty
 
         ret
     
@@ -437,7 +426,6 @@ section .text
         cmp eax, [endFruitTime]
         jne .stillFruitTime
 
-        int3
         mov si, MazeModelBuffer
         add si, FRUIT_TILE_POS
         mov byte[si], 0x0F

@@ -131,7 +131,6 @@ section .text
 
         .notZeroDisplayScore:
             xor edx, edx
-            int3
             mov cx, 10 
             push eax          ; As eax contains the score, we need to preserve it
             div cx ;Divides the score => 
