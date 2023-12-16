@@ -436,7 +436,7 @@ section .text
 
     lifeManagement: 
         cmp word[scoreForLife], 10000
-        jl .noNewLife
+        jb .noNewLife
             mov word[scoreForLife], 0
             cmp byte [lifeCounter], 5
             je .noNewLife
