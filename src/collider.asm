@@ -40,7 +40,7 @@ section .text
             mov word [strcPinky  + posX], 160
             mov word [strcPinky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Pinky], PINKY_1
+            mov word [strcPinky + frame], PINKY_1
             mov byte [strcPinky + isChased], 0
             call Display_Pinky
         .noGhostCollision:
@@ -58,7 +58,7 @@ section .text
             mov word [strcBlinky  + posX], 160
             mov word [strcBlinky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Blinky], BLINKY_1
+            mov word [strcBlinky + frame], BLINKY_1
             mov byte [strcBlinky + isChased], 0
             call Display_Blinky
         .noGhostCollision:
@@ -76,7 +76,7 @@ section .text
             mov word [strcInky  + posX], 160
             mov word [strcInky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Inky], INKY_1
+            mov word [strcInky + frame], INKY_1
             mov byte [strcInky + isChased], 0
             call Display_Inky
         .noGhostCollision:
@@ -94,7 +94,7 @@ section .text
             mov word [strcClyde  + posX], 160
             mov word [strcClyde  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Clyde], CLYDE_1
+            mov word [strcClyde + frame], CLYDE_1
             mov byte [strcClyde + isChased], 0
             call Display_Clyde
         .noGhostCollision:
@@ -149,8 +149,11 @@ section .text
             jmp .notTouched
 
         .normalContact:
-
-            call resetGame
+            mov word [strcBlinky + isChased], 0
+            mov word [strcPinky + isChased], 0
+            mov word [strcInky + isChased], 0
+            mov word [strcClyde + isChased], 0
+            mov word [strcPacMan + isDead], 1
 
         .notTouched:
         

@@ -1,12 +1,18 @@
 struc Sprite
     posX: resw 1
     posY: resw 1
+    frame: resw 1
     absPos: resw 1
     velocityX: resw 1
     velocityY: resw 1
+    direction: resb 1
     isChased: resb 1
     isDead: resb 1
+    
 endstruc
+
+%define FRAMES_COUNTER_PACMAN_ANIMATION 3
+%define FRAMES_COUNTER_GHOSTS_ANIMATION 6
 
 %define PACMAN_START_X 160
 %define PACMAN_START_Y 132
@@ -29,10 +35,17 @@ endstruc
 %define RIGHT_KEY_SCANCODE 4dh
 %define EXIT_KEY_SCANCODE 01h
 
+
+%define RIGHT_DIRECTION 0
+%define    UP_DIRECTION 1
+%define  LEFT_DIRECTION 2
+%define  DOWN_DIRECTION 3
+
+
 %define BLINKY_1 0
 %define BLINKY_2 1
 %define PINKY_1 2
-%define PINK_2 3
+%define PINKY_2 3
 %define INKY_1 4
 %define INKY_2 5
 %define CLYDE_1 6
@@ -152,8 +165,8 @@ endstruc
 %define CCPS 3000000
 %define FPS 24
 
-; Clock percision is in µs
-%define PERIOD CCPS / FPS
+; Clock percision is in µs , here a periode (timelapse beetween 2 frame update) is equal to aproximately 42 ms (1/24th second)
+%define PERIOD CCPS / FPS 
 
 
 section .data 
