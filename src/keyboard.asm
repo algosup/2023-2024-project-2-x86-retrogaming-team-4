@@ -164,8 +164,10 @@ section .text
         mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], LEFT_DIRECTION
+        
         call changePacManPosition
         inc byte[keyChanged]
+
         .NoLeft:
         mov byte[jumpNoLeft], 0
 
@@ -201,8 +203,10 @@ section .text
         mov word[strcPacMan + velocityX], 1
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], RIGHT_DIRECTION
+
         call changePacManPosition
         inc byte[keyChanged]
+
         .NoRight:
         mov byte[jumpNoRight], 0
 
@@ -237,8 +241,10 @@ section .text
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], -1
         mov word[strcPacMan + direction], UP_DIRECTION
+
         call changePacManPosition
         inc byte[keyChanged]
+
         .NoUp:
         mov byte[jumpNoUp], 0
 
@@ -275,8 +281,10 @@ section .text
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], 1
         mov word[strcPacMan + direction], DOWN_DIRECTION
+
         call changePacManPosition
         inc byte[keyChanged]
+
         .NoDown:
             mov byte[jumpNoDown], 0
             cmp byte [keyChanged], 0

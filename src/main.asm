@@ -75,10 +75,10 @@ section .text
         call ClearPacMan 
         
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
-        
+         call GhostsSpeedUpdate
         call readKeyboard
         
-        call GhostsSpeedUpdate
+       
         ; move the ghosts according to the defined velocity of each one
         call changePinkyPosition
         call changeBlinkyPosition

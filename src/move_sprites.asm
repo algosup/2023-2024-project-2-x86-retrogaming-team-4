@@ -67,41 +67,18 @@ section .data
     pacManNextPosX dw 0
     pacManNextPosY dw 0
 
-    ghosts_base_pixel_speed dw 0
-    frames_per_speed_cycle dw 0
-    base_frames dw 0
-    dopped_Frames dw 0
-    frames_repetition_cycle dw 0
-    speeeed dw 0
+    Speed_Pixels dw 1
 
 section .text
-
-    GhostsSpeedDefinition:
-    ; set the variables to set the speed wanted  : 
-    ; dx = the percentage of the speed wanted (100% = 10 pixels/frame)
-
-        mov ah , MAXIMUM_SPEED_PIXELS
-        mov al , GHOSTS_SPEED_PERCENT
-        ; contains the minimum of pixels to move
-        ; contains how many frames in a cycle of control (the number of frames on which we chosse if we add 1 or not pixel to the base)
-        ; contains the number of frames which will have a pixel more in the movement
-        ; contains the number of frames which won't have a pixel more in the movement
-        ; contains the maximum interval of frames in the cycle between a dopped and a base pixels speed
     
     GhostsSpeedUpdate:
 
-        inc word [dopped_Frames] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
-
-        cmp word [dopped_Frames], 0 ; check the timer
-        jne .noAnimation
-
-        mov word [dopped_Frames], 0
-            mov word[speeeed], 1
-        
+        cmp word[Speed_Pixels], 1
+        je .to2speed
+        dec word[Speed_Pixels]
         ret
-
-        .noAnimation:
-            mov word[speeeed], 2
+        .to2speed:
+        inc word[Speed_Pixels]
         ret
 
     changePacManPosition:
