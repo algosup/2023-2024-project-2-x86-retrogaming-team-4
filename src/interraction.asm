@@ -364,12 +364,9 @@ section .text
         mov byte[strcClyde + isChased], 1
         mov byte[strcPacMan + isChased], 0
         mov eax, [timestamp_of_next_frame]
-        add eax, 18000000
+        add eax, 24000000 ; 8 sec (6 sec blue + 2 sec White/blue)
         mov [endFrightTime], eax
-        mov word [frameOf_Blinky], AFRAID_1
-        mov word [frameOf_Inky], AFRAID_1
-        mov word [frameOf_Pinky], AFRAID_1
-        mov word [frameOf_Clyde], AFRAID_1
+        
         ret
 
     checkFrightTime:
@@ -377,10 +374,6 @@ section .text
         cmp eax, [endFrightTime]
         jne .stillFrightTime
             mov byte[strcBlinky + isChased], 0
-            mov word [frameOf_Blinky], BLINKY_1
-            mov word [frameOf_Inky], INKY_1
-            mov word [frameOf_Pinky], PINKY_1
-            mov word [frameOf_Clyde], CLYDE_1
             mov byte[strcInky + isChased], 0
             mov byte[strcPinky + isChased], 0
             mov byte[strcClyde + isChased], 0

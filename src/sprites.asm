@@ -1,33 +1,25 @@
 section .data
 
-    frameOf_PacMan dw PACMAN_RIGHT_2
+    Blinky_eyes dw 0
 
-    afraid dw 0 ;   0 : normal ghost animation,  1 : afraid ghost animation
+    Pinky_eyes dw 0
 
-    frameOf_Blinky dw BLINKY_1
-    frameOf_Blinky_eyes dw EYES_RIGHT
+    Clyde_eyes dw 0
 
-    frameOf_Pinky dw PINKY_1
-    frameOf_Pinky_eyes dw EYES_RIGHT
-
-    frameOf_Clyde dw CLYDE_1
-    frameOf_Clyde_eyes dw EYES_RIGHT
-
-    frameOf_Inky dw INKY_1
-    frameOf_Inky_eyes dw EYES_RIGHT
+    Inky_eyes dw 0
 
     frameOf_Lives dw PACMAN_LEFT_2
 
 section .text
-    
+
     Display_PacMan:
     ; display PacMan according to current positions values
-
+    
         mov bx, [strcPacMan + posX]
         mov ax, [strcPacMan + posY]
         call calculate_screen_position
-
-        mov ax, [frameOf_PacMan]
+        
+        mov ax, [strcPacMan + frame]
         call calculate_spritesheet_position
         call draw_sprite
 
@@ -35,18 +27,21 @@ section .text
 
     Display_Blinky:
     ; display Blinky and its eyes, according to current positions values
-
+       
         mov bx, [strcBlinky + posX]
         mov ax, [strcBlinky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Blinky]
+        mov ax, [strcBlinky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Blinky_eyes]
+        cmp word[strcBlinky + isChased], 1
+        je .noEyes
+        mov ax, [Blinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
@@ -57,29 +52,36 @@ section .text
         mov ax, [strcInky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Inky]
+        mov ax, [strcInky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Inky_eyes]
+        cmp word[strcInky + isChased], 1
+        je .noEyes
+        mov ax, [Inky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
 
     Display_Pinky:
     ; display Pinky and its eyes, according to current positions values
+
         mov bx, [strcPinky + posX]
         mov ax, [strcPinky + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Pinky]
+        mov ax, [strcPinky + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Pinky_eyes]
+        cmp word[strcPinky + isChased], 1
+        je .noEyes
+        mov ax, [Pinky_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
@@ -90,18 +92,22 @@ section .text
         mov ax, [strcClyde + posY]
         call calculate_screen_position
         push dx
-        mov ax, [frameOf_Clyde]
+        mov ax, [strcClyde + frame]
         call calculate_spritesheet_position
         call draw_sprite
         pop dx
-        mov ax, [frameOf_Clyde_eyes]
+        cmp word[strcClyde + isChased], 1
+        je .noEyes
+        mov ax, [Clyde_eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
 
         ret
     
     displayFruit:
     ; display the fruit according to its current position values
+
         mov ax, [fruitSprite]
         call calculate_spritesheet_position
         mov dx, FRUIT_POS_X + FRUIT_POS_Y
@@ -109,6 +115,7 @@ section .text
         call draw_sprite
         pop dx
         call draw_sprite_bg_buffer
+
         ret
 
     displayLives:
