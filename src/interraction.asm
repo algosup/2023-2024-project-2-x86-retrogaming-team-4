@@ -4,6 +4,9 @@ section .data
     pacManCenterX: dw 0
     pacManCenterY: dw 0
     score: dw 0
+    scoreForLife: dw 0
+    lifeCounter: db 3
+    livesPosX: dw 0
     pelletEaten: dw 0
     endFrightTime: dd 0, 0
     endFruitTime: dd 0, 0
@@ -120,6 +123,7 @@ section .text
     isPellet:
         ; increment score
         add word[score], 10
+        add word[scoreForLife], 10
         inc word[pelletEaten]
         call setTileEmpty
 
@@ -128,7 +132,7 @@ section .text
     isPowerPellet:
         ; increment score
         add word[score], 50
-
+        add word[scoreForLife], 50
         call frightTime
         call setTileEmpty
 
@@ -137,6 +141,7 @@ section .text
     isCherry:
         ; increment score
         add word[score], 200
+        add word[scoreForLife], 200
         call setTileEmpty
 
         ret
@@ -145,6 +150,7 @@ section .text
         
         ; increment score
         add word[score], 300
+        add word[scoreForLife], 300
         call setTileEmpty
 
         ret
@@ -152,6 +158,7 @@ section .text
     isOrange:
         ; increment score
         add word[score], 500
+        add word[scoreForLife], 500
         call setTileEmpty
 
         ret
@@ -159,6 +166,7 @@ section .text
     isApple:
         ; increment score
         add word[score], 700
+        add word[scoreForLife], 700
         call setTileEmpty
 
         ret
@@ -166,6 +174,7 @@ section .text
     isMelon:
         ; increment score
         add word[score], 1000
+        add word[scoreForLife], 1000
         call setTileEmpty
 
         ret
@@ -173,6 +182,7 @@ section .text
     isGalaxianFlagship	:
         ; increment score
         add word[score], 2000
+        add word[scoreForLife], 2000
         call setTileEmpty
 
         ret
@@ -180,6 +190,7 @@ section .text
     isBell:
         ; increment score
         add word[score], 3000
+        add word[scoreForLife], 3000
         call setTileEmpty
 
         ret
@@ -187,6 +198,7 @@ section .text
     isKey:
         ; increment score
         add word[score], 5000
+        add word[scoreForLife], 5000
         call setTileEmpty
 
         ret
@@ -420,4 +432,43 @@ section .text
         call replaceFruit
 
         .stillFruitTime:
+        ret
+
+    lifeManagement: 
+        cmp word[scoreForLife], 10000
+        jb .noNewLife
+            mov word[scoreForLife], 0
+            cmp byte [lifeCounter], 5
+            je .noNewLife
+            inc byte [lifeCounter]
+            mov word [frameOf_Lives], PACMAN_LEFT_2
+            call whereToDisplayLife
+            call displayLives
+        .noNewLife:
+        ret
+
+    whereToDisplayLife:
+        cmp byte [lifeCounter], 2
+        jne .notTwo
+            mov ax, 28*TILE_SIZE+3*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notTwo:
+
+        cmp byte [lifeCounter], 3
+        jne .notThree
+            mov ax, 28*TILE_SIZE+2*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notThree:
+
+        cmp byte [lifeCounter], 4
+        jne .notFour
+            mov ax, 28*TILE_SIZE+1*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notFour:
+
+        mov ax, 28*TILE_SIZE
+        mov [livesPosX], ax
         ret

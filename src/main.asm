@@ -32,9 +32,11 @@ section .text
         ;Set the maze
         call BuildBackgroundBuffer
 
-        resetPoint:
 
         call MazeToBGbuffer
+
+        resetPoint:
+
         call DisplayMaze
         call BuildMazeModelBuffer
         
@@ -63,6 +65,7 @@ section .text
         je .skipForDeath
 
         call checkFrightTime
+        call lifeManagement
         
         ;clear All the moving sprites 
         call ClearPinky        

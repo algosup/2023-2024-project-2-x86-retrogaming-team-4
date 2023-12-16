@@ -149,6 +149,13 @@ section .text
             jmp .notTouched
 
         .normalContact:
+
+            mov word [frameOf_Lives], BLACK
+            call whereToDisplayLife
+            call displayLives
+            dec byte [lifeCounter]
+            
+            call resetGame
             mov word [strcBlinky + isChased], 0
             mov word [strcPinky + isChased], 0
             mov word [strcInky + isChased], 0

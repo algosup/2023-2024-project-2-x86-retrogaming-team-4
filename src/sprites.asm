@@ -8,6 +8,8 @@ section .data
 
     Inky_eyes dw 0
 
+    frameOf_Lives dw PACMAN_LEFT_2
+
 section .text
 
     Display_PacMan:
@@ -114,6 +116,19 @@ section .text
         pop dx
         call draw_sprite_bg_buffer
 
+        ret
+
+    displayLives:
+    ; display the lives according to the current position values
+        mov bx, [livesPosX]
+        mov ax, TILE_SIZE
+        call calculate_screen_position
+        push dx
+        mov ax, [frameOf_Lives]
+        call calculate_spritesheet_position
+        call draw_sprite
+        pop dx
+        call draw_sprite_bg_buffer
         ret
 
     ClearPacMan:
