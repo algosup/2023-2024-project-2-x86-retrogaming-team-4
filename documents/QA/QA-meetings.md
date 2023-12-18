@@ -113,3 +113,25 @@ The team is expected to implement the optimized code commenting practices discus
 ### After-Consequences:
 The identified branches have been successfully deleted. The "maze" branch has been updated to align with the latest codebase. Code sanitization efforts are underway, emphasizing meaningful comments and improved variable naming. The team is committed to adhering to naming conventions and organizing code more systematically. The two-reviewer system for pull requests in the main and dev branches has been implemented, involving 1 QA and either the project manager or the tech leader. The merging of entry.asm and main.asm has contributed to a more cohesive codebase. These actions collectively aim to enhance code quality and collaboration within the development team.
 
+# 5. QA Team 5-Minute Meeting 
+
+## Meeting Date and Time: 2023-12-14 10:00 AM
+
+## Objective: Code Sanitization
+
+### Content:
+- **Features added**
+  - Fruits
+  - Sprite animations
+  - Life processing and display
+- **Features in progress**
+  - Ghost AI
+  - Sound
+  - Level progression
+  - Score display
+- Developers are struggling with the score display.
+- Ghost AI is not yet functional but is in progress.
+- Developers start to be tired but still work hard.
+### After-Consequences:
+The project is coming to an end, options are quickly added due to the good basic structure of the project.
+
