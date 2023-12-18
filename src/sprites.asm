@@ -197,7 +197,7 @@ section .text
         push word [BackgroundBufferSegment]
         pop ds
         mov si, di      
-         
+
         mov dx, SPRITE_SIZE
 
         .eachLine:
@@ -243,7 +243,6 @@ section .text
             mov di, bx
             mov ah, 0
 
-            
             .writeTheTile:
                 ;set the source 'al' : the background color
                 mov al, BACKGROUND_COLOR

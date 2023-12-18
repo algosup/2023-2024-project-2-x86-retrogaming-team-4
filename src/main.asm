@@ -73,7 +73,7 @@ section .text
         call ClearInky
         call ClearClyde
         call ClearPacMan 
-        
+        call AnimatePowerPellet
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
         
         call readKeyboard
@@ -85,6 +85,7 @@ section .text
         call changeInkyPosition
         call changeClydePosition
         
+
 
         call AnimatePacMan
         call AnimateGhosts

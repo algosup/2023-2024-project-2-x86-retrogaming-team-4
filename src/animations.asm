@@ -10,10 +10,13 @@ section .data
     PacmanDeathCounter dw PACMAN_DEATH_1 - 1
     PacmanFrameBuffer dw PACMAN_RIGHT_2
 
+    ArePowerPelletsDisplayed dw 1
+    PPAnimationCounter dw 0
+
 section .text
 
     AnimateGhosts:
-        ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
+    ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
 
         inc word [GhostsAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
 
@@ -217,3 +220,91 @@ section .text
         mov word[strcPacMan + isDead], 0
         
         ret
+    
+    AnimatePowerPellet:
+
+        inc word [PPAnimationCounter] 
+
+        cmp  word [PPAnimationCounter], FRAMES_COUNTER_POWER_PELLET_ANIMATION ; check the timer
+        jne .noAnimation
+
+        mov word [PPAnimationCounter],0 ; reset the counter/timer
+        jmp .toggle ; toogle the frames of ghosts
+
+        .toggle:
+
+            cmp word [ArePowerPelletsDisplayed], 1
+            je .erase
+            .display:
+                mov ax, POWER_PELLET_1_OFFSET
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_2_OFFSET
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_3_OFFSET
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_4_OFFSET
+                call DisplayPowerPellet
+
+                mov word [ArePowerPelletsDisplayed], 1
+
+                mov word [PPAnimationCounter], 0
+        ret
+
+            .erase:
+                mov ax, POWER_PELLET_1_OFFSET
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_2_OFFSET
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_3_OFFSET
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_4_OFFSET
+                call ErasePowerPellet
+
+                mov word [ArePowerPelletsDisplayed], 0
+
+                mov word [PPAnimationCounter], 0
+            
+            .noAnimation:
+
+        ret
+
+        DisplayPowerPellet:
+        ; need to define :
+        ; ax = the linear position of the tile
+            mov bx, MazeSpriteSheet
+            add bx, POWER_PELLET_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
+            call WriteTile
+
+            ret
+
+        ErasePowerPellet:
+        ; need to define :
+        ; ax = the linear position of the tile
+            mov bx, MazeSpriteSheet
+            add bx, BACKGROUND_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
+            call WriteTile
+
+            ret
+        
+        WriteTile:
+        ; need to define :
+        ; ax = the linear position where display the tile
+        ; bx = the offset of the tile to display
+            
+            ;set the destination 'es:di'
+            push word [ScreenBufferSegment] 
+            pop es 
+            mov di, ax
+
+            ;set the source 'ds:si'
+            mov si, bx
+
+                
+            mov dx, TILE_SIZE
+            .eachLine:
+                mov cx, TILE_SIZE
+                rep movsb
+                add di, SCREEN_WIDTH - TILE_SIZE
+                dec dx
+                jnz .eachLine
+            ret
