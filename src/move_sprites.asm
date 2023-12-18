@@ -114,41 +114,45 @@ section .text
     changeGhostPosition:
     ; changes the ghosts' positions values according to the current velocity
     ; changes the direction if encounter a wall
+
         ;switch the direction if the ghost reached a side of the screen
         cmp cx, SCREEN_WIDTH - SPRITE_SIZE
-        jb .noXflip
+        jl .noXflip
+        cmp cx, SPRITE_SIZE
+        jg .noXflip
         neg ax
 
         .noXflip:
         cmp bx, SCREEN_HEIGHT - SPRITE_SIZE
-        jb .noYflip
+        jl .noYflip
+        cmp bx, SPRITE_SIZE
+        jg .noYflip
         neg dx
-
+        
+        
         .noYflip:
+        push cx
         cmp ax, 0
         je .zeroX
-        ;test ax
-        ;jns .positiveX
-        sar ax, 1
-        push dx
-        mul word [Speed_Pixels]
-        pop dx
+        mov cx, ax
+        xor ax, ax
+        mov al, byte [Speed_Pixels]
+        test cx, cx
+        jns .zeroX
+        neg ax
         .zeroX:
         cmp dx, 0
         je .zeroY
-        int3
-        sar dx, 1
-        push ax
-        mov ax, dx
-        mul word [Speed_Pixels]
-        mov dx, ax
-        pop ax
+        mov cx, dx
+        xor dx, dx
+        mov dl, byte [Speed_Pixels]
+        test cx, cx
+        jns .zeroY
+        neg dx
         .zeroY:
-        ;inc/decremente the position
+        pop cx
         add bx, dx
         add cx, ax
-        
-
         ret
 
     ChangeEyesFrame:

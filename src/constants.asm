@@ -12,7 +12,7 @@ struc Sprite
 endstruc
 
 ; those numbers are the frequency of actualization of the different frames ; 1 frame = 1/24th of second ( +-= 0.042 sec )
-%define FRAMES_COUNTER_PACMAN_ANIMATION 3
+%define FRAMES_COUNTER_PACMAN_ANIMATION 1
 %define FRAMES_COUNTER_GHOSTS_ANIMATION 6
 
 
