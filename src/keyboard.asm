@@ -118,7 +118,7 @@ section .text
         mov dx, word[Speed_Pixels]
         neg dx
 
-        mov word[strcPacMan + velocityX], dx
+        mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], LEFT_DIRECTION
         call changePacManPosition
@@ -397,7 +397,7 @@ section .text
         mov dx, word[Speed_Pixels]
         
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], dx
+        mov word[strcPacMan + velocityY], 2
         mov word[strcPacMan + direction], DOWN_DIRECTION
         call changePacManPosition
         inc byte[keyChanged]
