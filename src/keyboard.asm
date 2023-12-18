@@ -36,12 +36,11 @@ section .text
 
         ; We use the same kind of process as used for collisions, but we only check walls were we cannot go left
         ; The direction stays in buffer until Pac-Man can go left
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
         call getCorners
-
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -57,10 +56,10 @@ section .text
         cmp byte[si], 0x04
         je .NoLeft
 
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -76,10 +75,11 @@ section .text
         cmp byte[si], 0x04
         je .NoLeft
 
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -95,10 +95,11 @@ section .text
         cmp byte[si], 0x04
         je .NoLeft
 
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -113,6 +114,7 @@ section .text
         je .NoLeft
         cmp byte[si], 0x04
         je .NoLeft
+
 
         mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
@@ -127,12 +129,11 @@ section .text
 
         ; We use the same kind of process as used for collisions, but we only check walls were we cannot go right
         ; The direction stays in buffer until Pac-Man can go right
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
         call getCorners
-
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -148,10 +149,10 @@ section .text
         cmp byte[si], 0x01
         je .NoRight
 
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -167,10 +168,10 @@ section .text
         cmp byte[si], 0x01
         je .NoRight
 
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -186,10 +187,10 @@ section .text
         cmp byte[si], 0x01
         je .NoRight
 
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -218,12 +219,11 @@ section .text
 
         ; We use the same kind of process as used for collisions, but we only check walls were we cannot go up
         ; The direction stays in buffer until Pac-Man can go up
+        
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
         call getCorners
-
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -239,10 +239,10 @@ section .text
         cmp byte[si], 0x04
         je .NoUp
         
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -258,10 +258,10 @@ section .text
         cmp byte[si], 0x04
         je .NoUp
         
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -277,10 +277,10 @@ section .text
         cmp byte[si], 0x04
         je .NoUp
         
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -307,14 +307,14 @@ section .text
         cmp byte [keyPressed], DOWN_KEY_SCANCODE
         jne .NoDown
 
-        call getCorners
 
         ; We use the same kind of process as used for collisions, but we only check walls were we cannot go down
         ; The direction stays in buffer until Pac-Man can go down
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -330,10 +330,10 @@ section .text
         cmp byte[si], 0x02
         je .NoDown
         
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -349,10 +349,10 @@ section .text
         cmp byte[si], 0x02
         je .NoDown
         
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -368,10 +368,10 @@ section .text
         cmp byte[si], 0x02
         je .NoDown
         
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
         call getTileAbsPos
         mov si, MazeModel
         add si, [tileAbsPos]
@@ -401,4 +401,3 @@ section .text
             and byte [keyChanged], 00
         
         ret
-

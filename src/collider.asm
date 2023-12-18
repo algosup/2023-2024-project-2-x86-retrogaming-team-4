@@ -1,15 +1,8 @@
 section .data
-
-    corner0X dw 0
-    corner0Y dw 0
-    corner1X dw 0
-    corner1Y dw 0
-    corner2X dw 0
-    corner2Y dw 0
-    corner3X dw 0
-    corner3Y dw 0
-
     isCollid db 0
+
+    cornerOffsetX dW 0
+    cornerOffsetY dW 0
 
     checkedCornerX dw 0
     checkedCornerY dw 0
@@ -165,39 +158,68 @@ section .text
         .notTouched:
         
         ret
-
+    
     isColliding:
 
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
         call getCorners
-        ; Set corner to check
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 5
+        mov word [cornerOffsetY], 5
+        call getCorners
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 10
+        mov word [cornerOffsetY], 5
+        call getCorners
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 5
+        mov word [cornerOffsetY], 10
+        call getCorners
+        call isWall
+        cmp byte[isCollid], 1
+        je .collision
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
+        call isWall
+
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 10
+        mov word [cornerOffsetY], 10
+        call getCorners
         call isWall
 
         cmp byte[isCollid], 1
@@ -208,37 +230,18 @@ section .text
         call stopPacMan
     
         ret
-    
+
+    ; Set offset for the corner to check
+    ; Param: cornerOffsetX, cornerOffsetX
+    ; Return: checkedCornerX, checkedCornerY
     getCorners:
     ; Get the corner of the PacMan tile
-
         mov bx, [pacManNextPosX]
-        add bx, 4
-        mov [corner0X], bx
+        add bx, [cornerOffsetX]
+        mov [checkedCornerX], bx
         mov ax, [pacManNextPosY]
-        add ax, 4
-        mov [corner0Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 4
-        mov [corner1X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 11
-        mov [corner1Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 11
-        mov [corner2X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 4
-        mov [corner2Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 11
-        mov [corner3X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 11
-        mov [corner3Y], ax
+        add ax, [cornerOffsetX]
+        mov [checkedCornerY], ax
 
         ret
     
