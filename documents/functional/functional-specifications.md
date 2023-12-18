@@ -47,7 +47,7 @@
       - [Interactions](#interactions)
         - [Pellets eating](#pellets-eating)
         - [Power Pellets](#power-pellets)
-        - [Cherry](#cherry)
+        - [Fruits](#fruits)
       - [Tunnels](#tunnels)
       - [Ghosts](#ghosts)
         - [Ghosts movements](#ghosts-movements)
@@ -85,7 +85,6 @@
       - [Main menu](#main-menu)
       - [High-score menu](#high-score-menu)
       - [Themes sub-menu](#themes-sub-menu)
-    - [Additional Fruits \& Bonuses](#additional-fruits--bonuses)
     - [Game launcher](#game-launcher)
   - [XIII. Glossary](#xiii-glossary)
 
@@ -310,15 +309,22 @@ The game will take place in a maze similar to the example displayed below with a
 
 Here are the different sprites that will be used to create the game:
 
-| Name          | Dimensions | Pictures                                      |
-| ------------- | ---------- | --------------------------------------------- |
-| Pac-Man       | 16x8       | ![Pac-Man](../pictures/Pac-Man.png)           |
-| Pellets       | 8x8        | ![Pellets](../pictures/Pellets.png)           |
-| Ghosts        | 16x8       | ![Ghosts](../pictures/Ghosts.png)             |
-| Scared Ghosts | 16x8       | ![ScaredGhosts](../pictures/ScaredGhosts.png) |
-| Eyes          | 5x5        | ![Eyes](../pictures/Eyes.png)                 |
-| Cherry        | 8x8        | ![Cherry](../pictures/Cherry.png)             |
-| Scores        | 7x5        | ![Scores](../pictures/scores_display.png)     |
+| Name              | Dimensions          | Pictures                                           |
+| ----------------- | ------------------- | -------------------------------------------------- |
+| Pac-Man           | 16x8                | ![Pac-Man](../pictures/Pac-Man.png)                |
+| Pellets           | 8x8                 | ![Pellets](../pictures/Pellets.png)                |
+| Ghosts            | 16x8                | ![Ghosts](../pictures/Ghosts.png)                  |
+| Scared Ghosts     | 16x8                | ![ScaredGhosts](../pictures/ScaredGhosts.png)      |
+| Eyes              | 5x10                | ![Eyes](../pictures/Eyes.png)                      |
+| Cherry            | 8x8                 | ![Cherry](../pictures/Cherry.png)                  |
+| Strawberry        | 8x8                 | ![Strawberry](../pictures/PM_Strawberry.webp)      |
+| Orange            | 8x8                 | ![Orange](../pictures/PM_Orange.webp)              |
+| Apple             | 8x8                 | ![Apple](../pictures/PM_Apple.webp)                |
+| Melon             | 8x8                 | ![Melon](../pictures/PM_Melon.webp)                |
+| Galaxian Flagship | 8x8                 | ![Galaxian flagship](../pictures/PM_Galaxian.webp) |
+| Bell              | 8x8                 | ![Bell](../pictures/PM_Bell.webp)                  |
+| Key               | 8x8                 | ![Key](../pictures/PM_Key.webp)                    |
+| Scores            | 8x8 (per character) | ![Scores](../pictures/scores_display.png)          |
 
 Pac-Man will be able to face 4 directions, up, left, down, and right, and open his mouth.  
 Ghosts will be able to see in those 4 directions.
@@ -393,9 +399,9 @@ When moving, the ghosts are animated, giving the impression of a seamless move t
 When frightened, the ghosts have a different sprite from the one they have in other modes. Each of the ghost have the same sprite. 2.5 seconds before the end of frightening mode, the ghost blinks in blue and white as described in the following table:
 
 | Moment in frightening mode                               | Sprite n°1                                                 | Sprite n°2                                                 | Sprite n°3                                           | Sprite n°4                                           | Time between each sprite display on the screen |
-| -------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ------------------------ |
-| Classic frightening mode                                 | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | /                                                    | /                                                    | 1/6th of a second        |
-| Flashing frightening mode (end of frightening mode time) | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | ![Ghost blinking 1](../pictures/Ghost-Blinking1.png) | ![Ghost blinking 2](../pictures/Ghost-Blinking2.png) | 1/6th of a second        |
+| -------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------- |
+| Classic frightening mode                                 | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | /                                                    | /                                                    | 1/6th of a second                              |
+| Flashing frightening mode (end of frightening mode time) | ![Ghost frightening 1](../pictures/Ghost-Frightening1.png) | ![Ghost frightening 2](../pictures/Ghost-Frightening2.png) | ![Ghost blinking 1](../pictures/Ghost-Blinking1.png) | ![Ghost blinking 2](../pictures/Ghost-Blinking2.png) | 1/6th of a second                              |
 
 #### Sound system
 
@@ -466,18 +472,52 @@ In this image, the little red dots situated in the center of the corridors of th
 
 In this image, the bigger red dots situated in the center of the maze are the pellets which can be eaten by Pac-Man.
 
-##### Cherry
+##### Fruits
 
-- After 70 pellets have eaten, a bonus cherry appears in the maze and stays active and displayed on the screen. When Pac-Man collects the fruit, 100 additional points are awarded and incremented to the player's score. After 170 dots are eaten, another cherry will appear unless the first one is still here.
+- After 70 pellets have eaten, a bonus fruit appears in the maze and stays active and displayed on the screen. When Pac-Man collects the fruit, additional points are awarded depending on the type of fruit eaten and are incremented to the player's score. After 170 dots are eaten, another bonus fruit will appear unless the first one is still here.
 
-| Eaten dots | Time displayed | Given points |
-| ---------- | -------------- | ------------ |
-| 70         | 10s            | 100          |
-| 170        | 8s             | 100          |
+| Eaten dots | Time displayed |
+| ---------- | -------------- |
+| 70         | 10s            |
+| 170        | 8s             |
 
-After eating a cherry, a text sprite indicating the player earned 100 points in Salmon color appears at the exact position where the cherry was and disappears after 2 seconds.
+In levels 0-7, the fruits are drawn starting from the cherry to the fruit that matches the current level.
 
-<p align="center"><img src="../pictures/100_pts.png" alt="100 points" width="64"></p>
+| Level | Fruit n°1         | Fruit n°2 |
+| ----- | ----------------- | --------- |
+| 1     | Cherry            | Cherry    |
+| 2     | Strawberry        | Cherry    |
+| 3     | Orange            | Cherry    |
+| 4     | Apple             | Cherry    |
+| 5     | Melon             | Cherry    |
+| 6     | Galaxian Flagship | Cherry    |
+| 7     | Key               | Cherry    |
+
+In levels 8-18 in the orginal Pac-Man, the first fruit drawn is offset by the level counter, pushing out older fruits as the game progresses and new fruits are drawn. Pushed out fruits follow the given table:
+
+| Level | Pushed out fruit  |
+| ----- | ----------------- |
+| 8     | Cherry            |
+| 10    | Strawberry        |
+| 12    | Orange            |
+| 14    | Apple             |
+| 16    | Melon             |
+| 18    | Galaxian Flagship |
+
+In levels 19 and over, the only fruits being drawn are the keys and the keys.
+
+After eating a fruit, a text sprite indicating the player earned the fruit's corresponding points in salmon color appears at the exact position where the fruit was and disappears after 2 seconds.
+
+| Fruit             | Example image                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| Cherry            | <p align="center"><img src="../pictures/100_pts.png" alt="100 points" width="64"></p>  |
+| Strawberry        | <p align="center"><img src="../pictures/300_pts.png" alt="300 points" width="64"></p>  |
+| Orange            | <p align="center"><img src="../pictures/500_pts.png" alt="100 points" width="64"></p>  |
+| Apple             | <p align="center"><img src="../pictures/700_pts.png" alt="100 points" width="64"></p>  |
+| Melon             | <p align="center"><img src="../pictures/1000_pts.png" alt="100 points" width="64"></p> |
+| Galaxian Flagship | <p align="center"><img src="../pictures/2000_pts.png" alt="100 points" width="64"></p> |
+| Bell              | <p align="center"><img src="../pictures/3000_pts.png" alt="100 points" width="64"></p> |
+| Key               | <p align="center"><img src="../pictures/5000_pts.png" alt="100 points" width="64"></p> |
 
 #### Tunnels
 
@@ -681,15 +721,22 @@ Here are the different eye sprites corresponding to the direction they are trave
 #### Game Rules
 
 - **Scoring:**
-  | Object eaten  | Point values |
-  | ------------- | ------------ |
-  | Pellets       | 10 points    |
-  | Power pellets | 50 points    |
-  | Cherry        | 100 points   |
-  | 1 Ghost       | 200 points   |
-  | 2 Ghosts \*   | 400 points   |
-  | 3 Ghosts \*   | 800 points   |
-  | 4 Ghosts \*   | 1600 points  |
+  | Object eaten      | Point values |
+  | ----------------- | ------------ |
+  | Pellets           | 10 points    |
+  | Power pellets     | 50 points    |
+  | Cherry            | 100 points   |
+  | Strawberry        | 300 points   |
+  | Orange            | 500 points   |
+  | Apple             | 700 points   |
+  | Melon             | 1000 points  |
+  | Galaxian Flagship | 2000 points  |
+  | Bell              | 3000 points  |
+  | Key               | 5000 points  |
+  | 1 Ghost           | 200 points   |
+  | 2 Ghosts \*       | 400 points   |
+  | 3 Ghosts \*       | 800 points   |
+  | 4 Ghosts \*       | 1600 points  |
 
   \* The "2 Ghosts", "3 Ghosts" and "4 Ghosts" point values are only valid if the ghosts are eaten consecutively during the same frightening mode session.
 - **Level Progression:**
@@ -900,24 +947,9 @@ This menu will allow you to choose between different gameplay styles, changing t
 - `Enter key`/`Spacebar`: Choose and apply the sub-option of an option.
   - When selecting a sub-option of an option, it unselects the previously selected option.
 
-### Additional Fruits & Bonuses
-
-As the cherry is the most iconic fruit of the Pac-Man game, we decided to implement it directly, however, we plan to add the other fruits present in it. Each of them will be displayed as an 8x8 sprite in the maze and will be randomly spawning with a decreasing spawn rate the more the fruit gives points. They are subjected to the same spawn conditions as the one described in the [interactions section](#interactions).  
-Here is the table of the bonus points provided by the bonus fruits and the spawn rate associated with it:
-
-| Image                                              | Fruit name        | Given points |
-| -------------------------------------------------- | ----------------- | ------------ |
-| ![Strawberry](../pictures/PM_Strawberry.webp)      | Strawberry        | 300          |
-| ![Orange](../pictures/PM_Orange.webp)              | Orange            | 500          |
-| ![Apple](../pictures/PM_Apple.webp)                | Apple             | 700          |
-| ![Melon](../pictures/PM_Melon.webp)                | Melon             | 1000         |
-| ![Galaxian flagship](../pictures/PM_Galaxian.webp) | Galaxian Flagship | 2000         |
-| ![Bell](../pictures/PM_Bell.webp)                  | Bell              | 3000         |
-| ![Key](../pictures/PM_Key.webp)                    | Key               | 5000         |
-
 ### Game launcher
 
-As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we plan to create a .exe and a .dmg executable to launch our Pac-Man clone if we don't face any development issues before the project deadline. It will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases. However, as this is a complex task that needs a complete breakdown of the feature, we are going to create another functional and technical specification for this.
+As executing an x86 ASM file using DOSBox is a fastidious task for inexperienced users, we plan to create a .cmd and a .bash scripts to launch our Pac-Man clone if we don't face any development issues before the project deadline. It will automatically check if DOSBox is installed or not. If not, it will download and install DOSBox before launching the game automatically in both cases.
 
 ## XIII. Glossary
 
