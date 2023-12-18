@@ -147,6 +147,7 @@ section .text
          jne .NOTloadAnimation
          call PacmanDeathAnimation
          call Display_PacMan
+         call checkGameOver
          cmp word[strcPacMan + isDead], 0
          je .resetGame
          
@@ -157,3 +158,12 @@ section .text
             mov word[PacmanDeathCounter], PACMAN_DEATH_1-1
             call resetGame
             ret
+         
+   checkGameOver:
+      cmp byte [isGameOver], 1
+      jne .notGameOver
+         call displayGameOver
+         cmp word [strcPacMan + isDead], 0
+         je exit
+      .notGameOver:
+      ret

@@ -131,6 +131,45 @@ section .text
         call draw_sprite_bg_buffer
         ret
 
+    displayGameOver:
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 72*64
+        mov di, 0
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 73*64
+        mov di, 8
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 74*64
+        mov di, 16
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 75*64
+        mov di, 24
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 15*64
+        mov di, 32
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 76*64
+        mov di, 40
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 77*64
+        mov di, 48
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 75*64
+        mov di, 56
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 78*64
+        mov di, 64
+        call draw_tile
+        ret
+
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
@@ -397,6 +436,20 @@ section .text
 
         pop es
 
+        ret
+
+    draw_tile:
+        mov ax, [ScreenBufferSegment]
+        mov es, ax
+        mov dx, TILE_SIZE ;number of lines
+        .eachLine:
+            mov cx, TILE_SIZE
+            rep movsb
+            add di, SCREEN_WIDTH - TILE_SIZE
+            dec dx
+            cmp dx, 0
+            jne .eachLine
+        
         ret
 
     draw_sprite_bg_buffer:

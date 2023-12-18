@@ -50,6 +50,8 @@ section .text
 
         ;Set the Timer and clock for the game loop
         call setTimer
+
+        call displayGameOver
         
         call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
@@ -98,10 +100,14 @@ section .text
         .skipForDeath:
         call Display_PacMan
 
+        cmp word[strcPacMan + isDead], 1
+        je .skipForDeath2
+
         ;read if a ghost hit pacman or the reverse
         
         call readContact
 
+        .skipForDeath2:
         ;display fruits
         call setFruits
         call checkFruitPrint
