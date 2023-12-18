@@ -138,6 +138,9 @@ section .text
         cmp byte[jumpNoUp], 1
         je .NoUp
 
+        mov dx, word[Speed_Pixels]
+        neg dx
+
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], -2
         mov word[strcPacMan + direction], UP_DIRECTION
@@ -176,7 +179,6 @@ section .text
         call checkDown
         cmp byte[jumpNoDown], 1
         je .NoDown
-
         mov word[strcPacMan + velocityX], 0
         mov word[strcPacMan + velocityY], 2
         mov word[strcPacMan + direction], DOWN_DIRECTION
