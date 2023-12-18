@@ -71,7 +71,7 @@ section .data
 
 section .text
     
-    GhostsSpeedUpdate:
+    SpritesSpeedUpdate:
 
         cmp word[Speed_Pixels], 1
         je .to2speed
@@ -114,27 +114,46 @@ section .text
     changeGhostPosition:
     ; changes the ghosts' positions values according to the current velocity
     ; changes the direction if encounter a wall
-
         ;switch the direction if the ghost reached a side of the screen
-        cmp bx, SCREEN_WIDTH - SPRITE_SIZE 
+        cmp cx, SCREEN_WIDTH - SPRITE_SIZE
         jb .noXflip
-        neg dx
+        neg ax
 
         .noXflip:
-        cmp ax, SCREEN_HEIGHT - SPRITE_SIZE 
+        cmp bx, SCREEN_HEIGHT - SPRITE_SIZE
         jb .noYflip
-        neg cx
+        neg dx
 
         .noYflip:
+        cmp ax, 0
+        je .zeroX
+        ;test ax
+        ;jns .positiveX
+        sar ax, 1
+        push dx
+        mul word [Speed_Pixels]
+        pop dx
+        .zeroX:
+        cmp dx, 0
+        je .zeroY
+        int3
+        sar dx, 1
+        push ax
+        mov ax, dx
+        mul word [Speed_Pixels]
+        mov dx, ax
+        pop ax
+        .zeroY:
         ;inc/decremente the position
-        add ax, cx
         add bx, dx
+        add cx, ax
+        
 
         ret
 
-    changeGhostFrames:
+    ChangeEyesFrame:
     ; only changes the eyes' sprite according to the new direction
-
+        
         cmp dx, 0
         jle .noEyesRight
         mov ax, EYES_RIGHT
@@ -161,19 +180,19 @@ section .text
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-        mov ax, [strcBlinky + posY]
-        mov bx, [strcBlinky + posX]
-        mov cx, [strcBlinky + velocityY]
-        mov dx, [strcBlinky + velocityX]
+        mov bx, [strcBlinky + posY]
+        mov cx, [strcBlinky + posX]
+        mov dx, [strcBlinky + velocityY]
+        mov ax, [strcBlinky + velocityX]
 
         call changeGhostPosition
 
-        mov word [strcBlinky + posY], ax
-        mov word [strcBlinky + posX], bx
-        mov word [strcBlinky + velocityY], cx
-        mov word [strcBlinky + velocityX], dx
+        mov word [strcBlinky + posY], bx
+        mov word [strcBlinky + posX], cx
+        mov word [strcBlinky + velocityY], dx
+        mov word [strcBlinky + velocityX], ax
 
-        call changeGhostFrames
+        call ChangeEyesFrame
 
         mov word [Blinky_eyes], ax
 
@@ -183,19 +202,19 @@ section .text
     ; changes the Inky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-        mov ax, [strcInky + posY]
-        mov bx, [strcInky + posX]
-        mov cx, [strcInky + velocityY]
-        mov dx, [strcInky + velocityX]
+        mov bx, [strcInky + posY]
+        mov cx, [strcInky + posX]
+        mov dx, [strcInky + velocityY]
+        mov ax, [strcInky + velocityX]
 
         call changeGhostPosition
 
-        mov word [strcInky + posY], ax
-        mov word [strcInky + posX], bx
-        mov word [strcInky + velocityY], cx
-        mov word [strcInky + velocityX], dx
+        mov word [strcInky + posY], bx
+        mov word [strcInky + posX], cx
+        mov word [strcInky + velocityY], dx
+        mov word [strcInky + velocityX], ax
 
-        call changeGhostFrames
+        call ChangeEyesFrame
 
         mov word [Inky_eyes], ax
 
@@ -205,19 +224,19 @@ section .text
     ; changes the Pinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-        mov ax, [strcPinky + posY]
-        mov bx, [strcPinky + posX]
-        mov cx, [strcPinky + velocityY]
-        mov dx, [strcPinky + velocityX]
+        mov bx, [strcPinky + posY]
+        mov cx, [strcPinky + posX]
+        mov dx, [strcPinky + velocityY]
+        mov ax, [strcPinky + velocityX]
 
         call changeGhostPosition
 
-        mov word [strcPinky + posY], ax
-        mov word [strcPinky + posX], bx
-        mov word [strcPinky + velocityY], cx
-        mov word [strcPinky + velocityX], dx
+        mov word [strcPinky + posY], bx
+        mov word [strcPinky + posX], cx
+        mov word [strcPinky + velocityY], dx
+        mov word [strcPinky + velocityX], ax
 
-        call changeGhostFrames
+        call ChangeEyesFrame
 
         mov word [Pinky_eyes], ax
 
@@ -227,19 +246,19 @@ section .text
     ; changes the Clyde's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-        mov ax, [strcClyde + posY]
-        mov bx, [strcClyde + posX]
-        mov cx, [strcClyde + velocityY]
-        mov dx, [strcClyde + velocityX]
+        mov bx, [strcClyde + posY]
+        mov cx, [strcClyde + posX]
+        mov dx, [strcClyde + velocityY]
+        mov ax, [strcClyde + velocityX]
 
         call changeGhostPosition
 
-        mov word [strcClyde + posY], ax
-        mov word [strcClyde + posX], bx
-        mov word [strcClyde + velocityY], cx
-        mov word [strcClyde + velocityX], dx
+        mov word [strcClyde + posY], bx
+        mov word [strcClyde + posX], cx
+        mov word [strcClyde + velocityY], dx
+        mov word [strcClyde + velocityX], ax
 
-        call changeGhostFrames
+        call ChangeEyesFrame
 
         mov word [Clyde_eyes], ax
 
