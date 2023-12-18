@@ -175,7 +175,7 @@ section .text
 
     SwitchMouthOpening:
     ; just toogles the frame of pacman if opened -> closed, and the reverse
-        int3
+         
         cmp bx, PACMAN_FULL
         je .toSlightlyClosed
 

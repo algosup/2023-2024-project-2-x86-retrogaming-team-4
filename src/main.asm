@@ -71,8 +71,9 @@ section .text
         call ClearClyde
         call ClearPacMan 
         
+        call SpritesSpeedUpdate
+        
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
-         call GhostsSpeedUpdate
         call readKeyboard
         
        
