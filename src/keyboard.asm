@@ -161,7 +161,7 @@ section .text
         cmp byte[jumpNoLeft], 1
         je .NoLeft
 
-        mov word[strcPacMan + velocityX], dx
+        mov word[strcPacMan + velocityX], -1
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], LEFT_DIRECTION
         
