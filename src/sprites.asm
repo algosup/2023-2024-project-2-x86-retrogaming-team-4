@@ -131,18 +131,44 @@ section .text
 
         .notZeroDisplayScore:
             xor edx, edx
-            mov cx, 10 
             push eax          ; As eax contains the score, we need to preserve it
-            int3
-            div cx ;Divides the score => 
-            mov [scoreUnit], ax ; reminder is stored in dx
-            call displayUnit
+            mov cx, 10
+            div cx
+            mov bx, 1
+
+            div cx
+            mov [scoreUnit], dx
+            call displayDigits
+            cmp word[score], 100
+            jb .dsp
+
+            mov ax, [score]
+            mov cx, 100
+            div cx
+            div cx
+            mov [scoreUnit], dx
+            mov bx, 2
+            call displayDigits
+            cmp word[score], 1000
+            jb .dsp
+
+            mov ax, [score]
+            mov cx, 1000
+            div cx
+            ;div cx
+            mov [scoreUnit], dx
+            mov bx, 3
+            call displayDigits
+            ;cmp word[score], 1000
+            ;jb .dsp
+
+            .dsp:
             pop eax
             call .scoreLoop
             ret
 
 
-    displayUnit: ;ax usable to store data
+    displayDigits: ;ax usable to store data
         mov si, MazeSpriteSheet ;Load the spritesheet
         cmp word [scoreUnit], 0
         jne .notzero
@@ -210,21 +236,18 @@ section .text
         jne .notnine
         add si, 25*64 ;Position on spritesheet
         call .displayScoreOnScreen
-        
+
         .notnine:
         ret
-        
     
         .displayScoreOnScreen:
-            ; mov bh, [currentDisplayedScoreUnit]
-            ; mov bl, 22
-            ; sub bl, bh
-            ; mov al, bl
-            ; mov bl, 8
-            ; mul bl
-            ; mov si, ax
+
             mov di, 16*SCREEN_WIDTH+ 22*8 ; Place to display
-            ; add di, ax
+            cmp bx, 2
+            jne .Hundred
+            mov di, 16*SCREEN_WIDTH+ 21*8 ; Place to display
+            .Hundred:
+            
             call draw_tile ;Draw the score unit
         ret
         
