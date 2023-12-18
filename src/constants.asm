@@ -12,7 +12,7 @@ struc Sprite
 endstruc
 
 ; those numbers are the frequency of actualization of the different frames ; 1 frame = 1/24th of second ( +-= 0.042 sec )
-%define FRAMES_COUNTER_PACMAN_ANIMATION 3
+%define FRAMES_COUNTER_PACMAN_ANIMATION 2
 %define FRAMES_COUNTER_GHOSTS_ANIMATION 6
 
 ; speeds are in percentage just to be precise, so,  1% = 0.1 pixel (or 1 pixel for 10 frames) and 100%  = 10 pixels per frame ( can be set below)

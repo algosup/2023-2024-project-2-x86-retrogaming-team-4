@@ -170,25 +170,8 @@ section .text
         je .collision
 
         ; Set offset for the corner to check
-        mov word [cornerOffsetX], 5
-        mov word [cornerOffsetY], 5
-        call getCorners
-        call isWall
-        cmp byte[isCollid], 1
-        je .collision
-
-
-        ; Set offset for the corner to check
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 4
-        call getCorners
-        call isWall
-        cmp byte[isCollid], 1
-        je .collision
-
-        ; Set offset for the corner to check
-        mov word [cornerOffsetX], 10
-        mov word [cornerOffsetY], 5
         call getCorners
         call isWall
         cmp byte[isCollid], 1
@@ -203,25 +186,10 @@ section .text
         je .collision
 
         ; Set offset for the corner to check
-        mov word [cornerOffsetX], 5
-        mov word [cornerOffsetY], 10
-        call getCorners
-        call isWall
-        cmp byte[isCollid], 1
-        je .collision
-
-        ; Set offset for the corner to check
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 11
         call getCorners
         call isWall
-
-        ; Set offset for the corner to check
-        mov word [cornerOffsetX], 10
-        mov word [cornerOffsetY], 10
-        call getCorners
-        call isWall
-
         cmp byte[isCollid], 1
         je .collision
         ret

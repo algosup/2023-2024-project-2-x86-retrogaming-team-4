@@ -8,103 +8,7 @@ section .data
     jumpNoDown db 0
 
 section .text
-    checkLeft:
-        call getCorners
-        call getTileAbsPos
-        mov si, MazeModel
-        add si, [tileAbsPos]
-        sub si, 1
-        cmp byte[si], 0x0B
-        je .NoLeft
-        cmp byte[si], 0x06
-        je .NoLeft
-        cmp byte[si], 0x08
-        je .NoLeft
-        cmp byte[si], 0x02
-        je .NoLeft
-        cmp byte[si], 0x04
-        je .NoLeft
-
-        .end:
-            ret
-
-        .NoLeft:
-            mov byte[jumpNoLeft], 1
-            jmp .end
-
-    checkRight:
-        call getCorners
-        call getTileAbsPos
-        mov si, MazeModel
-        add si, [tileAbsPos]
-        add si, 1
-        cmp byte[si], 0x0C
-        je .NoRight
-        cmp byte[si], 0x07
-        je .NoRight
-        cmp byte[si], 0x05
-        je .NoRight
-        cmp byte[si], 0x03
-        je .NoRight
-        cmp byte[si], 0x01
-        je .NoRight
-
-        .end:
-            ret
-
-        .NoRight:
-            mov byte[jumpNoRight], 1
-            jmp .end
-
-
-    checkUp:
-        call getCorners
-        call getTileAbsPos
-        mov si, MazeModel
-        add si, [tileAbsPos]
-        sub si, 40
-        cmp byte[si], 0x09
-        je .NoUp
-        cmp byte[si], 0x07
-        je .NoUp
-        cmp byte[si], 0x08
-        je .NoUp
-        cmp byte[si], 0x03
-        je .NoUp
-        cmp byte[si], 0x04
-        je .NoUp
-
-        .end:
-            ret
-
-        .NoUp:
-            mov byte[jumpNoUp], 1
-            jmp .end
-
-    checkDown:
-        call getCorners
-        call getTileAbsPos
-        mov si, MazeModel
-        add si, [tileAbsPos]
-        add si, 40
-        cmp byte[si], 0x0A
-        je .NoDown
-        cmp byte[si], 0x06
-        je .NoDown
-        cmp byte[si], 0x05
-        je .NoDown
-        cmp byte[si], 0x01
-        je .NoDown
-        cmp byte[si], 0x02
-        je .NoDown
-
-        .end:
-            ret
-
-        .NoDown:
-            mov byte[jumpNoDown], 1
-            jmp .end
-
+    
     readKeyboard:
     
         ; Don't do anything if no key was pressed
@@ -139,7 +43,6 @@ section .text
         call checkLeft
         cmp byte[jumpNoLeft], 1
         je .NoLeft
-        
 
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 4
@@ -147,13 +50,11 @@ section .text
         cmp byte[jumpNoLeft], 1
         je .NoLeft
 
-
         mov word [cornerOffsetX], 4
         mov word [cornerOffsetY], 11
         call checkLeft
         cmp byte[jumpNoLeft], 1
         je .NoLeft
-
 
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 11
@@ -161,7 +62,7 @@ section .text
         cmp byte[jumpNoLeft], 1
         je .NoLeft
 
-        mov word[strcPacMan + velocityX], -1
+        mov word[strcPacMan + velocityX], -2
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], LEFT_DIRECTION
         
@@ -187,7 +88,6 @@ section .text
         cmp byte[jumpNoRight], 1
         je .NoRight
 
-
         mov word [cornerOffsetX], 4
         mov word [cornerOffsetY], 11
         call checkRight
@@ -200,7 +100,7 @@ section .text
         cmp byte[jumpNoRight], 1
         je .NoRight
 
-        mov word[strcPacMan + velocityX], 1
+        mov word[strcPacMan + velocityX], 2
         mov word[strcPacMan + velocityY], 0
         mov word[strcPacMan + direction], RIGHT_DIRECTION
 
@@ -219,7 +119,7 @@ section .text
         call checkUp
         cmp byte[jumpNoUp], 1
         je .NoUp
-        
+
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 4
         call checkUp
@@ -231,7 +131,7 @@ section .text
         call checkUp
         cmp byte[jumpNoUp], 1
         je .NoUp
-        
+
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 11
         call checkUp
@@ -239,7 +139,7 @@ section .text
         je .NoUp
 
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], -1
+        mov word[strcPacMan + velocityY], -2
         mov word[strcPacMan + direction], UP_DIRECTION
 
         call changePacManPosition
@@ -258,28 +158,27 @@ section .text
         call checkDown
         cmp byte[jumpNoDown], 1
         je .NoDown
-        
+
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 4
         call checkDown
         cmp byte[jumpNoDown], 1
         je .NoDown
-        
+
         mov word [cornerOffsetX], 4
         mov word [cornerOffsetY], 11
         call checkDown
         cmp byte[jumpNoDown], 1
         je .NoDown
-        
+
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 11
         call checkDown
         cmp byte[jumpNoDown], 1
         je .NoDown
 
-
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], 1
+        mov word[strcPacMan + velocityY], 2
         mov word[strcPacMan + direction], DOWN_DIRECTION
 
         call changePacManPosition
@@ -294,4 +193,92 @@ section .text
 
             and byte [keyChanged], 00
         
+        ret
+
+    checkLeft:
+        call getMazeData
+        sub si, 1
+        cmp byte[si], 0x0B
+        je .NoLeft
+        cmp byte[si], 0x06
+        je .NoLeft
+        cmp byte[si], 0x08
+        je .NoLeft
+        cmp byte[si], 0x02
+        je .NoLeft
+        cmp byte[si], 0x04
+        je .NoLeft
+
+        ret
+
+        .NoLeft:
+            mov byte[jumpNoLeft], 1
+            ret
+
+    checkRight:
+        call getMazeData
+        add si, 1
+        cmp byte[si], 0x0C
+        je .NoRight
+        cmp byte[si], 0x07
+        je .NoRight
+        cmp byte[si], 0x05
+        je .NoRight
+        cmp byte[si], 0x03
+        je .NoRight
+        cmp byte[si], 0x01
+        je .NoRight
+
+        ret
+
+        .NoRight:
+            mov byte[jumpNoRight], 1
+            ret
+
+
+    checkUp:
+        call getMazeData
+        sub si, 40
+        cmp byte[si], 0x09
+        je .NoUp
+        cmp byte[si], 0x07
+        je .NoUp
+        cmp byte[si], 0x08
+        je .NoUp
+        cmp byte[si], 0x03
+        je .NoUp
+        cmp byte[si], 0x04
+        je .NoUp
+
+        ret
+
+        .NoUp:
+            mov byte[jumpNoUp], 1
+            ret
+
+    checkDown:
+        call getMazeData
+        add si, 40
+        cmp byte[si], 0x0A
+        je .NoDown
+        cmp byte[si], 0x06
+        je .NoDown
+        cmp byte[si], 0x05
+        je .NoDown
+        cmp byte[si], 0x01
+        je .NoDown
+        cmp byte[si], 0x02
+        je .NoDown
+
+        ret
+
+        .NoDown:
+            mov byte[jumpNoDown], 1
+            ret
+
+    getMazeData:
+        call getCorners
+        call getTileAbsPos
+        mov si, MazeModel
+        add si, [tileAbsPos]
         ret
