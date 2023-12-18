@@ -2,7 +2,8 @@
 
 The project has exited its third week, which was mainly a continuation of what was started the previous week.
 
-## Accomplishments:
+## Accomplishments
+
 1. Technical specifications
    - As the deadline for the technical specifications approaches, the document is nearing completion. It will be reviewed by the team tomorrow and polished before sending it to the client.
 2. Movements
@@ -11,6 +12,7 @@ The project has exited its third week, which was mainly a continuation of what w
    - There is now a timer that allows us to define a framerate to the game, and thus, precisely control the movements of the player and ghosts. It has not yet been included with the rest of the code, but this should be done shortly, either in the 5th week or if possible before.
 
 ## Challenges
+
 1. Timer
    - The complexity of the Assembly instructions made the timer creation quite a challenge. Thankfully, the restriction on the hardware being removed allowed us to access a new functionality that made this process much easier.
 2. Communication
@@ -20,6 +22,7 @@ The project has exited its third week, which was mainly a continuation of what w
      <!-- - I wanted to write a third point by I forgot what -->
 
 ## Plan for next week
+
 1. Quality improvements
    - Additional meetings will be held to ensure that everything runs like clockwork, with regular verifications from the project manager and quality team.
    - Some of the aspects to tackle include naming conventions and file structure, task repartition, and communication.
@@ -28,6 +31,6 @@ The project has exited its third week, which was mainly a continuation of what w
 3. Management
    - The managerial documents are almost complete. The risks and assumptions will be moved over from the functional specifications, and some mistakes fixed such as the dates not having the correct hours on the planning.
 
-## Conclusion:
+## Conclusion
 
 We are still ahead of schedule. After dealing with a few problems that could hinder the project, we should be on track toward a good final product with, hopefully, a prototype ready to be delivered earlier than expected, providing us more time to respond to the feedback.
