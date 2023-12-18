@@ -911,7 +911,7 @@ Here is the table of the bonus points provided by the bonus fruits and the spawn
 | ![Orange](../pictures/PM_Orange.webp)              | Orange            | 500          |
 | ![Apple](../pictures/PM_Apple.webp)                | Apple             | 700          |
 | ![Melon](../pictures/PM_Melon.webp)                | Melon             | 1000         |
-| ![Galaxian starship](../pictures/PM_Galaxian.webp) | Galaxian starship | 2000         |
+| ![Galaxian flagship](../pictures/PM_Galaxian.webp) | Galaxian Flagship | 2000         |
 | ![Bell](../pictures/PM_Bell.webp)                  | Bell              | 3000         |
 | ![Key](../pictures/PM_Key.webp)                    | Key               | 5000         |
 
