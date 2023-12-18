@@ -74,11 +74,12 @@ section .text
         call ClearClyde
         call ClearPacMan 
         
-        ;look at "arrows pressed ?" and move PacMan according to the direction pressed
+        call SpritesSpeedUpdate
         
+        ;look at "arrows pressed ?" and move PacMan according to the direction pressed
         call readKeyboard
         
-
+       
         ; move the ghosts according to the defined velocity of each one
         call changePinkyPosition
         call changeBlinkyPosition
