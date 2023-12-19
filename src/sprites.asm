@@ -18,7 +18,7 @@ section .data
 
     currentDisplayedScoreUnit: db 0
     numberPositionInSpritesheet: dw 0
-    scoreBuffer dw 0
+    scoreBuffer: dd 0
 
 section .text
     
@@ -123,120 +123,135 @@ section .text
         .notZeroDisplayScore:
             xor edx, edx
             push eax          ; As eax contains the score, we need to preserve it
-            mov ax, [score]
-            mov cl, 100
-            div cl
-            mov bx, 1
-            mov word[scoreBuffer], ax
-            mov ax, dx
-            mov cl, 10
-            div cl
-            mov word[scoreUnit], dx
-            int3
-            call displayDigits
-            ;mov cx, 10
-            ;div cx
-            ;mov bx, 1
-;
-            ;div cx
-            ;mov [scoreUnit], dx
-            ;call displayDigits
-            ;cmp word[score], 100
-            ;jb .dsp
-;
-            ;mov ax, [score]
-            ;mov cx, 100
-            ;div cx
-            ;div cx
-            ;mov [scoreUnit], dx
-            ;mov bx, 2
-            ;call displayDigits
-            ;cmp word[score], 1000
-            ;jb .dsp
-;
-            ;int3
-            ;xor dx, dx
-            ;mov ax, [score]
-            ;mov cx, 1000
-            ;div cx
-            ;div cx
-            ;mov [scoreUnit], dx
-            ;mov bx, 3
-            ;call displayDigits
-            ;cmp word[score], 1000
-            ;jb .dsp
+            ; tenth
 
-            .dsp:
+            mov eax, [score]
+            mov cx, 10
+            div cx
+            div cx
+            mov bx, 1
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; hundredth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 2
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+            
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; thousandth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 3
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; tenth of thousandth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 4
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; hundredth of thousandth
+            
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 5
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            .skip:
             pop eax
             ret
 
 
     displayDigits: ;ax usable to store data
-        int3
         mov si, MazeSpriteSheet ;Load the spritesheet
-        cmp word [scoreUnit], 0
+        cmp long [scoreUnit], 0
         jne .notzero
         add si, 16*64 ;Position on spritesheet
         call .displayScoreOnScreen
 
         .notzero:
-        cmp word [scoreUnit], 1
+        cmp long [scoreUnit], 1
         jne .notone
         add si, 17*64 ;Position on spritesheet
         call .displayScoreOnScreen
 
 
         .notone:
-        cmp word [scoreUnit], 2
+        cmp long [scoreUnit], 2
         jne .nottwo
         add si, 18*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .nottwo:
-        cmp word [scoreUnit], 3
+        cmp long [scoreUnit], 3
         jne .notthree
         add si, 19*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notthree:
-        cmp word [scoreUnit], 4
+        cmp long [scoreUnit], 4
         jne .notfour
         add si, 20*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notfour:
-        cmp word [scoreUnit], 5
+        cmp long [scoreUnit], 5
         jne .notfive
         add si, 21*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notfive:
-        cmp word [scoreUnit], 6
+        cmp long [scoreUnit], 6
         jne .notsix
         add si, 22*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notsix:
-        cmp word [scoreUnit], 7
+        cmp long [scoreUnit], 7
         jne .notseven
         add si, 23*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .notseven:
-        cmp word [scoreUnit], 8
+        cmp long [scoreUnit], 8
         jne .noteight
         add si, 24*64 ;Position on spritesheet
         call .displayScoreOnScreen
         
 
         .noteight:
-        cmp word [scoreUnit], 9
+        cmp long [scoreUnit], 9
         jne .notnine
         add si, 25*64 ;Position on spritesheet
         call .displayScoreOnScreen
@@ -255,6 +270,18 @@ section .text
             jne .Thousand
             mov di, 16*SCREEN_WIDTH+ 20*8 ; Place to display
             .Thousand:
+            cmp bx, 4
+            jne .TenThousand
+            mov di, 16*SCREEN_WIDTH+ 19*8 ; Place to display
+            .TenThousand:
+            cmp bx, 5
+            jne .HundredThousand
+            mov di, 16*SCREEN_WIDTH+ 18*8 ; Place to display
+            .HundredThousand:
+            cmp bx, 6
+            jne .Million
+            mov di, 16*SCREEN_WIDTH+ 17*8 ; Place to display
+            .Million:
 
             call draw_tile ;Draw the score unit
         ret
