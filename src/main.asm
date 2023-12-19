@@ -1,4 +1,5 @@
 
+
 org 100h
 
 jmp start
@@ -103,6 +104,7 @@ section .text
         call Display_Clyde
         .skipForDeath:
         call Display_PacMan
+        call displayScore
 
         cmp word[strcPacMan + isDead], 1
         je .skipForDeath2
