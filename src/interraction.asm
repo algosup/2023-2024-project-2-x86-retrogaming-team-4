@@ -3,7 +3,7 @@ section .data
     pacManTilePos: dw 0
     pacManCenterX: dw 0
     pacManCenterY: dw 0
-    scoreForLife: dw 999
+    scoreForLife: dw 0
     lifeCounter: db 3
     livesPosX: dw 0
     pelletEaten: dw 0
@@ -472,25 +472,25 @@ section .text
     whereToDisplayLife:
         cmp byte [lifeCounter], 2
         jne .notTwo
-            mov ax, 28*TILE_SIZE+6*TILE_SIZE
+            mov ax, 28*TILE_SIZE+8*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notTwo:
 
         cmp byte [lifeCounter], 3
         jne .notThree
-            mov ax, 28*TILE_SIZE+4*TILE_SIZE
+            mov ax, 28*TILE_SIZE+6*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notThree:
 
         cmp byte [lifeCounter], 4
         jne .notFour
-            mov ax, 28*TILE_SIZE+2*TILE_SIZE
+            mov ax, 28*TILE_SIZE+4*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notFour:
 
-        mov ax, 28*TILE_SIZE
+        mov ax, 28*TILE_SIZE+2*TILE_SIZE
         mov [livesPosX], ax
         ret
