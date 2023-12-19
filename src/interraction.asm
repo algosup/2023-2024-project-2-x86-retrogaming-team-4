@@ -384,13 +384,13 @@ section .text
     IsOnTeleporter:
         ; check if on teleporter
         ; teleport to the other side
-        cmp word[strcPacMan + posX], 0
-        jne .noTPLeft
-        add word[strcPacMan + posX], 303
+        cmp word[strcPacMan + posX], 1
+        ja .noTPLeft
+        mov word[strcPacMan + posX], 302
         .noTPLeft:
-        cmp word[strcPacMan + posX], 304
-        jne .noTP
-        sub word[strcPacMan + posX], 303
+        cmp word[strcPacMan + posX], 303
+        jb .noTP
+        mov word[strcPacMan + posX], 2
         .noTP:
         ret
 
