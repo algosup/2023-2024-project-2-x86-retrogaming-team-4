@@ -94,6 +94,8 @@ section .text
       call Display_Blinky
       mov word [strcBlinky + velocityX], 1
       mov word [strcBlinky + velocityY], 0
+      mov word [strcBlinky + nextVelocityX], 1
+      mov word [strcBlinky + nextVelocityY], 0
 
       mov word [strcInky + posX], 144
       mov word [strcInky + posY], 108
@@ -101,6 +103,8 @@ section .text
       call Display_Inky
       mov word [strcInky + velocityX], 0
       mov word [strcInky + velocityY], 1
+      mov word [strcInky + nextVelocityX], 0
+      mov word [strcInky + nextVelocityY], 1
 
       mov word [strcPinky + posX], 160
       mov word [strcPinky + posY], 108
@@ -108,6 +112,8 @@ section .text
       call Display_Pinky
       mov word [strcPinky + velocityX], 1
       mov word [strcPinky + velocityY], 0
+      mov word [strcPinky + nextVelocityX], 1
+      mov word [strcPinky + nextVelocityY], 0
 
       mov word [strcClyde + posX], 176
       mov word [strcClyde + posY], 108
@@ -115,6 +121,8 @@ section .text
       call Display_Clyde
       mov word [strcClyde + velocityX], -1
       mov word [strcClyde + velocityY], 0
+      mov word [strcClyde + nextVelocityX], -1
+      mov word [strcClyde + nextVelocityY], 0
 
       ret
    

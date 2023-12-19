@@ -40,8 +40,10 @@ section .data
             at targetY, db 0
         iend
 
-    afterMoveTileX dw 0
-    afterMoveTileY dw 0
+    beforeMoveX dw 0
+    beforeMoveY dw 0
+    nextMoveTileX dw 0
+    nextMoveTileY dw 0
     checkTileX dw 0
     checkTileY dw 0
     checkVelocityX dw 0
@@ -64,27 +66,91 @@ section .text
         mov di, strcBlinky
         call moveGhost
 
-        ; TODO
-        ; Check if we changed tile
-        ; if not changed tile
-        ;     ret
-        ; if colliding:
-        ;     recenter on tile
+        ; Check if we passed the tile center
+        mov ax, [beforeMoveX]
+        mov bx, [di + posX]
+        cmp ax, bx
+        je .skipX
+        sub ax, TILE_SIZE / 2
+        sub bx, TILE_SIZE / 2
+        shr ax, 3
+        shr bx, 3
+        cmp ax, bx
+        jne .passedCenter
+        .skipX:
+        ; Same thing for the Y coord
+        mov ax, [beforeMoveY]
+        mov bx, [di + posY]
+        cmp ax, bx
+        je .skipY
+        sub ax, TILE_SIZE / 2
+        sub bx, TILE_SIZE / 2
+        shr ax, 3
+        shr bx, 3
+        .skipY:
+        cmp ax, bx
+        jne .passedCenter
+        ret
+        .passedCenter:
+
+        ; Apply any possible rotation that might have occured
+        mov ax, [di + posX]
+        add ax, TILE_SIZE / 2 - 1
+        and ax, 0xf8 ; Round down to the tile coords
+        add ax, TILE_SIZE / 2
+        mov cx, ax
+        sub ax, [di + posX]
+        jns .dxPositive
+        neg ax
+        .dxPositive:
+        mov bx, [di + posY]
+        add bx, TILE_SIZE / 2 - 1
+        and bx, 0xf8
+        add bx, TILE_SIZE / 2
+        mov dx, bx
+        sub bx, [di + posY]
+        jns .dyPositive
+        neg bx
+        .dyPositive:
+        add ax, bx
+        ; Re-add the offset
+        ; TODO: Refacto this, it hurts my eyes
+        mov [di + posX], cx
+        mov [di + posY], dx
+        cmp word [di + nextVelocityX], 0
+        je .doneOffsetX
+        jl .negativeOffsetX
+        add [di + posX], ax
+        inc word [nextMoveTileX]
+        jmp .doneOffsetX
+        .negativeOffsetX:
+        sub [di + posX], ax
+        dec word [nextMoveTileX]
+        .doneOffsetX:
+        cmp word [di + nextVelocityY], 0
+        je .doneOffsetY
+        jl .negativeOffsetY
+        add [di + posY], ax
+        inc word [nextMoveTileY]
+        jmp .doneOffsetY
+        .negativeOffsetY:
+        sub [di + posY], ax
+        dec word [nextMoveTileY]
+        .doneOffsetY:
 
         ; Change velocity
-        mov ax, [strcBlinky + nextVelocityX]
-        mov [strcBlinky + velocityX], ax
-        mov ax, [strcBlinky + nextVelocityY]
-        mov [strcBlinky + velocityY], ax
+        mov ax, [di + nextVelocityX]
+        mov [di + velocityX], ax
+        mov ax, [di + nextVelocityY]
+        mov [di + velocityY], ax
 
         ; Initialize best distance, dx and dy
         mov word [bestDistance], 0xffff
         mov word [bestVelocityX], 0
         mov word [bestVelocityY], 0
 
-        ; Check in all directions for the best tile
+        ; Check in all directions for the best tile, skip tile if the tile is in our back
         ; TODO: Check for overflows (if check tile is outside the maze)
-        ; TODO: Skip tile if the tile is in our back
         ; Check up
         mov word [checkVelocityX], 0
         mov word [checkVelocityY], -1
@@ -104,42 +170,47 @@ section .text
 
         ; Set next velocities
         mov ax, [bestVelocityX]
-        mov [strcBlinky + nextVelocityX], ax
+        mov [di + nextVelocityX], ax
         mov ax, [bestVelocityY]
-        mov [strcBlinky + nextVelocityY], ax
+        mov [di + nextVelocityY], ax
 
         ret
 
     moveGhost:
-        ; Move
-        mov ax, [di + posY]
-        add ax, [di + velocityY]
-        mov [di + posY], ax
+        ; Memorize old position
         mov ax, [di + posX]
+        mov [beforeMoveX], ax
+        mov bx, [di + posY]
+        mov [beforeMoveY], bx
+
+        ; Move
         add ax, [di + velocityX]
         mov [di + posX], ax
+        add bx, [di + velocityY]
+        mov [di + posY], bx
     
         ; Calculate new tile position
         mov bx, TILE_SIZE
         add ax, SPRITE_SIZE / 2
         xor dx, dx
         div bx
-        mov [afterMoveTileX], ax
+        mov [nextMoveTileX], ax
         mov ax, [di + posY]
         add ax, SPRITE_SIZE / 2
         xor dx, dx
         div bx
-        mov [afterMoveTileY], ax
+        mov [nextMoveTileY], ax
 
         ; TODO: Check collision
 
         ret
     
     checkTile:
-        mov ax, [afterMoveTileX]
+        ; Calculate the position of the tile to be checked
+        mov ax, [nextMoveTileX]
         add ax, [checkVelocityX]
         mov [checkTileX], ax
-        mov ax, [afterMoveTileY]
+        mov ax, [nextMoveTileY]
         add ax, [checkVelocityY]
         mov [checkTileY], ax
 
