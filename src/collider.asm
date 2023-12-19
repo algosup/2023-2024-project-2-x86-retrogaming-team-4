@@ -117,39 +117,19 @@ section .text
         mov ax, [strcPacMan + posX]
         mov bx, [strcPacMan + posY]
 
-        cmp ax, cx
-        je .onSameXaxis
-        cmp bx, dx
-        je .onSameYaxis
+
+        call AbsoluteDifference
+        cmp ax, TILE_SIZE-3
+        jg .notTouched
         
-        jmp  .notTouched
-
+        mov ax, bx
+        mov cx, dx
+        call AbsoluteDifference
+        cmp ax, TILE_SIZE-3
+        jg .notTouched
         
-
-        .onSameYaxis:
-            ; get the difference between pacman and ghost position
-            sub ax, cx
-
-            ; get the absolute value of this difference
-            mov cx, ax
-            sar cx, 15
-            xor ax, cx
-            shr cx, 15
-            add ax, cx
-            
-            ; check if they are touching each other
-            cmp ax, TILE_SIZE
-            jg .notTouched
-            
-
-        .onSameXaxis:
-            mov ax, bx
-            mov cx, dx
-            jmp .onSameYaxis
-
 
         .touched:
-            call waitForAnyKeyPressed
             cmp byte [afraid], 0
             je .normalContact
             
@@ -177,6 +157,25 @@ section .text
         .notTouched:
         
         ret
+
+    AbsoluteDifference:
+    ; get the absolute difference between 2 numbers
+    ; parameters :
+    ; ax : number 1
+    ; cx : number 2
+    ; return : ax = absolute difference
+
+        sub ax, cx
+        ; get the absolute value of this difference
+        mov cx, ax
+        sar cx, 15
+        xor ax, cx
+        shr cx, 15
+        add ax, cx
+
+        ret
+    
+
 
     isColliding:
 
