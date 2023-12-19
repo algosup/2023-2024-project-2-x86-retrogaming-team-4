@@ -3,7 +3,7 @@ section .data
     pacManTilePos: dw 0
     pacManCenterX: dw 0
     pacManCenterY: dw 0
-    scoreForLife: dw 0
+    scoreForLife: dw 999
     lifeCounter: db 3
     livesPosX: dw 0
     pelletEaten: dw 0
@@ -145,7 +145,7 @@ section .text
         ; increment score
         add long[score], 1
         add word [numberPelletEaten], 1
-        add word[scoreForLife], 10
+        add word[scoreForLife], 1
         inc word[pelletEaten]
         call setTileEmpty
 
@@ -155,7 +155,7 @@ section .text
         ; increment score
         add long[score], 5
         add word [numberPelletEaten], 1
-        add word[scoreForLife], 50
+        add word[scoreForLife], 5
         call frightTime
         call setTileEmpty
 
@@ -164,7 +164,7 @@ section .text
     isCherry:
         ; increment score
         add long[score], 20
-        add word[scoreForLife], 200
+        add word[scoreForLife], 20
         call setTileEmpty
 
         ret
@@ -173,7 +173,7 @@ section .text
         
         ; increment score
         add long[score], 30
-        add word[scoreForLife], 300
+        add word[scoreForLife], 30
         call setTileEmpty
 
         ret
@@ -181,7 +181,7 @@ section .text
     isOrange:
         ; increment score
         add long[score], 50
-        add word[scoreForLife], 500
+        add word[scoreForLife], 50
         call setTileEmpty
 
         ret
@@ -189,7 +189,7 @@ section .text
     isApple:
         ; increment score
         add long[score], 70
-        add word[scoreForLife], 700
+        add word[scoreForLife], 70
         call setTileEmpty
 
         ret
@@ -197,7 +197,7 @@ section .text
     isMelon:
         ; increment score
         add long[score], 100
-        add word[scoreForLife], 1000
+        add word[scoreForLife], 100
         call setTileEmpty
 
         ret
@@ -205,7 +205,7 @@ section .text
     isGalaxianFlagship	:
         ; increment score
         add long[score], 200
-        add word[scoreForLife], 2000
+        add word[scoreForLife], 200
         call setTileEmpty
 
         ret
@@ -213,7 +213,7 @@ section .text
     isBell:
         ; increment score
         add long[score], 300
-        add word[scoreForLife], 3000
+        add word[scoreForLife], 300
         call setTileEmpty
 
         ret
@@ -221,7 +221,7 @@ section .text
     isKey:
         ; increment score
         add long[score], 500
-        add word[scoreForLife], 5000
+        add word[scoreForLife], 500
         call setTileEmpty
 
         ret
@@ -457,7 +457,7 @@ section .text
         ret
 
     lifeManagement: 
-        cmp word[scoreForLife], 10000
+        cmp word[scoreForLife], 1000
         jb .noNewLife
             mov word[scoreForLife], 0
             cmp byte [lifeCounter], 5
@@ -472,21 +472,21 @@ section .text
     whereToDisplayLife:
         cmp byte [lifeCounter], 2
         jne .notTwo
-            mov ax, 28*TILE_SIZE+3*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+6*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notTwo:
 
         cmp byte [lifeCounter], 3
         jne .notThree
-            mov ax, 28*TILE_SIZE+2*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+4*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notThree:
 
         cmp byte [lifeCounter], 4
         jne .notFour
-            mov ax, 28*TILE_SIZE+1*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+2*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notFour:
