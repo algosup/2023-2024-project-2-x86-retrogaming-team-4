@@ -32,13 +32,15 @@ section .text
         ;Set the maze
         call BuildBackgroundBuffer
 
+        NewLevel:
 
         call MazeToBGbuffer
+        call BuildMazeModelBuffer
 
         resetPoint:
 
         call DisplayMaze
-        call BuildMazeModelBuffer
+        
         
 
         ;Set the sprites (first state) 
@@ -51,7 +53,7 @@ section .text
         ;Set the Timer and clock for the game loop
         call setTimer
 
-        call displayGameOver
+        ; call displayGameOver
         
         call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
@@ -114,6 +116,8 @@ section .text
         
         ;display all on the real screen (quick)
         call UpdateScreen
+
+        call checkLevel
         
 ;-------------------------------------------------
 ; GOTO GAME LOOP

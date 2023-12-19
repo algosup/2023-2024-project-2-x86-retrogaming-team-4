@@ -12,6 +12,8 @@ section .data
     endFruitTime: dd 0, 0
     fruitTilePos: dw 0
     fruitSprite: dw 0
+    level dw 1
+    numberPelletEaten dw 0
 
 section .text
 
@@ -120,9 +122,22 @@ section .text
             call isKey
             jmp .eraseFruit
 
+    checkLevel:
+        cmp word [numberPelletEaten], 260
+        jne .endFunc
+            mov word [numberPelletEaten], 0
+            add word [level], 1
+            mov word [strcPacMan + velocityX], 0
+            mov word [strcPacMan + velocityY], 0
+            mov byte [keyPressed], 0
+            jmp NewLevel
+        .endFunc:
+        ret
+
     isPellet:
         ; increment score
         add word[score], 10
+        add word [numberPelletEaten], 1
         add word[scoreForLife], 10
         inc word[pelletEaten]
         call setTileEmpty
@@ -132,6 +147,7 @@ section .text
     isPowerPellet:
         ; increment score
         add word[score], 50
+        add word [numberPelletEaten], 1
         add word[scoreForLife], 50
         call frightTime
         call setTileEmpty

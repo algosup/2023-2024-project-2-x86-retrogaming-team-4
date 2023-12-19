@@ -134,40 +134,37 @@ section .text
     displayGameOver:
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 72*64
-        mov di, 0
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*16
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 73*64
-        mov di, 8
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*17
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 74*64
-        mov di, 16
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*18
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 75*64
-        mov di, 24
-        call draw_tile
-        mov si, MazeSpriteSheet ;Load the spritesheet
-        add si, 15*64
-        mov di, 32
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*19
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 76*64
-        mov di, 40
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*21
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 77*64
-        mov di, 48
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*22
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 75*64
-        mov di, 56
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*23
         call draw_tile
         mov si, MazeSpriteSheet ;Load the spritesheet
         add si, 78*64
-        mov di, 64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*24
         call draw_tile
+        call UpdateScreen
         ret
 
     ClearPacMan:

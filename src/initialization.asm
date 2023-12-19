@@ -143,11 +143,10 @@ section .text
       .death:
          call DisplayMaze
          inc word[timerDeathPacMan]
-         cmp word[timerDeathPacMan], 0x3
+         cmp word[timerDeathPacMan], 0x3; how many gameloop'sframes skip for frequency of actualization of the pacman death animation
          jne .NOTloadAnimation
          call PacmanDeathAnimation
          call Display_PacMan
-         call checkGameOver
          cmp word[strcPacMan + isDead], 0
          je .resetGame
          
@@ -155,6 +154,7 @@ section .text
          ret
 
          .resetGame:
+            call checkGameOver
             mov word[PacmanDeathCounter], PACMAN_DEATH_1-1
             call resetGame
             ret
@@ -162,8 +162,9 @@ section .text
    checkGameOver:
       cmp byte [isGameOver], 1
       jne .notGameOver
+         call DisplayMaze
          call displayGameOver
-         cmp word [strcPacMan + isDead], 0
-         je exit
+         call waitForAnyKeyPressed
+         jmp exit
       .notGameOver:
       ret
