@@ -155,7 +155,6 @@ section .text
             call displayLives
             dec byte [lifeCounter]
             
-            call resetGame
             mov word [strcBlinky + isChased], 0
             mov word [strcPinky + isChased], 0
             mov word [strcInky + isChased], 0

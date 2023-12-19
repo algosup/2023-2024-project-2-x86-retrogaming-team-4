@@ -1,4 +1,4 @@
-[map symbols pac.map]
+
 org 100h
 
 jmp start
