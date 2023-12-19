@@ -18,6 +18,8 @@ section .data
 
     ghostCollision db 0
 
+    isGameOver db 0
+
 section .text
 
     readContact:
@@ -29,11 +31,14 @@ section .text
             ret
 
     PinkyContact:
-        mov bx, [strcPinky  + posX]
-        mov ax, [strcPinky  + posY]
-        mov dx, [strcPinky + isChased]
-        mov [afraid], dx
+
+        mov ax, [strcPinky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcPinky  + posX]
+        mov dx, [strcPinky  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearPinky
@@ -47,11 +52,13 @@ section .text
         ret
         
     BlinkyContact:
-        mov bx, [strcBlinky  + posX]
-        mov ax, [strcBlinky  + posY]
-        mov dx, [strcBlinky + isChased]
-        mov [afraid], dx
+        mov ax, [strcBlinky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcBlinky  + posX]
+        mov dx, [strcBlinky  + posY]
         call isThereContact
+
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearBlinky
@@ -65,11 +72,13 @@ section .text
         ret
 
     InkyContact:
-        mov bx, [strcInky  + posX]
-        mov ax, [strcInky  + posY]
-        mov dx, [strcInky + isChased]
-        mov [afraid], dx
+        mov ax, [strcInky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcInky  + posX]
+        mov dx, [strcInky  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearInky
@@ -83,11 +92,13 @@ section .text
         ret
     
     ClydeContact:
-        mov bx, [strcClyde  + posX]
-        mov ax, [strcClyde  + posY]
-        mov dx, [strcClyde + isChased]
-        mov [afraid], dx
+        mov ax, [strcClyde + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcClyde  + posX]
+        mov dx, [strcClyde  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearClyde
@@ -100,47 +111,44 @@ section .text
         .noGhostCollision:
         ret
 
-
     isThereContact:
     ; read if a ghost touched pacman (or the reverse)
 
-        push ds ; pop at the end
+        mov ax, [strcPacMan + posX]
+        mov bx, [strcPacMan + posY]
 
-        ;calculates the linear position of the ghost (result in ax)
-        mov cx, SCREEN_WIDTH
-        mul cx
-        add ax, bx 
-
-        ;stores the color of pacman into 'ah'
-        mov di, palette
-        inc di, ;(add 1 to di) cause '1' is the color of pacman according to the palette of colors for the spritesheet
-        xor bx, bx
-        mov bl, [ds:di]
-
-        ;the destination is 'al'
+        cmp ax, cx
+        je .onSameXaxis
+        cmp bx, dx
+        je .onSameYaxis
         
-        ;set the source 'ds:si'
-        push word [ScreenBufferSegment]
-        pop ds
-        mov si, ax  
-        
-        mov dx, SPRITE_SIZE
-        .eachLine:
-            mov cx, SPRITE_SIZE
-            .eachPixel:
-                lodsb
-                cmp al, bl
-                je .touched
-                dec cx
-                jnz .eachPixel
-            add si, SCREEN_WIDTH - SPRITE_SIZE
-            dec dx
-            jnz .eachLine
-        pop ds
-        jmp .notTouched
+        jmp  .notTouched
+
+        .onSameXaxis:
+            mov ax, bx
+            mov cx, dx
+
+        .onSameYaxis:
+            ; get the difference between pacman and ghost position
+            sub ax, cx
+
+            ; get the absolute value of this difference
+            mov cx, ax
+            sar cx, 15
+            xor ax, cx
+            shr cx, 15
+            add ax, cx
+            
+            ; check if they are touching each other
+            mov cx, TILE_SIZE
+            cmp byte[strcPacMan + direction], 0
+            je .pacManIsGoingRight
+            .pacManIsGoingRight:
+            cmp ax, cx
+            jg .notTouched
 
         .touched:
-            pop ds
+            call waitForAnyKeyPressed
             cmp byte [afraid], 0
             je .normalContact
             
@@ -154,6 +162,10 @@ section .text
             call whereToDisplayLife
             call displayLives
             dec byte [lifeCounter]
+            cmp byte [lifeCounter], 0
+            jne .notGameOver
+                mov byte [isGameOver], 1
+            .notGameOver:
             
             mov word [strcBlinky + isChased], 0
             mov word [strcPinky + isChased], 0
