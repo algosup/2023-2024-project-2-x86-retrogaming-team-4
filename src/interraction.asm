@@ -3,19 +3,24 @@ section .data
     pacManTilePos: dw 0
     pacManCenterX: dw 0
     pacManCenterY: dw 0
-    score: dw 0
     scoreForLife: dw 0
     lifeCounter: db 3
     livesPosX: dw 0
     pelletEaten: dw 0
+    score: dd 0
+    scoreUnit: dd 0
+
     endFrightTime: dd 0, 0
+    
     endFruitTime: dd 0, 0
     fruitTilePos: dw 0
     fruitSprite: dw 0
+    level dw 1
+    numberPelletEaten dw 0
 
 section .text
 
-    pelletEating:
+     pelletEating:
         mov bx, [strcPacMan + posX]
         add bx, 5
         mov [pacManCenterX], bx
@@ -37,6 +42,7 @@ section .text
         ; get the tile at pacman's position
         mov si, MazeModelBuffer
         add si, [pacManTilePos]
+
         ;compare the tile to the pellet
         cmp byte[si], 0x0D
         je .pellet    
@@ -67,6 +73,7 @@ section .text
 
         cmp byte[si], 0x16
         je .key
+
         
         .erase:
             xor ax, ax
@@ -120,10 +127,25 @@ section .text
             call isKey
             jmp .eraseFruit
 
+    checkLevel:
+        cmp word [numberPelletEaten], 260
+        jne .endFunc
+            mov word [numberPelletEaten], 0
+            add word [level], 1
+            mov word [strcPacMan + velocityX], 0
+            mov word [strcPacMan + velocityY], 0
+            mov byte [keyPressed], 0
+            call displayNextLevel
+            call waitForAnyKeyPressed
+            jmp NewLevel
+        .endFunc:
+        ret
+
     isPellet:
         ; increment score
-        add word[score], 10
-        add word[scoreForLife], 10
+        add long[score], 1
+        add word [numberPelletEaten], 1
+        add word[scoreForLife], 1
         inc word[pelletEaten]
         call setTileEmpty
 
@@ -131,17 +153,18 @@ section .text
 
     isPowerPellet:
         ; increment score
-        add word[score], 50
-        add word[scoreForLife], 50
+        add long[score], 5
+        add word [numberPelletEaten], 1
+        add word[scoreForLife], 5
         call frightTime
         call setTileEmpty
 
         ret
-
+    
     isCherry:
         ; increment score
-        add word[score], 200
-        add word[scoreForLife], 200
+        add long[score], 20
+        add word[scoreForLife], 20
         call setTileEmpty
 
         ret
@@ -149,56 +172,56 @@ section .text
     isStrawberry:
         
         ; increment score
-        add word[score], 300
-        add word[scoreForLife], 300
+        add long[score], 30
+        add word[scoreForLife], 30
         call setTileEmpty
 
         ret
 
     isOrange:
         ; increment score
-        add word[score], 500
-        add word[scoreForLife], 500
+        add long[score], 50
+        add word[scoreForLife], 50
         call setTileEmpty
 
         ret
 
     isApple:
         ; increment score
-        add word[score], 700
-        add word[scoreForLife], 700
+        add long[score], 70
+        add word[scoreForLife], 70
         call setTileEmpty
 
         ret
 
     isMelon:
         ; increment score
-        add word[score], 1000
-        add word[scoreForLife], 1000
+        add long[score], 100
+        add word[scoreForLife], 100
         call setTileEmpty
 
         ret
 
     isGalaxianFlagship	:
         ; increment score
-        add word[score], 2000
-        add word[scoreForLife], 2000
+        add long[score], 200
+        add word[scoreForLife], 200
         call setTileEmpty
 
         ret
 
     isBell:
         ; increment score
-        add word[score], 3000
-        add word[scoreForLife], 3000
+        add long[score], 300
+        add word[scoreForLife], 300
         call setTileEmpty
 
         ret
 
     isKey:
         ; increment score
-        add word[score], 5000
-        add word[scoreForLife], 5000
+        add long[score], 500
+        add word[scoreForLife], 500
         call setTileEmpty
 
         ret
@@ -355,7 +378,6 @@ section .text
         ; set the tile to empty
         mov byte[si], 0x0F
         ret
-    
 
     frightTime:
         mov byte[strcBlinky + isChased], 1
@@ -435,7 +457,7 @@ section .text
         ret
 
     lifeManagement: 
-        cmp word[scoreForLife], 10000
+        cmp word[scoreForLife], 1000
         jb .noNewLife
             mov word[scoreForLife], 0
             cmp byte [lifeCounter], 5
@@ -450,25 +472,25 @@ section .text
     whereToDisplayLife:
         cmp byte [lifeCounter], 2
         jne .notTwo
-            mov ax, 28*TILE_SIZE+3*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+8*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notTwo:
 
         cmp byte [lifeCounter], 3
         jne .notThree
-            mov ax, 28*TILE_SIZE+2*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+6*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notThree:
 
         cmp byte [lifeCounter], 4
         jne .notFour
-            mov ax, 28*TILE_SIZE+1*3*TILE_SIZE
+            mov ax, 28*TILE_SIZE+4*TILE_SIZE
             mov [livesPosX], ax
             ret
         .notFour:
 
-        mov ax, 28*TILE_SIZE
+        mov ax, 28*TILE_SIZE+2*TILE_SIZE
         mov [livesPosX], ax
         ret
