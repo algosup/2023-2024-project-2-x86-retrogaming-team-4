@@ -1,10 +1,10 @@
 %define BACKGROUND_TILE_HEXACODE 0x0F 
 %define POWER_PELLET_TILE_HEXACODE 0x0E
-; OFFSETS = position in terms of pixels of the beginning of the tile in the screen
-%define POWER_PELLET_1_OFFSET 20512
-%define POWER_PELLET_2_OFFSET 20760
-%define POWER_PELLET_3_OFFSET 51232
-%define POWER_PELLET_4_OFFSET 51480
+; POSITIONS = position in terms of tiles in the maze model (= 40*y + x)
+%define POWER_PELLET_1_POSITION 324
+%define POWER_PELLET_2_POSITION 804
+%define POWER_PELLET_3_POSITION 355
+%define POWER_PELLET_4_POSITION 835
 
 section .bss
 

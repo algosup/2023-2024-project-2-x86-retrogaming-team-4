@@ -178,7 +178,6 @@ section .text
 
     SwitchMouthOpening:
     ; just toogles the frame of pacman if opened -> closed, and the reverse
-        int3
         cmp bx, PACMAN_FULL
         je .toSlightlyClosed
 
@@ -236,13 +235,13 @@ section .text
             cmp word [ArePowerPelletsDisplayed], 1
             je .erase
             .display:
-                mov ax, POWER_PELLET_1_OFFSET
+                mov ax, POWER_PELLET_1_POSITION
                 call DisplayPowerPellet
-                mov ax, POWER_PELLET_2_OFFSET
+                mov ax, POWER_PELLET_2_POSITION
                 call DisplayPowerPellet
-                mov ax, POWER_PELLET_3_OFFSET
+                mov ax, POWER_PELLET_3_POSITION
                 call DisplayPowerPellet
-                mov ax, POWER_PELLET_4_OFFSET
+                mov ax, POWER_PELLET_4_POSITION
                 call DisplayPowerPellet
 
                 mov word [ArePowerPelletsDisplayed], 1
@@ -251,13 +250,13 @@ section .text
         ret
 
             .erase:
-                mov ax, POWER_PELLET_1_OFFSET
+                mov ax, POWER_PELLET_1_POSITION
                 call ErasePowerPellet
-                mov ax, POWER_PELLET_2_OFFSET
+                mov ax, POWER_PELLET_2_POSITION
                 call ErasePowerPellet
-                mov ax, POWER_PELLET_3_OFFSET
+                mov ax, POWER_PELLET_3_POSITION
                 call ErasePowerPellet
-                mov ax, POWER_PELLET_4_OFFSET
+                mov ax, POWER_PELLET_4_POSITION
                 call ErasePowerPellet
 
                 mov word [ArePowerPelletsDisplayed], 0
@@ -271,25 +270,78 @@ section .text
         DisplayPowerPellet:
         ; need to define :
         ; ax = the linear position of the tile
+            push ax
+            call GetValueInMazeModelBuffer
+            cmp ax, BACKGROUND_TILE_HEXACODE
+            je .noDisplay
+            pop ax
+            call CalculatePixelPosition
             mov bx, MazeSpriteSheet
             add bx, POWER_PELLET_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
             call WriteTile
 
             ret
+            
+            .noDisplay:
+            pop ax
+            ret
 
         ErasePowerPellet:
         ; need to define :
         ; ax = the linear position of the tile
+
+            push ax
+            call GetValueInMazeModelBuffer
+            cmp ax, BACKGROUND_TILE_HEXACODE
+            je .noDisplay
+            pop ax
+            call CalculatePixelPosition
             mov bx, MazeSpriteSheet
             add bx, BACKGROUND_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
             call WriteTile
 
             ret
-        
+
+            .noDisplay:
+            pop ax
+            ret
+
+        GetValueInMazeModelBuffer:
+        ; define ax = the linear position of the tile in the maze model
+        ; result in ax
+            
+            mov si, MazeModelBuffer
+            add si, ax
+            xor ax, ax
+            mov al, [ds:si]
+
+            ret
+
+        CalculatePixelPosition:
+        ; need to define ax = the linear position of the tile in the maze model
+        ; result in ax (linear pixel position of the beginning of the tile in the screen)
+
+             
+            mov cl, 40
+            div cl
+            push ax
+            xor dx, dx
+            mov dl, al
+            mov ax, SCREEN_WIDTH * TILE_SIZE 
+            mul dx
+            mov cx, ax
+            pop ax
+            mov dl, ah
+            mov ax, TILE_SIZE
+            mul dx
+            add ax, cx
+
+            ret
+
         WriteTile:
         ; need to define :
         ; ax = the linear position where display the tile
-        ; bx = the offset of the tile to display
+        ; bx = the POSITION of the tile to display
             
             ;set the destination 'es:di'
             push word [ScreenBufferSegment] 
@@ -299,7 +351,6 @@ section .text
             ;set the source 'ds:si'
             mov si, bx
 
-                
             mov dx, TILE_SIZE
             .eachLine:
                 mov cx, TILE_SIZE
