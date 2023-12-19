@@ -1,4 +1,5 @@
-[map symbols pac.map]
+
+
 org 100h
 
 jmp start
@@ -32,13 +33,15 @@ section .text
         ;Set the maze
         call BuildBackgroundBuffer
 
+        NewLevel:
 
         call MazeToBGbuffer
+        call BuildMazeModelBuffer
 
         resetPoint:
 
         call DisplayMaze
-        call BuildMazeModelBuffer
+        
         
 
         ;Set the sprites (first state) 
@@ -50,6 +53,9 @@ section .text
 
         ;Set the Timer and clock for the game loop
         call setTimer
+
+        cmp word [level], 2
+        je gameloop
         
         call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
@@ -73,7 +79,7 @@ section .text
         call ClearInky
         call ClearClyde
         call ClearPacMan 
-        
+        call AnimatePowerPellet
         ;look at "arrows pressed ?" and move PacMan according to the direction pressed
          call GhostsSpeedUpdate
         call readKeyboard
@@ -86,6 +92,7 @@ section .text
         call changeClydePosition
         
 
+
         call AnimatePacMan
         call AnimateGhosts
 
@@ -97,17 +104,24 @@ section .text
         call Display_Clyde
         .skipForDeath:
         call Display_PacMan
+        call displayScore
+
+        cmp word[strcPacMan + isDead], 1
+        je .skipForDeath2
 
         ;read if a ghost hit pacman or the reverse
         
         call readContact
 
+        .skipForDeath2:
         ;display fruits
         call setFruits
         call checkFruitPrint
         
         ;display all on the real screen (quick)
         call UpdateScreen
+
+        call checkLevel
         
 ;-------------------------------------------------
 ; GOTO GAME LOOP

@@ -10,6 +10,10 @@ section .data
 
     frameOf_Lives dw PACMAN_LEFT_2
 
+    currentDisplayedScoreUnit: db 0
+    numberPositionInSpritesheet: dw 0
+    scoreBuffer: dd 0
+
 section .text
 
     Display_PacMan:
@@ -131,6 +135,267 @@ section .text
         call draw_sprite_bg_buffer
         ret
 
+    displayGameOver:
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 72*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*16
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 73*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*17
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 74*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*18
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 75*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*19
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 76*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*21
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 77*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*22
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 75*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*23
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 78*64
+        mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*24
+        call draw_tile
+        call UpdateScreen
+        ret
+
+    displayNextLevel:
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 79*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*16
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*17
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 81*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*18
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 82*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*19
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 83*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*21
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*22
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 84*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*23
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*24
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 83*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*25
+        call draw_tile
+        call UpdateScreen
+        ret
+
+    displayScore:
+        mov eax, [score]
+
+        cmp eax, 0 ; Compare if the score is equal to 0
+        jne .notZeroDisplayScore
+        ret
+
+        .notZeroDisplayScore:
+            xor edx, edx
+            push eax          ; As eax contains the score, we need to preserve it
+            ; tenth
+
+            mov eax, [score]
+            mov cx, 10
+            div cx
+            mov bx, 1
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; hundredth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 2
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+            
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; thousandth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 3
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; tenth of thousandth
+
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 4
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; hundredth of thousandth
+            
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 5
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; Million
+            
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 6
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            .skip:
+            pop eax
+            ret
+
+
+    displayDigits: ;ax usable to store data
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        cmp long [scoreUnit], 0
+        jne .notzero
+        add si, 16*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+
+        .notzero:
+        cmp long [scoreUnit], 1
+        jne .notone
+        add si, 17*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+
+
+        .notone:
+        cmp long [scoreUnit], 2
+        jne .nottwo
+        add si, 18*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .nottwo:
+        cmp long [scoreUnit], 3
+        jne .notthree
+        add si, 19*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notthree:
+        cmp long [scoreUnit], 4
+        jne .notfour
+        add si, 20*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notfour:
+        cmp long [scoreUnit], 5
+        jne .notfive
+        add si, 21*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notfive:
+        cmp long [scoreUnit], 6
+        jne .notsix
+        add si, 22*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notsix:
+        cmp long [scoreUnit], 7
+        jne .notseven
+        add si, 23*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .notseven:
+        cmp long [scoreUnit], 8
+        jne .noteight
+        add si, 24*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+        
+
+        .noteight:
+        cmp long [scoreUnit], 9
+        jne .notnine
+        add si, 25*64 ;Position on spritesheet
+        call .displayScoreOnScreen
+
+        .notnine:
+        ret
+    
+        .displayScoreOnScreen:
+
+            mov di, 16*SCREEN_WIDTH+ 22*8 ; Place to display
+            cmp bx, 2
+            jne .Hundred
+            mov di, 16*SCREEN_WIDTH+ 21*8 ; Place to display
+            .Hundred:
+            cmp bx, 3
+            jne .Thousand
+            mov di, 16*SCREEN_WIDTH+ 20*8 ; Place to display
+            .Thousand:
+            cmp bx, 4
+            jne .TenThousand
+            mov di, 16*SCREEN_WIDTH+ 19*8 ; Place to display
+            .TenThousand:
+            cmp bx, 5
+            jne .HundredThousand
+            mov di, 16*SCREEN_WIDTH+ 18*8 ; Place to display
+            .HundredThousand:
+            cmp bx, 6
+            jne .Million
+            mov di, 16*SCREEN_WIDTH+ 17*8 ; Place to display
+            .Million:
+
+            call draw_tile ;Draw the score unit
+        ret
+        
+    
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 
@@ -197,7 +462,8 @@ section .text
         push word [BackgroundBufferSegment]
         pop ds
         mov si, di      
-         
+        
+
         mov dx, SPRITE_SIZE
 
         .eachLine:
@@ -243,7 +509,6 @@ section .text
             mov di, bx
             mov ah, 0
 
-            
             .writeTheTile:
                 ;set the source 'al' : the background color
                 mov al, BACKGROUND_COLOR
@@ -397,6 +662,20 @@ section .text
 
         pop es
 
+        ret
+
+    draw_tile:
+        mov ax, [ScreenBufferSegment]
+        mov es, ax
+        mov dx, TILE_SIZE ;number of lines
+        .eachLine:
+            mov cx, TILE_SIZE
+            rep movsb
+            add di, SCREEN_WIDTH - TILE_SIZE
+            dec dx
+            cmp dx, 0
+            jne .eachLine
+        
         ret
 
     draw_sprite_bg_buffer:

@@ -11,6 +11,8 @@ section .data
 
     ghostCollision db 0
 
+    isGameOver db 0
+
 section .text
 
     readContact:
@@ -147,8 +149,11 @@ section .text
             call whereToDisplayLife
             call displayLives
             dec byte [lifeCounter]
+            cmp byte [lifeCounter], 0
+            jne .notGameOver
+                mov byte [isGameOver], 1
+            .notGameOver:
             
-            call resetGame
             mov word [strcBlinky + isChased], 0
             mov word [strcPinky + isChased], 0
             mov word [strcInky + isChased], 0

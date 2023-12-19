@@ -10,10 +10,13 @@ section .data
     PacmanDeathCounter dw PACMAN_DEATH_1 - 1
     PacmanFrameBuffer dw PACMAN_RIGHT_2
 
+    ArePowerPelletsDisplayed dw 1
+    PPAnimationCounter dw 0
+
 section .text
 
     AnimateGhosts:
-        ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
+    ; change the state of the ghost (normal, afraid or blinking afraid white / blue) and if the animation timer is reached, it switchs to the second frame of the actual state .
 
         inc word [GhostsAnimationCounter] ; counter is from 0 to 6 (6 frames = 0.25 seconds)
 
@@ -175,7 +178,6 @@ section .text
 
     SwitchMouthOpening:
     ; just toogles the frame of pacman if opened -> closed, and the reverse
-        int3
         cmp bx, PACMAN_FULL
         je .toSlightlyClosed
 
@@ -217,3 +219,143 @@ section .text
         mov word[strcPacMan + isDead], 0
         
         ret
+    
+    AnimatePowerPellet:
+
+        inc word [PPAnimationCounter] 
+
+        cmp  word [PPAnimationCounter], FRAMES_COUNTER_POWER_PELLET_ANIMATION ; check the timer
+        jne .noAnimation
+
+        mov word [PPAnimationCounter],0 ; reset the counter/timer
+        jmp .toggle ; toogle the frames of ghosts
+
+        .toggle:
+
+            cmp word [ArePowerPelletsDisplayed], 1
+            je .erase
+            .display:
+                mov ax, POWER_PELLET_1_POSITION
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_2_POSITION
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_3_POSITION
+                call DisplayPowerPellet
+                mov ax, POWER_PELLET_4_POSITION
+                call DisplayPowerPellet
+
+                mov word [ArePowerPelletsDisplayed], 1
+
+                mov word [PPAnimationCounter], 0
+        ret
+
+            .erase:
+                mov ax, POWER_PELLET_1_POSITION
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_2_POSITION
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_3_POSITION
+                call ErasePowerPellet
+                mov ax, POWER_PELLET_4_POSITION
+                call ErasePowerPellet
+
+                mov word [ArePowerPelletsDisplayed], 0
+
+                mov word [PPAnimationCounter], 0
+            
+            .noAnimation:
+
+        ret
+
+        DisplayPowerPellet:
+        ; need to define :
+        ; ax = the linear position of the tile
+            push ax
+            call GetValueInMazeModelBuffer
+            cmp ax, BACKGROUND_TILE_HEXACODE
+            je .noDisplay
+            pop ax
+            call CalculatePixelPosition
+            mov bx, MazeSpriteSheet
+            add bx, POWER_PELLET_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
+            call WriteTile
+
+            ret
+            
+            .noDisplay:
+            pop ax
+            ret
+
+        ErasePowerPellet:
+        ; need to define :
+        ; ax = the linear position of the tile
+
+            push ax
+            call GetValueInMazeModelBuffer
+            cmp ax, BACKGROUND_TILE_HEXACODE
+            je .noDisplay
+            pop ax
+            call CalculatePixelPosition
+            mov bx, MazeSpriteSheet
+            add bx, BACKGROUND_TILE_HEXACODE * TILE_SIZE * TILE_SIZE
+            call WriteTile
+
+            ret
+
+            .noDisplay:
+            pop ax
+            ret
+
+        GetValueInMazeModelBuffer:
+        ; define ax = the linear position of the tile in the maze model
+        ; result in ax
+            
+            mov si, MazeModelBuffer
+            add si, ax
+            xor ax, ax
+            mov al, [ds:si]
+
+            ret
+
+        CalculatePixelPosition:
+        ; need to define ax = the linear position of the tile in the maze model
+        ; result in ax (linear pixel position of the beginning of the tile in the screen)
+
+             
+            mov cl, 40
+            div cl
+            push ax
+            xor dx, dx
+            mov dl, al
+            mov ax, SCREEN_WIDTH * TILE_SIZE 
+            mul dx
+            mov cx, ax
+            pop ax
+            mov dl, ah
+            mov ax, TILE_SIZE
+            mul dx
+            add ax, cx
+
+            ret
+
+        WriteTile:
+        ; need to define :
+        ; ax = the linear position where display the tile
+        ; bx = the POSITION of the tile to display
+            
+            ;set the destination 'es:di'
+            push word [ScreenBufferSegment] 
+            pop es 
+            mov di, ax
+
+            ;set the source 'ds:si'
+            mov si, bx
+
+            mov dx, TILE_SIZE
+            .eachLine:
+                mov cx, TILE_SIZE
+                rep movsb
+                add di, SCREEN_WIDTH - TILE_SIZE
+                dec dx
+                jnz .eachLine
+            ret
