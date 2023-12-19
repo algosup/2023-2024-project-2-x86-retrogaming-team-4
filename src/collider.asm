@@ -124,9 +124,7 @@ section .text
         
         jmp  .notTouched
 
-        .onSameXaxis:
-            mov ax, bx
-            mov cx, dx
+        
 
         .onSameYaxis:
             ; get the difference between pacman and ghost position
@@ -140,12 +138,15 @@ section .text
             add ax, cx
             
             ; check if they are touching each other
-            mov cx, TILE_SIZE
-            cmp byte[strcPacMan + direction], 0
-            je .pacManIsGoingRight
-            .pacManIsGoingRight:
-            cmp ax, cx
+            cmp ax, TILE_SIZE
             jg .notTouched
+            
+
+        .onSameXaxis:
+            mov ax, bx
+            mov cx, dx
+            jmp .onSameYaxis
+
 
         .touched:
             call waitForAnyKeyPressed
