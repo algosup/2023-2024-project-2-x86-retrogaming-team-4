@@ -3,9 +3,11 @@ section .data
         istruc Sprite
             at posX, dw 10
             at posY, dw 10
+            at frame, dw PACMAN_FULL
             at absPos, dw 10*10
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 1
             at isDead, db 0
         iend
@@ -14,9 +16,11 @@ section .data
         istruc Sprite
             at posX, dw 274
             at posY, dw 30
+            at frame, dw BLINKY_1
             at absPos, dw 274*30
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -25,9 +29,11 @@ section .data
         istruc Sprite
             at posX, dw 90
             at posY, dw 100
+            at frame, dw INKY_1
             at absPos, dw 90*100
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -36,9 +42,11 @@ section .data
         istruc Sprite
             at posX, dw 30
             at posY, dw 30
+            at frame, dw PINKY_1
             at absPos, dw 30*30
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -47,9 +55,11 @@ section .data
         istruc Sprite
             at posX, dw 70
             at posY, dw 100
+            at frame, dw CLYDE_1
             at absPos, dw 70*100
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
             at isDead, db 0
         iend
@@ -60,6 +70,7 @@ section .data
 section .text
 
     changePacManPosition:
+        
         ; set next position
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
@@ -152,7 +163,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Blinky_eyes], ax
+        mov word [Blinky_eyes], ax
 
         ret
 
@@ -174,7 +185,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Inky_eyes], ax
+        mov word [Inky_eyes], ax
 
         ret
 
@@ -196,7 +207,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Pinky_eyes], ax
+        mov word [Pinky_eyes], ax
 
         ret
 
@@ -218,7 +229,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Clyde_eyes], ax
+        mov word [Clyde_eyes], ax
 
         ret
 

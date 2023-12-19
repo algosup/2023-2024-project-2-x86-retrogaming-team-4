@@ -3,7 +3,9 @@ section .data
     pacManTilePos: dw 0
     pacManCenterX: dw 0
     pacManCenterY: dw 0
-
+    scoreForLife: dw 0
+    lifeCounter: db 3
+    livesPosX: dw 0
     pelletEaten: dw 0
     score: dd 0
     scoreUnit: dd 0
@@ -13,6 +15,8 @@ section .data
     endFruitTime: dd 0, 0
     fruitTilePos: dw 0
     fruitSprite: dw 0
+    level dw 1
+    numberPelletEaten dw 0
 
 section .text
 
@@ -123,9 +127,25 @@ section .text
             call isKey
             jmp .eraseFruit
 
+    checkLevel:
+        cmp word [numberPelletEaten], 260
+        jne .endFunc
+            mov word [numberPelletEaten], 0
+            add word [level], 1
+            mov word [strcPacMan + velocityX], 0
+            mov word [strcPacMan + velocityY], 0
+            mov byte [keyPressed], 0
+            call displayNextLevel
+            call waitForAnyKeyPressed
+            jmp NewLevel
+        .endFunc:
+        ret
+
     isPellet:
         ; increment score
         add long[score], 1
+        add word [numberPelletEaten], 1
+        add word[scoreForLife], 10
         inc word[pelletEaten]
         call setTileEmpty
 
@@ -134,7 +154,8 @@ section .text
     isPowerPellet:
         ; increment score
         add long[score], 5
-
+        add word [numberPelletEaten], 1
+        add word[scoreForLife], 50
         call frightTime
         call setTileEmpty
 
@@ -143,6 +164,7 @@ section .text
     isCherry:
         ; increment score
         add long[score], 20
+        add word[scoreForLife], 200
         call setTileEmpty
 
         ret
@@ -151,6 +173,7 @@ section .text
         
         ; increment score
         add long[score], 30
+        add word[scoreForLife], 300
         call setTileEmpty
 
         ret
@@ -158,6 +181,7 @@ section .text
     isOrange:
         ; increment score
         add long[score], 50
+        add word[scoreForLife], 500
         call setTileEmpty
 
         ret
@@ -165,6 +189,7 @@ section .text
     isApple:
         ; increment score
         add long[score], 70
+        add word[scoreForLife], 700
         call setTileEmpty
 
         ret
@@ -172,6 +197,7 @@ section .text
     isMelon:
         ; increment score
         add long[score], 100
+        add word[scoreForLife], 1000
         call setTileEmpty
 
         ret
@@ -179,6 +205,7 @@ section .text
     isGalaxianFlagship	:
         ; increment score
         add long[score], 200
+        add word[scoreForLife], 2000
         call setTileEmpty
 
         ret
@@ -186,6 +213,7 @@ section .text
     isBell:
         ; increment score
         add long[score], 300
+        add word[scoreForLife], 3000
         call setTileEmpty
 
         ret
@@ -193,6 +221,7 @@ section .text
     isKey:
         ; increment score
         add long[score], 500
+        add word[scoreForLife], 5000
         call setTileEmpty
 
         ret
@@ -357,12 +386,9 @@ section .text
         mov byte[strcClyde + isChased], 1
         mov byte[strcPacMan + isChased], 0
         mov eax, [timestamp_of_next_frame]
-        add eax, 18000000
+        add eax, 24000000 ; 8 sec (6 sec blue + 2 sec White/blue)
         mov [endFrightTime], eax
-        mov word [frameOf_Blinky], AFRAID_1
-        mov word [frameOf_Inky], AFRAID_1
-        mov word [frameOf_Pinky], AFRAID_1
-        mov word [frameOf_Clyde], AFRAID_1
+        
         ret
 
     checkFrightTime:
@@ -370,10 +396,6 @@ section .text
         cmp eax, [endFrightTime]
         jne .stillFrightTime
             mov byte[strcBlinky + isChased], 0
-            mov word [frameOf_Blinky], BLINKY_1
-            mov word [frameOf_Inky], INKY_1
-            mov word [frameOf_Pinky], PINKY_1
-            mov word [frameOf_Clyde], CLYDE_1
             mov byte[strcInky + isChased], 0
             mov byte[strcPinky + isChased], 0
             mov byte[strcClyde + isChased], 0
@@ -432,4 +454,43 @@ section .text
         call replaceFruit
 
         .stillFruitTime:
+        ret
+
+    lifeManagement: 
+        cmp word[scoreForLife], 10000
+        jb .noNewLife
+            mov word[scoreForLife], 0
+            cmp byte [lifeCounter], 5
+            je .noNewLife
+            inc byte [lifeCounter]
+            mov word [frameOf_Lives], PACMAN_LEFT_2
+            call whereToDisplayLife
+            call displayLives
+        .noNewLife:
+        ret
+
+    whereToDisplayLife:
+        cmp byte [lifeCounter], 2
+        jne .notTwo
+            mov ax, 28*TILE_SIZE+3*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notTwo:
+
+        cmp byte [lifeCounter], 3
+        jne .notThree
+            mov ax, 28*TILE_SIZE+2*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notThree:
+
+        cmp byte [lifeCounter], 4
+        jne .notFour
+            mov ax, 28*TILE_SIZE+1*3*TILE_SIZE
+            mov [livesPosX], ax
+            ret
+        .notFour:
+
+        mov ax, 28*TILE_SIZE
+        mov [livesPosX], ax
         ret

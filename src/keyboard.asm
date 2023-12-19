@@ -114,10 +114,10 @@ section .text
         cmp byte[si], 0x04
         je .NoLeft
 
-        mov word[strcPacMan + velocityX], -1
+        mov word[strcPacMan + velocityX], -1*SPRITE_SPEED_PIXELS
         mov word[strcPacMan + velocityY], 0
+        mov word[strcPacMan + direction], LEFT_DIRECTION
         call changePacManPosition
-        mov word[frameOf_PacMan], PACMAN_LEFT_2
         inc byte[keyChanged]
         .NoLeft:
 
@@ -205,10 +205,10 @@ section .text
         cmp byte[si], 0x01
         je .NoRight
 
-        mov word[strcPacMan + velocityX], 1
+        mov word[strcPacMan + velocityX], 1*SPRITE_SPEED_PIXELS
         mov word[strcPacMan + velocityY], 0
+        mov word[strcPacMan + direction], RIGHT_DIRECTION
         call changePacManPosition
-        mov word[frameOf_PacMan], PACMAN_RIGHT_2
         inc byte[keyChanged]
         .NoRight:
 
@@ -297,9 +297,9 @@ section .text
         je .NoUp
 
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], -1
+        mov word[strcPacMan + velocityY], -1*SPRITE_SPEED_PIXELS
+        mov word[strcPacMan + direction], UP_DIRECTION
         call changePacManPosition
-        mov word[frameOf_PacMan], PACMAN_UP_2
         inc byte[keyChanged]
         .NoUp:
 
@@ -388,9 +388,9 @@ section .text
         je .NoDown
         
         mov word[strcPacMan + velocityX], 0
-        mov word[strcPacMan + velocityY], 1
+        mov word[strcPacMan + velocityY], 1*SPRITE_SPEED_PIXELS
+        mov word[strcPacMan + direction], DOWN_DIRECTION
         call changePacManPosition
-        mov word[frameOf_PacMan], PACMAN_DOWN_2
         inc byte[keyChanged]
         .NoDown:
             cmp byte [keyChanged], 0
