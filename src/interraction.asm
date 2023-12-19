@@ -5,8 +5,8 @@ section .data
     pacManCenterY: dw 0
 
     pelletEaten: dw 0
-    score: dw 0
-    scoreUnit: dd 0
+    score: dw 880
+    scoreUnit: dw 0
 
     endFrightTime: dd 0, 0
     

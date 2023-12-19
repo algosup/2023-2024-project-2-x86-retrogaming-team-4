@@ -18,6 +18,7 @@ section .data
 
     currentDisplayedScoreUnit: db 0
     numberPositionInSpritesheet: dw 0
+    scoreBuffer dw 0
 
 section .text
     
@@ -114,61 +115,64 @@ section .text
 
     displayScore:
         mov eax, [score]
-        mov long [currentDisplayedScoreUnit], 0 ;cursor in the score
 
         cmp eax, 0 ; Compare if the score is equal to 0
-        je .zero
-            call .scoreLoop
-        .zero: ; exit the function
-
+        jne .notZeroDisplayScore
         ret
-
-        .scoreLoop:
-            inc long [currentDisplayedScoreUnit] ; Add one to the unit we edit
-
-            cmp long [currentDisplayedScoreUnit], 8 ; If we are at the eight number, we break
-            je .zero
 
         .notZeroDisplayScore:
             xor edx, edx
             push eax          ; As eax contains the score, we need to preserve it
-            mov cx, 10
-            div cx
+            mov ax, [score]
+            mov cl, 100
+            div cl
             mov bx, 1
-
-            div cx
-            mov [scoreUnit], dx
+            mov word[scoreBuffer], ax
+            mov ax, dx
+            mov cl, 10
+            div cl
+            mov word[scoreUnit], dx
+            int3
             call displayDigits
-            cmp word[score], 100
-            jb .dsp
-
-            mov ax, [score]
-            mov cx, 100
-            div cx
-            div cx
-            mov [scoreUnit], dx
-            mov bx, 2
-            call displayDigits
-            cmp word[score], 1000
-            jb .dsp
-
-            mov ax, [score]
-            mov cx, 1000
-            div cx
+            ;mov cx, 10
             ;div cx
-            mov [scoreUnit], dx
-            mov bx, 3
-            call displayDigits
+            ;mov bx, 1
+;
+            ;div cx
+            ;mov [scoreUnit], dx
+            ;call displayDigits
+            ;cmp word[score], 100
+            ;jb .dsp
+;
+            ;mov ax, [score]
+            ;mov cx, 100
+            ;div cx
+            ;div cx
+            ;mov [scoreUnit], dx
+            ;mov bx, 2
+            ;call displayDigits
+            ;cmp word[score], 1000
+            ;jb .dsp
+;
+            ;int3
+            ;xor dx, dx
+            ;mov ax, [score]
+            ;mov cx, 1000
+            ;div cx
+            ;div cx
+            ;mov [scoreUnit], dx
+            ;mov bx, 3
+            ;call displayDigits
             ;cmp word[score], 1000
             ;jb .dsp
 
             .dsp:
             pop eax
-            call .scoreLoop
             ret
 
 
     displayDigits: ;ax usable to store data
+        int3
         mov si, MazeSpriteSheet ;Load the spritesheet
         cmp word [scoreUnit], 0
         jne .notzero
@@ -247,7 +251,11 @@ section .text
             jne .Hundred
             mov di, 16*SCREEN_WIDTH+ 21*8 ; Place to display
             .Hundred:
-            
+            cmp bx, 3
+            jne .Thousand
+            mov di, 16*SCREEN_WIDTH+ 20*8 ; Place to display
+            .Thousand:
+
             call draw_tile ;Draw the score unit
         ret
         
