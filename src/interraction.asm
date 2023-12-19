@@ -5,7 +5,7 @@ section .data
     pacManCenterY: dw 0
 
     pelletEaten: dw 0
-    score: dd 65500
+    score: dd 0
     scoreUnit: dd 0
 
     endFrightTime: dd 0, 0
@@ -125,7 +125,7 @@ section .text
 
     isPellet:
         ; increment score
-        add long[score], 10
+        add long[score], 1
         inc word[pelletEaten]
         call setTileEmpty
 
@@ -133,7 +133,7 @@ section .text
 
     isPowerPellet:
         ; increment score
-        add long[score], 50
+        add long[score], 5
 
         call frightTime
         call setTileEmpty
@@ -142,7 +142,7 @@ section .text
     
     isCherry:
         ; increment score
-        add long[score], 200
+        add long[score], 20
         call setTileEmpty
 
         ret
@@ -150,49 +150,49 @@ section .text
     isStrawberry:
         
         ; increment score
-        add long[score], 300
+        add long[score], 30
         call setTileEmpty
 
         ret
 
     isOrange:
         ; increment score
-        add long[score], 500
+        add long[score], 50
         call setTileEmpty
 
         ret
 
     isApple:
         ; increment score
-        add long[score], 700
+        add long[score], 70
         call setTileEmpty
 
         ret
 
     isMelon:
         ; increment score
-        add long[score], 1000
+        add long[score], 100
         call setTileEmpty
 
         ret
 
     isGalaxianFlagship	:
         ; increment score
-        add long[score], 2000
+        add long[score], 200
         call setTileEmpty
 
         ret
 
     isBell:
         ; increment score
-        add long[score], 3000
+        add long[score], 300
         call setTileEmpty
 
         ret
 
     isKey:
         ; increment score
-        add long[score], 5000
+        add long[score], 500
         call setTileEmpty
 
         ret

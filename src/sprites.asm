@@ -128,7 +128,6 @@ section .text
             mov eax, [score]
             mov cx, 10
             div cx
-            div cx
             mov bx, 1
             mov long[scoreBuffer], eax
             mov long[scoreUnit], edx
@@ -178,6 +177,18 @@ section .text
             mov cx, 10
             div cx
             mov bx, 5
+            mov long[scoreBuffer], eax
+            mov long[scoreUnit], edx
+            call displayDigits
+
+            cmp long[scoreBuffer], 1
+            jb .skip
+            ; Million
+            
+            mov eax, [scoreBuffer]
+            mov cx, 10
+            div cx
+            mov bx, 6
             mov long[scoreBuffer], eax
             mov long[scoreUnit], edx
             call displayDigits
