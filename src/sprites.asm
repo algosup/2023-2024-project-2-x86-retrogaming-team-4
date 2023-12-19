@@ -167,6 +167,46 @@ section .text
         call UpdateScreen
         ret
 
+    displayNextLevel:
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 79*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*16
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*17
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 81*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*18
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 82*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*19
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 83*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*21
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*22
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 84*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*23
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 80*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*24
+        call draw_tile
+        mov si, MazeSpriteSheet ;Load the spritesheet
+        add si, 83*64
+        mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*25
+        call draw_tile
+        call UpdateScreen
+        ret
+
     ClearPacMan:
     ; replace the 16x16 bloc of pixels where is PacMan, by the content of the background buffer at the same location, according to its x y positions
 

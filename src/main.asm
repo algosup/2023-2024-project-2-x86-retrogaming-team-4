@@ -53,7 +53,8 @@ section .text
         ;Set the Timer and clock for the game loop
         call setTimer
 
-        ; call displayGameOver
+        cmp word [level], 2
+        je gameloop
         
         call waitForAnyKeyPressed
 ;-----------------------------------------------------------------------------------------
