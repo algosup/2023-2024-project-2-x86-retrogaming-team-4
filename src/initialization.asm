@@ -6,6 +6,7 @@ section .bss
 section .data
 
     timestamp_of_next_frame dd 0, 0 ; timestamp of the next frame
+    timerDeathPacMan dw 0
 
    
 section .text
@@ -77,10 +78,9 @@ section .text
    FirstDisplayPacMan:
    ; set the initial position and frame (mouth closed or not, ...) and display it
 
-      mov word [strcPacMan + posX], 160
-      mov word [strcPacMan + posY], 132
-      mov word [frameOf_PacMan], PACMAN_RIGHT_2
-
+      mov word [strcPacMan + posX], PACMAN_START_X
+      mov word [strcPacMan + posY], PACMAN_START_Y
+      mov word [strcPacMan + frame], PACMAN_FULL
       call Display_PacMan
 
       ret
@@ -90,38 +90,42 @@ section .text
 
       mov word [strcBlinky + posX], 160
       mov word [strcBlinky + posY], 84
-      mov word [frameOf_Blinky], BLINKY_1
+      mov word [strcBlinky + frame], BLINKY_1
+      mov word [Blinky_eyes], EYES_UP
       call Display_Blinky
-      mov word [strcBlinky + velocityX], 1
+      mov word [strcBlinky + velocityX], 1*SPRITE_SPEED_PIXELS
       mov word [strcBlinky + velocityY], 0
-      mov word [strcBlinky + nextVelocityX], 1
+      mov word [strcBlinky + nextVelocityX], 1*SPRITE_SPEED_PIXELS
       mov word [strcBlinky + nextVelocityY], 0
 
       mov word [strcInky + posX], 144
       mov word [strcInky + posY], 108
-      mov word [frameOf_Inky], INKY_1
+      mov word [strcInky + frame], INKY_1
+      mov word [Inky_eyes], EYES_DOWN
       call Display_Inky
       mov word [strcInky + velocityX], 0
-      mov word [strcInky + velocityY], 1
+      mov word [strcInky + velocityY], 0
       mov word [strcInky + nextVelocityX], 0
-      mov word [strcInky + nextVelocityY], 1
+      mov word [strcInky + nextVelocityY], 0
 
       mov word [strcPinky + posX], 160
       mov word [strcPinky + posY], 108
-      mov word [frameOf_Pinky], PINKY_1
+      mov word [strcPinky + frame], PINKY_1
+      mov word [Pinky_eyes], EYES_RIGHT
       call Display_Pinky
-      mov word [strcPinky + velocityX], 1
-      mov word [strcPinky + velocityY], 0
-      mov word [strcPinky + nextVelocityX], 1
-      mov word [strcPinky + nextVelocityY], 0
+      mov word [strcPinky + velocityX], 0
+      mov word [strcPinky + velocityY], -1*SPRITE_SPEED_PIXELS
+      mov word [strcPinky + nextVelocityX], 0
+      mov word [strcPinky + nextVelocityY], -1*SPRITE_SPEED_PIXELS
 
       mov word [strcClyde + posX], 176
       mov word [strcClyde + posY], 108
-      mov word [frameOf_Clyde], CLYDE_1
+      mov word [strcClyde + frame], CLYDE_1
+      mov word [Clyde_eyes], EYES_LEFT
       call Display_Clyde
-      mov word [strcClyde + velocityX], -1
+      mov word [strcClyde + velocityX], 0
       mov word [strcClyde + velocityY], 0
-      mov word [strcClyde + nextVelocityX], -1
+      mov word [strcClyde + nextVelocityX], 0
       mov word [strcClyde + nextVelocityY], 0
 
       ret
@@ -130,7 +134,7 @@ section .text
       mov word [strcPacMan + velocityX], 0
       mov word [strcPacMan + velocityY], 0
       mov byte [keyPressed], 0
-      jmp resetPoint
+      jmp start.resetPoint
 
       ret
 
@@ -138,4 +142,39 @@ section .text
       mov ax, 0C01h
       int 21h
 
+      ret
+   
+   checkDeath:
+      cmp word[strcPacMan + isDead], 1
+      je .death
+      ret
+      .death:
+         call DisplayMaze
+         inc word[timerDeathPacMan]
+         cmp word[timerDeathPacMan], 0x3; how many gameloop'sframes skip for frequency of actualization of the pacman death animation
+         jne .NOTloadAnimation
+         call PacmanDeathAnimation
+         call Display_PacMan
+         cmp word[strcPacMan + isDead], 0
+         je .resetGame
+         
+         .NOTloadAnimation:
+         ret
+
+         .resetGame:
+            call checkGameOver
+            mov word[PacmanDeathCounter], PACMAN_DEATH_1-1
+            call resetGame
+            ret
+         
+   checkGameOver:
+      cmp byte [isGameOver], 1
+      jne .notGameOver
+         call DisplayMaze
+         call displayScore
+         call displayGameOver
+         call UpdateScreen
+         call waitForAnyKeyPressed
+         jmp exit
+      .notGameOver:
       ret

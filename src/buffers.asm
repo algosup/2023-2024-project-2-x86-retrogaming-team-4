@@ -9,13 +9,29 @@ section .text
         mov [ScreenBufferSegment],bx
 
         ret
-    
+
     BuildBackgroundBuffer: 
     ;allocates the space for the buffer in the 'heap' memory
         mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
         call heapAllocParagraph
         mov [BackgroundBufferSegment],bx
    
+        ret
+
+    BuildMazeModelBuffer:
+    ; clone the MazeModel to be modified while keeping the original
+
+        ;set the destination 'es:di'
+        push ds
+        pop es
+        mov di, MazeModelBuffer
+
+        ;set the source 'ds:si'
+        mov si, MazeModel
+
+        mov cx, MAZE_HEIGHT*MAZE_WIDTH
+        rep movsb
+
         ret
 
     UpdateScreen:
@@ -37,12 +53,13 @@ section .text
         pop ds
 
         ret
-
    
-   MazeToBGbuffer: 
-   ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
+    MazeToBGbuffer: 
+    ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
 
         xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
+        .chooseFirstLine:
+        xor dl, dl
         push word [BackgroundBufferSegment]
         pop es
         ;ds is ok
@@ -77,8 +94,8 @@ section .text
             xor ax, ax
             mov al, [ds:si] ; now al contains the hexa codes (for sprite) of the byte where is the 'cx'th Tile of mazemodel 
             
-            
             push dx
+            
             ; pick the sprite to display following the hexacode
             ; Get the offset of the sprite, following the hexa code
             mov si, MazeSpriteSheet

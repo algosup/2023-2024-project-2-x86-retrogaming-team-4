@@ -3,9 +3,11 @@ section .data
         istruc Sprite
             at posX, dw 10
             at posY, dw 10
+            at frame, dw PACMAN_FULL
             at velocityX, dw 0
             at velocityY, dw 0
-            at isChased, db 1
+            at direction, db 0
+            at isChased, db 1 ; not used
             at isDead, db 0
             at nextPosX, dw 10
             at nextPosY, dw 10
@@ -17,10 +19,12 @@ section .data
         istruc Sprite
             at posX, dw 274
             at posY, dw 30
+            at frame, dw BLINKY_1
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
             at nextPosX, dw 274
             at nextPosY, dw 30
             at nextVelocityX, dw 0
@@ -31,10 +35,12 @@ section .data
         istruc Sprite
             at posX, dw 90
             at posY, dw 100
+            at frame, dw INKY_1
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
             at nextPosX, dw 90
             at nextPosY, dw 100
             at nextVelocityX, dw 0
@@ -45,10 +51,12 @@ section .data
         istruc Sprite
             at posX, dw 30
             at posY, dw 30
+            at frame, dw PINKY_1
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
             at nextPosX, dw 30
             at nextPosY, dw 30
             at nextVelocityX, dw 0
@@ -59,32 +67,52 @@ section .data
         istruc Sprite
             at posX, dw 70
             at posY, dw 100
+            at frame, dw CLYDE_1
             at velocityX, dw 0
             at velocityY, dw 0
+            at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
             at nextPosX, dw 70
             at nextPosY, dw 100
             at nextVelocityX, dw 0
             at nextVelocityY, dw 0
         iend
 
+    pacManNextPosX dw 0
+    pacManNextPosY dw 0
+
+    Speed_Pixels dw 1
+
 section .text
+    
+    GhostsSpeedUpdate:
+
+        cmp word[Speed_Pixels], 1
+        je .to2speed
+        dec word[Speed_Pixels]
+        ret
+        .to2speed:
+        inc word[Speed_Pixels]
+        ret
 
     changePacManPosition:
+        
         ; set next position
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
-        mov [strcPacMan + nextPosX], bx
+        mov [pacManNextPosX], bx
 
         mov ax, [strcPacMan + posY]
         add ax, [strcPacMan + velocityY]
-        mov [strcPacMan + nextPosY], ax
+        mov [pacManNextPosY], ax
 
         ; check collision
         call isColliding
 
         ; if no collision, set next position
+
+        call IsOnTeleporter
 
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
@@ -95,6 +123,7 @@ section .text
         mov [strcPacMan + posY], ax
         ; Pellet eating
         call pelletEating
+        
         ret
 
     changeGhostPosition:
@@ -153,21 +182,17 @@ section .text
         add bx, [strcBlinky + velocityX]
         mov [strcBlinky + nextPosX], bx
 
- 
-        
+        call changeGhostPosition
 
-        mov bx, [strcBlinky + posX]
-        add bx, [strcBlinky + velocityX]
-        mov [strcBlinky + posX], bx
-
-        mov ax, [strcBlinky + posY]
-        add ax, [strcBlinky + velocityY]
-        mov [strcBlinky + posY], ax
+        mov word [strcBlinky + posY], ax
+        mov word [strcBlinky + posX], bx
+        mov word [strcBlinky + velocityY], cx
+        mov word [strcBlinky + velocityX], dx
 
 
         ; call changeGhostFrames
 
-        ; mov word [frameOf_Blinky_eyes], ax
+        mov word [Blinky_eyes], ax
 
         ret
 
@@ -181,7 +206,6 @@ section .text
         mov dx, [strcInky + velocityX]
 
         call changeGhostPosition
-        call changeGhostPosition
 
         mov word [strcInky + posY], ax
         mov word [strcInky + posX], bx
@@ -189,9 +213,8 @@ section .text
         mov word [strcInky + velocityX], dx
 
         call changeGhostFrames
-        call changeGhostFrames
 
-        mov word [frameOf_Inky_eyes], ax
+        mov word [Inky_eyes], ax
 
         ret
 
@@ -213,7 +236,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Pinky_eyes], ax
+        mov word [Pinky_eyes], ax
 
         ret
 
@@ -235,7 +258,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [frameOf_Clyde_eyes], ax
+        mov word [Clyde_eyes], ax
 
         ret
 
