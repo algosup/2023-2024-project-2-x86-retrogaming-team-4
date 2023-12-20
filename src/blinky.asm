@@ -40,8 +40,8 @@ section .data
             at targetY, db 0
         iend
 
-    beforeMoveX dw 0
-    beforeMoveY dw 0
+    afterMoveTileX dw 0
+    afterMoveTileY dw 0
     nextMoveTileX dw 0
     nextMoveTileY dw 0
     checkTileX dw 0
@@ -163,29 +163,23 @@ section .text
         ret
 
     moveGhost:
-        ; Memorize old position
-        mov ax, [di + posX]
-        mov [beforeMoveX], ax
-        mov bx, [di + posY]
-        mov [beforeMoveY], bx
-
         ; Move
+        mov ax, [di + posX]
         add ax, [di + velocityX]
         mov [di + posX], ax
+        mov bx, [di + posY]
         add bx, [di + velocityY]
         mov [di + posY], bx
     
         ; Calculate new tile position
-        mov bx, TILE_SIZE
         add ax, SPRITE_SIZE / 2
-        xor dx, dx
-        div bx
+        shr ax, 3
+        mov [afterMoveTileX], ax
         mov [nextMoveTileX], ax
-        mov ax, [di + posY]
-        add ax, SPRITE_SIZE / 2
-        xor dx, dx
-        div bx
-        mov [nextMoveTileY], ax
+        add bx, SPRITE_SIZE / 2
+        shr bx, 3
+        mov [afterMoveTileY], bx
+        mov [nextMoveTileY], bx
 
         ; TODO: Check collision
 
@@ -210,7 +204,16 @@ section .text
         cmp byte [isCollid], 1
         je .exit
 
-        ; TODO: Return if tile is in our back
+        ; Return if tile is in our back
+        ; Since we are always one step ahead, this comes down to check if we are currently on this tile
+        mov ax, [afterMoveTileX]
+        cmp ax, [checkTileX]
+        jne .notGoingBackwards
+        mov ax, [afterMoveTileY]
+        cmp ax, [checkTileY]
+        jne .notGoingBackwards
+        ret
+        .notGoingBackwards:
 
         call calcDistance
         cmp ax, [bestDistance]
