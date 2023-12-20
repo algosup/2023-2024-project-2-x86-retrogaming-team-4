@@ -144,7 +144,10 @@ section .text
             mov byte [strcBlinky + isChased], 0
             mov byte [strcClyde + isChased], 0
             mov byte [strcInky + isChased], 0
+            call resetPelletEaten
             call BuildMazeModelBuffer
+            mov dh, FIRST_LINE_OF_MAZE
+            call MazeToBGbuffer.chooseFirstLine
             jmp start.resetPoint
         .endFunc:
         ret
