@@ -17,6 +17,7 @@ section .data
     fruitSprite: dw 0
     level dw 1
     numberPelletEaten dw 0
+    killStreak db 0
 
 section .text
 
@@ -380,6 +381,7 @@ section .text
         ret
 
     frightTime:
+        mov byte [killStreak], 0
         mov byte[strcBlinky + isChased], 1
         mov byte[strcInky + isChased], 1
         mov byte[strcPinky + isChased], 1

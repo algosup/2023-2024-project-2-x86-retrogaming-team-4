@@ -141,6 +141,27 @@ section .text
             
         .afraidContact:
             mov byte [ghostCollision], 1
+            inc byte [killStreak]
+            cmp byte [killStreak], 1
+            jne .notOne
+                add long [score], 20
+            .notOne:
+
+            cmp byte [killStreak], 2
+            jne .notTwo
+                add long [score], 40
+            .notTwo:
+
+            cmp byte [killStreak], 3
+            jne .notThree
+                add long [score], 80
+            .notThree:
+
+            cmp byte [killStreak], 4
+            jne .notFour
+                add long [score], 160
+            .notFour:
+
             jmp .notTouched
 
         .normalContact:
