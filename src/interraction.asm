@@ -128,7 +128,7 @@ section .text
             jmp .eraseFruit
 
     checkLevel:
-        cmp word [numberPelletEaten], 260
+        cmp word [numberPelletEaten], NUMBER_OF_PELLETS
         jne .endFunc
             mov word [numberPelletEaten], 0
             add word [level], 1
@@ -136,10 +136,14 @@ section .text
             mov word [strcPacMan + velocityY], 0
             mov byte [keyPressed], 0
             call displayNextLevel
+            call UpdateScreen
             call waitForAnyKeyPressed
-            jmp NewLevel
+            .NewLevel:
+            call BuildMazeModelBuffer
+            jmp start.resetPoint
         .endFunc:
         ret
+    
 
     isPellet:
         ; increment score

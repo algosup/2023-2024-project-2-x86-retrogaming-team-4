@@ -126,7 +126,7 @@ section .text
       mov word [strcPacMan + velocityX], 0
       mov word [strcPacMan + velocityY], 0
       mov byte [keyPressed], 0
-      jmp resetPoint
+      jmp start.resetPoint
 
       ret
 
@@ -163,7 +163,9 @@ section .text
       cmp byte [isGameOver], 1
       jne .notGameOver
          call DisplayMaze
+         call displayScore
          call displayGameOver
+         call UpdateScreen
          call waitForAnyKeyPressed
          jmp exit
       .notGameOver:

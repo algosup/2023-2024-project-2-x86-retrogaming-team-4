@@ -9,7 +9,7 @@ section .text
         mov [ScreenBufferSegment],bx
 
         ret
-    
+
     BuildBackgroundBuffer: 
     ;allocates the space for the buffer in the 'heap' memory
         mov ax, (SCREEN_HEIGHT*SCREEN_WIDTH/16) ; in ax, the number of paragraph to allocate (1 para = 16bits)
@@ -53,12 +53,13 @@ section .text
         pop ds
 
         ret
-
    
     MazeToBGbuffer: 
     ; read the Maze model (array of tiles) from 'maze.asm', and build the pixels of each tile in the background buffer, according to the hexacode read in the maze model.
 
         xor dx, dx ; dh and dl are counters : dh will always contains the number of complete lines, dl contains the number of complete Tiles in this line
+        .chooseFirstLine:
+        xor dl, dl
         push word [BackgroundBufferSegment]
         pop es
         ;ds is ok
