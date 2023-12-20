@@ -21,7 +21,7 @@ endstruc
 
 %define SPRITE_SPEED_PIXELS 2
 
-%define NUMBER_OF_PELLETS 3
+%define NUMBER_OF_PELLETS 260
 
 ; speeds are in percentage just to be precise, so,  1% = 0.1 pixel (or 1 pixel for 10 frames) and 100%  = 10 pixels per frame ( can be set below)
 %define MAXIMUM_SPEED_PIXELS 10
