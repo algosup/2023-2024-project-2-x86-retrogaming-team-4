@@ -69,7 +69,276 @@ section .data
 
     Speed_Pixels dw 1
 
+    targetGhost db 0
+    ; 0 = blinky
+    ; 1 = inky
+    ; 2 = pinky
+    ; 3 = clyde
+    isGhostCollid db 0
+
+    ghostNextPosX dw 0
+    ghostNextPosY dw 0
+
 section .text
+    setGhostMovLeft:
+        cmp byte[targetGhost], 0
+        je .setBlinkyNewVel
+
+        cmp byte[targetGhost], 1
+        je .setInkyNewVel
+
+        cmp byte[targetGhost], 2
+        je .setPinkyNewVel
+
+        cmp byte[targetGhost], 3
+        je .setClydeNewVel
+
+        .setBlinkyNewVel:
+            mov word [strcBlinky + velocityY], 0
+            mov word [strcBlinky + velocityX], -1
+            jmp .skip
+
+        .setInkyNewVel:
+            mov word [strcInky + velocityY], 0
+            mov word [strcInky + velocityX], -1
+            jmp .skip
+
+        .setPinkyNewVel:
+            mov word [strcPinky + velocityY], 0
+            mov word [strcPinky + velocityX], -1
+            jmp .skip
+
+        .setClydeNewVel:
+            mov word [strcClyde + velocityY], 0
+            mov word [strcClyde + velocityX], -1
+
+        .skip:
+            ret
+
+    setGhostMovRight:
+        cmp byte[targetGhost], 0
+        je .setBlinkyNewVel
+
+        cmp byte[targetGhost], 1
+        je .setInkyNewVel
+
+        cmp byte[targetGhost], 2
+        je .setPinkyNewVel
+
+        cmp byte[targetGhost], 3
+        je .setClydeNewVel
+
+        .setBlinkyNewVel:
+            mov word [strcBlinky + velocityY], 0
+            mov word [strcBlinky + velocityX], 1
+            jmp .skip
+
+        .setInkyNewVel:
+            mov word [strcInky + velocityY], 0
+            mov word [strcInky + velocityX], 1
+            jmp .skip
+
+        .setPinkyNewVel:
+            mov word [strcPinky + velocityY], 0
+            mov word [strcPinky + velocityX], 1
+            jmp .skip
+
+        .setClydeNewVel:
+            mov word [strcClyde + velocityY], 0
+            mov word [strcClyde + velocityX], 1
+
+        .skip:
+            ret
+
+    setGhostMovUp:
+        cmp byte[targetGhost], 0
+        je .setBlinkyNewVel
+
+        cmp byte[targetGhost], 1
+        je .setInkyNewVel
+
+        cmp byte[targetGhost], 2
+        je .setPinkyNewVel
+
+        cmp byte[targetGhost], 3
+        je .setClydeNewVel
+
+        .setBlinkyNewVel:
+            mov word [strcBlinky + velocityY], -1
+            mov word [strcBlinky + velocityX], 0
+            jmp .skip
+
+        .setInkyNewVel:
+            mov word [strcInky + velocityY], -1
+            mov word [strcInky + velocityX], 0
+            jmp .skip
+
+        .setPinkyNewVel:
+            mov word [strcPinky + velocityY], -1
+            mov word [strcPinky + velocityX], 0
+            jmp .skip
+
+        .setClydeNewVel:
+            mov word [strcClyde + velocityY], -1
+            mov word [strcClyde + velocityX], 0
+
+        .skip:
+            ret
+
+    setGhostMovDown:
+        cmp byte[targetGhost], 0
+        je .setBlinkyNewVel
+
+        cmp byte[targetGhost], 1
+        je .setInkyNewVel
+
+        cmp byte[targetGhost], 2
+        je .setPinkyNewVel
+
+        cmp byte[targetGhost], 3
+        je .setClydeNewVel
+
+        .setBlinkyNewVel:
+            mov word [strcBlinky + velocityY], 1
+            mov word [strcBlinky + velocityX], 0
+            jmp .skip
+
+        .setInkyNewVel:
+            mov word [strcInky + velocityY], 1
+            mov word [strcInky + velocityX], 0
+            jmp .skip
+
+        .setPinkyNewVel:
+            mov word [strcPinky + velocityY], 1
+            mov word [strcPinky + velocityX], 0
+            jmp .skip
+
+        .setClydeNewVel:
+            mov word [strcClyde + velocityY], 1
+            mov word [strcClyde + velocityX], 0
+
+        .skip:
+            ret
+
+
+    getNewDirection:
+        ; Read the current time
+        rdtsc
+        mov cx, 4
+        div cx
+
+        ; Set the new velocity
+        cmp dx, 0
+        je .setGhostMovLeft
+
+        cmp dx, 1
+        je .setGhostMovRight
+
+        cmp dx, 2
+        je .setGhostMovUp
+
+        cmp dx, 3
+        je .setGhostMovDown
+
+        .setGhostMovLeft:
+            call setGhostMovLeft
+            ret
+
+        .setGhostMovRight:
+            call setGhostMovRight
+            ret
+
+        .setGhostMovUp:
+            call setGhostMovUp
+            ret
+
+        .setGhostMovDown:
+            call setGhostMovDown
+            ret
+
+
+
+    getGhostNextPosition:
+        ; changes the ghosts' positions values according to the current velocity an targetted ghost
+        cmp byte[targetGhost], 0
+        je .getBlinkyNextPosition
+
+        cmp byte[targetGhost], 1
+        je .getInkyNextPosition
+
+        cmp byte[targetGhost], 2
+        je .getPinkyNextPosition
+
+        cmp byte[targetGhost], 3
+        je .getClydeNextPosition
+
+        .getBlinkyNextPosition:
+            mov ax, [strcBlinky + posY]
+            mov bx, [strcBlinky + posX]
+            add ax, [strcBlinky + velocityY]
+            add bx, [strcBlinky + velocityX]
+            jmp .skip
+
+        .getInkyNextPosition:
+            mov ax, [strcInky + posY]
+            mov bx, [strcInky + posX]
+            add ax, [strcInky + velocityY]
+            add bx, [strcInky + velocityX]
+            jmp .skip
+
+
+        .getPinkyNextPosition:
+            mov ax, [strcPinky + posY]
+            mov bx, [strcPinky + posX]
+            add ax, [strcPinky + velocityY]
+            add bx, [strcPinky + velocityX]
+            jmp .skip
+
+        .getClydeNextPosition:
+            mov ax, [strcClyde + posY]
+            mov bx, [strcClyde + posX]
+            add ax, [strcClyde + velocityY]
+            add bx, [strcClyde + velocityX]
+            jmp .skip
+
+        .skip:
+            mov [ghostNextPosY], ax
+            mov [ghostNextPosX], bx
+            ret
+
+    stopGhost:
+        ; Stop the targeted ghost
+        cmp byte[targetGhost], 0
+        je .stopBlinky
+
+        cmp byte[targetGhost], 1
+        je .stopInky
+
+        cmp byte[targetGhost], 2
+        je .stopPinky
+
+        cmp byte[targetGhost], 3
+        je .stopClyde
+
+        .stopBlinky:
+            mov word [strcBlinky + velocityX], 0
+            mov word [strcBlinky + velocityY], 0
+            ret
+
+        .stopInky:
+            mov word [strcInky + velocityX], 0
+            mov word [strcInky + velocityY], 0
+            ret
+
+        .stopPinky:
+            mov word [strcPinky + velocityX], 0
+            mov word [strcPinky + velocityY], 0
+            ret
+
+        .stopClyde:
+            mov word [strcClyde + velocityX], 0
+            mov word [strcClyde + velocityY], 0
+            ret
     
     GhostsSpeedUpdate:
 
@@ -161,6 +430,13 @@ section .text
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
+        mov byte [targetGhost], 0
+        call getGhostNextPosition
+        ;check if the ghost is colliding with a wall
+        call isGhostColliding
+        cmp byte [isGhostCollid], 1
+        je .changeBlinkyDirection
+
         mov ax, [strcBlinky + posY]
         mov bx, [strcBlinky + posX]
         mov cx, [strcBlinky + velocityY]
@@ -178,6 +454,11 @@ section .text
         mov word [Blinky_eyes], ax
 
         ret
+
+        .changeBlinkyDirection:
+            mov byte [isGhostCollid], 0
+            call getNewDirection
+            ret
 
     changeInkyPosition:
     ; changes the Inky's positions values according to the current velocity 

@@ -7,13 +7,170 @@ section .data
     checkedCornerX dw 0
     checkedCornerY dw 0
 
+    ghostCornerOffsetX dW 0
+    ghostCornerOffsetY dW 0
+
+    ghostCheckedCornerX dw 0
+    ghostCheckedCornerY dw 0
+
     tileAbsPos dw 0
+    tileGhostAbsPos dw 0
 
     ghostCollision db 0
 
     isGameOver db 0
 
 section .text
+    isGhostColliding:
+         ; Set offset for the corner to check
+        mov word [ghostCornerOffsetX], 4
+        mov word [ghostCornerOffsetY], 4
+        call getGhostCorners
+        call isWallForGhost
+        cmp byte[isGhostCollid], 1
+        je .skip
+
+        ; Set offset for the corner to check
+        mov word [ghostCornerOffsetX], 11
+        mov word [ghostCornerOffsetY], 4
+        call getGhostCorners
+        call isWallForGhost
+        cmp byte[isGhostCollid], 1
+        je .skip
+
+        ; Set offset for the corner to check
+        mov word [ghostCornerOffsetX], 4
+        mov word [ghostCornerOffsetY], 11
+        call getGhostCorners
+        call isWallForGhost
+        cmp byte[isGhostCollid], 1
+        je .skip
+
+        ; Set offset for the corner to check
+        mov word [ghostCornerOffsetX], 11
+        mov word [ghostCornerOffsetY], 11
+        call getGhostCorners
+        call isWallForGhost
+        cmp byte[isGhostCollid], 1
+        je .skip
+
+        .skip:
+        ret
+
+    ; Set offset for the corner to check
+    ; Param: ghostCornerOffsetX, ghostCornerOffsetY
+    ; Return: ghostCheckedCornerX, ghostCheckedCornerY
+    getGhostCorners:
+    ; Get the corner of the PacMan tile
+        mov bx, [ghostNextPosX]
+        add bx, [ghostCornerOffsetX]
+        mov [ghostCheckedCornerX], bx
+        mov ax, [ghostNextPosY]
+        add ax, [ghostCornerOffsetY]
+        mov [ghostCheckedCornerY], ax
+
+        ret
+
+    getGhostTileAbsPos:
+    ; Get absolute position of tile
+    ; Param: checkedCornerX, checkedCornerY
+    ; Return: tileAbsPos
+
+        mov ax, [ghostCheckedCornerY]
+        shr ax, 3
+        mov bx, SCREEN_WIDTH/8
+        mul bx
+        mov [tileGhostAbsPos], ax
+
+        mov ax, [ghostCheckedCornerX]
+        shr ax, 3
+        add [tileGhostAbsPos], ax
+        ret
+
+    isWallForGhost:
+    ; Check if the tile is a wall
+    
+        ;Get the tile's absolute position
+        call getGhostTileAbsPos
+
+        ;Read the chosen tile in the maze table
+        mov si, MazeModelBuffer
+        add si, [tileGhostAbsPos]
+        
+        ;compare all the differents wall's sprites and return is collided if the compare is equal
+        cmp byte[si], 0x01
+        jne .not1
+        mov byte[isGhostCollid], 1
+        ret
+        .not1:
+
+        cmp byte[si], 0x02
+        jne .not2
+        mov byte[isGhostCollid], 1
+        ret
+        .not2:
+
+        cmp byte[si], 0x03
+        jne .not3
+        mov byte[isGhostCollid], 1
+        ret
+        .not3:
+
+        cmp byte[si], 0x04
+        jne .not4
+        mov byte[isGhostCollid], 1
+        ret
+        .not4:
+
+        cmp byte[si], 0x05
+        jne .not5
+        mov byte[isGhostCollid], 1
+        ret
+        .not5:
+
+        cmp byte[si], 0x06
+        jne .not6
+        mov byte[isGhostCollid], 1
+        ret
+        .not6:
+
+        cmp byte[si], 0x07
+        jne .not7
+        mov byte[isGhostCollid], 1
+        ret
+        .not7:
+
+        cmp byte[si], 0x08
+        jne .not8
+        mov byte[isGhostCollid], 1
+        ret
+        .not8:
+
+        cmp byte[si], 0x09
+        jne .not9
+        mov byte[isGhostCollid], 1
+        ret
+        .not9:
+
+        cmp byte[si], 0x0A
+        jne .notA
+        mov byte[isGhostCollid], 1
+        ret
+        .notA:
+
+        cmp byte[si], 0x0B
+        jne .notB
+        mov byte[isGhostCollid], 1
+        ret
+        .notB:
+
+        cmp byte[si], 0x0C
+        jne .notC
+        mov byte[isGhostCollid], 1
+        ret
+        .notC:
+        
+        ret
 
     readContact:
     ; check if pacman hit a ghost
