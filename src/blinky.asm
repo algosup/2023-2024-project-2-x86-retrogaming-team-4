@@ -66,32 +66,17 @@ section .text
         mov di, strcBlinky
         call moveGhost
 
-        ; Check if we passed the tile center
-        mov ax, [beforeMoveX]
-        mov bx, [di + posX]
-        cmp ax, bx
-        je .skipX
+        ; Check if we are centered on a tile
+        mov ax, [di + posX]
         sub ax, TILE_SIZE / 2
-        sub bx, TILE_SIZE / 2
-        shr ax, 3
-        shr bx, 3
-        cmp ax, bx
-        jne .passedCenter
-        .skipX:
-        ; Same thing for the Y coord
-        mov ax, [beforeMoveY]
-        mov bx, [di + posY]
-        cmp ax, bx
-        je .skipY
+        and ax, TILE_SIZE - 1
+        cmp ax, 0
+        jnz .exit
+        mov ax, [di + posY]
         sub ax, TILE_SIZE / 2
-        sub bx, TILE_SIZE / 2
-        shr ax, 3
-        shr bx, 3
-        .skipY:
-        cmp ax, bx
-        jne .passedCenter
-        ret
-        .passedCenter:
+        and ax, TILE_SIZE - 1
+        cmp ax, 0
+        jnz .exit
 
         ; Apply any possible rotation that might have occured
         mov ax, [di + posX]
@@ -174,6 +159,7 @@ section .text
         mov ax, [bestVelocityY]
         mov [di + nextVelocityY], ax
 
+        .exit:
         ret
 
     moveGhost:
