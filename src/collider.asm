@@ -112,13 +112,13 @@ section .text
 
 
         call AbsoluteDifference
-        cmp ax, TILE_SIZE-3
+        cmp ax, TILE_SIZE
         jg .notTouched
         
         mov ax, bx
         mov cx, dx
         call AbsoluteDifference
-        cmp ax, TILE_SIZE-3
+        cmp ax, TILE_SIZE
         jg .notTouched
         
 
