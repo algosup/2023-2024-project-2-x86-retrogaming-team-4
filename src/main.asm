@@ -35,6 +35,7 @@ section .text
 
         call MazeToBGbuffer
         call BuildMazeModelBuffer
+        call resetPelletEaten
 
         .resetPoint:
         mov dh, FIRST_LINE_OF_MAZE

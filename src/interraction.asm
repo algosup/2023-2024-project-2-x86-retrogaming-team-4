@@ -242,7 +242,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
 
         .exit:
@@ -260,7 +260,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
 
         .exit:
@@ -278,7 +278,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -296,7 +296,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -314,7 +314,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -332,7 +332,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -350,7 +350,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -368,7 +368,7 @@ section .text
         call displayFruit
 
         mov eax, [timestamp_of_next_frame]
-        add eax, 30000000
+        add eax, FRUIT_TIME
         mov [endFruitTime], eax
         
         .exit:
@@ -390,7 +390,7 @@ section .text
         mov byte[strcClyde + isChased], 1
         mov byte[strcPacMan + isChased], 0
         mov eax, [timestamp_of_next_frame]
-        add eax, 24000000 ; 8 sec (6 sec blue + 2 sec White/blue)
+        add eax, PACMAN_FRIGHTENED_TIME ; 8 sec (6 sec blue + 2 sec White/blue)
         mov [endFrightTime], eax
         
         ret
@@ -421,30 +421,98 @@ section .text
         ret
 
     setFruits:
+        cmp word[level], 8
+        je .level8
+        cmp word[level], 9
+        je .level9
+        cmp word[level], 10
+        je .level10
+        cmp word[level], 11
+        je .level11
+        cmp word[level], 12
+        je .level12
+        cmp word[level], 13
+        je .level13
+        cmp word[level], 14
+        jae .levelMore
+
         cmp word[pelletEaten], 70
         je addCherry
         
         cmp word[pelletEaten], 170
         je addStrawberry
+        jmp .exit
 
-        cmp word[pelletEaten], 270
+        .level8:
+
+        cmp word[pelletEaten], 70
+        je addStrawberry
+
+        cmp word[pelletEaten], 170
+        je addOrange
+        jmp .exit
+
+        .level9:
+
+        cmp word[pelletEaten], 70
         je addOrange
 
-        cmp word[pelletEaten], 370
+        cmp word[pelletEaten], 170
+        je addApple
+        jmp .exit
+
+        .level10:
+
+        cmp word[pelletEaten], 70
         je addApple
 
-        cmp word[pelletEaten], 470
+        cmp word[pelletEaten], 170
+        je addMelon
+        jmp .exit
+
+        .level11:
+
+        cmp word[pelletEaten], 70
         je addMelon
 
-        cmp word[pelletEaten], 570
+        cmp word[pelletEaten], 170
+        je addGalaxianFlagship
+        jmp .exit
+
+        .level12:
+
+        cmp word[pelletEaten], 70
         je addGalaxianFlagship
 
-        cmp word[pelletEaten], 670
+        cmp word[pelletEaten], 170
+        je addBell
+        jmp .exit
+
+        .level13:
+
+        cmp word[pelletEaten], 70
         je addBell
 
-        cmp word[pelletEaten], 770
+        cmp word[pelletEaten], 170
+        je addKey
+        jmp .exit
+
+        .levelMore:
+
+        cmp word[pelletEaten], 70
         je addKey
 
+        cmp word[pelletEaten], 170
+        je addKey
+
+        .exit:
+        ret
+
+    resetPelletEaten:
+        cmp word[pelletEaten], 770
+        jne .noReset
+        mov word[pelletEaten], 0
+        .noReset:
         ret
 
     checkFruitPrint:

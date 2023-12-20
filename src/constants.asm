@@ -11,6 +11,9 @@ struc Sprite
     
 endstruc
 
+%define FRUIT_TIME 30000000
+%define PACMAN_FRIGHTENED_TIME 24000000 ; 8 sec (6 sec blue + 2 sec White/blue)
+
 ; those numbers are the frequency of actualization of the different frames ; 1 frame = 1/24th of second ( +-= 0.042 sec )
 %define FRAMES_COUNTER_PACMAN_ANIMATION 2
 %define FRAMES_COUNTER_GHOSTS_ANIMATION 6
