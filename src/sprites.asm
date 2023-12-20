@@ -168,7 +168,6 @@ section .text
         add si, 78*64
         mov di, 17*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*24
         call draw_tile
-        call UpdateScreen
         ret
 
     displayNextLevel:
@@ -208,7 +207,6 @@ section .text
         add si, 83*64
         mov di, 0*TILE_SIZE*SCREEN_WIDTH+TILE_SIZE*25
         call draw_tile
-        call UpdateScreen
         ret
 
     displayScore:

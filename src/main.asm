@@ -41,6 +41,7 @@ section .text
         resetPoint:
 
         call DisplayMaze
+        call displayScore
         
         
 

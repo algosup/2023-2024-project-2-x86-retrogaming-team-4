@@ -163,7 +163,9 @@ section .text
       cmp byte [isGameOver], 1
       jne .notGameOver
          call DisplayMaze
+         call displayScore
          call displayGameOver
+         call UpdateScreen
          call waitForAnyKeyPressed
          jmp exit
       .notGameOver:
