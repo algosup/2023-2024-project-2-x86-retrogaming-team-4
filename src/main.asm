@@ -37,6 +37,7 @@ section .text
 
         call MazeToBGbuffer
         call BuildMazeModelBuffer
+        call resetPelletEaten
 
         resetPoint:
 
