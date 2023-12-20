@@ -107,20 +107,24 @@ section .text
         jl .negativeOffsetX
         add [di + posX], ax
         inc word [nextMoveTileX]
+        mov word [di + eyes], EYES_RIGHT
         jmp .doneOffsetX
         .negativeOffsetX:
         sub [di + posX], ax
         dec word [nextMoveTileX]
+        mov word [di + eyes], EYES_LEFT
         .doneOffsetX:
         cmp word [di + nextVelocityY], 0
         je .doneOffsetY
         jl .negativeOffsetY
         add [di + posY], ax
         inc word [nextMoveTileY]
+        mov word [di + eyes], EYES_DOWN
         jmp .doneOffsetY
         .negativeOffsetY:
         sub [di + posY], ax
         dec word [nextMoveTileY]
+        mov word [di + eyes], EYES_UP
         .doneOffsetY:
 
         ; Change velocity

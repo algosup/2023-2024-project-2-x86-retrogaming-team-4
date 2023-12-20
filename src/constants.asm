@@ -2,6 +2,7 @@ struc Sprite
     posX: resw 1
     posY: resw 1
     frame: resw 1
+    eyes: resw 1
     velocityX: resw 1
     velocityY: resw 1
     direction: resb 1

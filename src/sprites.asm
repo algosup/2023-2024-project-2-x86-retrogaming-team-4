@@ -1,13 +1,5 @@
 section .data
 
-    Blinky_eyes dw 0
-
-    Pinky_eyes dw 0
-
-    Clyde_eyes dw 0
-
-    Inky_eyes dw 0
-
     frameOf_Lives dw PACMAN_LEFT_2
 
     currentDisplayedScoreUnit: db 0
@@ -42,7 +34,7 @@ section .text
         pop dx
         cmp word[strcBlinky + isChased], 1
         je .noEyes
-        mov ax, [Blinky_eyes]
+        mov ax, [strcBlinky + eyes]
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:
@@ -62,7 +54,7 @@ section .text
         pop dx
         cmp word[strcInky + isChased], 1
         je .noEyes
-        mov ax, [Inky_eyes]
+        mov ax, [strcInky + eyes]
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:
@@ -82,7 +74,7 @@ section .text
         pop dx
         cmp word[strcPinky + isChased], 1
         je .noEyes
-        mov ax, [Pinky_eyes]
+        mov ax, [strcPinky + eyes]
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:
@@ -102,7 +94,7 @@ section .text
         pop dx
         cmp word[strcClyde + isChased], 1
         je .noEyes
-        mov ax, [Clyde_eyes]
+        mov ax, [strcClyde + eyes]
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:

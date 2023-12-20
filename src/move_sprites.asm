@@ -192,7 +192,7 @@ section .text
 
         ; call changeGhostFrames
 
-        mov word [Blinky_eyes], ax
+        mov word [strcBlinky + eyes], ax
 
         ret
 
@@ -214,7 +214,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Inky_eyes], ax
+        mov word [strcInky + eyes], ax
 
         ret
 
@@ -236,7 +236,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Pinky_eyes], ax
+        mov word [strcPinky + eyes], ax
 
         ret
 
@@ -258,7 +258,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Clyde_eyes], ax
+        mov word [strcClyde + eyes], ax
 
         ret
 
