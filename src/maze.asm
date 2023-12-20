@@ -6,6 +6,8 @@
 %define POWER_PELLET_3_POSITION 355
 %define POWER_PELLET_4_POSITION 835
 
+%define FIRST_LINE_OF_MAZE 4
+
 section .bss
 
     MazeModelBuffer resb MAZE_HEIGHT*MAZE_WIDTH
