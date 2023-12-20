@@ -67,7 +67,19 @@ section .data
     pacManNextPosX dw 0
     pacManNextPosY dw 0
 
+    Speed_Pixels dw 1
+
 section .text
+    
+    GhostsSpeedUpdate:
+
+        cmp word[Speed_Pixels], 1
+        je .to2speed
+        dec word[Speed_Pixels]
+        ret
+        .to2speed:
+        inc word[Speed_Pixels]
+        ret
 
     changePacManPosition:
         
