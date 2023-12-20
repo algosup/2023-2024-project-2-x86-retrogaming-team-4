@@ -137,9 +137,12 @@ section .text
             mov byte [keyPressed], 0
             call displayNextLevel
             call waitForAnyKeyPressed
-            jmp NewLevel
+            .NewLevel:
+            call BuildMazeModelBuffer
+            jmp start.resetPoint
         .endFunc:
         ret
+    
 
     isPellet:
         ; increment score

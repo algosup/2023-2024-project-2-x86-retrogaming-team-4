@@ -33,13 +33,13 @@ section .text
         ;Set the maze
         call BuildBackgroundBuffer
 
-        NewLevel:
-
         call MazeToBGbuffer
         call BuildMazeModelBuffer
 
-        resetPoint:
-
+        .resetPoint:
+        mov dh, FIRST_LINE_OF_MAZE
+        call MazeToBGbuffer.chooseFirstLine
+        
         call DisplayMaze
         call displayScore
         
