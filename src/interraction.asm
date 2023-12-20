@@ -139,6 +139,10 @@ section .text
             call UpdateScreen
             call waitForAnyKeyPressed
             .NewLevel:
+            mov byte [strcPinky + isChased], 0
+            mov byte [strcBlinky + isChased], 0
+            mov byte [strcClyde + isChased], 0
+            mov byte [strcInky + isChased], 0
             call BuildMazeModelBuffer
             jmp start.resetPoint
         .endFunc:
@@ -388,7 +392,6 @@ section .text
         mov byte[strcInky + isChased], 1
         mov byte[strcPinky + isChased], 1
         mov byte[strcClyde + isChased], 1
-        mov byte[strcPacMan + isChased], 0
         mov eax, [timestamp_of_next_frame]
         add eax, PACMAN_FRIGHTENED_TIME ; 8 sec (6 sec blue + 2 sec White/blue)
         mov [endFrightTime], eax
@@ -403,7 +406,6 @@ section .text
             mov byte[strcInky + isChased], 0
             mov byte[strcPinky + isChased], 0
             mov byte[strcClyde + isChased], 0
-            mov byte[strcPacMan + isChased], 1
         .stillFrightTime:
         ret
     

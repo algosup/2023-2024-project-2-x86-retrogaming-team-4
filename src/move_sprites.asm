@@ -8,7 +8,7 @@ section .data
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
-            at isChased, db 1
+            at isChased, db 1 ; not used
             at isDead, db 0
         iend
     
@@ -22,7 +22,7 @@ section .data
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
         iend
 
     strcInky:
@@ -35,7 +35,7 @@ section .data
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
         iend
 
     strcPinky:
@@ -48,7 +48,7 @@ section .data
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
         iend
 
     strcClyde:
@@ -61,7 +61,7 @@ section .data
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
-            at isDead, db 0
+            at isDead, db 0 ; not used
         iend
 
     pacManNextPosX dw 0
