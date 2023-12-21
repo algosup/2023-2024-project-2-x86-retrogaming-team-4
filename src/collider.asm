@@ -32,11 +32,16 @@ section .text
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearPinky
-            mov word [strcPinky  + posX], 160
+            mov word [strcPinky  + posX], 156
             mov word [strcPinky  + posY], 108
             mov byte [ghostCollision], 0
             mov word [strcPinky + frame], PINKY_1
             mov byte [strcPinky + isChased], 0
+            mov word [strcPinky + velocityX], 0
+            mov word [strcPinky + velocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcPinky + nextVelocityX], 0
+            mov word [strcPinky + nextVelocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcPinky + eyes], EYES_UP
             call Display_Pinky
         .noGhostCollision:
         ret
@@ -50,11 +55,16 @@ section .text
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearBlinky
-            mov word [strcBlinky  + posX], 160
+            mov word [strcBlinky  + posX], 156
             mov word [strcBlinky  + posY], 108
             mov byte [ghostCollision], 0
             mov word [strcBlinky + frame], BLINKY_1
             mov byte [strcBlinky + isChased], 0
+            mov word [strcBlinky + velocityX], 0
+            mov word [strcBlinky + velocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcBlinky + nextVelocityX], 0
+            mov word [strcBlinky + nextVelocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcBlinky + eyes], EYES_UP
             call Display_Blinky
         .noGhostCollision:
         ret
@@ -68,11 +78,16 @@ section .text
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearInky
-            mov word [strcInky  + posX], 160
+            mov word [strcInky  + posX], 156
             mov word [strcInky  + posY], 108
             mov byte [ghostCollision], 0
             mov word [strcInky + frame], INKY_1
             mov byte [strcInky + isChased], 0
+            mov word [strcBlinky + velocityX], 0
+            mov word [strcInky + velocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcInky + nextVelocityX], 0
+            mov word [strcInky + nextVelocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcInky + eyes], EYES_UP
             call Display_Inky
         .noGhostCollision:
         ret
@@ -86,11 +101,16 @@ section .text
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearClyde
-            mov word [strcClyde  + posX], 160
+            mov word [strcClyde  + posX], 156
             mov word [strcClyde  + posY], 108
             mov byte [ghostCollision], 0
             mov word [strcClyde + frame], CLYDE_1
             mov byte [strcClyde + isChased], 0
+            mov word [strcClyde + velocityX], 0
+            mov word [strcClyde + velocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcClyde + nextVelocityX], 0
+            mov word [strcClyde + nextVelocityY], -1*SPRITE_SPEED_PIXELS
+            mov word [strcClyde + eyes], EYES_UP
             call Display_Clyde
         .noGhostCollision:
         ret
