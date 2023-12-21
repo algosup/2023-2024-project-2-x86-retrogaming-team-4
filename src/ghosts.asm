@@ -1,45 +1,4 @@
 section .data
-    
-    strcBlinkyBehaviour:
-        istruc Ghost
-            at canRight, db 0
-            at canLeft, db 0
-            at canUp, db 0
-            at canDown, db 0
-            at targetX, db 0
-            at targetY, db 0
-        iend
-
-    strcInkyBehaviour:
-        istruc Ghost
-            at canRight, db 0
-            at canLeft, db 0
-            at canUp, db 0
-            at canDown, db 0
-            at targetX, db 0
-            at targetY, db 0
-        iend
-
-    strcPinkyBehaviour:
-        istruc Ghost
-            at canRight, db 0
-            at canLeft, db 0
-            at canUp, db 0
-            at canDown, db 0
-            at targetX, db 0
-            at targetY, db 0
-        iend
-
-    strcClydeBehaviour:
-        istruc Ghost
-            at canRight, db 0
-            at canLeft, db 0
-            at canUp, db 0
-            at canDown, db 0
-            at targetX, db 0
-            at targetY, db 0
-        iend
-
     afterMoveTileX dw 0
     afterMoveTileY dw 0
     nextMoveTileX dw 0
@@ -56,15 +15,34 @@ section .data
 section .text
 
     moveGhosts:
-        call moveBlinky
-        ; call movePinky
-        ; call moveInky
-        ; call moveClyde
-        ret
-    
-    moveBlinky:
         mov di, strcBlinky
         call moveGhost
+        ; mov di, strcPinky
+        ; call moveGhost
+        ; mov di, strcInky
+        ; call moveGhost
+        ; mov di, strcClyde
+        ; call moveGhost
+        ret
+    
+    moveGhost:
+        ; Move
+        mov ax, [di + posX]
+        add ax, [di + velocityX]
+        mov [di + posX], ax
+        mov bx, [di + posY]
+        add bx, [di + velocityY]
+        mov [di + posY], bx
+    
+        ; Calculate new tile position
+        add ax, SPRITE_SIZE / 2
+        shr ax, 3
+        mov [afterMoveTileX], ax
+        mov [nextMoveTileX], ax
+        add bx, SPRITE_SIZE / 2
+        shr bx, 3
+        mov [afterMoveTileY], bx
+        mov [nextMoveTileY], bx
 
         ; Check if we are centered on a tile
         mov ax, [di + posX]
@@ -133,6 +111,12 @@ section .text
         mov ax, [di + nextVelocityY]
         mov [di + velocityY], ax
 
+        call ghostPathFinding
+
+        .exit:
+        ret
+
+    ghostPathFinding:
         ; Initialize best distance, dx and dy
         mov word [bestDistance], 0xffff
         mov word [bestVelocityX], 0
@@ -162,30 +146,6 @@ section .text
         mov [di + nextVelocityX], ax
         mov ax, [bestVelocityY]
         mov [di + nextVelocityY], ax
-
-        .exit:
-        ret
-
-    moveGhost:
-        ; Move
-        mov ax, [di + posX]
-        add ax, [di + velocityX]
-        mov [di + posX], ax
-        mov bx, [di + posY]
-        add bx, [di + velocityY]
-        mov [di + posY], bx
-    
-        ; Calculate new tile position
-        add ax, SPRITE_SIZE / 2
-        shr ax, 3
-        mov [afterMoveTileX], ax
-        mov [nextMoveTileX], ax
-        add bx, SPRITE_SIZE / 2
-        shr bx, 3
-        mov [afterMoveTileY], bx
-        mov [nextMoveTileY], bx
-
-        ; TODO: Check collision
 
         ret
     

@@ -16,7 +16,7 @@ jmp start
 %include "move_sprites.asm"
 %include "animations.asm"
 %include "interraction.asm"
-%include "blinky.asm"
+%include "ghosts.asm"
 
 section .text
 
