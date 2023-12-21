@@ -1,15 +1,8 @@
 section .data
-
-    corner0X dw 0
-    corner0Y dw 0
-    corner1X dw 0
-    corner1Y dw 0
-    corner2X dw 0
-    corner2Y dw 0
-    corner3X dw 0
-    corner3Y dw 0
-
     isCollid db 0
+
+    cornerOffsetX dW 0
+    cornerOffsetY dW 0
 
     checkedCornerX dw 0
     checkedCornerY dw 0
@@ -17,6 +10,8 @@ section .data
     tileAbsPos dw 0
 
     ghostCollision db 0
+
+    isGameOver db 0
 
 section .text
 
@@ -29,167 +24,204 @@ section .text
             ret
 
     PinkyContact:
-        mov bx, [strcPinky  + posX]
-        mov ax, [strcPinky  + posY]
-        mov dx, [strcPinky + isChased]
-        mov [afraid], dx
+
+        mov ax, [strcPinky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcPinky  + posX]
+        mov dx, [strcPinky  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearPinky
             mov word [strcPinky  + posX], 160
             mov word [strcPinky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Pinky], PINKY_1
+            mov word [strcPinky + frame], PINKY_1
             mov byte [strcPinky + isChased], 0
             call Display_Pinky
         .noGhostCollision:
         ret
         
     BlinkyContact:
-        mov bx, [strcBlinky  + posX]
-        mov ax, [strcBlinky  + posY]
-        mov dx, [strcBlinky + isChased]
-        mov [afraid], dx
+        mov ax, [strcBlinky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcBlinky  + posX]
+        mov dx, [strcBlinky  + posY]
         call isThereContact
+
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearBlinky
             mov word [strcBlinky  + posX], 160
             mov word [strcBlinky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Blinky], BLINKY_1
+            mov word [strcBlinky + frame], BLINKY_1
             mov byte [strcBlinky + isChased], 0
             call Display_Blinky
         .noGhostCollision:
         ret
 
     InkyContact:
-        mov bx, [strcInky  + posX]
-        mov ax, [strcInky  + posY]
-        mov dx, [strcInky + isChased]
-        mov [afraid], dx
+        mov ax, [strcInky + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcInky  + posX]
+        mov dx, [strcInky  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearInky
             mov word [strcInky  + posX], 160
             mov word [strcInky  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Inky], INKY_1
+            mov word [strcInky + frame], INKY_1
             mov byte [strcInky + isChased], 0
             call Display_Inky
         .noGhostCollision:
         ret
     
     ClydeContact:
-        mov bx, [strcClyde  + posX]
-        mov ax, [strcClyde  + posY]
-        mov dx, [strcClyde + isChased]
-        mov [afraid], dx
+        mov ax, [strcClyde + isChased]
+        mov [afraid], ax
+
+        mov cx, [strcClyde  + posX]
+        mov dx, [strcClyde  + posY]
         call isThereContact
+        
         cmp byte [ghostCollision], 1
         jne .noGhostCollision
             call ClearClyde
             mov word [strcClyde  + posX], 160
             mov word [strcClyde  + posY], 108
             mov byte [ghostCollision], 0
-            mov word [frameOf_Clyde], CLYDE_1
+            mov word [strcClyde + frame], CLYDE_1
             mov byte [strcClyde + isChased], 0
             call Display_Clyde
         .noGhostCollision:
         ret
 
-
     isThereContact:
     ; read if a ghost touched pacman (or the reverse)
 
-        push ds ; pop at the end
+        mov ax, [strcPacMan + posX]
+        mov bx, [strcPacMan + posY]
 
-        ;calculates the linear position of the ghost (result in ax)
-        mov cx, SCREEN_WIDTH
-        mul cx
-        add ax, bx 
 
-        ;stores the color of pacman into 'ah'
-        mov di, palette
-        inc di, ;(add 1 to di) cause '1' is the color of pacman according to the palette of colors for the spritesheet
-        xor bx, bx
-        mov bl, [ds:di]
-
-        ;the destination is 'al'
+        call AbsoluteDifference
+        cmp ax, TILE_SIZE
+        jg .notTouched
         
-        ;set the source 'ds:si'
-        push word [ScreenBufferSegment]
-        pop ds
-        mov si, ax  
+        mov ax, bx
+        mov cx, dx
+        call AbsoluteDifference
+        cmp ax, TILE_SIZE
+        jg .notTouched
         
-        mov dx, SPRITE_SIZE
-        .eachLine:
-            mov cx, SPRITE_SIZE
-            .eachPixel:
-                lodsb
-                cmp al, bl
-                je .touched
-                dec cx
-                jnz .eachPixel
-            add si, SCREEN_WIDTH - SPRITE_SIZE
-            dec dx
-            jnz .eachLine
-        pop ds
-        jmp .notTouched
 
         .touched:
-            pop ds
             cmp byte [afraid], 0
             je .normalContact
             
         .afraidContact:
             mov byte [ghostCollision], 1
+            inc byte [killStreak]
+            cmp byte [killStreak], 1
+            jne .notOne
+                add long [score], 20
+            .notOne:
+
+            cmp byte [killStreak], 2
+            jne .notTwo
+                add long [score], 40
+            .notTwo:
+
+            cmp byte [killStreak], 3
+            jne .notThree
+                add long [score], 80
+            .notThree:
+
+            cmp byte [killStreak], 4
+            jne .notFour
+                add long [score], 160
+            .notFour:
+
             jmp .notTouched
 
         .normalContact:
 
-            call resetGame
+            mov word [frameOf_Lives], BLACK
+            call whereToDisplayLife
+            call displayLives
+            dec byte [lifeCounter]
+            cmp byte [lifeCounter], 0
+            jne .notGameOver
+                mov byte [isGameOver], 1
+            .notGameOver:
+            
+            mov word [strcBlinky + isChased], 0
+            mov word [strcPinky + isChased], 0
+            mov word [strcInky + isChased], 0
+            mov word [strcClyde + isChased], 0
+            mov word [strcPacMan + isDead], 1
 
         .notTouched:
         
         ret
 
+    AbsoluteDifference:
+    ; get the absolute difference between 2 numbers
+    ; parameters :
+    ; ax : number 1
+    ; cx : number 2
+    ; return : ax = absolute difference
+
+        sub ax, cx
+        ; get the absolute value of this difference
+        mov cx, ax
+        sar cx, 15
+        xor ax, cx
+        shr cx, 15
+        add ax, cx
+
+        ret
+    
+
+
     isColliding:
 
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
         call getCorners
-        ; Set corner to check
-        mov ax, [corner0X]
-        mov bx, [corner0Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner1X]
-        mov bx, [corner1Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call getCorners
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner2X]
-        mov bx, [corner2Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call getCorners
         call isWall
         cmp byte[isCollid], 1
         je .collision
 
-        mov ax, [corner3X]
-        mov bx, [corner3Y]
-        mov [checkedCornerX], ax
-        mov [checkedCornerY], bx
+        ; Set offset for the corner to check
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call getCorners
         call isWall
-
         cmp byte[isCollid], 1
         je .collision
         ret
@@ -198,37 +230,18 @@ section .text
         call stopPacMan
     
         ret
-    
+
+    ; Set offset for the corner to check
+    ; Param: cornerOffsetX, cornerOffsetX
+    ; Return: checkedCornerX, checkedCornerY
     getCorners:
     ; Get the corner of the PacMan tile
-
         mov bx, [pacManNextPosX]
-        add bx, 4
-        mov [corner0X], bx
+        add bx, [cornerOffsetX]
+        mov [checkedCornerX], bx
         mov ax, [pacManNextPosY]
-        add ax, 4
-        mov [corner0Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 4
-        mov [corner1X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 11
-        mov [corner1Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 11
-        mov [corner2X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 4
-        mov [corner2Y], ax
-
-        mov bx, [pacManNextPosX]
-        add bx, 11
-        mov [corner3X], bx
-        mov ax, [pacManNextPosY]
-        add ax, 11
-        mov [corner3Y], ax
+        add ax, [cornerOffsetX]
+        mov [checkedCornerY], ax
 
         ret
     
