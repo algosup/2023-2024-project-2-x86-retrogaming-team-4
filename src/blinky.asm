@@ -81,7 +81,7 @@ section .text
         ; Apply any possible rotation that might have occured
         mov ax, [di + posX]
         add ax, TILE_SIZE / 2 - 1
-        and ax, 0xf8 ; Round down to the tile coords
+        and ax, 0xfff8 ; Round down to the tile coords
         add ax, TILE_SIZE / 2
         mov cx, ax
         sub ax, [di + posX]
@@ -90,7 +90,7 @@ section .text
         .dxPositive:
         mov bx, [di + posY]
         add bx, TILE_SIZE / 2 - 1
-        and bx, 0xf8
+        and bx, 0xfff8
         add bx, TILE_SIZE / 2
         mov dx, bx
         sub bx, [di + posY]
@@ -234,9 +234,11 @@ section .text
     calcDistance:
         ;  Calculate the difference in x and y coordinate
         mov ax, [strcPacMan + posX]
+        add ax, TILE_SIZE / 2
         shr ax, 3 
         sub ax, [checkTileX]
         mov bx, [strcPacMan + posY] 
+        add bx, TILE_SIZE / 2
         shr bx, 3
         sub bx, [checkTileY]
     
