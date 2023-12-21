@@ -17,12 +17,12 @@ section .text
     moveGhosts:
         mov di, strcBlinky
         call moveGhost
-        ; mov di, strcPinky
-        ; call moveGhost
-        ; mov di, strcInky
-        ; call moveGhost
-        ; mov di, strcClyde
-        ; call moveGhost
+        mov di, strcPinky
+        call moveGhost
+        mov di, strcInky
+        call moveGhost
+        mov di, strcClyde
+        call moveGhost
         ret
     
     moveGhost:
@@ -142,9 +142,14 @@ section .text
         call checkTile
 
         ; Set next velocities
+        mov bx, SPRITE_SPEED_PIXELS
         mov ax, [bestVelocityX]
+        xor dx, dx
+        mul bx
         mov [di + nextVelocityX], ax
         mov ax, [bestVelocityY]
+        xor dx, dx
+        mul bx
         mov [di + nextVelocityY], ax
 
         ret
