@@ -165,21 +165,25 @@ section .text
             cmp byte [killStreak], 1
             jne .notOne
                 add long [score], 20
+                add word[scoreForLife], 20
             .notOne:
 
             cmp byte [killStreak], 2
             jne .notTwo
                 add long [score], 40
+                add word[scoreForLife], 40
             .notTwo:
 
             cmp byte [killStreak], 3
             jne .notThree
                 add long [score], 80
+                add word[scoreForLife], 80
             .notThree:
 
             cmp byte [killStreak], 4
             jne .notFour
                 add long [score], 160
+                add word[scoreForLife], 160
             .notFour:
 
             jmp .notTouched
