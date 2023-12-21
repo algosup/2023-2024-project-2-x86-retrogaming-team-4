@@ -6,6 +6,7 @@ struc Sprite
     velocityX: resw 1
     velocityY: resw 1
     direction: resb 1
+    direction: resb 1
     isChased: resb 1
     isDead: resb 1
     nextPosX: resw 1
@@ -56,6 +57,9 @@ endstruc
 %define MAZE_WIDTH 40
 %define MAZE_HEIGHT 25
 
+%define MAZE_WIDTH 40
+%define MAZE_HEIGHT 25
+
 %define BACKGROUND_COLOR 0
 
 %define UP_KEY_SCANCODE 48h
@@ -71,9 +75,17 @@ endstruc
 %define  DOWN_DIRECTION 3
 
 
+
+%define RIGHT_DIRECTION 0
+%define    UP_DIRECTION 1
+%define  LEFT_DIRECTION 2
+%define  DOWN_DIRECTION 3
+
+
 %define BLINKY_1 0
 %define BLINKY_2 1
 %define PINKY_1 2
+%define PINKY_2 3
 %define PINKY_2 3
 %define INKY_1 4
 %define INKY_2 5

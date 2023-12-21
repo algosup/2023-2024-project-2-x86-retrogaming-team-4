@@ -6,8 +6,13 @@ section .data
     jumpNoRight db 0
     jumpNoUp db 0
     jumpNoDown db 0
+    jumpNoLeft db 0
+    jumpNoRight db 0
+    jumpNoUp db 0
+    jumpNoDown db 0
 
 section .text
+    
     
     readKeyboard:
     
@@ -34,6 +39,9 @@ section .text
         cmp byte [keyPressed], EXIT_KEY_SCANCODE
         je exit
 
+        cmp byte [keyPressed], EXIT_KEY_SCANCODE
+        je exit
+
         ; Left
         cmp byte [keyPressed], LEFT_KEY_SCANCODE
         jne .NoLeft
@@ -42,7 +50,16 @@ section .text
         mov word [cornerOffsetY], 4
         call checkLeft
         cmp byte[jumpNoLeft], 1
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 4
+        call checkLeft
+        cmp byte[jumpNoLeft], 1
         je .NoLeft
+
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 4
+        call checkLeft
+        cmp byte[jumpNoLeft], 1
 
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 4
@@ -54,8 +71,16 @@ section .text
         mov word [cornerOffsetY], 11
         call checkLeft
         cmp byte[jumpNoLeft], 1
+        mov word [cornerOffsetX], 4
+        mov word [cornerOffsetY], 11
+        call checkLeft
+        cmp byte[jumpNoLeft], 1
         je .NoLeft
 
+        mov word [cornerOffsetX], 11
+        mov word [cornerOffsetY], 11
+        call checkLeft
+        cmp byte[jumpNoLeft], 1
         mov word [cornerOffsetX], 11
         mov word [cornerOffsetY], 11
         call checkLeft

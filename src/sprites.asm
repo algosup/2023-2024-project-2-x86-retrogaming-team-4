@@ -38,6 +38,7 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:
+        .noEyes:
 
         ret
     
@@ -57,6 +58,7 @@ section .text
         mov ax, [strcInky + eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
         .noEyes:
 
         ret
@@ -78,6 +80,7 @@ section .text
         call calculate_spritesheet_position
         call draw_sprite
         .noEyes:
+        .noEyes:
 
         ret
     
@@ -97,6 +100,7 @@ section .text
         mov ax, [strcClyde + eyes]
         call calculate_spritesheet_position
         call draw_sprite
+        .noEyes:
         .noEyes:
 
         ret

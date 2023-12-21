@@ -7,6 +7,7 @@ section .data
 
     timestamp_of_next_frame dd 0, 0 ; timestamp of the next frame
     timerDeathPacMan dw 0
+    timerDeathPacMan dw 0
 
    
 section .text

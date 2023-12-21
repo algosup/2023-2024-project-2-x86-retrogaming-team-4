@@ -12,6 +12,20 @@ section .bss
 
     MazeModelBuffer resb MAZE_HEIGHT*MAZE_WIDTH
 
+%define BACKGROUND_TILE_HEXACODE 0x0F 
+%define POWER_PELLET_TILE_HEXACODE 0x0E
+; POSITIONS = position in terms of tiles in the maze model (= 40*y + x)
+%define POWER_PELLET_1_POSITION 324
+%define POWER_PELLET_2_POSITION 804
+%define POWER_PELLET_3_POSITION 355
+%define POWER_PELLET_4_POSITION 835
+
+%define FIRST_LINE_OF_MAZE 4
+
+section .bss
+
+    MazeModelBuffer resb MAZE_HEIGHT*MAZE_WIDTH
+
 ; MATCHING TABLE :
 
 ; INTER                       00             
@@ -30,6 +44,14 @@ section .bss
 ; PELLET                    0x0D
 ; SUPER_PELLET              0x0E
 ; BACKGROUND                0x0F
+; CHERRY                    0x17
+; STRAWBERRY                0x10
+; ORANGE                    0x11
+; APPLE                     0x12
+; MELON                     0x13
+; GALAXIAN FLAGSHIP         0x14
+; BELL                      0x15
+; KEY                       0x16
 ; CHERRY                    0x17
 ; STRAWBERRY                0x10
 ; ORANGE                    0x11
@@ -79,6 +101,7 @@ section .data
                     db 0x27, 0x27, 0x27, 0x27, 0x27, 0x27, 0x27, 0x27
                     db 0x27, 0x27, 0x27, 0x27, 0x27, 0x27, 0x27, 0x27
     
+                    db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ; Out Top Left Corner         1
                     db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ; Out Top Left Corner         1
                     db 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01
                     db 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00
