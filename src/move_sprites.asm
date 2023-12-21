@@ -8,8 +8,6 @@ section .data
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 1 ; not used
-            at direction, db 0
-            at isChased, db 1 ; not used
             at isDead, db 0
             at nextPosX, dw 10
             at nextPosY, dw 10
@@ -24,7 +22,6 @@ section .data
             at frame, dw BLINKY_1
             at velocityX, dw 0
             at velocityY, dw 0
-            at direction, db 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
@@ -42,7 +39,6 @@ section .data
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
-            at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
             at nextPosX, dw 90
@@ -53,12 +49,11 @@ section .data
 
     strcPinky:
         istruc Sprite
-            at posX, dw 30&
+            at posX, dw 30
             at posY, dw 30
             at frame, dw PINKY_1
             at velocityX, dw 0
             at velocityY, dw 0
-            at direction, db 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
@@ -76,7 +71,6 @@ section .data
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
-            at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
             at nextPosX, dw 70
@@ -87,8 +81,6 @@ section .data
 
     pacManNextPosX dw 0
     pacManNextPosY dw 0
-
-    Speed_Pixels dw 1
 
     Speed_Pixels dw 1
 
@@ -103,19 +95,8 @@ section .text
         .to2speed:
         inc word[Speed_Pixels]
         ret
-    
-    GhostsSpeedUpdate:
-
-        cmp word[Speed_Pixels], 1
-        je .to2speed
-        dec word[Speed_Pixels]
-        ret
-        .to2speed:
-        inc word[Speed_Pixels]
-        ret
 
     changePacManPosition:
-        
         
         ; set next position
         mov bx, [strcPacMan + posX]
@@ -133,8 +114,6 @@ section .text
 
         call IsOnTeleporter
 
-        call IsOnTeleporter
-
         mov bx, [strcPacMan + posX]
         add bx, [strcPacMan + velocityX]
         mov [strcPacMan + posX], bx
@@ -144,7 +123,6 @@ section .text
         mov [strcPacMan + posY], ax
         ; Pellet eating
         call pelletEating
-        
         
         ret
 

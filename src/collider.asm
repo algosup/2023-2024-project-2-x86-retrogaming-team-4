@@ -155,6 +155,7 @@ section .text
         jmp .notTouched
 
         .touched:
+            pop ds
             cmp byte [afraid], 0
             je .normalContact
             
@@ -255,20 +256,12 @@ section .text
     ; Set offset for the corner to check
     ; Param: cornerOffsetX, cornerOffsetX
     ; Return: checkedCornerX, checkedCornerY
-
-    ; Set offset for the corner to check
-    ; Param: cornerOffsetX, cornerOffsetX
-    ; Return: checkedCornerX, checkedCornerY
     getCorners:
     ; Get the corner of the PacMan tile
         mov bx, [pacManNextPosX]
         add bx, [cornerOffsetX]
         mov [checkedCornerX], bx
-        add bx, [cornerOffsetX]
-        mov [checkedCornerX], bx
         mov ax, [pacManNextPosY]
-        add ax, [cornerOffsetX]
-        mov [checkedCornerY], ax
         add ax, [cornerOffsetX]
         mov [checkedCornerY], ax
 
