@@ -651,11 +651,11 @@ Pinky's targetting in when Pac-Man faces up.
 ##### Inky (Blue ghost)
 
 - **Spawn:**
-  - Inky also spawns in the ghost house and is the 2nd ghost to come out of it. It spawns on the left part of the house, allowing Pinky which is situated in the center to exit it before itself. However, it cannot come out of it while Pac-Man has not eaten 30 pellets yet.
+  - Inky also spawns in the ghost house and is the 2nd ghost to come out of it. It spawns on the left part of the house, allowing Inky which is situated in the center to exit it before itself. However, it cannot come out of it while Pac-Man has not eaten 30 pellets yet.
 - **Speed variations:**
-  - The speed of Pinky is constant and follows the Ghost speed table across the different levels
+  - The speed of Inky is constant and follows the Ghost speed table across the different levels
 - **Pac-Man targetting:**
-  - In chase mode, Inky uses the most diffuclt targetting scheme. He needs Pac-Man's current tile and orientation and Bliky's current tile.<br>First, you have to take the tile situated two tiles ahead of Pac-Man, considering his current direction. You then imagine a vector from Blinky's current tile to the tile situated 2 tiles ahead of Pac-Man. Finally, you multiply by 2 the length of this vector, and the end of it will show the targetted tile by Inky.
+  - In chase mode, Inky uses the most diffuclt targetting scheme. He needs Pac-Man's current tile and orientation and Inky's current tile.<br>First, you have to take the tile situated two tiles ahead of Pac-Man, considering his current direction. You then imagine a vector from Inky's current tile to the tile situated 2 tiles ahead of Pac-Man. Finally, you multiply by 2 the length of this vector, and the end of it will show the targetted tile by Inky.
 
 <p align="center"><img src="../pictures/inky-targeting.png" alt="pac-man gif" width="250"></p>
 

@@ -47,14 +47,16 @@ To run this project, you need to meet the following requirements:
 ## Installation
 
 1. Clone the repository using [Github Desktop](https://desktop.github.com/) or the following command in the command line: `git clone https://github.com/algosup/2023-2024-project-2-x86-retrogaming-team-4.git`
-1. Install [NASM](https://nasm.us/) and [DOSBox](https://www.dosbox.com/download.php?main=1) following the installation process default instructions.
+1. Install [NASM](https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/dos/nasm-2.16.01-dos-upx.zip) by unziping it and place this last in a folder named `nasm` in the clone folder.
+1. Install [DOSBox](https://www.dosbox.com/download.php?main=1) following the installation process default instructions.
 
 ## Configuration
 
-1. Change the configuration of DOSBox using the provided configuration file by replacing the original one.
-1. Run DOSBox with the provided run.bat or run.bash file
-1. Type the following commands:
+1. Open your command line and go to your clone folder root: `cd %absolute_path_to_clone_folder%`
+2. Run the following command: `nasm/nasm src/main.asm -f bin -o pacman.com`
+3. Run DOSBox
+4. Type the following commands in the command line interface of DOSBox:
+    - `MOUNT c %absolute_path_to_clone_folder%`
     - `c:`
     - `pacman`
-1. Enjoy playing Pac-Man! 🙌
-
+5. Enjoy playing Pac-Man! 🙌
