@@ -271,6 +271,8 @@ section .text
         je .NoDown
         cmp byte[si], 0x02
         je .NoDown
+        cmp byte[si], 0x56
+        je .NoDown
 
         ret
 

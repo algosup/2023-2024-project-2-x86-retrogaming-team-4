@@ -340,5 +340,17 @@ section .text
         mov byte[isCollid], 1
         ret
         .notC:
+
+        cmp byte[si], 0x55
+        jne .notDoorUp
+        mov byte[isCollid], 1
+        ret
+        .notDoorUp:
+
+        cmp byte[si], 0x56
+        jne .notDoorDown
+        mov byte[isCollid], 1
+        ret
+        .notDoorDown:
         
         ret
