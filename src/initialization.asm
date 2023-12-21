@@ -88,37 +88,49 @@ section .text
    FirstDisplayGhosts:
    ; for each ghost : set the initial : -POSITION- -FRAME- -EYES FRAME- -DIRECTION- -SPEED- and then display it
 
-      mov word [strcBlinky + posX], 160
-      mov word [strcBlinky + posY], 84
+      mov word [strcBlinky + posX], GHOST_HOUSE_CENTER_X
+      mov word [strcBlinky + posY], BLINKY_SPAWN_Y
       mov word [strcBlinky + frame], BLINKY_1
-      mov word [Blinky_eyes], EYES_UP
+      mov word [strcBlinky + eyes], EYES_UP
       call Display_Blinky
-      mov word [strcBlinky + velocityX], 0
-      mov word [strcBlinky + velocityY], -1*SPRITE_SPEED_PIXELS
+      mov word [strcBlinky + velocityX], 1*SPRITE_SPEED_PIXELS
+      mov word [strcBlinky + velocityY], 0
+      mov word [strcBlinky + nextVelocityX], 1*SPRITE_SPEED_PIXELS
+      mov word [strcBlinky + nextVelocityY], 0
 
-      mov word [strcInky + posX], 144
-      mov word [strcInky + posY], 108
+      ; mov word [strcInky + posX], GHOST_HOUSE_CENTER_X - SPRITE_SIZE
+      ; mov word [strcInky + posY], GHOST_HOUSE_CENTER_Y
+      mov word [strcInky + posX], GHOST_HOUSE_CENTER_X - 3 * SPRITE_SIZE ; TEMP
+      mov word [strcInky + posY], BLINKY_SPAWN_Y ; TEMP
       mov word [strcInky + frame], INKY_1
-      mov word [Inky_eyes], EYES_DOWN
+      mov word [strcInky + eyes], EYES_DOWN
       call Display_Inky
       mov word [strcInky + velocityX], 0
-      mov word [strcInky + velocityY], 1*SPRITE_SPEED_PIXELS
+      mov word [strcInky + velocityY], 0
+      mov word [strcInky + nextVelocityX], 0
+      mov word [strcInky + nextVelocityY], 0
 
-      mov word [strcPinky + posX], 160
-      mov word [strcPinky + posY], 108
+      mov word [strcPinky + posX], GHOST_HOUSE_CENTER_X
+      mov word [strcPinky + posY], GHOST_HOUSE_CENTER_Y
       mov word [strcPinky + frame], PINKY_1
-      mov word [Pinky_eyes], EYES_RIGHT
+      mov word [strcPinky + eyes], EYES_UP
       call Display_Pinky
-      mov word [strcPinky + velocityX], 1*SPRITE_SPEED_PIXELS
-      mov word [strcPinky + velocityY], 0
+      mov word [strcPinky + velocityX], 0
+      mov word [strcPinky + velocityY], -1*SPRITE_SPEED_PIXELS ; Immidiately goes out
+      mov word [strcPinky + nextVelocityX], 0
+      mov word [strcPinky + nextVelocityY], -1*SPRITE_SPEED_PIXELS
 
-      mov word [strcClyde + posX], 176
-      mov word [strcClyde + posY], 108
+      ; mov word [strcClyde + posX], GHOST_HOUSE_CENTER_X + SPRITE_SIZE
+      ; mov word [strcClyde + posY], GHOST_HOUSE_CENTER_Y
+      mov word [strcClyde + posX], GHOST_HOUSE_CENTER_X + 3 * SPRITE_SIZE ; TEMP
+      mov word [strcClyde + posY], BLINKY_SPAWN_Y ; TEMP
       mov word [strcClyde + frame], CLYDE_1
-      mov word [Clyde_eyes], EYES_LEFT
+      mov word [strcClyde + eyes], EYES_LEFT
       call Display_Clyde
-      mov word [strcClyde + velocityX], -1*SPRITE_SPEED_PIXELS
+      mov word [strcClyde + velocityX], 0
       mov word [strcClyde + velocityY], 0
+      mov word [strcClyde + nextVelocityX], 0
+      mov word [strcClyde + nextVelocityY], 0
 
       ret
    

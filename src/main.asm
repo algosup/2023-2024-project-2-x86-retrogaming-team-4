@@ -16,6 +16,7 @@ jmp start
 %include "move_sprites.asm"
 %include "animations.asm"
 %include "interraction.asm"
+%include "ghosts.asm"
 
 section .text
 
@@ -87,13 +88,8 @@ section .text
         
        
         ; move the ghosts according to the defined velocity of each one
-        call changePinkyPosition
-        call changeBlinkyPosition
-        call changeInkyPosition
-        call changeClydePosition
+        call moveGhosts
         
-
-
         call AnimatePacMan
         call AnimateGhosts
 

@@ -4,12 +4,15 @@ section .data
             at posX, dw 10
             at posY, dw 10
             at frame, dw PACMAN_FULL
-            at absPos, dw 10*10
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 1 ; not used
             at isDead, db 0
+            at nextPosX, dw 10
+            at nextPosY, dw 10
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
     
     strcBlinky:
@@ -17,12 +20,15 @@ section .data
             at posX, dw 274
             at posY, dw 30
             at frame, dw BLINKY_1
-            at absPos, dw 274*30
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
+            at nextPosX, dw 274
+            at nextPosY, dw 30
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcInky:
@@ -30,12 +36,15 @@ section .data
             at posX, dw 90
             at posY, dw 100
             at frame, dw INKY_1
-            at absPos, dw 90*100
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
+            at nextPosX, dw 90
+            at nextPosY, dw 100
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcPinky:
@@ -43,12 +52,15 @@ section .data
             at posX, dw 30
             at posY, dw 30
             at frame, dw PINKY_1
-            at absPos, dw 30*30
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
+            at nextPosX, dw 30
+            at nextPosY, dw 30
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     strcClyde:
@@ -56,12 +68,15 @@ section .data
             at posX, dw 70
             at posY, dw 100
             at frame, dw CLYDE_1
-            at absPos, dw 70*100
             at velocityX, dw 0
             at velocityY, dw 0
             at direction, db 0
             at isChased, db 0
             at isDead, db 0 ; not used
+            at nextPosX, dw 70
+            at nextPosY, dw 100
+            at nextVelocityX, dw 0
+            at nextVelocityY, dw 0
         iend
 
     pacManNextPosX dw 0
@@ -161,10 +176,11 @@ section .text
     ; changes the Blinky's positions values according to the current velocity 
     ; changes the direction if encounter a wall
     ; changes the eyes' sprite according to the new direction
-        mov ax, [strcBlinky + posY]
+        
+         ; set next position
         mov bx, [strcBlinky + posX]
-        mov cx, [strcBlinky + velocityY]
-        mov dx, [strcBlinky + velocityX]
+        add bx, [strcBlinky + velocityX]
+        mov [strcBlinky + nextPosX], bx
 
         call changeGhostPosition
 
@@ -173,9 +189,10 @@ section .text
         mov word [strcBlinky + velocityY], cx
         mov word [strcBlinky + velocityX], dx
 
-        call changeGhostFrames
 
-        mov word [Blinky_eyes], ax
+        ; call changeGhostFrames
+
+        mov word [strcBlinky + eyes], ax
 
         ret
 
@@ -197,7 +214,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Inky_eyes], ax
+        mov word [strcInky + eyes], ax
 
         ret
 
@@ -219,7 +236,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Pinky_eyes], ax
+        mov word [strcPinky + eyes], ax
 
         ret
 
@@ -241,7 +258,7 @@ section .text
 
         call changeGhostFrames
 
-        mov word [Clyde_eyes], ax
+        mov word [strcClyde + eyes], ax
 
         ret
 
@@ -251,4 +268,4 @@ section .text
         mov byte[isCollid], 0x00
         ret
 
-        
+    

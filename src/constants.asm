@@ -2,13 +2,25 @@ struc Sprite
     posX: resw 1
     posY: resw 1
     frame: resw 1
-    absPos: resw 1
+    eyes: resw 1
     velocityX: resw 1
     velocityY: resw 1
     direction: resb 1
     isChased: resb 1
     isDead: resb 1
-    
+    nextPosX: resw 1
+    nextPosY: resw 1
+    nextVelocityX: resw 1
+    nextVelocityY: resw 1
+endstruc
+
+struc Ghost 
+    canRight: resb 1
+    canLeft: resb 1
+    canUp: resb 1
+    canDown: resb 1
+    targetX: resb 1
+    targetY: resb 1
 endstruc
 
 %define FRUIT_TIME 30000000
@@ -30,6 +42,9 @@ endstruc
 
 %define PACMAN_START_X 160
 %define PACMAN_START_Y 132
+%define GHOST_HOUSE_CENTER_X 156
+%define GHOST_HOUSE_CENTER_Y 108
+%define BLINKY_SPAWN_Y GHOST_HOUSE_CENTER_Y - 3 * TILE_SIZE
 %define FRUIT_TILE_POS 697
 %define FRUIT_POS_X 134
 %define FRUIT_POS_Y 41600
